@@ -5,8 +5,8 @@ import styles from "../styles/GlobalContainer.module.css"
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <div className={styles.className}>
-      <Component {...pageProps} />{" "}
+      <div className={styles.container}>
+       <Component {...pageProps} />{" "}
       </div>
     </Provider>
   );
