@@ -2,6 +2,7 @@ import sql from "../../../database/connection";
 import { checkApiMethod } from "../../../utility";
 export default async function handler(req, res) {
 
+  /************* GET ALL CERTAIN DEPENDENT *************/
   if (checkApiMethod(req, "GET")) {
     try {
       const dependents = await sql`SELECT * FROM dependents ORDER BY dependent ASC;`;
@@ -12,6 +13,7 @@ export default async function handler(req, res) {
     }
     return
   }
+  /************* CREATE A NEW DEPENDENT *************/
   if (checkApiMethod(req, "POST")) {
     const { sponsor_id, age, relation } = req.body
     const newDependent = { sponsor_id, age, relation } 

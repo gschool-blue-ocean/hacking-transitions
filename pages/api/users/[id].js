@@ -1,8 +1,20 @@
 import sql from "../../../database/connection";
 import { checkApiMethod } from "../../../utility";
 export default async function handler(req, res) {
+  const { id } = req.query;
+  /************* GET A CERTAIN USER INFORMATION *************/
+  if (checkApiMethod(req, "GET")) {
+    try {
+      const user = (await sql`SELECT * FROM users WHERE user_id = ${id}`)[0];
+      res.json(user);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+    return;
+  }
+  /************* UPDATE A CERTAIN USER INFORMATION *************/
   if (checkApiMethod(req, "PATCH")) {
-    const user_id = req.query.id;
     const {
       first,
       last,
@@ -42,13 +54,32 @@ export default async function handler(req, res) {
       interests,
     };
     try {
-      const user = (await sql`UPDATE users SET ${sql(
-        newUser
-      )} WHERE user_id = ${user_id} RETURNING *`)[0];
+      // DONT FORGET TO ENCRYPT PASSWORD
+      // newUser.password = await bcrypt.hash(password, 10);
+
+      const user = (
+        await sql`UPDATE users SET ${sql(
+          newUser
+        )} WHERE user_id = ${id} RETURNING *`
+      )[0];
       res.send(user);
     } catch (error) {
       console.log(error);
       res.send(error);
     }
+    return;
+  }
+  /************* DELETE A CERTAIN USER  *************/
+  if (checkApiMethod(req, "DELETE")) {
+    try {
+      const user = (
+        await sql`DELETE FROM users WHERE user_id = ${id} RETURNING *`
+      )[0];
+      res.json(user);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+    return;
   }
 }
