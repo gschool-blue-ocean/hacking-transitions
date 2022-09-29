@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (checkApiMethod(req, "GET")) {
     try {
       const users = await sql`SELECT * FROM users ORDER BY user_id ASC;`;
-      res.send(users.rows);
+      res.send(users);
     } catch (error) {
       console.log(error);
       res.send(error);
