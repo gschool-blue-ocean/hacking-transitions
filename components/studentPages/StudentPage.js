@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
-import "../../styles/StudentPage.module.css";
+import styles from "../../styles/StudentPage.module.css"
 // import "../../StyleSheets/StudentPage.css";
 // import SideNav from "../SideNav/SideNav";
 // import LoginContext from "../../Context/LoginContext";
@@ -55,7 +55,7 @@ export default function StudentPage({
    console.log(activeStudent);
 
    return (
-      <div className="test--grid">
+      <div className={styles.testgrid}>
          {/* {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
@@ -63,14 +63,14 @@ export default function StudentPage({
                setActiveStudent={setActiveStudent}
             />
          )} */}
-         <div className="container">
-         <div className="StudentDash--Wrapper">
-            <div className="SDash--Header">
-               <h3 id="StuHeader--Name">
+         <div className={styles.container}>
+         <div className={styles.StudentDashWrapper}>
+            <div className={styles.SDashHeader}>
+               <h3 id={styles.StuHeaderName}>
                   {/* {activeStudent.first} {activeStudent.last} */}
                   John Doe
                </h3>
-               <p id="StuHeader--Branch">
+               <p id={styles.StuHeaderBranch}>
                   {/* {activeStudent.branch} */}
                   Navy
                </p>
@@ -80,8 +80,8 @@ export default function StudentPage({
             </div>
 
             {/* User Data Card */}
-            <div className="SDash--Info-card">
-               <div className="infoCard--container">
+            <div className="styles.SDash-Info-card">
+               <div className="styles.infoCard-container">
                   <ul>
                      <div>
                         {showEditStudentModal && (
@@ -93,14 +93,14 @@ export default function StudentPage({
                               setActiveStudent={setActiveStudent}
                            />
                         )}
-                        <div onClick={handleEditBtnClicked} className="editStudentBtnSpan">
-                           <FiEdit className="editStudentInfoBtn" />
-                           <div className="editStudentToolTip">Edit</div>
+                        <div onClick={handleEditBtnClicked} className={styles.editStudentBtnSpan}>
+                           <FiEdit className={styles.editStudentInfoBtn} />
+                           <div className={styles.editStudentToolTip}>Edit</div>
                         </div>
                      </div>
 
                      <li>
-                        <h4 className="text-left">ETS Date</h4>
+                        <h4 className="{styles.text-left">ETS Date</h4>
                         <span>
                            nov 28
                            {/* {activeStudent.ets_date} */}
@@ -109,51 +109,51 @@ export default function StudentPage({
 
                      <h4 className="text-left">Personal Info</h4>
                      <li>
-                        <span className="title"> Email: </span>
-                        <span className="answer">
+                        <span className={styles.title}> Email: </span>
+                        <span className={styles.answer}>
                            {/* {activeStudent.email} */}
                            johndoe.email.com
                            </span>
                      </li>
                      <li>
                         <span className="title under-line"> MOS: </span>
-                        <span className="answer"> 
+                        <span className={styles.answer}> 
                         {/* {activeStudent.mos}  */}
                         69B
                         </span>
                      </li>
                      <li>
-                        <span className="title"> Rank: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> Rank: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.rank}  */}
                         E13
                         </span>
                      </li>
                      <li>
-                        <span className="title"> Duty Station: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> Duty Station: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.duty_station} */}
                         my house
                         </span>
                      </li>
                      <li>
-                        <span className="title"> Terminal Leave: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> Terminal Leave: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.leave_start_date} */}
                         tomorrow
                         </span>
                      </li>
 
                      <li>
-                        <span className="title"> TAP Status: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> TAP Status: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.taps_complete ? "Complete" : "Incomplete"}  */}
                         complete
                         </span>
                      </li>
 
                      <h4 className="text-left">Dependents</h4>
-                     <li className="title">
+                     <li className={styles.title}>
                         <span>
                            {/* {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"} */}
                            None
@@ -162,8 +162,8 @@ export default function StudentPage({
 
                      <li>
                         <h4 className="text-left"> Education </h4>
-                        <span className="title"> Degree: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> Degree: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.highest_education} */}
                         grade 7
                         </span>
@@ -171,15 +171,15 @@ export default function StudentPage({
 
                      <li>
                         <h4 className="text-left"> Relocation </h4>
-                        <span className="title"> Planning to Relocate?: </span>
-                        <span className="answer"> 
+                        <span className={styles.title}> Planning to Relocate?: </span>
+                        <span className={styles.answer}> 
                         {/* {activeStudent.planning_to_relocate ? "Yes" : "No"} */}
                         Yes
                         </span>
                      </li>
 
                      <h4>Interests</h4>
-                     <li className="title">
+                     <li className={styles.title}>
                         <span>
                            {/* {activeStudent.interests} */}
                            interested in everything
