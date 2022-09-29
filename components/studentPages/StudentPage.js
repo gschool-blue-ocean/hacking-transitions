@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
+import "../../styles/StudentPage.module.css";
 // import "../../StyleSheets/StudentPage.css";
 // import SideNav from "../SideNav/SideNav";
 // import LoginContext from "../../Context/LoginContext";
@@ -55,21 +56,27 @@ export default function StudentPage({
 
    return (
       <div className="test--grid">
-         {userData.admin && (
+         {/* {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
                activeStudent={activeStudent}
                setActiveStudent={setActiveStudent}
             />
-         )}
+         )} */}
          <div className="container">
          <div className="StudentDash--Wrapper">
             <div className="SDash--Header">
                <h3 id="StuHeader--Name">
-                  {activeStudent.first} {activeStudent.last}
+                  {/* {activeStudent.first} {activeStudent.last} */}
+                  John Doe
                </h3>
-               <p id="StuHeader--Branch">{activeStudent.branch}</p>
-               <SPETStag userETS={activeStudent.ets_date} />
+               <p id="StuHeader--Branch">
+                  {/* {activeStudent.branch} */}
+                  Navy
+               </p>
+               <SPETStag userETS='today'
+               // {activeStudent.ets_date}
+                />
             </div>
 
             {/* User Data Card */}
@@ -94,62 +101,97 @@ export default function StudentPage({
 
                      <li>
                         <h4 className="text-left">ETS Date</h4>
-                        <span>{activeStudent.ets_date}</span>
+                        <span>
+                           nov 28
+                           {/* {activeStudent.ets_date} */}
+                           </span>
                      </li>
 
                      <h4 className="text-left">Personal Info</h4>
                      <li>
                         <span className="title"> Email: </span>
-                        <span className="answer">{activeStudent.email}</span>
+                        <span className="answer">
+                           {/* {activeStudent.email} */}
+                           johndoe.email.com
+                           </span>
                      </li>
                      <li>
                         <span className="title under-line"> MOS: </span>
-                        <span className="answer"> {activeStudent.mos} </span>
+                        <span className="answer"> 
+                        {/* {activeStudent.mos}  */}
+                        69B
+                        </span>
                      </li>
                      <li>
                         <span className="title"> Rank: </span>
-                        <span className="answer"> {activeStudent.rank} </span>
+                        <span className="answer"> 
+                        {/* {activeStudent.rank}  */}
+                        E13
+                        </span>
                      </li>
                      <li>
                         <span className="title"> Duty Station: </span>
-                        <span className="answer"> {activeStudent.duty_station}</span>
+                        <span className="answer"> 
+                        {/* {activeStudent.duty_station} */}
+                        my house
+                        </span>
                      </li>
                      <li>
                         <span className="title"> Terminal Leave: </span>
-                        <span className="answer"> {activeStudent.leave_start_date}</span>
+                        <span className="answer"> 
+                        {/* {activeStudent.leave_start_date} */}
+                        tomorrow
+                        </span>
                      </li>
 
                      <li>
                         <span className="title"> TAP Status: </span>
-                        <span className="answer"> {activeStudent.taps_complete ? "Yes" : "No"} </span>
+                        <span className="answer"> 
+                        {/* {activeStudent.taps_complete ? "Complete" : "Incomplete"}  */}
+                        complete
+                        </span>
                      </li>
 
                      <h4 className="text-left">Dependents</h4>
                      <li className="title">
-                        <span>{activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"}</span>
+                        <span>
+                           {/* {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"} */}
+                           None
+                           </span>
                      </li>
 
                      <li>
                         <h4 className="text-left"> Education </h4>
                         <span className="title"> Degree: </span>
-                        <span className="answer"> {activeStudent.highest_education}</span>
+                        <span className="answer"> 
+                        {/* {activeStudent.highest_education} */}
+                        grade 7
+                        </span>
                      </li>
 
                      <li>
                         <h4 className="text-left"> Relocation </h4>
                         <span className="title"> Planning to Relocate?: </span>
-                        <span className="answer"> {activeStudent.planning_to_relocate ? "Yes" : "No"}</span>
+                        <span className="answer"> 
+                        {/* {activeStudent.planning_to_relocate ? "Yes" : "No"} */}
+                        Yes
+                        </span>
                      </li>
 
                      <h4>Interests</h4>
                      <li className="title">
-                        <span>{activeStudent.interests}</span>
+                        <span>
+                           {/* {activeStudent.interests} */}
+                           interested in everything
+                           </span>
                      </li>
                   </ul>
                </div>
             </div>
-            <SPTasks activeStudent={activeStudent} />
-            <ChatModal socket={socket} activeStudent={activeStudent} />
+            <SPTasks activeStudent='activestudent'
+            // {activeStudent} 
+            />
+            {/* <ChatModal socket={socket} activeStudent={activeStudent} /> */}
          </div >
       </div >
 

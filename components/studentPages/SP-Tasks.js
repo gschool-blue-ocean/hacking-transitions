@@ -70,7 +70,8 @@ export default function SPTasks({ activeStudent }) {
    };
 
    if (loading) {
-      return <Loading />;
+      return;
+      //  <Loading />;
    } else {
       return (
          <div className="SDash--Tasks">
