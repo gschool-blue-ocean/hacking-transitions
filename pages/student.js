@@ -1,4 +1,4 @@
-import StudentPage from "../components/StudentPage"
+import StudentPage from "../components/studentPages/StudentPage"
 
 const student = () => {
   return (
