@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod } from "../../../utility";
+import { checkApiMethod, notFound404} from "../../../utility";
 export default async function handler(req, res) {
   /************* GET ALL TASKS *************/
   if (checkApiMethod(req, "GET")) {
@@ -33,4 +33,5 @@ export default async function handler(req, res) {
     }
     return;
   }
+  notFound404(res)
 }

@@ -1,5 +1,5 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod } from "../../../utility";
+import { checkApiMethod,notFound404 } from "../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* GET ALL TASKS FROM A CERTAIN STUDENT *************/
@@ -26,4 +26,5 @@ export default async function handler(req, res) {
     }
     return;
   }
+  notFound404(res)
 }
