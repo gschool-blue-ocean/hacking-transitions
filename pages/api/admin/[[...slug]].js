@@ -4,8 +4,8 @@ export default async function handler(req, res) {
   if (!req.query.slug) {
     /******** CREATE NEW ADMIN ********/
     if (checkApiMethod(req, "POST")) {
-      const { first, last, email, username, password } = req.body;
-      const newAdmin = { first, last, email, username, password };
+      const { admin, first, last, email, username, password } = req.body;
+      const newAdmin = { admin, first, last, email, username, password };
       //   newAdmin.password = await bcrypt.hash(password, 10);
 
       try {
@@ -13,13 +13,24 @@ export default async function handler(req, res) {
         res.json(admin);
       } catch (error) {
         console.log(error);
-        handleErrors(res)
+        handleErrors(res);
+      }
+      return;
+    }
+    if (checkApiMethod(req, "GET")) {
+      try {
+        const adminList = await sql`SELECT * FROM users WHERE admin=true`;
+        res.json(adminList);
+      } catch (error) {
+        console.log(error);
+        handleErrors(res);
       }
       return;
     }
     /******** END CREATE NEW ADMIN ********/
   } else {
     const { slug } = req.query;
+
     /******** UPDATE ESXISTING ADMIN ********/
     if (
       checkApiMethod(req, "PATCH") &&
