@@ -5,9 +5,9 @@ import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   // user_data localstorage? redux?
   const userData = { user_id: 11 };
-  const [chatMessages, setChatMessages] = useState([]);
-  const [message, setMessage] = useState("");
-  const [socket, setSocket] = useState({});
+  const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
+  const [message, setMessage] = useState(""); //new message 
+  const [socket, setSocket] = useState({}); // socket connection
   useEffect(() => {
     (async () => {
       /******** CONNECT TO SOCKET/CHAT SERVER ********/
@@ -31,17 +31,18 @@ const Chat = () => {
         socket.on("connect", () => {
           console.log("connected");
         });
-        await joinRoom();
-
+        await joinRoom(); //join room by students id
+        ////If not sender of message recieve the new message and display it
         socket.on("recieve_message", (newMessage) => {
-          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
+          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]); 
         });
       }
     })();
   }, [socket]);
 
   const submitMsg = async () => {
-    if (message.length === 0) return;
+    if (message.length === 0) return; // If message is empty dont send
+    // Create a new comment object
     const newMessage = {
       student_id: 11,
       author_id: userData.user_id,
@@ -49,7 +50,9 @@ const Chat = () => {
       content: message,
       date_time: new Date(Date.now()).toUTCString(),
     };
+    // Update chat display with newly typed message
     setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
+    // send the new message to the server 
     socket.broadcast &&
       (await socket.broadcast
         .to(
@@ -58,6 +61,7 @@ const Chat = () => {
             : userData.user_id
         )
         .emit("send_new_message", newMessage));
+    //reset input field
     setMessage("");
   };
   const joinRoom = async () => {
