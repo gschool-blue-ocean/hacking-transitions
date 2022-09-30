@@ -1,0 +1,7 @@
+.container {
+    border: 1px black solid;
+    height: 200rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+}
