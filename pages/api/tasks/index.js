@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod, notFound404} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
 export default async function handler(req, res) {
   /************* GET ALL TASKS *************/
   if (checkApiMethod(req, "GET")) {
@@ -8,10 +8,11 @@ export default async function handler(req, res) {
       res.send(tasks);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
+  /************* END GET ALL TASKS *************/
   /************* CREATE NEW TASKS *************/
   if (checkApiMethod(req, "POST")) {
     const { student_id, title, date, description, remarks, completed } =
@@ -29,9 +30,10 @@ export default async function handler(req, res) {
       res.json(task);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
+  /************* END CREATE NEW TASKS *************/
   notFound404(res)
 }
