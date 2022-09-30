@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END GET A CERTAIN USER INFORMATION *************/
   /************* UPDATE A CERTAIN USER INFORMATION *************/
   if (checkApiMethod(req, "PATCH")) {
     const {
@@ -69,6 +70,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END UPDATE A CERTAIN USER INFORMATION *************/
   /************* DELETE A CERTAIN USER  *************/
   if (checkApiMethod(req, "DELETE")) {
     try {
@@ -82,6 +84,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END DELETE A CERTAIN USER  *************/
   notFound404(res)
 }
 

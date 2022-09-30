@@ -19,6 +19,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END UPDATE A CERTAIN TASKS *************/
   /************* DELETE A CERTAIN TASKS *************/
   if (checkApiMethod(req, "DELETE")) {
     try {
@@ -30,5 +31,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END DELETE A CERTAIN TASKS *************/
   notFound404(res)
 }

@@ -13,5 +13,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END GET ALL USERS FROM A CERTAIN COHORT *************/
   notFound404(res)
 }

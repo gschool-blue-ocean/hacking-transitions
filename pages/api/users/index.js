@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END GET ALL USERS INFORMATION *************/
   /************* CREATE A NEW USER  *************/
   if (checkApiMethod(req, "POST")) {
     const {
@@ -78,5 +79,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END CREATE A NEW USER  *************/
   notFound404(res)
 }

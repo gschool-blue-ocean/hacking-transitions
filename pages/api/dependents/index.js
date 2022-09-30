@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     }
     return
   }
+  /************* END GET ALL CERTAIN DEPENDENT *************/
   /************* CREATE A NEW DEPENDENT *************/
   if (checkApiMethod(req, "POST")) {
     const { sponsor_id, age, relation } = req.body
@@ -26,5 +27,6 @@ export default async function handler(req, res) {
     }
     return
   }
+  /************* END CREATE A NEW DEPENDENT *************/
   notFound404(res)
 }

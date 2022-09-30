@@ -19,6 +19,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END UPDATE A CERTAIN DEPENDENTS INFORMATION *************/
   /************* DELETE A CERTAIN DEPENDENT *************/
   if (checkApiMethod(req, "DELETE")) {
     try {
@@ -32,5 +33,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END DELETE A CERTAIN DEPENDENT *************/
   notFound404(res)
 }

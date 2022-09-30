@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END GET ALL TASKS FROM A CERTAIN STUDENT *************/
   /************* DELETE ALL TASKS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "DELETE") && typeof parseInt(id) === "number") {
     try {
@@ -26,5 +27,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END DELETE ALL TASKS FROM A CERTAIN STUDENT *************/
   notFound404(res)
 }

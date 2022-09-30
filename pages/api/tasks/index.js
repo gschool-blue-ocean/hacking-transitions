@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END GET ALL TASKS *************/
   /************* CREATE NEW TASKS *************/
   if (checkApiMethod(req, "POST")) {
     const { student_id, title, date, description, remarks, completed } =
@@ -33,5 +34,6 @@ export default async function handler(req, res) {
     }
     return;
   }
+  /************* END CREATE NEW TASKS *************/
   notFound404(res)
 }
