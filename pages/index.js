@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { server } from "../utility";
 import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
+import Header from "./Header/Header";
+import Footer from "./footer";
 //=========================  LOGIN PAGE ==================
 export default function Home() {
   const dispatch = useDispatch();
@@ -23,10 +25,12 @@ export default function Home() {
     })();
   }, []);
   console.log(allUsersData);
-  
+
   return (
     <div className={styles.container}>
-Login
+      <Header />
+      Login
+      <Footer />
     </div>
   );
 }
