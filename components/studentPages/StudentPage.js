@@ -10,19 +10,19 @@ import styles from "../../styles/StudentPage.module.css"
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 
-const customStyles = {
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "var(--clr-primary-accent)",
-      borderRadius: "10px",
-      width: "30%",
-   },
-};
+// const customStyles = {
+//    content: {
+//       top: "50%",
+//       left: "50%",
+//       right: "auto",
+//       bottom: "auto",
+//       marginRight: "-50%",
+//       transform: "translate(-50%, -50%)",
+//       backgroundColor: "var(--clr-primary-accent)",
+//       borderRadius: "10px",
+//       width: "30%",
+//    },
+// };
 
 // Modal.setAppElement(".AppContainer");
 
