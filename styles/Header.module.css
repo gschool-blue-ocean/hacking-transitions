@@ -1,0 +1,11 @@
+.header {
+    border: 2px solid black;
+
+}
+
+.logo {
+    position: absolute;
+    top: .25rem;
+    left: .25rem;
+    height: 2.5rem;
+}
