@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod, notFound404 } from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
   if (!req.query.slug) {
     /******** CREATE NEW ADMIN ********/
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         res.json(admin);
       } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        handleErrors(res)
       }
       return;
     }
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         res.json(admin);
       } catch (error) {
         console.log(error);
-        res.send(error);
+        handleErrors(res);
       }
       return;
     }
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
         res.json(student);
       } catch (error) {
         console.log(error);
-        res.send(error);
+        handleErrors(res);
       }
       return;
     }
