@@ -1,8 +1,6 @@
-import {Pool} from 'pg'
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
-})
-export default pool
+import postgres from "postgres";
+const sql = postgres(process.env.DATABASE_URL,{ idle_timeout: 60 });
+export default sql;
 
 
 

@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../styles/LoginStyles.module.css";
+import { server } from "../utility";
+import { setAllUserData, setAllCohortData } from "../redux/features/app-slice.js"
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 let Login = () => {
-    const [allUsersData] = useState([])
-    const [loading, setLoading] = useState(Boolean)
+    // const [allUsersData] = useState([])
+    const dispatch = useDispatch();
+    const { allUsersData, allCohortsData } = useSelector(
+      ({ app: { allUsersData, allCohortsData } }) => ({
+        allUsersData,
+        allCohortsData,
+      })
+    );
     const [userData, setUserData] = useState('')
     const [loginData, setLoginData]=useState({
         username: "",
@@ -25,7 +34,14 @@ let Login = () => {
             // they used invokeSetLogin here but im not sure where it came from ; browser says its not defined
         }
     }, [userData])
-
+    useEffect(() => {
+      (async () => {
+        const allUsers = await (await fetch(`${server}/api/users`)).json();
+        dispatch(setAllUserData(allUsers));
+        
+      })();
+    }, []);
+    console.log('all users', allUsersData)
     const handleSubmit = (e) =>{
         e.preventDefault();
         // removeErrorMsgs() --> not sure why they did this but this was used here
