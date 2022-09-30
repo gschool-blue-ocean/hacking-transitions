@@ -1,6 +1,10 @@
-const editadmins = () => {
+import EditAdminTab from "../../components/AdminPage/AdminEdit/EditAdminTab";
+const editAdmins = () => {
   return (
-    <div>editadmins</div>
-  )
-}
-export default editadmins
+    <div>
+      <EditAdminTab />
+    </div>
+  );
+};
+
+export default editAdmins;

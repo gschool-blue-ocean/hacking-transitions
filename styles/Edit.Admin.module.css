@@ -1,0 +1,86 @@
+.adminEditParent {
+  background-color: #f6efe7;
+  display: grid;
+  height: 1000px;
+  width: 1000px;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas: "adminCreate adminList";
+  margin-left: 10%;
+}
+/* admin create */
+.adminCreateParent {
+  background-color: grey;
+  display: grid;
+  grid-area: adminCreate;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "adminCreateHeader"
+    "adminCreateForm";
+}
+.adminCreateHeader {
+  background-color: white;
+  color: #003b4c;
+  display: grid;
+  grid-area: adminCreateHeader;
+  font-size: 50%;
+  justify-content: center;
+  margin-top: 40px;
+  border-bottom: #f79020;
+}
+.adminCreateForm {
+  background-color: white;
+  display: grid;
+  grid-area: adminCreateForm;
+}
+.adminCreateFormInputLabel {
+  margin-left: 12.5%;
+  margin-top: 5%;
+  margin-right: 12.5%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-areas: "adminCreateFormLabel adminCreateFormInput";
+  color: #003b4c;
+}
+.adminCreateFormLabel {
+  display: grid;
+  grid-area: adminCreateFormLabel;
+}
+.adminCreateFormInput {
+  display: grid;
+  grid-area: adminCreateFormInput;
+}
+.adminCreateFormSubmit {
+  margin-top: 2.5%;
+  justify-content: center;
+  margin-left: 12.5%;
+  margin-right: 12.5%;
+}
+.adminCreateFormSubmitBtn {
+  height: 30px;
+  width: 100%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+/* admin list */
+.adminListParent {
+  background-color: bisque;
+  display: grid;
+  grid-area: adminList;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "adminListHeader"
+    "adminListList";
+}
+.adminListHeader {
+  display: grid;
+  grid-area: adminListHeader;
+  font-size: 50%;
+  justify-content: center;
+}
+.adminListList {
+  background-color: blue;
+  display: grid;
+  grid-area: adminListList;
+}
