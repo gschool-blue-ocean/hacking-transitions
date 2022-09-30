@@ -1,5 +1,6 @@
-import styles from "../../styles/Edit.Admin.module.css";
-import { useState } from "react";
+import styles from "../../../styles/Edit.Admin.module.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const AdminCreate = () => {
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
@@ -10,16 +11,25 @@ const AdminCreate = () => {
   /* 
 once the backend is finished, need to make an axios post creating new admin using stored states for submit button!!
   */
-
+  const createAdmin = (event) => {
+    event.preventDefault();
+    axios.post("/api/admin", {
+      admin: true,
+      first: newFirstName,
+      last: newLastName,
+      username: newUsername,
+      password: newPassword,
+      email: newEmail,
+    });
+  };
   return (
     <div className={styles.adminCreateParent}>
       <div className={styles.adminCreateHeader}>
-        <h1>Add an Admin</h1>
+        <h1>Create an Admin</h1>
       </div>
       <div className={styles.adminCreateForm}>
         <form>
           <div className={styles.adminCreateFormInputLabel}>
-            <label className={styles.adminCreateFormLabel}>First Name:</label>
             <input
               className={styles.adminCreateFormInput}
               id="FirstName"
@@ -27,10 +37,10 @@ once the backend is finished, need to make an axios post creating new admin usin
               value={newFirstName}
               onChange={(event) => setNewFirstName(event.target.value)}
               aria-label="FirstName"
+              placeholder="First Name"
             />
           </div>
           <div className={styles.adminCreateFormInputLabel}>
-            <label className={styles.adminCreateFormLabel}>Last Name:</label>
             <input
               className={styles.adminCreateFormInput}
               id="LastName"
@@ -38,10 +48,10 @@ once the backend is finished, need to make an axios post creating new admin usin
               value={newLastName}
               onChange={(event) => setNewLastName(event.target.value)}
               aria-label="LastName"
+              placeholder="Last Name"
             />
           </div>
           <div className={styles.adminCreateFormInputLabel}>
-            <label className={styles.adminCreateFormLabel}>Username:</label>
             <input
               className={styles.adminCreateFormInput}
               id="Username"
@@ -49,10 +59,10 @@ once the backend is finished, need to make an axios post creating new admin usin
               value={newUsername}
               onChange={(event) => setNewUsername(event.target.value)}
               aria-label="Username"
+              placeholder="Username"
             />
           </div>
           <div className={styles.adminCreateFormInputLabel}>
-            <label className={styles.adminCreateFormLabel}>Password:</label>
             <input
               className={styles.adminCreateFormInput}
               id="Password"
@@ -60,10 +70,10 @@ once the backend is finished, need to make an axios post creating new admin usin
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
               aria-label="Password"
+              placeholder="Password"
             />
           </div>
           <div className={styles.adminCreateFormInputLabel}>
-            <label className={styles.adminCreateFormLabel}>Email:</label>
             <input
               className={styles.adminCreateFormInput}
               id="Email"
@@ -71,10 +81,15 @@ once the backend is finished, need to make an axios post creating new admin usin
               value={newEmail}
               onChange={(event) => setNewEmail(event.target.value)}
               aria-label="Email"
+              placeholder="Email"
             />
           </div>
           <div className={styles.adminCreateFormSubmit}>
-            <button className={styles.adminCreateFormSubmitBtn} type="submit">
+            <button
+              className={styles.adminCreateFormSubmitBtn}
+              type="submit"
+              onClick={createAdmin}
+            >
               Create Admin!
             </button>
           </div>
