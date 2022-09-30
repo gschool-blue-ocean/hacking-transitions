@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Login from '../login' 
+import Login from '../components/login' 
 import Button from 'react-bootstrap/Button';
 //=========================  LOGIN PAGE ==================
 export default function Home() {
