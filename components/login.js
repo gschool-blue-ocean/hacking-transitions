@@ -8,12 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 let Login = () => {
-    // const [allUsersData] = useState([])
+    let listOfUserNames=[]; 
     const dispatch = useDispatch();
-    const { allUsersData, allCohortsData } = useSelector(
-      ({ app: { allUsersData, allCohortsData } }) => ({
+    const { allUsersData } = useSelector(
+      ({ app: { allUsersData } }) => ({
         allUsersData,
-        allCohortsData,
       })
     );
     const [userData, setUserData] = useState('')
@@ -29,46 +28,36 @@ let Login = () => {
             // they used invokeSetLogin here but im not sure where it came from ; browser says its not defined
         }
     }, [])
-    useEffect(() => {
-        if(userData){
-            // they used invokeSetLogin here but im not sure where it came from ; browser says its not defined
-        }
-    }, [userData])
+
     useEffect(() => {
       (async () => {
         const allUsers = await (await fetch(`${server}/api/users`)).json();
         dispatch(setAllUserData(allUsers));
         
       })();
+     allUsersData.forEach((user) =>{
+        return listOfUserNames.push(user.username)
+       
+      })
     }, []);
-    console.log('all users', allUsersData)
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         // removeErrorMsgs() --> not sure why they did this but this was used here
         handleLogin();
     }
     const handleLogin = () =>{
-        setLoading(true)
-        const checkUserNames = (username) => {
-            let result = false; 
-            allUsersData.forEach((el) => {
-                if(el.username === username){
-                    result = true;
-                }
-            })
-            return result; 
-        }
-        let inputData = {
-            username: loginData.username,
-            password: loginData.password,
-        };
-        let foundUserName = checkUserNames(inputData.username)
-        if(inputData.username.length === 0 || inputData.password.length ===0){
-            setLoading(false)
-            // loginError uses here;  not sure why 
-        }
-        // fetch request here
-            // POST inputData
+      let inputData = {
+        username: loginData.username,
+        password: loginData.password
+      }
+      if(listOfUserNames.includes(inputData.username)){
+        console.log("list of usernames", listOfUserNames)
+        console.log('user is valid')
+      } else{
+        console.log('no')
+      }
+   
     }
     const handleChange = (e) =>{
         setLoginData((prevLoginData) =>{
@@ -78,11 +67,7 @@ let Login = () => {
             }
         })
     }
-    // const removeErrorMsgs = () =>{
-    //     const errorMsg =
-    //     typeof document !== "undefined" && document.querySelectorAll(".errorMsg");
-    //     errorMsg.forEach((elem) => elem.classNameList.remove("show"));
-    // }
+    
     // handleHash was here but was commented out; 
     return (
         <div className={style.modalContainer}>

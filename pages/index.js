@@ -23,7 +23,7 @@ export default function Home() {
       dispatch(setAllCohortData(allCohorts));
     })();
   }, []);
-
+ 
   
   return (
     <div className={styles.container}>
