@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod, notFound404} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
 export default async function handler(req, res) {
 
   /************* GET ALL CERTAIN DEPENDENT *************/
@@ -9,10 +9,11 @@ export default async function handler(req, res) {
       res.send(dependents.rows);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return
   }
+  /************* END GET ALL CERTAIN DEPENDENT *************/
   /************* CREATE A NEW DEPENDENT *************/
   if (checkApiMethod(req, "POST")) {
     const { sponsor_id, age, relation } = req.body
@@ -22,9 +23,10 @@ export default async function handler(req, res) {
         res.json(dependent)
     } catch (error) {
         console.log(error)
-        res.send(error)
+        handleErrors(res)
     }
     return
   }
+  /************* END CREATE A NEW DEPENDENT *************/
   notFound404(res)
 }

@@ -1,5 +1,5 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404 } from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* GET ALL USERS FROM A CERTAIN COHORT *************/
@@ -9,9 +9,10 @@ export default async function handler(req, res) {
       res.json(users);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
+  /************* END GET ALL USERS FROM A CERTAIN COHORT *************/
   notFound404(res)
 }
