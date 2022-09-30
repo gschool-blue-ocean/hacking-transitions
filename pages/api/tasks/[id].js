@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod,notFound404 } from "../../../utility";
+import { checkApiMethod,notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* UPDATE A CERTAIN TASKS *************/
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       res.json(task);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       res.json(task);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }

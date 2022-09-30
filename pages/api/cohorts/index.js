@@ -1,15 +1,33 @@
-import sql from "../../../database/connection"
-import { checkApiMethod } from "../../../utility"
+import sql from "../../../database/connection";
+import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
- if(checkApiMethod(req, "GET")) {
+  /******** GET ALL COHORTS ********/
+  if (checkApiMethod(req, "GET")) {
     try {
-        let data = await sql`SELECT * FROM cohorts ORDER BY cohort_id ASC;`
-        res.json(data.rows)    
+      let cohorts = await sql`SELECT * FROM cohorts ORDER BY cohort_id ASC;`;
+      res.json(cohorts);
     } catch (error) {
-        console.log(error)
-        res.send(error)
+      console.log(error);
+      handleErrors(res);
     }
-} 
-return
+    return;
+  }
+  /******** END GET ALL COHORTS ********/
+  /******** CREATE NEW COHORTS ********/
+  if (checkApiMethod(req, "POST")) {
+    const { cohort_name, start_date, end_date, active } = req.body;
+    const newCohort = { cohort_name, start_date, end_date, active };
+    try {
+      let cohort = (
+        await sql`INSERT INTO cohorts ${sql(newCohort)} RETURNING *`
+      )[0];
+      res.json(cohort);
+    } catch (error) {
+      console.log(error);
+      handleErrors(res);
+    }
+    return;
+  }
+  /******** END CREATE NEW COHORTS ********/
+  notFound404(res);
 }
-  

@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod, notFound404} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
 export default async function handler(req, res) {
 
   /************* GET ALL CERTAIN DEPENDENT *************/
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       res.send(dependents.rows);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return
   }
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         res.json(dependent)
     } catch (error) {
         console.log(error)
-        res.send(error)
+        handleErrors(res)
     }
     return
   }

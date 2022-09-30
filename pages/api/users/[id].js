@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod, notFound404 } from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* GET A CERTAIN USER INFORMATION *************/
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       res.json(user);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
@@ -65,7 +65,7 @@ export default async function handler(req, res) {
       res.send(user);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
       res.json(user);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }

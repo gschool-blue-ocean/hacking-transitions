@@ -1,5 +1,5 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* GET ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
@@ -10,10 +10,11 @@ export default async function handler(req, res) {
       res.json(dependents);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
+  /************* END GET ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
   /************* DELETE ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
   if (checkApiMethod(req, "DELETE") && typeof parseInt(id) === "number") {
     try {
@@ -22,9 +23,10 @@ export default async function handler(req, res) {
       res.json(dependents);
     } catch (error) {
       console.log(error);
-      res.send(error);
+      handleErrors(res);
     }
     return;
   }
+  /************* END DELETE ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
   notFound404(res)
 }
