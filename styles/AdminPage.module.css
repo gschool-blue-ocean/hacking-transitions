@@ -21,4 +21,18 @@
     border: 1px black solid;
     margin: 2rem;
     width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.listitem{
+    border: 1px black solid;
+    width: 6rem;
+    height: 2rem;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+.cohortbtn{
+    border: 1px black solid;
 }

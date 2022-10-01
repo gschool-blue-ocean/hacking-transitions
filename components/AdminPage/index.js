@@ -19,8 +19,8 @@ const AdminContainer = () => {
         <div className={s.cohortsmenu}> 
           <ul>
             {cohorts.map(cohort => {return (
-                <li>
-                  <btn onClick={handleClick}>{cohort}</btn>
+                <li className={s.listitem}>
+                  <btn className={s.cohortbtn} onClick={handleClick}>{cohort}</btn>
                 </li>
             )}
             )}
