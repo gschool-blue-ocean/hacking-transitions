@@ -29,17 +29,17 @@ let Login = () => {
         }
     }, [])
 
-    useEffect(() => {
-      (async () => {
-        const allUsers = await (await fetch(`${server}/api/users`)).json();
-        dispatch(setAllUserData(allUsers));
+    // useEffect(() => {
+    //   (async () => {
+    //     const allUsers = await (await fetch(`${server}/api/users`)).json();
+    //     dispatch(setAllUserData(allUsers));
         
-      })();
-     allUsersData.forEach((user) =>{
-        return listOfUserNames.push(user.username)
+    //   })();
+    //  allUsersData.forEach((user) =>{
+    //     return listOfUserNames.push(user.username)
        
-      })
-    }, []);
+    //   })
+    // }, []);
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -51,12 +51,13 @@ let Login = () => {
         username: loginData.username,
         password: loginData.password
       }
-      if(listOfUserNames.includes(inputData.username)){
-        console.log("list of usernames", listOfUserNames)
-        console.log('user is valid')
-      } else{
-        console.log('no')
-      }
+    fetch(`${server}/api/users/userbyname/${inputData.username}`, {
+        method: 'POST', 
+        headers: {"Content-Type" : "application/json"}, 
+        body: JSON.stringify(inputData.username)
+      })
+      .then((res) => console.log(res))
+      
    
     }
     const handleChange = (e) =>{
