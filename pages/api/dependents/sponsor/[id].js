@@ -1,5 +1,5 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
   /************* GET ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
