@@ -14,7 +14,7 @@ const AdminContainer = () => {
   }
   const [isClicked, toggleClicked] = useState(false);
   const toggleClickedMenu = () => {
-    toggleHClicked(!isClicked);
+    toggleClicked(!isClicked);
   };
   // const [isMouse, toggleMouse] = React.useState(false);
   // const toggleMouseMenu = () => {
@@ -47,14 +47,14 @@ const AdminContainer = () => {
       <div className={s.menucontainer}> 
         <div className={s.menutitle}>
           <motion.btn 
-            onClick={toggleHoverMenu}>
+            onClick={toggleClickedMenu}>
          Cohorts
          </motion.btn>
         </div>
         <div className={s.cohortsmenu}> 
           <motion.ul 
               initial="exit"
-              animate={isHover ? "enter" : "exit"}
+              animate={isClicked ? "enter" : "exit"}
               variants={subMenuAnimate}>
             {cohorts.map(cohort => {return (
                 <li className={s.listitem}>
