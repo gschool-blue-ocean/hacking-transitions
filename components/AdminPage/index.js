@@ -2,6 +2,7 @@ import s from '../../styles/AdminPage.module.css'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 const AdminContainer = () => {
+  //FAKE DATA
   const cohorts = [
     'MCSP-11',
     'MCSP-12',
@@ -16,11 +17,7 @@ const AdminContainer = () => {
   const toggleClickedMenu = () => {
     toggleClicked(!isClicked);
   };
-  // const [isMouse, toggleMouse] = React.useState(false);
-  // const toggleMouseMenu = () => {
-  //   toggleMouse(!isMouse);
-  // };
-  //animation for 
+  //animation for dropdown menu
   const subMenuAnimate = {
     enter: {
       opacity: 1,
@@ -43,29 +40,32 @@ const AdminContainer = () => {
     }
   }
   return (
+    <div className={s.background}>
     <div className={s.container}>
       <div className={s.menucontainer}> 
         <div className={s.menutitle}>
           <motion.btn 
-            onClick={toggleClickedMenu}>
+            onClick={toggleClickedMenu}
+            className={s.titlebtn}>
          Cohorts
          </motion.btn>
         </div>
         <div className={s.cohortsmenu}> 
-          <motion.ul 
+          <motion.div 
               initial="exit"
               animate={isClicked ? "enter" : "exit"}
               variants={subMenuAnimate}>
             {cohorts.map(cohort => {return (
-                <li className={s.listitem}>
+                <div className={s.listitem}>
                   <btn className={s.cohortbtn} onClick={handleClick}>{cohort}</btn>
-                </li>
+                </div>
              )}
             )}
-          </motion.ul >
+          </motion.div >
         </div>
       </div>
       
+    </div>
     </div>
   )
 }

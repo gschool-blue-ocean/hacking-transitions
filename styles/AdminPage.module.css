@@ -1,38 +1,50 @@
+.background{
+    /* background: #f6efe7; */
+}
 .container {
     border: 1px black solid;
     height: 200rem;
     margin: 1rem;
     display: flex;
     flex-direction: row;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    color: #003B4C;
+    background-color: #FFF;
 }
 .menucontainer{
-    border: 1px black solid;
+    /* border: 1px black solid; */
+    height: 3.5rem;
     margin: 10rem;
     width: 20rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+ }
+ .titlebtn{
+    cursor: pointer;
  }
  .menutitle{
-    border: 1px black solid;
-    margin: 2rem;
-    width: 10rem;
-    font-size: 3rem;
+    border-bottom: 1px #F79020 solid;
 
+    width: 20rem;
+    font-size: 3rem;
  }
  .cohortsmenu{    
-    border: 1px black solid;
     margin: 2rem;
-    width: 10rem;
+    width: 12rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .listitem{
-    border: 1px black solid;
-    width: 6rem;
+    /* border: 1px black solid; */
+    width: 10rem;
     height: 2rem;
     margin: 1rem;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
 }
 .cohortbtn{
-    border: 1px black solid;
+    font-size: 2rem;
+    cursor: pointer;
 }
