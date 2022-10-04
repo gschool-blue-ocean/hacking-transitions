@@ -68,6 +68,7 @@ let Login = () => {
             // loginError uses here;  not sure why 
         }
         // fetch request here
+        else if (inputData.username === el.allUsersData.username )
             // POST inputData
     }
     const handleChange = (e) =>{
