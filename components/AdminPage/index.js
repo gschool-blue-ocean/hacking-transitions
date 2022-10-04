@@ -6,10 +6,13 @@ import axios from 'axios'
 const AdminContainer = () => {
   const [students, setStudents] = useState([])
   const [cohorts, setCohorts] = useState([])
+
   const [currCohort, setCurrCohort] = useState([])
 
   //let filtStudents = students.filter((student) => student.cohort_id == id)
   // setCurrCohort({cohort_id: id, cohort_name: data.cohort_name, students: filtStudents})
+
+
   useEffect(() => {
     axios({
         method: 'get',
