@@ -1,0 +1,105 @@
+.adminEditParent {
+  background-color: #fff;
+  display: grid;
+  height: 100%;
+  width: 70%;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas: "adminCreate adminList";
+  margin: 0 auto;
+  margin-top: 5%;
+}
+/* admin create */
+.adminCreateParent {
+  display: grid;
+  grid-area: adminCreate;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "adminCreateHeader"
+    "adminCreateForm";
+  margin-right: 2.5%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.adminCreateHeader {
+  color: #003b4c;
+  display: grid;
+  grid-area: adminCreateHeader;
+  font-size: 50%;
+  justify-content: center;
+  border-bottom: #f79020;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 2.5%;
+}
+.adminCreateForm {
+  background-color: white;
+  display: grid;
+  grid-area: adminCreateForm;
+}
+.adminCreateFormInputLabel {
+  margin-left: 12.5%;
+  margin-top: 5%;
+  margin-right: 12.5%;
+  display: grid;
+
+  color: #003b4c;
+}
+
+.adminCreateFormInput {
+  display: grid;
+  color: black;
+
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+
+.adminCreateFormSubmit {
+  margin-top: 5%;
+  justify-content: center;
+  margin-left: 12.5%;
+  margin-right: 12.5%;
+}
+.adminCreateFormSubmitBtn {
+  height: 30px;
+  width: 100%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.adminCreateFormSubmitBtn:hover {
+  height: 30px;
+  width: 100%;
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* admin list */
+.adminListParent {
+  display: grid;
+  grid-area: adminList;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "adminListHeader"
+    "adminListList";
+  margin-left: 2.5%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.adminListHeader {
+  display: grid;
+  grid-area: adminListHeader;
+  font-size: 50%;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 2.5%;
+}
+.adminListList {
+  display: grid;
+  grid-area: adminListList;
+}

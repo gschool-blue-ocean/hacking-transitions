@@ -6,6 +6,7 @@ const student = () => {
       <h1>students</h1>
       <Index/>
     </div>
+
   )
 }
 export default student
