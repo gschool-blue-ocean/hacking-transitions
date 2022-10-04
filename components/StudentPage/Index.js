@@ -26,7 +26,7 @@ import EditStudentModal from "./EditStudentModal";
 
 // Modal.setAppElement(".AppContainer");
 
-export default function StudentPage({
+export default function Index({
    modalIsOpen,
    setModalIsOpen,
    activeStudent,
