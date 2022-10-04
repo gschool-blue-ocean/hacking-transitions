@@ -1,4 +1,4 @@
-import Index from "../components/StudentPage"
+import Index from "../../components/StudentPage"
 
 const student = () => {
   return (
