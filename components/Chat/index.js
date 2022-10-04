@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   // user_data localstorage? redux?
-  const userData = { user_id: 11 };
+  const userData = { user_id: 12 };
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [message, setMessage] = useState(""); //new message 
   const [socket, setSocket] = useState({}); // socket connection
@@ -17,7 +17,7 @@ const Chat = () => {
 
       /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
       const studentComments = await (
-        await fetch(`${server}/api/comments/student/${11}`)
+        await fetch(`${server}/api/comments/student/${12}`)
       ).json();
       // console.log(studentComments);
       setChatMessages(studentComments);
@@ -44,7 +44,7 @@ const Chat = () => {
     if (message.length === 0) return; // If message is empty dont send
     // Create a new comment object
     const newMessage = {
-      student_id: 11,
+      student_id: 12,
       author_id: userData.user_id,
       author_name: `${userData.first} ${userData.last}`,
       content: message,
@@ -57,7 +57,7 @@ const Chat = () => {
       (await socket.broadcast
         .to(
           JSON.parse(localStorage.currentUser).admin || userData.admin
-            ? 11 /*activeStudent.user_id*/
+            ? 12 /*activeStudent.user_id*/
             : userData.user_id
         )
         .emit("send_new_message", newMessage));
@@ -66,9 +66,10 @@ const Chat = () => {
   };
   const joinRoom = async () => {
     JSON.parse(localStorage.currentUser).admin || userData.admin
-      ? await socket.emit("join_room", 11 /*activeStudent.user_id*/)
+      ? await socket.emit("join_room", 12 /*activeStudent.user_id*/)
       : await socket.emit("join_room", userData.user_id);
   };
+
   return (
     <div className={styles.container}>
       {/* CREATE EXISTING MESSAGES */}
@@ -90,10 +91,10 @@ const Chat = () => {
                 }`}
               >
                 <p className={styles.content}> {content} </p>
-                <div className={styles.head}>
+                <p className={styles.head}>
                   {" "}
                   <strong>{author_name}</strong> <i>{date_time}</i>
-                </div>
+                </p>
               </div>
             );
           }

@@ -1,3 +1,6 @@
 .container{
-    
+    height: min(10rem,10rem) ;
+    width: min(20rem,20rem);
+    border: 1px solid red;
+    margin-top: 10rem;
 }
