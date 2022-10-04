@@ -87,4 +87,3 @@ export default async function handler(req, res) {
   /************* END DELETE A CERTAIN USER  *************/
   notFound404(res)
 }
-
