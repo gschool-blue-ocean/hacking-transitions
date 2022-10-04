@@ -4,7 +4,7 @@ import style from "../styles/LoginStyles.module.css";
 import { server } from "../utility";
 import { setAllUserData, setAllCohortData } from "../redux/features/app-slice.js"
 import { useSelector, useDispatch } from "react-redux";
-
+import axios from "axios";
 
 
 let Login = () => {
@@ -46,7 +46,8 @@ let Login = () => {
         // removeErrorMsgs() --> not sure why they did this but this was used here
         handleLogin();
     }
-    const handleLogin = () =>{
+    const handleLogin = () => {
+
       let inputData = {
         username: loginData.username,
         password: loginData.password
@@ -56,10 +57,20 @@ let Login = () => {
         headers: {"Content-Type" : "application/json"}, 
         body: JSON.stringify(inputData.username)
       })
-      .then((res) => console.log(res))
-      
+      .then(res => res.json()
+      .then(data => console.log(data))
+      // .then(function(response) {
+      //   return response.json();
+      // }).then(function(data){
+      //   console.log(data);
+      // })
+    
+      // axios.get(`${server}/api/users/userbyname/${inputData.username}`)
+      // .then(res => console.log(res))
+      // .catch(err => console.log(err));
    
-    }
+    )}
+  
     const handleChange = (e) =>{
         setLoginData((prevLoginData) =>{
             return{
