@@ -2,13 +2,17 @@ import s from '../../styles/AdminPage.module.css'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const CohortMenu = ({cohorts}) => {
+const CohortMenu = ({cohorts,students, setCurrCohort }) => {
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active)
-  const handleClick = () => {
-    console.log('click')
+  const handleClick = (e) => {
+      const data = e.target.dataset
+      const id = data.cohort_id
+      let filtStudents = students.filter((student) => student.cohort_id == id)
+      setCurrCohort({cohort_id: id, cohort_name: data.cohort_name, students: filtStudents})
   }
+
   const toggleClickedMenu = () => {
     toggleClicked(!isClicked);
   };
@@ -50,7 +54,13 @@ const CohortMenu = ({cohorts}) => {
           variants={subMenuAnimate}>
         {cohorts.map(cohort => {return (
             <div className={s.listitem}>
-              <btn className={s.cohortbtn} onClick={handleClick} data={cohort}>{cohort.cohort_name}</btn>
+              <btn className={s.cohortbtn} onClick={handleClick} 
+              data-active={cohort.active} 
+              data-cohort_id={cohort.cohort_id}
+              data-cohort_name={cohort.cohort_name}
+              data-end_date={cohort.end_date}
+              data-start_date={cohort.start_date}
+              >{cohort.cohort_name}</btn>
             </div>
          )}
         )}
