@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       const comment = (
         await sql`INSERT INTO comments ${sql(newComment)} RETURNING *`
       )[0];
-      res.json(cohort);
+      res.json(comment);
     } catch (error) {
       console.log(error);
       handleErrors(res);

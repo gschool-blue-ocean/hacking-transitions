@@ -1,12 +1,12 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors} from "../../../../utility";
 export default async function handler(req, res) {
   const { id } = req.query;
-  /************* GET ALL COMMENTS FROM A CERTAIN SPONSOR *************/
+  /************* GET ALL COMMENTS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "GET") && typeof parseInt(id) === "number") {
     try {
       const comments =
-        await sql`SELECT * FROM comments WHERE student_id = ${id} ORDER BY comment_id ASC`;
+        await sql`SELECT * FROM comments WHERE student_id = ${id} ORDER BY comment_id ASC`;        
       res.json(comments);
     } catch (error) {
       console.log(error);
@@ -14,8 +14,8 @@ export default async function handler(req, res) {
     }
     return;
   }
-  /************* END GET ALL COMMENTS FROM A CERTAIN SPONSOR *************/
-  /************* DELETE ALL COMMENTS FROM A CERTAIN SPONSOR *************/
+  /************* END GET ALL COMMENTS FROM A CERTAIN STUDENT *************/
+  /************* DELETE ALL COMMENTS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "DELETE") && typeof parseInt(id) === "number") {
     try {
       const comments =
@@ -27,6 +27,6 @@ export default async function handler(req, res) {
     }
     return;
   }
-  /************* END DELETE ALL COMMENTS FROM A CERTAIN SPONSOR *************/
+  /************* END DELETE ALL COMMENTS FROM A CERTAIN STUDENT *************/
   notFound404(res)
 }

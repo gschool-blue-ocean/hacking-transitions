@@ -1,5 +1,5 @@
 import sql from "../../../database/connection";
-import { checkApiMethod,notFound404, handleErrors } from "../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 
 export default async function handler(req, res) {
   /************* GET ALL USERS INFORMATION *************/
@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     return;
   }
   /************* END GET ALL USERS INFORMATION *************/
+
   /************* CREATE A NEW USER  *************/
   if (checkApiMethod(req, "POST")) {
     const {
@@ -80,5 +81,10 @@ export default async function handler(req, res) {
     return;
   }
   /************* END CREATE A NEW USER  *************/
+<<<<<<< HEAD
   notFound404(res)
 }
+=======
+  notFound404(res);
+}
+>>>>>>> 6a5facf9638f2b5def352996a44a242d2c1a33b5
