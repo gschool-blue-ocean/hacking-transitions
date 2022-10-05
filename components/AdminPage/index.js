@@ -47,14 +47,15 @@ const AdminContainer = () => {
       <div className={s.menucontainer}> 
         <div className={s.menutitle}>
           <motion.btn 
-            onClick={toggleHoverMenu}>
+            // onClick={toggleHoverMenu}
+            >
          Cohorts
          </motion.btn>
         </div>
         <div className={s.cohortsmenu}> 
           <motion.ul 
               initial="exit"
-              animate={isHover ? "enter" : "exit"}
+              //animate={isHover ? "enter" : "exit"}
               variants={subMenuAnimate}>
             {cohorts.map(cohort => {return (
                 <li className={s.listitem}>
