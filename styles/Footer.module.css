@@ -4,13 +4,11 @@
 }
 
 .footer {
-    z-index: 9998;
-    position: relative;
     border-top: 10px solid #f79020;
     height: 80px;
     background: #f4f4f4;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
 }
 
