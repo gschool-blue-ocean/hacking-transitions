@@ -7,7 +7,7 @@ import styles from "../../styles/StudentPage.module.css"
 // import "../../StyleSheets/StudentPage.css";
 // import SideNav from "../SideNav/SideNav";
 // import LoginContext from "../../Context/LoginContext";
-// import ChatModal from "../../Components/Chat/ChatModal";
+import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 
@@ -81,17 +81,17 @@ export default function Index({
             </div>
 
             {/* User Data Card */}
-            <div className="styles.SDash-Info-card">
-               <div className="styles.infoCard-container">
+            <div className={styles.SDashInfocard}>
+               <div className={styles.infoCardcontainer}>
                   <ul>
                      <div>
                         {showEditStudentModal && (
                            <EditStudentModal
-                              setUserData={setUserData}
-                              userData={userData}
-                              setShowEditStudentModal={setShowEditStudentModal}
-                              activeStudent={activeStudent}
-                              setActiveStudent={setActiveStudent}
+                              // setUserData={setUserData}
+                              // userData={userData}
+                              // setShowEditStudentModal={setShowEditStudentModal}
+                              // activeStudent={activeStudent}
+                              // setActiveStudent={setActiveStudent}
                            />
                         )}
                         <div onClick={handleEditBtnClicked} className={styles.editStudentBtnSpan}>
@@ -101,7 +101,7 @@ export default function Index({
                      </div>
 
                      <li>
-                        <h4 className="{styles.text-left">ETS Date</h4>
+                        <h4 className="text-left">ETS Date</h4>
                         <span>
                            nov 28
                            {/* {activeStudent.ets_date} */}
@@ -192,7 +192,11 @@ export default function Index({
             <SPTasks activeStudent='activestudent'
             // {activeStudent} 
             />
+<<<<<<< HEAD
             <Chat/>
+=======
+            <Chat activeStudent={activeStudent} />
+>>>>>>> 091f4dd524a0e86087c5cbcd7f4d97b22d54bef3
          </div >
       </div >
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import styles from "../../styles/StudentPage.module.css";
 
 export default function SPEditTask({ task, cancelEdit, closeModal }) {
    const { register, handleSubmit } = useForm();
@@ -45,9 +46,9 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
    };
 
    return (
-      <div className="Modal--EditTask">
+      <div className={styles.ModalEditTask}>
          <button
-            className="Modal--TaskBtns"
+            className={styles.ModalTaskBtns}
             onClick={() => {
                cancelEdit(false);
                closeModal(false);
@@ -56,8 +57,8 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
             Close
          </button>
          <h3 id="Modal--Header">Editing Task</h3>
-         <form className="Modal--TaskFormFlex" onSubmit={handleSubmit(onSubmit)}>
-            <div className="Modal--TaskInputs">
+         <form className={styles.ModalTaskFormFlex} onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.ModalTaskInputs}>
                <label>Title</label>
                <input
                   defaultValue={task.title}
@@ -67,7 +68,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                />
             </div>
 
-            <div className="Modal--TaskInputs">
+            <div className={styles.ModalTaskInputs}>
                <label>Date</label>
                <input
                   type="date"
@@ -76,7 +77,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                />
             </div>
 
-            <div className="Modal--TaskInputs">
+            <div className={styles.ModalTaskInputs}>
                <label>Task Completed?</label>
                <select defaultValue={task.completed} {...register("completed", { required: true })}>
                   <option value="true">Completed</option>
@@ -84,7 +85,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                </select>
             </div>
 
-            <div className="Modal--TaskInputs">
+            <div className={styles.ModalTaskInputs}>
                <label>Description</label>
                <input
                   defaultValue={task.description}
@@ -93,7 +94,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                   {...register("description", { required: true })}
                />
             </div>
-            <input className="Modal--TaskBtns" type="submit" value="Submit Edit" />
+            <input className={styles.ModalTaskBtns} type="submit" value="Submit Edit" />
          </form>
       </div>
    );
