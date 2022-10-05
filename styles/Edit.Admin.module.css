@@ -1,3 +1,10 @@
+.hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-right: 15%;
+}
 .adminEditParent {
   background-color: #fff;
   display: grid;
@@ -6,7 +13,7 @@
   grid-template-columns: 3fr 2fr;
   grid-template-areas: "adminCreate adminList";
   margin: 0 auto;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 /* admin create */
 .adminCreateParent {
@@ -18,9 +25,10 @@
     "adminCreateForm";
   margin-right: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 100%;
 }
 .adminCreateHeader {
-  color: #003b4c;
+  color: black;
   display: grid;
   grid-area: adminCreateHeader;
   font-size: 50%;
@@ -42,7 +50,7 @@
   margin-right: 12.5%;
   display: grid;
 
-  color: #003b4c;
+  color: black;
 }
 
 .adminCreateFormInput {
@@ -89,6 +97,8 @@
     "adminListList";
   margin-left: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  min-height: 20rem;
+  max-height: 30rem;
 }
 .adminListHeader {
   display: grid;
@@ -102,4 +112,21 @@
 .adminListList {
   display: grid;
   grid-area: adminListList;
+  overflow-y: auto;
+}
+.adminListListText {
+  display: grid;
+}
+.adminListListBtn {
+  display: grid;
+  border: 1px solid transparent;
+  border-radius: 0;
+  width: 20%;
+  margin-top: 2.5%;
+  color: white;
+  background-color: #cf1020;
+}
+.adminListListBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: #a52a2a;
 }

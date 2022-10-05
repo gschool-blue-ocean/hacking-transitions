@@ -4,7 +4,7 @@ import style from "../../styles/Footer.module.css";
 const Footer = () => {
   return (
     <div className={style.container}>
-      <div className={style.spacer}>spacer</div>
+      <div className={style.spacer}></div>
       <div className={style.footer}>
         <div className={style.cont}>
           <div className={style.col}>

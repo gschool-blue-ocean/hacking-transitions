@@ -1,9 +1,9 @@
-import Index from "../../components/StudentPage"
+import StudentPage from "../../components/StudentPage"
 
 const student = () => {
   return (
     <div>
-      <Index/>
+      <StudentPage/>
     </div>
 
   )

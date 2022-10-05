@@ -3,30 +3,12 @@ import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import styles from "../../styles/StudentPage.module.css"
-// import "../../StyleSheets/StudentPage.css";
-// import SideNav from "../SideNav/SideNav";
-// import LoginContext from "../../Context/LoginContext";
-// import ChatModal from "../../Components/Chat/ChatModal";
+import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 
-// const customStyles = {
-//    content: {
-//       top: "50%",
-//       left: "50%",
-//       right: "auto",
-//       bottom: "auto",
-//       marginRight: "-50%",
-//       transform: "translate(-50%, -50%)",
-//       backgroundColor: "var(--clr-primary-accent)",
-//       borderRadius: "10px",
-//       width: "30%",
-//    },
-// };
 
-// Modal.setAppElement(".AppContainer");
-
-export default function Index({
+export default function StudentPage({
    modalIsOpen,
    setModalIsOpen,
    activeStudent,
@@ -191,7 +173,7 @@ export default function Index({
             <SPTasks activeStudent='activestudent'
             // {activeStudent} 
             />
-            {/* <ChatModal socket={socket} activeStudent={activeStudent} /> */}
+            <Chat />
          </div >
       </div >
 
