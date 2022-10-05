@@ -65,9 +65,9 @@ const Chat = () => {
     setMessage("");
   };
   const joinRoom = async () => {
-    JSON.parse(localStorage.currentUser).admin || userData.admin
-      ? await socket.emit("join_room", 11 /*activeStudent.user_id*/)
-      : await socket.emit("join_room", userData.user_id);
+    // JSON.parse(localStorage.currentUser).admin || userData.admin
+    //   ? await socket.emit("join_room", 11 /*activeStudent.user_id*/)
+    //   : await socket.emit("join_room", userData.user_id);
   };
   return (
     <div className={styles.container}>
