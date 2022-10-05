@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../styles/LoginStyles.module.css";
 import { server } from "../utility";
-import { setAllUserData, setAllCohortData } from "../redux/features/app-slice.js"
+import { setAllUserData, setAllCohortData, setCurrentUser, setIsAdmin, setLoginState } from "../redux/features/app-slice.js"
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 
 
+// i need to revise this so much
 let Login = () => {
-    let listOfUserNames=[]; 
+    // let listOfUserNames=[]; 
     const dispatch = useDispatch();
     const { allUsersData } = useSelector(
       ({ app: { allUsersData } }) => ({
@@ -41,13 +42,13 @@ let Login = () => {
     //   })
     // }, []);
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        // removeErrorMsgs() --> not sure why they did this but this was used here
-        handleLogin();
-    }
-    const handleLogin = () => {
-
+    // const handleSubmit = (e) =>{
+    //     e.preventDefault();
+    //     // removeErrorMsgs() --> not sure why they did this but this was used here
+    //     handleLogin();
+    // }
+    const handleLogin = (e) => {
+      e.preventDefault();
       let inputData = {
         username: loginData.username,
         password: loginData.password
@@ -58,7 +59,15 @@ let Login = () => {
         body: JSON.stringify(inputData.username)
       })
       .then(res => res.json()
-      .then(data => console.log(data))
+      // .then(data => console.log(data))
+      .then((data) => {  
+        if (data.username === inputData.username && data.password === inputData.password) {
+          dispatch(setLoginState(true));
+          dispatch(setCurrentUser(data));
+          dispatch(setIsAdmin(data.admin));
+        }
+       })
+  
       // .then(function(response) {
       //   return response.json();
       // }).then(function(data){
@@ -91,7 +100,7 @@ let Login = () => {
             Fields can not be blank!
           </span>
   
-          <form className={style.loginForm} onSubmit={handleSubmit}>
+          <form className={style.loginForm} onSubmit={handleLogin}>
             <input
               id="formInput"  
               className={`${style.loginInputBox} ${style.username}`}
