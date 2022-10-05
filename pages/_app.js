@@ -11,10 +11,6 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <Meta />
 
-      <div className={styles.container}>
-       <Component {...pageProps} />{" "}
-      </div>
-
       <Layout>
         <Component {...pageProps} />{" "}
       </Layout>
