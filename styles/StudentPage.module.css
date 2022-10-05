@@ -1,0 +1,346 @@
+
+/* ================== TEST ==================== */
+.testgrid {
+   display: grid;
+   grid-template-areas: "sideNav content";
+   grid-template-columns: [first] 20% [second] auto;
+   gap: 10px;
+   height: 100%;
+   background-color: darkgray;
+}
+
+.studentView {
+   grid-template-areas: "content content";
+   padding: 0 2% 0 2%;
+}
+
+.sideNavWrapper {
+   grid-area: sideNav;
+   height: 100%;
+}
+
+.StudentDashWrapper {
+   grid-area: content;
+   height: 100%;
+}
+
+/* =========== Student Container ============== */
+.container{
+   display: block;
+   margin: auto;
+   width: 100vw;
+   background-color: darkgray;
+   height: fit-content;
+}
+
+.StudentDashWrapper {
+   padding: 0.5rem;
+   display: grid;
+   grid-template-areas:
+      "StuHeader StuHeader StuHeader"
+      "StuInfo StuTasks StuTasks"
+      "StuInfo StuTasks StuTasks"
+      "ChatModal ChatModal ChatModal";
+
+   grid-template-columns: 1fr 1fr 1fr;
+   border-radius: 10px;
+   background-color: darkgray;
+   font-family: var(--ff-primary);
+   /* max-height: 85vh; */
+   width: 100%;
+   /* overflow: auto !important; */
+}
+
+/* =============== Student Header ============= */
+.SDashHeader {
+   grid-area: StuHeader;
+   display: grid;
+   grid-template-areas:
+      "StuName . ETStag"
+      "StuBranch . .";
+}
+
+#StuHeaderName {
+   grid-area: StuName;
+   color: var(--clr-primary-accent);
+   text-align: start;
+   align-self: center;
+}
+
+#StuHeaderBranch {
+   grid-area: StuBranch;
+   color: var(--clr-bgsecondary-contrast);
+   padding: 5px;
+}
+
+.StuHeaderETStag {
+   grid-area: ETStag;
+   text-align: center;
+   color: white;
+   border-radius: 10px;
+   font-weight: bold;
+   width: fit-content;
+   padding: 5px 20px;
+   justify-self: end;
+}
+
+#ETS-120 {
+   background-color: var(--clr-ets-blue);
+}
+
+#ETS-90 {
+   background-color: var(--clr-ets-yellow);
+}
+
+#ETS-60 {
+   background-color: var(--clr-ets-orange);
+}
+
+#ETS-30 {
+   background-color: var(--clr-ets-red);
+}
+
+#ETS-d {
+   background-color: var(--clr-ets-green);
+}
+
+/* ============= Student Info =============== */
+
+.editStudentBtnSpan {
+   /* position: relative; */
+   float: right;
+   display: grid;
+   justify-items: center;
+}
+
+.studentview {
+   margin-right: 20vw;
+}
+
+.editStudentInfoBtn:hover {
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.editStudentInfoBtn:hover+.editStudentToolTip {
+   visibility: visible !important;
+}
+
+.editStudentToolTip {
+   visibility: hidden;
+}
+
+.SDashInfocard {
+   grid-area: StuInfo;
+}
+
+/* .SDash--Info-card>ul,
+li,
+span {
+   list-style: none;
+} */
+
+.infoCardcontainer {
+   width: 100%;
+   background-color: #fff;
+   padding: var(--spacer-smallItems);
+   border-radius: 8px;
+}
+
+/* ul>h4,
+li>h4 {
+   margin-top: 1em;
+} */
+
+.title {
+   margin-left: 0.8em;
+}
+
+.answer {
+   margin-left: auto;
+}
+
+/* ============= Student Tasks ============== */
+
+.SDashTasks {
+   grid-area: StuTasks;
+   display: flex;
+   flex-direction: column;
+   border-radius: 8px;
+   flex-wrap: nowrap;
+   align-items: center;
+   margin-left: 12px;
+   background-color: #fff;
+   max-height: 93.7%;
+   margin-top: 2.5%;
+   overflow-y: scroll;
+}
+
+#StuTasksHeader {
+   margin: 10px;
+   color: var(--clr-bgprimary-dark);
+}
+
+.StuTasksCreateBtn {
+   font-size: 25px;
+   background: none;
+   border: none;
+   margin-bottom: 8px;
+}
+
+.StuTasksCreateBtn:hover {
+   cursor: pointer;
+   transform: scale(1.05);
+}
+
+.StuTasksCard {
+   display: grid;
+   grid-template-areas: ". title edtBtn";
+   grid-template-columns: 1fr 90% 1fr;
+   align-items: center;
+   border: solid var(--clr-nuetral-brown);
+   border-radius: 5px;
+   margin-bottom: 8px;
+   width: 85%;
+   text-align: center;
+   color: var(--clr-accent-white);
+   background-color: var(--clr-bgsecondary-contrast);
+   box-shadow: 0px 4px 8px 0px #9b9b9b;
+   transition: box-shadow ease 0.2s, transform ease 0.1s;
+   padding: 5px;
+}
+
+.StuTasksCard:hover {
+   cursor: pointer;
+   box-shadow: 0px 6px 16px 0px #414141;
+   background-blend-mode: lighten;
+}
+
+.StuTasksCard:active {
+   box-shadow: none;
+   transform: scale(0.98);
+}
+
+.StuTasksTitle {
+   grid-area: title;
+   width: 100%;
+   text-align: center;
+}
+
+.StuTasksButtons {
+   grid-area: edtBtn;
+   color: var(--clr-accent-white);
+   font-size: 18px;
+   background: none;
+   border-radius: 5px;
+   border: none;
+   padding: 2px 5px;
+}
+
+.StuTasksButtons:hover {
+   cursor: pointer;
+}
+
+/* ============= Student Modal =============== */
+
+.SPTaskModal {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-areas:
+      "TaskHeader"
+      "TaskStatus"
+      "TaskStatus"
+      "TaskDesc"
+      "TaskRemarks"
+      "AddRemark";
+   font-family: var(--ff-primary);
+   gap: 12px;
+}
+
+#ModalHeader {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskHeader;
+   text-align: center;
+   background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
+}
+
+.ModalTaskStatus {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskStatus;
+   background-color: var(--clr-accent-white);
+}
+
+.ModalTaskDesc {
+   border-radius: 5px;
+   padding: 10px;
+   grid-area: TaskDesc;
+   background-color: var(--clr-accent-white);
+}
+
+.ModalEditTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.ModalCreateTask {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.ModalTaskFormFlex {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.ModalTaskInputs {
+   display: flex;
+   flex-direction: column;
+   border-radius: 5px;
+   padding: 10px;
+   background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
+}
+
+.ModalTaskInputs>input {
+   font-family: var(--ff-primary);
+   background-color: rgb(232, 232, 232);
+   border-radius: 5px;
+   border: none;
+   font-size: 20px;
+   padding: 2px;
+}
+
+.ModalTaskInputs>select {
+   font-family: var(--ff-primary);
+   background-color: rgb(232, 232, 232);
+   border-radius: 5px;
+   border: none;
+   font-size: 20px;
+   padding: 2px;
+}
+
+.ModalTaskBtns {
+   font-family: var(--ff-primary);
+   background: var(--clr-accent-white);
+   padding: 5px;
+   width: 20%;
+   border-radius: 10px;
+   border: none;
+   place-self: center;
+}
+
+.DependentCard {
+   display: flex;
+   justify-content: space-between;
+   width: 40%;
+}
+
+#DependentAge {
+   font-weight: bold;
+}

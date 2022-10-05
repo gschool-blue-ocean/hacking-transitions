@@ -3,12 +3,30 @@ import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import styles from "../../styles/StudentPage.module.css"
-import Chat from "../Chat";
+// import "../../StyleSheets/StudentPage.css";
+// import SideNav from "../SideNav/SideNav";
+// import LoginContext from "../../Context/LoginContext";
+// import ChatModal from "../../Components/Chat/ChatModal";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 
+// const customStyles = {
+//    content: {
+//       top: "50%",
+//       left: "50%",
+//       right: "auto",
+//       bottom: "auto",
+//       marginRight: "-50%",
+//       transform: "translate(-50%, -50%)",
+//       backgroundColor: "var(--clr-primary-accent)",
+//       borderRadius: "10px",
+//       width: "30%",
+//    },
+// };
 
-export default function StudentPage({
+// Modal.setAppElement(".AppContainer");
+
+export default function Index({
    modalIsOpen,
    setModalIsOpen,
    activeStudent,
@@ -62,17 +80,17 @@ export default function StudentPage({
             </div>
 
             {/* User Data Card */}
-            <div className={styles.SDashInfocard}>
-               <div className={styles.infoCardcontainer}>
+            <div className="styles.SDash-Info-card">
+               <div className="styles.infoCard-container">
                   <ul>
                      <div>
                         {showEditStudentModal && (
                            <EditStudentModal
-                              // setUserData={setUserData}
-                              // userData={userData}
-                              // setShowEditStudentModal={setShowEditStudentModal}
-                              // activeStudent={activeStudent}
-                              // setActiveStudent={setActiveStudent}
+                              setUserData={setUserData}
+                              userData={userData}
+                              setShowEditStudentModal={setShowEditStudentModal}
+                              activeStudent={activeStudent}
+                              setActiveStudent={setActiveStudent}
                            />
                         )}
                         <div onClick={handleEditBtnClicked} className={styles.editStudentBtnSpan}>
@@ -82,7 +100,7 @@ export default function StudentPage({
                      </div>
 
                      <li>
-                        <h4 className="text-left">ETS Date</h4>
+                        <h4 className="{styles.text-left">ETS Date</h4>
                         <span>
                            nov 28
                            {/* {activeStudent.ets_date} */}
@@ -173,7 +191,7 @@ export default function StudentPage({
             <SPTasks activeStudent='activestudent'
             // {activeStudent} 
             />
-            <Chat />
+            {/* <ChatModal socket={socket} activeStudent={activeStudent} /> */}
          </div >
       </div >
 

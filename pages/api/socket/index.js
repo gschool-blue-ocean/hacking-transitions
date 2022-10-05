@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
       socket.on("send_new_message", (msg) => {
-        ///// Create a new message in the database
+        ///// Create a new message in the database   
         fetch(`${server}/api/comments`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },

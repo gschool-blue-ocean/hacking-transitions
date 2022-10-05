@@ -1,0 +1,23 @@
+.container {
+    border: 1px black solid;
+    height: auto;
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    color: #003B4C;
+    background-color: #FFF;
+    margin: 10rem;
+    width: 100rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.table {
+    margin-left: 0rem;
+    font-size: 2rem;
+    height: fit-content;
+    width: inherit;
+}
+.tableheaders{
+    font-size: 2.3rem;
+    text-align: left;
+}
