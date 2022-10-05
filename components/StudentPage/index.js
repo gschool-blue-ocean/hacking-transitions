@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
+import Chat from "../Chat";
 import styles from "../../styles/StudentPage.module.css"
 // import "../../StyleSheets/StudentPage.css";
 // import SideNav from "../SideNav/SideNav";
@@ -191,7 +192,7 @@ export default function Index({
             <SPTasks activeStudent='activestudent'
             // {activeStudent} 
             />
-            {/* <ChatModal socket={socket} activeStudent={activeStudent} /> */}
+            <Chat/>
          </div >
       </div >
 

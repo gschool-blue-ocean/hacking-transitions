@@ -1,13 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { server } from "../../utility";
 import io from "socket.io-client";
+import { MdSend } from "react-icons/md";
+import dynamic from "next/dynamic";
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+import "react-quill/dist/quill.snow.css";
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
+  const testUser = 11;
   // user_data localstorage? redux?
-  const userData = { user_id: 12 };
+  const userData = {
+    user_id: testUser,
+    firstName: "BlueOcean",
+    lastName: "BlueOcean",
+  };
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
-  const [message, setMessage] = useState(""); //new message 
   const [socket, setSocket] = useState({}); // socket connection
+  const [newMessage, setNewMessage] = useState("");
+  const [ctrlDown, setCtrlDown] = useState(false);
+
   useEffect(() => {
     (async () => {
       /******** CONNECT TO SOCKET/CHAT SERVER ********/
@@ -17,7 +31,7 @@ const Chat = () => {
 
       /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
       const studentComments = await (
-        await fetch(`${server}/api/comments/student/${12}`)
+        await fetch(`${server}/api/comments/student/${testUser}`)
       ).json();
       // console.log(studentComments);
       setChatMessages(studentComments);
@@ -34,44 +48,42 @@ const Chat = () => {
         await joinRoom(); //join room by students id
         ////If not sender of message recieve the new message and display it
         socket.on("recieve_message", (newMessage) => {
-          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]); 
+          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
         });
       }
     })();
   }, [socket]);
 
   const submitMsg = async () => {
-    if (message.length === 0) return; // If message is empty dont send
+    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g
+    if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
     // Create a new comment object
-    const newMessage = {
-      student_id: 12,
+    const newMessageObj = {
+      student_id: testUser,
       author_id: userData.user_id,
-      author_name: `${userData.first} ${userData.last}`,
-      content: message,
+      author_name: `${userData.firstName} ${userData.lastName}`,
+      content: newMessage,
       date_time: new Date(Date.now()).toUTCString(),
     };
     // Update chat display with newly typed message
-    setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
-    // send the new message to the server 
-    socket.broadcast &&
-      (await socket.broadcast
-        .to(
-          JSON.parse(localStorage.currentUser).admin || userData.admin
-            ? 12 /*activeStudent.user_id*/
-            : userData.user_id
-        )
-        .emit("send_new_message", newMessage));
+    setChatMessages((oldMsgs) => [...oldMsgs, newMessageObj]);
+    console.log(foundContent.test(newMessageObj));
+
+    // send the new message to the server
+    if (socket.connected) {
+      await socket.emit("send_new_message", newMessageObj);
+    }
     //reset input field
-    setMessage("");
+    setNewMessage("");
   };
   const joinRoom = async () => {
     JSON.parse(localStorage.currentUser).admin || userData.admin
-      ? await socket.emit("join_room", 12 /*activeStudent.user_id*/)
+      ? await socket.emit("join_room", testUser /*activeStudent.user_id*/)
       : await socket.emit("join_room", userData.user_id);
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} on>
       {/* CREATE EXISTING MESSAGES */}
       <div className={styles.display}>
         {chatMessages.map(
@@ -87,14 +99,20 @@ const Chat = () => {
               <div
                 key={comment_id}
                 className={`${styles.message} ${
-                  author_id === userData.user_id ? styles.right : styles.left
+                  author_id === userData.user_id && styles.right
                 }`}
               >
-                <p className={styles.content}> {content} </p>
-                <p className={styles.head}>
-                  {" "}
-                  <strong>{author_name}</strong> <i>{date_time}</i>
-                </p>
+                <div className={styles.body}>
+                  <div
+                    className={styles.content}
+                    dangerouslySetInnerHTML={{ __html: content }}
+                  />
+                  <p className={styles.time}>
+                    {" "}
+                    <i>{date_time}</i>
+                  </p>
+                </div>
+                <strong className={` ${styles.name}`}>{author_name}</strong>
               </div>
             );
           }
@@ -103,26 +121,29 @@ const Chat = () => {
       {/* END CREATE EXISTING MESSAGES */}
       {/* CREATE A NEW  MESSAGE */}
       <div className={styles.newMsgWrapper}>
-        <input
-          type={"text"}
-          autoComplete={"off"}
-          name="newMsg"
-          id="newMsg"
-          placeholder="Type your message here"
-          value={message}
-          onChange={({ target }) => {
-            setMessage(target.value);
+        <QuillNoSSRWrapper
+          style={{
+            height: "100%",
+            maxHeight: "100%",
+            width: "100%",
+            maxWidth: "100%",
           }}
-          onKeyPress={({ key }) => {
-            key === "Enter" && submitMsg();
+          theme="snow"
+          onChange={setNewMessage}
+          value={newMessage}
+          onKeyDown={({ key }) => {
+            key === "Control" && setCtrlDown(true);
           }}
-        ></input>
-        <button
-          onClick={() => {
-            submitMsg();
+          onKeyUp={({ key }) => {
+            key === "Control" && setCtrlDown(false);
+            key === "Enter" && ctrlDown && submitMsg();
           }}
-        ></button>
+        />
+        <button tabIndex={1}className={styles.submit} onClick={() => submitMsg()}>
+          <MdSend />
+        </button>
       </div>
+
       {/*END CREATE A NEW  MESSAGE */}
     </div>
   );
