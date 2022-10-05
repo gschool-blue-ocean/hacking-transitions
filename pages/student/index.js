@@ -1,9 +1,11 @@
-import Index from "../components/StudentPage/index"
+import Index from "../../components/StudentPage"
+
 const student = () => {
   return (
     <div>
-      < Index />
+      <Index/>
     </div>
+
   )
 }
 export default student
