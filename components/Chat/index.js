@@ -6,7 +6,7 @@ const Chat = () => {
   // user_data localstorage? redux?
   const userData = { user_id: 11 };
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
-  const [message, setMessage] = useState(""); //new message 
+  const [message, setMessage] = useState(""); //new message
   const [socket, setSocket] = useState({}); // socket connection
   useEffect(() => {
     (async () => {
@@ -34,7 +34,7 @@ const Chat = () => {
         await joinRoom(); //join room by students id
         ////If not sender of message recieve the new message and display it
         socket.on("recieve_message", (newMessage) => {
-          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]); 
+          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
         });
       }
     })();
@@ -52,7 +52,7 @@ const Chat = () => {
     };
     // Update chat display with newly typed message
     setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
-    // send the new message to the server 
+    // send the new message to the server
     socket.broadcast &&
       (await socket.broadcast
         .to(
