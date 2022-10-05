@@ -5,7 +5,7 @@ const initialState = {
   allCohortsData: [],
   loginState: false,
   currentUser: {},
-  isAdmin: "",
+  isAdmin: false,
 };
 
 export const appSlice = createSlice({
@@ -19,7 +19,7 @@ export const appSlice = createSlice({
         state.allCohortsData = payload;
       },
       setLoginState(state, {payload}) {
-        state.setLoginState = payload;
+        state.loginState = payload;
       },
       setCurrentUser(state, {payload}) {
         state.currentUser = payload;
