@@ -81,10 +81,5 @@ export default async function handler(req, res) {
     return;
   }
   /************* END CREATE A NEW USER  *************/
-<<<<<<< HEAD
-  notFound404(res)
-}
-=======
   notFound404(res);
 }
->>>>>>> 6a5facf9638f2b5def352996a44a242d2c1a33b5
