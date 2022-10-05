@@ -30,6 +30,7 @@
    margin: auto;
    width: 100vw;
    background-color: darkgray;
+   height: fit-content;
 }
 
 .StudentDashWrapper {
@@ -45,9 +46,9 @@
    border-radius: 10px;
    background-color: darkgray;
    font-family: var(--ff-primary);
-   max-height: 85vh;
+   /* max-height: 85vh; */
    width: 100%;
-   overflow: auto !important;
+   /* overflow: auto !important; */
 }
 
 /* =============== Student Header ============= */
@@ -57,7 +58,6 @@
    grid-template-areas:
       "StuName . ETStag"
       "StuBranch . .";
-   margin-top: 7%;   
 }
 
 #StuHeaderName {
