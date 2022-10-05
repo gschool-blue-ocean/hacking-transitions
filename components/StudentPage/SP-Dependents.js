@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../../styles/StudentPage.module.css";
 
 export default function SPDependents({ student }) {
    const [dependents, setDependents] = useState([]);
@@ -17,7 +18,7 @@ export default function SPDependents({ student }) {
    if (student.has_dependents) {
       return dependents.map((dep) => {
          return (
-            <div className="Dependent--Card">
+            <div className={styles.DependentCard}>
                <div>{dep.relation}</div>
                <div id="Dependent--Age">{dep.age}</div>
             </div>
