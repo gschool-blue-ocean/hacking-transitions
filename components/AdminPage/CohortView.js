@@ -7,15 +7,15 @@ const CohortView = ({students, currCohort}) => {
   }, [])
   return (
     <div className={s.container}>
-        <table className={s.table}>
-          {/* <tr>
+        {/* <table className={s.table}>
+          <tr>
             <th className={s.tableheaders}>First</th>
             <th className={s.tableheaders}>Last</th>
             <th className={s.tableheaders}>ETS</th>
             <th className={s.tableheaders}>Terminal</th>
             <th className={s.tableheaders}>Branch</th>
-          </tr> */}
-          {/* {currCohort !== [] ? currCohort.students.map(student =>
+          </tr> 
+          {currCohort !== [] ? currCohort.students.map(student =>
           <tr>
             <td>Alfreds</td>
             <td>Anders</td>
@@ -23,8 +23,8 @@ const CohortView = ({students, currCohort}) => {
             <td>11/05/2022</td>
             <td>90days</td>
           </tr>
-            ) : <div>No data</div>} */}
-      </table>
+            ) : <div>No data</div>}
+      </table> */}
     </div>
   )
 }
