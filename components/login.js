@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 // import axios from "axios";
 
 
-
+// i need to revise this so much
 let Login = () => {
     const router = useRouter()
     const dispatch = useDispatch();
@@ -50,11 +50,12 @@ let Login = () => {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(data));
           dispatch(setIsAdmin(data.admin));
-        }
+        } 
+        
         if(data.admin === true){
-          router.push('admin')
+          router.push('/admin/')
         } else{
-          router.push('student')
+          router.push('/student')
         }
        })
   

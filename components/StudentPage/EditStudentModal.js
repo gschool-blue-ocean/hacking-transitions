@@ -302,7 +302,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
             </div>
 
         </div >,
-        //document.getElementById('portal')
+        document.getElementById('portal')
     )
 }
 
