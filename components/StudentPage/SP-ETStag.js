@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from "../../styles/StudentPage.module.css";
 
 export default function SPETStag({ userETS }) {
    const [days2ETS, setDays2ETS] = useState(null);
@@ -17,37 +18,37 @@ export default function SPETStag({ userETS }) {
 
       if (DiffDays <= 0) {
          return (
-            <div className="StuHeader--ETStag" id="ETS-d">
+            <div className={styles.StuHeaderETStag} id="ETS-d">
                ETS'd
             </div>
          );
       } else if (DiffDays > 0 && DiffDays <= 30) {
          return (
-            <div className="StuHeader--ETStag" id="ETS-30">
+            <div className={styles.StuHeaderETStag} id="ETS-30">
                30 Days
             </div>
          );
       } else if (DiffDays > 30 && DiffDays <= 60) {
          return (
-            <div className="StuHeader--ETStag" id="ETS-60">
+            <div className={styles.StuHeaderETStag} id="ETS-60">
                60 Days
             </div>
          );
       } else if (DiffDays > 60 && DiffDays <= 90) {
          return (
-            <div className="StuHeader--ETStag" id="ETS-90">
+            <div className={styles.StuHeaderETStag} id="ETS-90">
                90 Days
             </div>
          );
       } else if (DiffDays > 90 && DiffDays <= 120) {
          return (
-            <div className="StuHeader--ETStag" id="ETS-120">
+            <div className={styles.StuHeaderETStag} id="ETS-120">
                120 Days
             </div>
          );
       } else {
          return (
-            <div className="StuHeader--ETStag" id="ETS-120">
+            <div className={styles.StuHeaderETStag} id="ETS-120">
                120+ Days
             </div>
          );
@@ -57,6 +58,6 @@ export default function SPETStag({ userETS }) {
    if (!days2ETS) {
       return <div>Loading...</div>;
    } else {
-      return <div className="StuHeader--ETStag">{createETStag()}</div>;
+      return <div className={styles.StuHeaderETStag}>{createETStag()}</div>;
    }
 }
