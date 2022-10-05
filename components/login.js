@@ -39,9 +39,8 @@ let Login = () => {
         password: loginData.password
       }
     fetch(`${server}/api/users/userbyname/${inputData.username}`, {
-        method: 'POST', 
+        method: 'GET', 
         headers: {"Content-Type" : "application/json"}, 
-        body: JSON.stringify(inputData.username)
       })
       .then(res => res.json()
       .then((data) => {  
@@ -51,9 +50,8 @@ let Login = () => {
           dispatch(setCurrentUser(data));
           dispatch(setIsAdmin(data.admin));
         } 
-        
         if(data.admin === true){
-          router.push('/admin/')
+          router.push('/admin')
         } else{
           router.push('/student')
         }
