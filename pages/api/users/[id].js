@@ -10,8 +10,8 @@ export default async function handler(req, res) {
           isNaN(parseInt(id)) ? sql`username = ${id}` : sql`user_id = ${id}`
         }`
       )[0];
-      console.log(user)
-      res.json(user);
+      
+      user ? res.json(user) : res.status(404).send('Not Found');
     } catch (error) {
       console.log(error);
       handleErrors(res);
