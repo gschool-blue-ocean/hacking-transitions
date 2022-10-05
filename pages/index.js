@@ -35,13 +35,7 @@ export default function Home() {
   
   return (
     <div className={styles.container}>
-<<<<<<< HEAD
-      
-=======
       <Login />
-      <Chat />
-
->>>>>>> 091f4dd524a0e86087c5cbcd7f4d97b22d54bef3
     </div>
   );
 }
