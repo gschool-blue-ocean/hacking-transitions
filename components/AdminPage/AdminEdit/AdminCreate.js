@@ -21,6 +21,7 @@ once the backend is finished, need to make an axios post creating new admin usin
       password: newPassword,
       email: newEmail,
     });
+    window.location.reload();
   };
   return (
     <div className={styles.adminCreateParent}>
