@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { server } from '../../utility';
-import { setActiveStudent } from '../../redux/features/app-slice';
+import { setCurrentUser, setActiveStudent } from '../../redux/features/app-slice';
+
 
 const EditStudentModal = ({ setShowEditStudentModal }) => {
     const dispatch = useDispatch();
@@ -67,23 +68,10 @@ const EditStudentModal = ({ setShowEditStudentModal }) => {
             .then(res => res.json()
             )
             .then(() => {
-                setActiveStudent((prevData) => {
-                    return {
-                        ...prevData,
-                        ...formData
-                    }
-                })
+                setActiveStudent(formData)
+                setCurrentUser(formData)
+                // setShowEditStudentModal(false)
             })
-            .then(() => {
-                setUserData((prevData) => {
-                    return {
-                        ...prevData,
-                        ...formData
-                    }
-                })
-            })
-
-            .then(() => setShowEditStudentModal(false))
             .catch(err => console.log(err))
     }
 
@@ -106,7 +94,7 @@ const EditStudentModal = ({ setShowEditStudentModal }) => {
     }
 
     const handleCancel = () => {
-        setShowEditStudentModal(false)
+        // setShowEditStudentModal(false)
     }
 
     return (

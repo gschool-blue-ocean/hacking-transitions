@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
+import SPChecklist from "./SP-Checklist";
 import styles from "../../styles/StudentPage.module.css";
 import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
@@ -156,6 +157,7 @@ export default function StudentPage({
               </ul>
             </div>
           </div>
+          <SPChecklist />
           <SPTasks
             activeStudent={activeStudent}
           />

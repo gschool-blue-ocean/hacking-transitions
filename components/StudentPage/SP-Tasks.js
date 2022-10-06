@@ -8,6 +8,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { miniSerializeError } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 //task modal styling
 const customStyles = {
@@ -82,6 +83,7 @@ export default function SPTasks({ activeStudent }) {
         .then((tasks) => {
           setLoading(false);
           setStudentTasks(tasks);
+          console.log('studentasks', studentTasks)
         });
     }
   };
