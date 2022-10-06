@@ -98,7 +98,7 @@ export default async function handler(req, res) {
       try {
         
         const student = (
-          await sql`UPDATE users SET ${sql(newAdmin)} WHERE user_id = ${
+          await sql`UPDATE users SET ${sql(newStudent)} WHERE user_id = ${
             slug[1]
           } RETURNING *`
         )[0];
