@@ -12,7 +12,7 @@ export default function SPTaskModal({ task, closeModal }) {
 
    if (task) {
       return (
-         <div className={styles.SPTask-Modal}>
+         <div className={styles.SPTaskModal}>
             <h3 id="Modal-Header">{task.title}</h3>
 
             <div className={styles.ModalTaskStatus}>

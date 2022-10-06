@@ -7,7 +7,9 @@ import SPCreateTask from "./SP-CreateTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
+import { miniSerializeError } from "@reduxjs/toolkit";
 
+//task modal styling
 const customStyles = {
   content: {
     top: "50%",
@@ -16,7 +18,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "var(--clr-primary-accent)",
+    backgroundColor: "lightgray",
     borderRadius: "10px",
     width: "35%",
   },
@@ -82,103 +84,6 @@ export default function SPTasks({ activeStudent }) {
           setStudentTasks(tasks);
         });
     }
-    //temporary info for display
-    else {
-      setLoading(false);
-      setStudentTasks([
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-      ]);
-      console.log("nothing to see here");
-    }
   };
 
   if (loading) {
@@ -202,12 +107,14 @@ export default function SPTasks({ activeStudent }) {
             <div>{activeStudent.first} has not started a task</div>
           ) : (
             studentTasks.map((task) => {
+              console.log(task);
+
               return (
                 <div className={styles.StuTasksCard}>
                   <div
                     className={styles.StuTasksTitle}
-                    id={task.task_id}
                     key={task.task_id}
+                    id={task.task_id}
                     onClick={() => {
                       viewTask(task);
                     }}
