@@ -98,7 +98,7 @@ export default function StudentPage({
                            </span>
                      </li>
                      <li>
-                        <span className="title under-line"> MOS: </span>
+                        <span className={styles.title}> MOS: </span>
                         <span className={styles.answer}> 
                         {/* {activeStudent.mos}  */}
                         69B
