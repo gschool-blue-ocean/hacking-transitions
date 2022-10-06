@@ -38,10 +38,7 @@ let Login = () => {
         username: loginData.username,
         password: loginData.password
       }
-    fetch(`${server}/api/users/userbyname/${inputData.username}`, {
-        method: 'GET', 
-        headers: {"Content-Type" : "application/json"}, 
-      })
+    fetch(`${server}/api/users/userbyname/${inputData.username}`)
       .then(res => res.json()
       .then((data) => {  
     
