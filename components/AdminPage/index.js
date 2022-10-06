@@ -26,28 +26,10 @@ const AdminContainer = () => {
       } 
   }, [cohorts])
   return (
-    <div className={s.container}>
-      <div className={s.menucontainer}> 
-        <div className={s.menutitle}>
-          <motion.btn 
-            // onClick={toggleHoverMenu}
-            >
-         Cohorts
-         </motion.btn>
-        </div>
-        <div className={s.cohortsmenu}> 
-          <motion.ul 
-              initial="exit"
-              //animate={isHover ? "enter" : "exit"}
-              variants={subMenuAnimate}>
-            {cohorts.map(cohort => {return (
-                <li className={s.listitem}>
-                  <btn className={s.cohortbtn} onClick={handleClick}>{cohort}</btn>
-                </li>
-             )}
-            )}
-          </motion.ul >
-        </div>
+    <div className={s.background}>
+      <div className={s.container}>
+        <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
+        <CohortView students={students} currCohort={currCohort} />
       </div>
     </div>
   )
