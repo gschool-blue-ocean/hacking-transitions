@@ -101,6 +101,7 @@ let Login = () => {
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
+          <label htmlFor="username">Username</label>
           <input
             id="formInput"
             className={`${style.loginInputBox} ${style.username}`}
@@ -110,6 +111,7 @@ let Login = () => {
             value={loginData.username}
             onChange={handleChange}
           />
+          <label htmlFor="password">Password</label>
           <input
             id="formInput"
             className={style.loginInputBox}
