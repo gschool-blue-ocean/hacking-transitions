@@ -7,57 +7,17 @@ import {
   setLoginState,
   setActiveStudent,
 } from "../../redux/features/app-slice.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-// import axios from "axios";
-
-// i need to revise this so much
 let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const { allUsersData } = useSelector(
-  //   ({ app: { allUsersData } }) => ({
-  //     allUsersData,
-  //   })
-  // );
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-  useEffect(() => {
-    // localStorage.clear()
-    /*
-        Check local storage for a signed in user, if exist sign them in
-    */
-    setLoginData({ username: "", password: "" });
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-        const currentUserObj = JSON.parse(currentUser);
-      fetch(`${server}/api/users/${currentUserObj.username}`)
-      .then((res) => {
-        if (res.status === 404) throw new Error("Not Found");
-        return res.json();
-      })
-      .then((user) => {
-        if (
-          user.password === currentUserObj.password
-        ) {
-          dispatch(setLoginState(true));
-          dispatch(setCurrentUser(user));
-          stayLogged &&
-            localStorage.setItem("currentUser", JSON.stringify(user));
-        }
-        currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(currentUserObj));
-      })
-      .catch(({ message }) => {
-        
-      });
-
-    }
-  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -72,26 +32,20 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-   
-
-        
-        if (
-          user.password === inputData.password
-        ) {
+        if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
-          stayLogged &&
-            localStorage.setItem("currentUser", JSON.stringify(user));
-        }else{
+          stayLogged && window
+            ? localStorage.setItem("currentUser", JSON.stringify(user))
+            : window.sessionStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+              );
+        } else {
           throw new Error("Not Found");
         }
-
-        if (user.admin === true) {
-          router.push("/admin/");
-        } else {
-          router.push("/student");
+        user.admin ? router.push("/admin") : router.push("/student"),
           dispatch(setActiveStudent(user));
-        }
       })
       .catch(({ message }) => {
         setError(true);
@@ -121,37 +75,51 @@ let Login = () => {
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
-          <label htmlFor="username">Username</label>
-          <input
-            id="formInput"
-            className={`${style.loginInputBox} ${style.username}`}
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={loginData.username}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            id="formInput"
-            className={style.loginInputBox}
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={loginData.password}
-            onChange={handleChange}
-          />
-          <input
-            type="checkbox"
-            name="stay_logged"
-            id="stay_logged"
-            value={true}
-            onClick={() => {
-              stayLogged = !stayLogged;
-              console.log(stayLogged);
-            }}
-          />{" "}
-          <label htmlFor="stay_logged">Remember Me</label>
+          <span>
+            <label htmlFor="username" className={style.label}>
+              Username
+            </label>
+            <input
+              required
+              id="formInput"
+              className={`${style.input} ${style.username}`}
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={loginData.username}
+              onChange={handleChange}
+            />
+          </span>
+          <span>
+            <label htmlFor="password" className={style.label}>
+              Password
+            </label>
+            <input
+              required
+              id="formInput"
+              className={style.input}
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
+            />
+          </span>
+          <span>
+            <input
+              type="checkbox"
+              name="stay_logged"
+              id="stay_logged"
+              value={true}
+              className={style.rememberMe}
+              onClick={() => {
+                stayLogged = !stayLogged;
+              }}
+            />{" "}
+            <label htmlFor="stay_logged" className={style.label}>
+              Remember Me
+            </label>
+          </span>
           <button type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
