@@ -3,6 +3,7 @@ import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const AdminContainer = () => {
   const [students, setStudents] = useState([]);
@@ -38,14 +39,14 @@ const AdminContainer = () => {
     <div className={s.container}>
       <div className={s.menucontainer}>
         <div className={s.menutitle}>
-          <button
+          <motion.btn
           // onClick={toggleHoverMenu}
           >
             Cohorts
-          </button>
+          </motion.btn>
         </div>
         <div className={s.cohortsmenu}>
-          <ul
+          <motion.ul
             initial="exit"
             //animate={isHover ? "enter" : "exit"}
             // variants={subMenuAnimate}
@@ -62,7 +63,7 @@ const AdminContainer = () => {
                 </li>
               );
             })}
-          </ul>
+          </motion.ul>
         </div>
       </div>
     </div>
