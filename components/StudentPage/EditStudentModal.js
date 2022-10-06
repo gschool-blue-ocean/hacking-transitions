@@ -1,27 +1,32 @@
 import react, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from "../../styles/StudentPage.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { server } from '../../utility';
+import { setActiveStudent } from '../../redux/features/app-slice';
 
-const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
+const EditStudentModal = ({ setShowEditStudentModal }) => {
+    const dispatch = useDispatch();
+    const { userData, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({userData: currentUser, activeStudent}))
 
     const [formData, setFormData] = useState({
-        // first: activeStudent.first,
-        // last: activeStudent.last,
-        // email: activeStudent.email,
-        // rank: activeStudent.rank,
-        // branch: activeStudent.branch,
-        // duty_station: activeStudent.duty_station,
-        // taps_complete: activeStudent.taps_complete,
-        // leave_start_date: convertDateToIso(activeStudent.leave_start_date),
-        // ets_date: convertDateToIso(activeStudent.ets_date),
-        // planning_to_relocate: activeStudent.planning_to_relocate,
-        // city: activeStudent.city,
-        // state: activeStudent.state,
-        // has_dependents: activeStudent.has_dependents,
-        // highest_education: activeStudent.highest_education,
-        // seeking_further_education: activeStudent.seeking_further_education,
-        // mos: activeStudent.mos,
-        // interests: activeStudent.interests
+        first: activeStudent.first,
+        last: activeStudent.last,
+        email: activeStudent.email,
+        rank: activeStudent.rank,
+        branch: activeStudent.branch,
+        duty_station: activeStudent.duty_station,
+        taps_complete: activeStudent.taps_complete,
+        leave_start_date: convertDateToIso(activeStudent.leave_start_date),
+        ets_date: convertDateToIso(activeStudent.ets_date),
+        planning_to_relocate: activeStudent.planning_to_relocate,
+        city: activeStudent.city,
+        state: activeStudent.state,
+        has_dependents: activeStudent.has_dependents,
+        highest_education: activeStudent.highest_education,
+        seeking_further_education: activeStudent.seeking_further_education,
+        mos: activeStudent.mos,
+        interests: activeStudent.interests
     })
 
     function convertDateToIso(date) {
@@ -52,33 +57,33 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
     }
 
     const handleSubmit = (e) => {
-        console.log("submitted")
-    //     e.preventDefault()
-    //     fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/${activeStudent.user_id}`, {
-    //         method: 'PATCH',
-    //         body: JSON.stringify(formData),
-    //         headers: { 'Content-Type': 'application/json' }
-    //     })
-    //         .then(res => res.json())
-    //         .then(() => {
-    //             setActiveStudent((prevData) => {
-    //                 return {
-    //                     ...prevData,
-    //                     ...formData
-    //                 }
-    //             })
-    //         })
-    //         .then(() => {
-    //             setUserData((prevData) => {
-    //                 return {
-    //                     ...prevData,
-    //                     ...formData
-    //                 }
-    //             })
-    //         })
+        e.preventDefault();
+        console.log("submitted", formData);
+        fetch(`${server}/api/admin/edit/${activeStudent.user_id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(() => {
+                setActiveStudent((prevData) => {
+                    return {
+                        ...prevData,
+                        ...formData
+                    }
+                })
+            })
+            .then(() => {
+                setUserData((prevData) => {
+                    return {
+                        ...prevData,
+                        ...formData
+                    }
+                })
+            })
 
-    //         .then(() => setShowEditStudentModal(false))
-    //         .catch(err => console.log(err))
+            .then(() => setShowEditStudentModal(false))
+            .catch(err => console.log(err))
     }
 
     const handleChange = (e) => {
@@ -103,8 +108,8 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
         setShowEditStudentModal(false)
     }
 
-    return ReactDOM.createPortal(
-        <div className='portalContainer'>
+    return (
+        // <div className='portalContainer'>
             <div className='addStudentModal'>
                 <h4 className='editStudentFormTitle'>Edit student information</h4>
 
@@ -274,7 +279,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                             /> Have dependents?</label>
                     </div>
 
-                    {/* {userData.admin ? null : <div className='myInterestsDiv'>
+                    {userData.admin ? null : <div className='myInterestsDiv'>
                     
                         <label>My interests:</label>
                         <textarea
@@ -283,7 +288,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                             onChange={handleChange}
                             name='interests'
                             value={formData.interests} />
-                    </div>} */}
+                    </div>}
 
 
                     <input
@@ -301,8 +306,8 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
 
             </div>
 
-        </div >,
-        document.getElementById('portal')
+        // </div >,
+        // document.getElementById('portal')
     )
 }
 

@@ -30,8 +30,6 @@ export default function StudentPage({
     setShowEditStudentModal(!showEditStudentModal);
   };
 
-  console.log(activeStudent);
-
   return (
     <div className={styles.testgrid}>
       {/* {userData.admin && (
