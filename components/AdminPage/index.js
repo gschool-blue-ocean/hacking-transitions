@@ -3,6 +3,7 @@ import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 const AdminContainer = () => {
   const [students, setStudents] = useState([]);
   const [cohorts, setCohorts] = useState([]);
@@ -23,28 +24,31 @@ const AdminContainer = () => {
     <div className={s.container}>
       <div className={s.menucontainer}>
         <div className={s.menutitle}>
-          <motion.btn
+          <button
           // onClick={toggleHoverMenu}
           >
             Cohorts
-          </motion.btn>
+          </button>
         </div>
         <div className={s.cohortsmenu}>
-          <motion.ul
+          <ul
             initial="exit"
             //animate={isHover ? "enter" : "exit"}
-            variants={subMenuAnimate}
+            // variants={subMenuAnimate}
           >
             {cohorts.map((cohort) => {
               return (
                 <li className={s.listitem}>
-                  <btn className={s.cohortbtn} onClick={handleClick}>
-                    {cohort}
+                  <btn
+                    className={s.cohortbtn}
+                    // onClick={handleClick}
+                  >
+                    {cohort.cohort_name}
                   </btn>
                 </li>
               );
             })}
-          </motion.ul>
+          </ul>
         </div>
       </div>
     </div>

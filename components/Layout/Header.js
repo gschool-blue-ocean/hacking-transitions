@@ -1,14 +1,36 @@
 import React from "react";
 import style from "../../styles/Header.module.css";
-// import Logo from "./galvanizeLogo.svg";
+import {
+  setLoginState,
+  setCurrentUser,
+  setActiveStudent,
+} from "../../redux/features/app-slice";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const currentUser = useSelector(({ app: { currentUser } }) => ({
+    currentUser,
+  }));
+
+  const logout = () => {
+    // localStorage.removeItem("currentUser");
+    dispatch(setLoginState(false));
+    dispatch(setCurrentUser({}));
+  };
+
   return (
     <nav className={style.header}>
       <div className={style.topNav}>
         <ul className={style.topList}>
-          <li className={style.listItem}>UserName</li>
-          <li className={style.listItem}>Logout</li>
+          <li className={style.listItem}>
+            {currentUser.first + currentUser.last}
+          </li>
+          <li className={style.listItem} onClick={logout()}>
+            Logout
+          </li>
         </ul>
       </div>
       <div className={style.bottomNav}>

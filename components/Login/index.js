@@ -31,6 +31,7 @@ let Login = () => {
     /*
         Check local storage for a signed in user, if exist sign them in
     */
+    setLoginData({ username: "", password: "" });
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
       const currentUserObj = JSON.parse(currentUser);
@@ -69,8 +70,7 @@ let Login = () => {
           router.push("/admin/");
         } else {
           router.push("/student");
-        dispatch(setActiveStudent(user));
-
+          dispatch(setActiveStudent(user));
         }
       })
       .catch(({ message }) => {
