@@ -1,6 +1,7 @@
 import s from '../../styles/AdminPage.module.css'
 import CohortMenu from './CohortMenu'
 import CohortView from './CohortView'
+import Chat from '../Chat'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 const AdminContainer = () => {
@@ -29,7 +30,8 @@ const AdminContainer = () => {
     <div className={s.background}>
       <div className={s.container}>
         <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
-        <CohortView students={students} currCohort={currCohort} />
+        {/* <CohortView students={students} currCohort={currCohort} /> */}
+        <Chat />
       </div>
     </div>
   )

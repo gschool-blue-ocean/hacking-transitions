@@ -10,6 +10,7 @@ export default async function handler(req, res) {
     res.socket.server.io = io;
 
     io.on("connection", (socket) => {
+      socket.removeAllListeners()
       console.log(`User Connected`);
 
       ///// JOIN A SPECIFIC STUDNETS CHAT ROOM
@@ -20,6 +21,8 @@ export default async function handler(req, res) {
 
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
       socket.on("send_new_message", (msg) => {
+        console.log('recieved new message',msg);
+        
         ///// Create a new message in the database   
         fetch(`${server}/api/comments`, {
           method: "POST",
@@ -27,7 +30,7 @@ export default async function handler(req, res) {
           body: JSON.stringify(msg),
         });
         ///// Broadcast the new message to be recieved by all clients connected
-        socket.to(msg.student_id).broadcast.emit("recieve_message", msg);
+        socket.to(msg.student_id).emit("recieve_message", msg);
         /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
       });
 

@@ -20,7 +20,7 @@ const Chat = () => {
   );
 
   // user_data localstorage? redux?
-
+  let newSocket;
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
@@ -28,62 +28,59 @@ const Chat = () => {
 
   useEffect(() => {
     (async () => {
-      /******** CONNECT TO SOCKET/CHAT SERVER ********/
       await fetch(`${server}/api/socket`);
-      setSocket(io());
-      /******** END CONNECT TO SOCKET/CHAT SERVER ********/
-
+      newSocket = io()
+      setSocket(newSocket);
       /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
       const studentComments = await (
-        await fetch(`${server}/api/comments/student/${userData.user_id}`)
+        await fetch(`${server}/api/comments/student/${9 /*userData.user_id*/}`)
       ).json();
       // console.log(studentComments);
+      
       setChatMessages(studentComments);
       /******** END GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
+
+      newSocket.on("connect", () => {
+        console.log("connected");
+      });
+      userData.admin
+        ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
+        : newSocket.emit("join_room", userData.user_id);
+
+        newSocket.on("recieve_message", (newMessage) => {
+        console.log("message recieved",newMessage.content);
+
+        setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
+      });
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      if (socket.on) {
-        socket.on("connect", () => {
-          console.log("connected");
-        });
-        await joinRoom(); //join room by students id
-        ////If not sender of message recieve the new message and display it
-        socket.on("recieve_message", (newMessage) => {
-          setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
-        });
-      }
-    })();
-  }, [socket]);
-
   const submitMsg = async () => {
-    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g;
-    if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
-    // Create a new comment object
-    const newMessageObj = {
-      student_id: user_id,
-      author_id: userData.user_id,
-      author_name: `${userData.firstName} ${userData.lastName}`,
-      content: newMessage,
-      date_time: new Date(Date.now()).toUTCString(),
-    };
-    // Update chat display with newly typed message
-    setChatMessages((oldMsgs) => [...oldMsgs, newMessageObj]);
-    console.log(foundContent.test(newMessageObj));
+    try {
+      const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g;
+      if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
+      // Create a new comment object
+      const newMessageObj = {
+        student_id: 9, //activeStudent.user_id,
+        author_id: userData.user_id,
+        author_name: `${userData.first} ${userData.last}`,
+        content: newMessage,
+        date_time: new Date(Date.now()).toUTCString(),
+      };
+      // Update chat display with newly typed message
+      console.log(foundContent.test(newMessageObj));
 
-    // send the new message to the server
-    if (socket.connected) {
+      // setting state here causes this to render twice i think and, makes client recieve multiple of the same message
+      setChatMessages((oldMsgs) => [...oldMsgs, newMessageObj]);
+
+      // send the new message to the server
       await socket.emit("send_new_message", newMessageObj);
+
+      //reset input field
+      setNewMessage("");
+    } catch (error) {
+      console.error(error);
     }
-    //reset input field
-    setNewMessage("");
-  };
-  const joinRoom = async () => {
-    // JSON.parse(localStorage.currentUser).admin || userData.admin
-    //   ? await socket.emit("join_room", 11 /*activeStudent.user_id*/)
-    //   : await socket.emit("join_room", userData.user_id);
   };
 
   return (

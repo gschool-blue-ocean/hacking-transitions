@@ -110,7 +110,7 @@ export default function SPTasks({ activeStudent }) {
               // console.log(task);
 
               return (
-                <div className={styles.StuTasksCard}>
+                <div className={styles.StuTasksCard} key={task.task_id}>
                   <div
                     className={styles.StuTasksTitle}
                     key={task.task_id}
