@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     /******** END CREATE NEW ADMIN ********/
   } else {
     const { slug } = req.query;
-
+    console.log(slug);
     /******** UPDATE ESXISTING ADMIN ********/
     if (
       checkApiMethod(req, "PATCH") &&
@@ -58,7 +58,9 @@ export default async function handler(req, res) {
       checkApiMethod(req, "PATCH") &&
       slug[0] === "edit" &&
       typeof parseInt(req.query.slug[1]) === "number"
+
     ) {
+      console.log('req.body', req.body)
       const {
         first,
         last,
@@ -98,12 +100,13 @@ export default async function handler(req, res) {
         interests,
       };
       try {
-        const student = (
-          await sql`UPDATE users SER ${sql(newAdmin)} WHERE user_id = ${
-            slug[1]
-          } RETURNING *`
-        )[0];
-        res.json(student);
+        console.log(newAdmin)
+        // const student = (
+        //   await sql`UPDATE users SER ${sql(newAdmin)} WHERE user_id = ${
+        //     slug[1]
+        //   } RETURNING *`
+        // )[0];
+        res.json({student: 'hello'});
       } catch (error) {
         console.log(error);
         handleErrors(res);
