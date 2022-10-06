@@ -25,9 +25,10 @@ let Login = () => {
 
     useEffect(()=>{
         const currentUser = localStorage.getItem('currentUser')
+        // console.log(localStorage);
         if(currentUser !== null){
             setUserData(JSON.parse(currentUser)) // does current user need to be parsed? 
-            
+            // console.log(localStorage);
         }
     }, [])
 
@@ -58,8 +59,9 @@ let Login = () => {
         }
        })
   
-   
+       
     )}
+    console.log(localStorage);
   
     const handleChange = (e) =>{
         setLoginData((prevLoginData) =>{
