@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../styles/LoginStyles.module.css";
 import { server } from "../utility";
-import { setAllUserData, setAllCohortData } from "../redux/features/app-slice.js"
+import { setAllUserData, setAllCohortData, setCurrentUser, setIsAdmin, setLoginState, } from "../redux/features/app-slice.js"
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useRouter } from "next/router";
+// import axios from "axios";
 
 
+// i need to revise this so much
 let Login = () => {
-    let listOfUserNames=[]; 
+    const router = useRouter()
     const dispatch = useDispatch();
     const { allUsersData } = useSelector(
       ({ app: { allUsersData } }) => ({
@@ -24,30 +26,14 @@ let Login = () => {
     useEffect(()=>{
         const currentUser = localStorage.getItem('currentUser')
         if(currentUser !== null){
-            setUserData(currentUser) // does current user need to be parsed? 
-            // they used invokeSetLogin here but im not sure where it came from ; browser says its not defined
+            setUserData(JSON.parse(currentUser)) // does current user need to be parsed? 
+            
         }
     }, [])
 
-    // useEffect(() => {
-    //   (async () => {
-    //     const allUsers = await (await fetch(`${server}/api/users`)).json();
-    //     dispatch(setAllUserData(allUsers));
-        
-    //   })();
-    //  allUsersData.forEach((user) =>{
-    //     return listOfUserNames.push(user.username)
-       
-    //   })
-    // }, []);
-
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        // removeErrorMsgs() --> not sure why they did this but this was used here
-        handleLogin();
-    }
-    const handleLogin = () => {
-
+    
+    const handleLogin = (e) => {
+      e.preventDefault();
       let inputData = {
         username: loginData.username,
         password: loginData.password
@@ -58,16 +44,21 @@ let Login = () => {
         body: JSON.stringify(inputData.username)
       })
       .then(res => res.json()
-      .then(data => console.log(data))
-      // .then(function(response) {
-      //   return response.json();
-      // }).then(function(data){
-      //   console.log(data);
-      // })
+      .then((data) => {  
     
-      // axios.get(`${server}/api/users/userbyname/${inputData.username}`)
-      // .then(res => console.log(res))
-      // .catch(err => console.log(err));
+        if (data.username === inputData.username && data.password === inputData.password) {
+          dispatch(setLoginState(true));
+          dispatch(setCurrentUser(data));
+          dispatch(setIsAdmin(data.admin));
+        } 
+        
+        if(data.admin === true){
+          router.push('/admin/')
+        } else{
+          router.push('/student')
+        }
+       })
+  
    
     )}
   
@@ -91,7 +82,7 @@ let Login = () => {
             Fields can not be blank!
           </span>
   
-          <form className={style.loginForm} onSubmit={handleSubmit}>
+          <form className={style.loginForm} onSubmit={handleLogin}>
             <input
               id="formInput"  
               className={`${style.loginInputBox} ${style.username}`}
