@@ -23,8 +23,8 @@ const CohortView = ({students, currCohort}) => {
             <td>11/05/2022</td>
             <td>90days</td>
           </tr>
-            ) : <div>No data</div>}
-      </table> */}
+            ) : <div>No data</div>} */}
+//       </table>
     </div>
   )
 }
