@@ -1,21 +1,23 @@
 .container {
-    border: 1px black solid;
     height: auto;
     margin: 1rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     color: #003B4C;
     background-color: #FFF;
-    margin: 10rem;
+    margin-left: 10rem;
     width: 100rem;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
 }
 .table {
-    margin-left: 0rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     font-size: 2rem;
-    height: fit-content;
+    height: 30rem;
     width: inherit;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .tableheaders{
     font-size: 2.3rem;
