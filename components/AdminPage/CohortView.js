@@ -9,26 +9,6 @@ const CohortView = ({currCohort}) => {
     } else {
     return (
     <div className={s.container}>
-<<<<<<< HEAD
-        {/* <table className={s.table}>
-          <tr>
-            <th className={s.tableheaders}>First</th>
-            <th className={s.tableheaders}>Last</th>
-            <th className={s.tableheaders}>ETS</th>
-            <th className={s.tableheaders}>Terminal</th>
-            <th className={s.tableheaders}>Branch</th>
-          </tr> 
-          {currCohort !== [] ? currCohort.students.map(student =>
-          <tr>
-            <td>Alfreds</td>
-            <td>Anders</td>
-            <td>Germany</td>
-            <td>11/05/2022</td>
-            <td>90days</td>
-          </tr>
-            ) : <div>No data</div>}
-      </table> */}
-=======
       {currCohort.map((cohort) => 
       <div className={s.table}>
         <h3>{cohort.cohort_name}</h3>
@@ -52,7 +32,6 @@ const CohortView = ({currCohort}) => {
         </table>
         </div>
         )}
->>>>>>> c29bfeb07d426beee81663c1928a6dc9315b1523
     </div>
   )
 }
