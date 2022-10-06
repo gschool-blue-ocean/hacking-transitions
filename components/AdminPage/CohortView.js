@@ -1,19 +1,13 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import s from '../../styles/CohortView.module.css'
-const CohortView = ({students, currCohort}) => {
-  useEffect(() => {
-    console.log('currCohort', currCohort)
-  }, [currCohort])
-  ///******TODO ADD A DEFAULT VALUE TO THE COHORT DATA. USE LOCAL STORAGE***********/
+const CohortView = ({currCohort}) => {
   if (currCohort.length == 0) {
     return ( 
       <div>No data</div>
     ) 
     } else {
-
-       
-  return (
+    return (
     <div className={s.container}>
       {currCohort.map((cohort) => 
       <div className={s.table}>

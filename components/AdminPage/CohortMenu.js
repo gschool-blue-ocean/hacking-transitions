@@ -2,27 +2,28 @@ import s from '../../styles/AdminPage.module.css'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const CohortMenu = ({cohorts,students, setCurrCohort }) => {
+const CohortMenu = ({currCohorts,students, setCurrCohort, cohorts }) => {
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active)
   const handleClick = (e) => {
       const data = e.target.dataset;
-      
       const id = data.cohort_id;
+      console.log('isclicked',data.isclicked);
       //filter students based on cohort id retrieved by event.target
       let filtStudents = students.filter((student) => student.cohort_id == id);
-    
       if (cohorts.length == 0) {
         setCurrCohort([{cohort_id: id, cohort_name: data.cohort_name, students: filtStudents}])
       } else {
-        if (!data.isClicked) {
+        //if cohort div is clicked, will remove, else removes cohort from state
+        if (data.isclicked === "false") {
           setCurrCohort(oldCohort => oldCohort.concat({cohort_id: id, cohort_name: data.cohort_name, students: filtStudents}))
+          data.isclicked = true;
         } else {
           setCurrCohort(oldCohort => oldCohort.filter(cohort => cohort.cohort_id != id))
+          data.isclicked = false;
         }
       }
-      data.isClicked = true;
   }
   const removeFromState = (id) => {
      setCurrCohort((cohort) => cohort.filter((cohort) => cohort.cohort_id != id))
@@ -71,7 +72,7 @@ const CohortMenu = ({cohorts,students, setCurrCohort }) => {
               <motion.btn 
               className={s.cohortbtn} 
               onClick={handleClick} 
-              data-isClicked={false}
+              data-isclicked={false}
               data-active={cohort.active} 
               data-cohort_id={cohort.cohort_id}
               data-cohort_name={cohort.cohort_name}
