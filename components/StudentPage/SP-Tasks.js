@@ -7,7 +7,9 @@ import SPCreateTask from "./SP-CreateTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
+import { miniSerializeError } from "@reduxjs/toolkit";
 
+//task modal styling
 const customStyles = {
   content: {
     top: "50%",
@@ -16,7 +18,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "var(--clr-primary-accent)",
+    backgroundColor: "lightgray",
     borderRadius: "10px",
     width: "35%",
   },
@@ -87,97 +89,34 @@ export default function SPTasks({ activeStudent }) {
       setLoading(false);
       setStudentTasks([
         {
+          task_id: -1,
           student_id: 10,
-          title: "porttitor pede",
+          title: "Final Physical",
           date: "9/4/2022",
           description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
+            "This needs to be done on base with my PCP (Dr. Brown), preferably on a Monday, and at least a week before my EOS IOT ensure DD214 submission is completed.",
+          remarks: "Set up Monday appointment with Dr. Brown.",
           completed: false,
         },
         {
+          task_id: -2,
           student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
+          title: "Pick up Awards",
+          date: "9/5/2022",
+          description: "Grab NAMs from Capt Smigth.",
+          remarks: "",
           completed: false,
         },
         {
+          task_id: -3,
           student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
+          title: "Schedule VSO appointment for BDD claim.",
+          date: "9/6/2022",
+          description: "Contact VSO and submit BDD ASAP.",
+          remarks: "none",
           completed: false,
         },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-          student_id: 10,
-          title: "porttitor pede",
-          date: "9/4/2022",
-          description:
-            "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-          remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-          completed: false,
-        },
-        {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
-       {
-         student_id: 10,
-         title: "porttitor pede",
-         date: "9/4/2022",
-         description:
-           "ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in",
-         remarks: "lacus curabitur at ipsum ac tellus semper interdum",
-         completed: false,
-       },
       ]);
-      console.log("nothing to see here");
     }
   };
 
@@ -202,12 +141,14 @@ export default function SPTasks({ activeStudent }) {
             <div>{activeStudent.first} has not started a task</div>
           ) : (
             studentTasks.map((task) => {
+              console.log(task);
+
               return (
                 <div className={styles.StuTasksCard}>
                   <div
                     className={styles.StuTasksTitle}
-                    id={task.task_id}
                     key={task.task_id}
+                    id={task.task_id}
                     onClick={() => {
                       viewTask(task);
                     }}

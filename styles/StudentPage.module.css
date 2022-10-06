@@ -34,7 +34,8 @@
 }
 
 .StudentDashWrapper {
-   padding: 0.5rem;
+   border-color: #f79020;
+   padding: .5rem;
    display: grid;
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
@@ -54,34 +55,31 @@
 /* =============== Student Header ============= */
 .SDashHeader {
    grid-area: StuHeader;
-   display: grid;
-   grid-template-areas:
-      "StuName . ETStag"
-      "StuBranch . .";
+   display: flex;
+   flex-direction: row;
+}
+.SDashheaderCol {
+   display: flex;
+   flex-direction: column;
 }
 
 #StuHeaderName {
-   grid-area: StuName;
-   color: var(--clr-primary-accent);
-   text-align: start;
-   align-self: center;
+   margin: 1px;
 }
 
 #StuHeaderBranch {
-   grid-area: StuBranch;
-   color: var(--clr-bgsecondary-contrast);
-   padding: 5px;
+   margin: 1px;
 }
 
 .StuHeaderETStag {
-   grid-area: ETStag;
-   text-align: center;
    color: white;
    border-radius: 10px;
    font-weight: bold;
    width: fit-content;
-   padding: 5px 20px;
-   justify-self: end;
+   padding: 5px;
+   position: relative;
+   left: 77%;
+   margin: 1px;
 }
 
 #ETS-120 {
@@ -153,7 +151,7 @@ li>h4 {
 } */
 
 .title {
-   margin-left: 0.8em;
+margin-left: auto;
 }
 
 .answer {
@@ -199,6 +197,7 @@ li>h4 {
    grid-template-columns: 1fr 90% 1fr;
    align-items: center;
    border: solid var(--clr-nuetral-brown);
+   border-top: 3px solid #f79020;
    border-radius: 5px;
    margin-bottom: 8px;
    width: 85%;
@@ -253,7 +252,6 @@ li>h4 {
       "TaskDesc"
       "TaskRemarks"
       "AddRemark";
-   font-family: var(--ff-primary);
    gap: 12px;
 }
 
