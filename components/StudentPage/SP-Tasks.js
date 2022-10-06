@@ -84,40 +84,6 @@ export default function SPTasks({ activeStudent }) {
           setStudentTasks(tasks);
         });
     }
-    //temporary info for display
-    else {
-      setLoading(false);
-      setStudentTasks([
-        {
-          task_id: -1,
-          student_id: 10,
-          title: "Final Physical",
-          date: "9/4/2022",
-          description:
-            "This needs to be done on base with my PCP (Dr. Brown), preferably on a Monday, and at least a week before my EOS IOT ensure DD214 submission is completed.",
-          remarks: "Set up Monday appointment with Dr. Brown.",
-          completed: false,
-        },
-        {
-          task_id: -2,
-          student_id: 10,
-          title: "Pick up Awards",
-          date: "9/5/2022",
-          description: "Grab NAMs from Capt Smigth.",
-          remarks: "",
-          completed: false,
-        },
-        {
-          task_id: -3,
-          student_id: 10,
-          title: "Schedule VSO appointment for BDD claim.",
-          date: "9/6/2022",
-          description: "Contact VSO and submit BDD ASAP.",
-          remarks: "none",
-          completed: false,
-        },
-      ]);
-    }
   };
 
   if (loading) {

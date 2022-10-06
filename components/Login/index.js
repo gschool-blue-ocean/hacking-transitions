@@ -25,7 +25,7 @@ let Login = () => {
     password: "",
   });
   const [error, setError] = useState(false);
-
+  let stayLogged = false;
   useEffect(() => {
     // localStorage.clear()
     /*
@@ -33,11 +33,28 @@ let Login = () => {
     */
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
-      const currentUserObj = JSON.parse(currentUser);
-      dispatch(setCurrentUser(currentUserObj)); //set Redux currentUser state to equal th euser in local storage
-      dispatch(setLoginState(true));
-      currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-        dispatch(setActiveStudent(currentUserObj));
+        const currentUserObj = JSON.parse(currentUser);
+      fetch(`${server}/api/users/${currentUserObj.username}`)
+      .then((res) => {
+        if (res.status === 404) throw new Error("Not Found");
+        return res.json();
+      })
+      .then((user) => {
+        if (
+          user.password === currentUserObj.password
+        ) {
+          dispatch(setLoginState(true));
+          dispatch(setCurrentUser(user));
+          stayLogged &&
+            localStorage.setItem("currentUser", JSON.stringify(user));
+        }
+        currentUserObj.admin ? router.push("/admin") : router.push("/student"),
+          dispatch(setActiveStudent(currentUserObj));
+      })
+      .catch(({ message }) => {
+        
+      });
+
     }
   }, []);
 
@@ -54,23 +71,25 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-        console.log(user.password !== inputData.password);
+   
 
-        if (user.password !== inputData.password) throw new Error("Not Found");
+        
         if (
-          user.username === inputData.username &&
           user.password === inputData.password
         ) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
+          stayLogged &&
+            localStorage.setItem("currentUser", JSON.stringify(user));
+        }else{
+          throw new Error("Not Found");
         }
 
         if (user.admin === true) {
           router.push("/admin/");
         } else {
           router.push("/student");
-        dispatch(setActiveStudent(user));
-
+          dispatch(setActiveStudent(user));
         }
       })
       .catch(({ message }) => {
@@ -101,6 +120,7 @@ let Login = () => {
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
+          <label htmlFor="username">Username</label>
           <input
             id="formInput"
             className={`${style.loginInputBox} ${style.username}`}
@@ -110,6 +130,7 @@ let Login = () => {
             value={loginData.username}
             onChange={handleChange}
           />
+          <label htmlFor="password">Password</label>
           <input
             id="formInput"
             className={style.loginInputBox}
@@ -119,15 +140,20 @@ let Login = () => {
             value={loginData.password}
             onChange={handleChange}
           />
-
+          <input
+            type="checkbox"
+            name="stay_logged"
+            id="stay_logged"
+            value={true}
+            onClick={() => {
+              stayLogged = !stayLogged;
+              console.log(stayLogged);
+            }}
+          />{" "}
+          <label htmlFor="stay_logged">Remember Me</label>
           <button type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
-
-          {/* <button
-                          type='button'
-                          className={`${style.loginBtn} ${style.createAccBtn}`}
-                          onClick={handleShowCreateAccModal}>Create an Account</button> */}
         </form>
       </div>
     </div>

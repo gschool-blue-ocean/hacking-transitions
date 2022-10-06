@@ -6,17 +6,14 @@ import styles from "../../styles/StudentPage.module.css";
 import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
+import { useSelector } from "react-redux";
 
 export default function StudentPage({
   modalIsOpen,
   setModalIsOpen,
-  activeStudent,
-  setActiveStudent,
-  allUsersData,
-  socket,
   viewClickedCohort,
 }) {
-  //    const { userData, setUserData } = useContext(LoginContext);
+  const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
   const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
   useEffect(() => {
@@ -49,17 +46,14 @@ export default function StudentPage({
           <div className={styles.SDashHeader}>
             <div className={styles.SDashheaderCol}>
                <h3 id={styles.StuHeaderName}>
-                 {/* {activeStudent.first} {activeStudent.last} */}
-                 John Doe
+                 {activeStudent.first} {activeStudent.last}
                </h3>
                <p id={styles.StuHeaderBranch}>
-                 {/* {activeStudent.branch} */}
-                 Navy
+                 {activeStudent.branch}
                </p>
             </div>
             <SPETStag
-              userETS="today"
-              // {activeStudent.ets_date}
+              userETS={activeStudent.ets_date}
             />
           </div>
 
@@ -89,8 +83,7 @@ export default function StudentPage({
                 <li>
                   <h4 className="text-left">ETS Date</h4>
                   <span>
-                    nov 28
-                    {/* {activeStudent.ets_date} */}
+                    {activeStudent.ets_date}
                   </span>
                 </li>
 
@@ -98,52 +91,45 @@ export default function StudentPage({
                 <li>
                   <span className={styles.title}> Email: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.email} */}
-                    johndoe.email.com
+                    {activeStudent.email}
                   </span>
                 </li>
                 <li>
                   <span className="title under-line"> MOS: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.mos}  */}
-                    69B
+                    {activeStudent.mos} 
                   </span>
                 </li>
                 <li>
                   <span className={styles.title}> Rank: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.rank}  */}
-                    E13
+                    {activeStudent.rank} 
                   </span>
                 </li>
                 <li>
                   <span className={styles.title}> Duty Station: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.duty_station} */}
-                    my house
+                    {activeStudent.duty_station}
                   </span>
                 </li>
                 <li>
                   <span className={styles.title}> Terminal Leave: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.leave_start_date} */}
-                    tomorrow
+                    {activeStudent.leave_start_date}
                   </span>
                 </li>
 
                 <li>
                   <span className={styles.title}> TAP Status: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.taps_complete ? "Complete" : "Incomplete"}  */}
-                    complete
+                    {activeStudent.taps_complete ? "Complete" : "Incomplete"} 
                   </span>
                 </li>
 
                 <h4 className="text-left">Dependents</h4>
                 <li className={styles.title}>
                   <span>
-                    {/* {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"} */}
-                    None
+                    {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"}
                   </span>
                 </li>
 
@@ -151,8 +137,7 @@ export default function StudentPage({
                   <h4 className="text-left"> Education </h4>
                   <span className={styles.title}> Degree: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.highest_education} */}
-                    grade 7
+                    {activeStudent.highest_education}
                   </span>
                 </li>
 
@@ -160,24 +145,21 @@ export default function StudentPage({
                   <h4 className="text-left"> Relocation </h4>
                   <span className={styles.title}> Planning to Relocate?: </span>
                   <span className={styles.answer}>
-                    {/* {activeStudent.planning_to_relocate ? "Yes" : "No"} */}
-                    Yes
+                    {activeStudent.planning_to_relocate ? "Yes" : "No"}
                   </span>
                 </li>
 
                 <h4>Interests</h4>
                 <li className={styles.title}>
                   <span>
-                    {/* {activeStudent.interests} */}
-                    interested in everything
+                    {activeStudent.interests}
                   </span>
                 </li>
               </ul>
             </div>
           </div>
           <SPTasks
-            activeStudent="activestudent"
-            // {activeStudent}
+            activeStudent={activeStudent}
           />
           <Chat />
         </div>
