@@ -40,7 +40,6 @@
   margin-bottom: 2.5%;
 }
 .adminCreateForm {
-  background-color: white;
   display: grid;
   grid-area: adminCreateForm;
 }
@@ -114,17 +113,71 @@
   grid-area: adminListList;
   overflow-y: auto;
 }
-.adminListListText {
+.adminListListTextBox {
   display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+  grid-template-areas:
+    "adminListListText adminListListBtn"
+    "adminListListEdit adminListListBtnTwo";
+}
+.adminListListText {
+  grid-area: adminListListText;
 }
 .adminListListBtn {
+  grid-area: adminListListBtn;
+  display: flex;
+  border: 1px solid transparent;
+  border-radius: 0;
+  width: 5rem;
+  height: 1.5rem;
+  color: white;
+  background-color: #cd5c5c;
+  margin-left: 2.5%;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10%;
+  line-height: 1.25rem;
+}
+.adminListListEdit {
+  grid-area: adminListListEdit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.adminListListInputFirstName {
+  height: 1.5rem;
+  width: 3rem;
+  margin-top: 2.5%;
+  justify-content: center;
+  text-align: center;
+  color: black;
+
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.adminListListBtnTwo {
   display: grid;
   border: 1px solid transparent;
   border-radius: 0;
-  width: 20%;
-  margin-top: 2.5%;
+  text-align: center;
+  width: 5rem;
+  height: 1.5rem;
+  grid-area: adminListListBtnTwo;
   color: white;
-  background-color: #cf1020;
+  background-color: #8fbc8f;
+  margin-left: 2.5%;
+  justify-content: center;
+  margin-top: 10%;
+  line-height: 1.25rem;
+}
+.adminListListBtnTwo:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+  background-color: #228b22;
 }
 .adminListListBtn:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
