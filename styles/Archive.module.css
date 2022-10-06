@@ -1,0 +1,98 @@
+
+/* ~~~~THIS IS THE STYLING FOR ARCHIVED COHORTS ~~~~*/
+.cohorts{
+    display:flex;
+    flex-flow:column;
+    height:60vh;
+    padding: 2em;
+    margin:auto
+}
+
+.searchC{
+    height: 2em;
+    vertical-align:top;
+}
+
+.searchC button{
+   
+    height:3em;
+    width:2em;
+    border-radius: .7em;
+    border-bottom-left-radius: 0%;
+    border-top-left-radius: 0%;
+    border: none;
+    box-shadow: 5px 5px 5px #111;
+    margin-top: .5rem;
+    background: #f6efe7;
+}
+
+.searchC button:hover{
+    font-size: .9rem;
+    opacity: 1;
+    color: white;
+    background-color: #F79020;
+    cursor: pointer;
+}
+
+.searchC input {
+    width:25em;
+    height: 3em;
+    border-radius: .7em;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius:0%;
+    border-width: 1px;
+    box-shadow: 5px 5px 5px #111;
+}
+
+.searchC input:focus {
+    outline:none;
+}
+
+.students {
+    display:flex;
+    flex-flow:column;
+    height:40vh;
+    padding: 2em;
+    margin:auto
+    
+}
+
+.searchS{
+    height: 2em;
+    vertical-align:top;
+}
+
+.searchS button{
+   
+    height:3em;
+    width:2em;
+    border-radius: .7em;
+    border-bottom-left-radius: 0%;
+    border-top-left-radius: 0%;
+    border: none;
+    box-shadow: 5px 5px 5px #111;
+    margin-top: .5rem;
+    background: #f6efe7;
+}
+
+.searchS button:hover{
+    font-size: .9rem;
+    opacity: 1;
+    color: white;
+    background-color: #F79020;
+    cursor: pointer;
+}
+
+.searchS input {
+    width:25em;
+    height: 3em;
+    border-radius: .7em;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius:0%;
+    border-width: 1px;
+    box-shadow: 5px 5px 5px #111;
+}
+
+.searchS input:focus {
+    outline:none;
+}

@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import store from "../redux/store";
 import { Provider } from "react-redux";
-import Meta from "../components/Meta";
+//import Meta from "../components/Meta";
 import Layout from "../components/Layout";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Meta />
+      {/* <Meta /> */}
       <Layout>
         <Component {...pageProps} />{" "}
       </Layout>
@@ -15,4 +15,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-
