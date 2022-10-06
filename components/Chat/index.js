@@ -7,7 +7,7 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css"; 
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   const testUser = 11;
