@@ -2,7 +2,8 @@
     /* background: #f6efe7; */
 }
 .container {
-    height: 200rem;
+    min-height: 100rem;
+    height: auto;
     margin: 1rem;
     display: flex;
     flex-direction: row;
@@ -13,7 +14,7 @@
 .menucontainer{
     /* border: 1px black solid; */
     height: 3.5rem;
-    margin: 10rem;
+    margin-left: 10rem;
     width: 20rem;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
  }
