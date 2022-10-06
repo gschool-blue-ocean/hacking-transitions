@@ -1,7 +1,5 @@
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
-
 import { useEffect } from "react";
 import { server } from "../utility";
 

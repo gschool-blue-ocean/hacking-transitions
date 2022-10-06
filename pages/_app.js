@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps }) {
   (
     <Provider store={store}>
       <Meta />
-
       <Layout>
         <CheckLogin />
         <Component {...pageProps} />{" "}
