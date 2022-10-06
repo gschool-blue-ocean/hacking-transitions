@@ -1,13 +1,15 @@
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import Chat from '../components/Chat'
 import { server } from "../utility";
-import Login from "../components/login";
+
+import Login from "../components/Login";
+
 import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
+
 //=========================  LOGIN PAGE ==================
-export default function Home() {
+
+ function Home() {
   const dispatch = useDispatch();
   const { allUsersData, allCohortsData } = useSelector(
     ({ app: { allUsersData, allCohortsData } }) => ({
@@ -24,9 +26,12 @@ export default function Home() {
       dispatch(setAllCohortData(allCohorts));
     })();
   }, []);
-   return (
+
+  return (
     <div className={styles.container}>
       <Login />
     </div>
   );
 }
+Home.displayName = 'Login'
+export default Home
