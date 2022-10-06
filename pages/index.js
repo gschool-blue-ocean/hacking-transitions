@@ -2,8 +2,8 @@ import Image from "next/image";
 import {  useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { server } from "../utility";
-import styles from '../styles/Home.module.css'
 import Login from "../components/Login/index";
+import Layout from "../components/Login/LoginLayout";
 
 import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
 
@@ -23,7 +23,9 @@ import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
 
   return (
     <>
+    < Layout >
       <Login />
+    </ Layout >
     </>
   );
 }

@@ -9,16 +9,9 @@ import {
 } from "../../redux/features/app-slice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-// import axios from "axios";
-
 let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const { allUsersData } = useSelector(
-  //   ({ app: { allUsersData } }) => ({
-  //     allUsersData,
-  //   })
-  // );
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -32,28 +25,29 @@ let Login = () => {
     */
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
-        const currentUserObj = JSON.parse(currentUser);
+      const currentUserObj = JSON.parse(currentUser);
       fetch(`${server}/api/users/${currentUserObj.username}`)
-      .then((res) => {
-        if (res.status === 404) throw new Error("Not Found");
-        return res.json();
-      })
-      .then((user) => {
-        if (
-          user.password === currentUserObj.password
-        ) {
-          dispatch(setLoginState(true));
-          dispatch(setCurrentUser(user));
-          stayLogged &&
-            localStorage.setItem("currentUser", JSON.stringify(user));
-        }
-        currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(currentUserObj));
-      })
-      .catch(({ message }) => {
-        
-      });
-
+        .then((res) => {
+          if (res.status === 404) throw new Error("Not Found");
+          return res.json();
+        })
+        .then((user) => {
+          if (user.password === currentUserObj.password) {
+            dispatch(setLoginState(true));
+            dispatch(setCurrentUser(user));
+            stayLogged &&
+              localStorage.setItem("currentUser", JSON.stringify(user));
+          } else {
+            throw new Error("Not Found");
+          }
+          currentUserObj.admin
+            ? router.push("/admin")
+            : router.push("/student"),
+            dispatch(setActiveStudent(currentUserObj));
+        })
+        .catch(({ message }) => {
+          console.error(message);
+        });
     }
   }, []);
 
@@ -70,26 +64,16 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-   
-
-        
-        if (
-          user.password === inputData.password
-        ) {
+        if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
           stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
-        }else{
+        } else {
           throw new Error("Not Found");
         }
-
-        if (user.admin === true) {
-          router.push("/admin/");
-        } else {
-          router.push("/student");
+        user.admin ? router.push("/admin") : router.push("/student"),
           dispatch(setActiveStudent(user));
-        }
       })
       .catch(({ message }) => {
         setError(true);
@@ -110,7 +94,7 @@ let Login = () => {
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
 
-      <div className={style.loginContainer}>
+      <div className={style.loginContainer} >
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
@@ -119,38 +103,52 @@ let Login = () => {
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
-          <label htmlFor="username">Username</label>
-          <input
-            id="formInput"
-            className={`${style.loginInputBox} ${style.username}`}
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={loginData.username}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            id="formInput"
-            className={style.loginInputBox}
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={loginData.password}
-            onChange={handleChange}
-          />
-          <input
-            type="checkbox"
-            name="stay_logged"
-            id="stay_logged"
-            value={true}
-            onClick={() => {
-              stayLogged = !stayLogged;
-              console.log(stayLogged);
-            }}
-          />{" "}
-          <label htmlFor="stay_logged">Remember Me</label>
-          <button type="submit" className={style.loginBtn}>
+          <span>
+            <label htmlFor="username" className={style.label}>
+              Username
+            </label>
+            <input
+              required
+              id="formInput"
+              className={`${style.input} ${style.username}`}
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={loginData.username}
+              onChange={handleChange}
+            />
+          </span>
+          <span>
+            <label htmlFor="password" className={style.label}>
+              Password
+            </label>
+            <input
+              required
+              id="formInput"
+              className={style.input}
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
+            />
+          </span>
+          <span>
+            <input
+              type="checkbox"
+              name="stay_logged"
+              id="stay_logged"
+              value={true}
+              className={style.rememberMe}
+              onClick={() => {
+                stayLogged = !stayLogged;
+              }}
+            />{" "}
+            <label htmlFor="stay_logged" className={style.label}>
+              Remember Me
+            </label>
+          </span>
+          <button id="submit" type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
         </form>
