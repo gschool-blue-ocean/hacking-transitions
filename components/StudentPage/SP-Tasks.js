@@ -107,7 +107,7 @@ export default function SPTasks({ activeStudent }) {
             <div>{activeStudent.first} has not started a task</div>
           ) : (
             studentTasks.map((task) => {
-              console.log(task);
+              // console.log(task);
 
               return (
                 <div className={styles.StuTasksCard}>
