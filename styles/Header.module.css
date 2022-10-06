@@ -1,8 +1,8 @@
 .header {
     background: #fff;
     width: 100%;
-    position: fixed;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    position: static;
 }
 
 .topNav {
@@ -10,7 +10,7 @@
     justify-content: flex-end;
     background: #f4f4f4;
     padding: 6px, 10px;
-    z-index: 9999;
+    /* z-index: 9999; */
     height: 33.8px;
     align-items: center;
 }
@@ -70,7 +70,7 @@
 
 .page {
     font-size: 16px;
-    z-index: 1;
+    /* z-index: 1; */
     position: relative;
     cursor: default;
     height: 42px;

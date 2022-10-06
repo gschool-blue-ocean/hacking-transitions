@@ -30,10 +30,12 @@
    margin: auto;
    width: 100vw;
    background-color: darkgray;
+   height: fit-content;
 }
 
 .StudentDashWrapper {
-   padding: 0.5rem;
+   border-color: #f79020;
+   padding: .5rem;
    display: grid;
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
@@ -45,9 +47,9 @@
    border-radius: 10px;
    background-color: darkgray;
    font-family: var(--ff-primary);
-   max-height: 85vh;
+   /* max-height: 85vh; */
    width: 100%;
-   overflow: auto !important;
+   /* overflow: auto !important; */
 }
 
 /* =============== Student Header ============= */
@@ -57,7 +59,6 @@
    grid-template-areas:
       "StuName . ETStag"
       "StuBranch . .";
-   margin-top: 7%;   
 }
 
 #StuHeaderName {
@@ -153,7 +154,7 @@ li>h4 {
 } */
 
 .title {
-   margin-left: 0.8em;
+margin-left: auto;
 }
 
 .answer {
@@ -199,6 +200,7 @@ li>h4 {
    grid-template-columns: 1fr 90% 1fr;
    align-items: center;
    border: solid var(--clr-nuetral-brown);
+   border-top: 3px solid #f79020;
    border-radius: 5px;
    margin-bottom: 8px;
    width: 85%;
