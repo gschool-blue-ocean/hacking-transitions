@@ -53,22 +53,24 @@ let Login = () => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
       })
-      .then((data) => {
-        console.log(data.password !== inputData.password);
+      .then((user) => {
+        console.log(user.password !== inputData.password);
 
-        if (data.password !== inputData.password) throw new Error("Not Found");
+        if (user.password !== inputData.password) throw new Error("Not Found");
         if (
-          data.username === inputData.username &&
-          data.password === inputData.password
+          user.username === inputData.username &&
+          user.password === inputData.password
         ) {
           dispatch(setLoginState(true));
-          dispatch(setCurrentUser(data));
+          dispatch(setCurrentUser(user));
         }
 
-        if (data.admin === true) {
+        if (user.admin === true) {
           router.push("/admin/");
         } else {
           router.push("/student");
+        dispatch(setActiveStudent(user));
+
         }
       })
       .catch(({ message }) => {
@@ -108,11 +110,6 @@ let Login = () => {
             value={loginData.username}
             onChange={handleChange}
           />
-          {/* {error.username && (
-            <span id="usernameLoginErrMsg" className={style.errorMsg}>
-              Username Not Found!
-            </span>
-          )} */}
           <input
             id="formInput"
             className={style.loginInputBox}
@@ -122,11 +119,6 @@ let Login = () => {
             value={loginData.password}
             onChange={handleChange}
           />
-          {/* {error.password && (
-            <span id="passwordLoginErrMsg" className={style.errorMsg}>
-              Incorrect Password!
-            </span>
-          )} */}
 
           <button type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
