@@ -76,7 +76,6 @@ font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
 .errorMsg {
     color: red;
     justify-self: center;
-    display: none;
 }
 
 .show {
