@@ -1,13 +1,13 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import s from '../../styles/CohortView.module.css'
-const CohortView = ({students, currCohort}) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import s from "../../styles/CohortView.module.css";
+const CohortView = ({ students, currCohort }) => {
   useEffect(() => {
-    console.log(currCohort)
-  }, [])
+    console.log(currCohort);
+  }, []);
   return (
     <div className={s.container}>
-        {/* <table className={s.table}>
+      {/* <table className={s.table}>
           <tr>
             <th className={s.tableheaders}>First</th>
             <th className={s.tableheaders}>Last</th>
@@ -24,9 +24,9 @@ const CohortView = ({students, currCohort}) => {
             <td>90days</td>
           </tr>
             ) : <div>No data</div>} */}
-//       </table>
+      {/* //       </table> */}
     </div>
-  )
-}
+  );
+};
 
-export default CohortView
+export default CohortView;

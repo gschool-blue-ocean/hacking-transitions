@@ -3,11 +3,11 @@ import { server } from "../../utility";
 import io from "socket.io-client";
 import { MdSend } from "react-icons/md";
 import dynamic from "next/dynamic";
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
-import "react-quill/dist/quill.snow.css";
+// const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+//   ssr: false,
+//   loading: () => <p>Loading ...</p>,
+// });
+// import "react-quill/dist/quill.snow.css";
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   const testUser = 11;
@@ -55,7 +55,7 @@ const Chat = () => {
   }, [socket]);
 
   const submitMsg = async () => {
-    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g
+    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g;
     if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
     // Create a new comment object
     const newMessageObj = {
@@ -139,7 +139,11 @@ const Chat = () => {
             key === "Enter" && ctrlDown && submitMsg();
           }}
         />
-        <button tabIndex={1}className={styles.submit} onClick={() => submitMsg()}>
+        <button
+          tabIndex={1}
+          className={styles.submit}
+          onClick={() => submitMsg()}
+        >
           <MdSend />
         </button>
       </div>
