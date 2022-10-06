@@ -7,7 +7,7 @@ import {
   setLoginState,
   setActiveStudent,
 } from "../../redux/features/app-slice.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 let Login = () => {
   const router = useRouter();
@@ -18,38 +18,7 @@ let Login = () => {
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-  useEffect(() => {
-    // localStorage.clear()
-    /*
-        Check local storage for a signed in user, if exist sign them in
-    */
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-      const currentUserObj = JSON.parse(currentUser);
-      fetch(`${server}/api/users/${currentUserObj.username}`)
-        .then((res) => {
-          if (res.status === 404) throw new Error("Not Found");
-          return res.json();
-        })
-        .then((user) => {
-          if (user.password === currentUserObj.password) {
-            dispatch(setLoginState(true));
-            dispatch(setCurrentUser(user));
-            stayLogged &&
-              localStorage.setItem("currentUser", JSON.stringify(user));
-          } else {
-            throw new Error("Not Found");
-          }
-          currentUserObj.admin
-            ? router.push("/admin")
-            : router.push("/student"),
-            dispatch(setActiveStudent(currentUserObj));
-        })
-        .catch(({ message }) => {
-          console.error(message);
-        });
-    }
-  }, []);
+  
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -67,8 +36,10 @@ let Login = () => {
         if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
-          stayLogged &&
-            localStorage.setItem("currentUser", JSON.stringify(user));
+          stayLogged && window ?
+            localStorage.setItem("currentUser", JSON.stringify(user)):
+            window.sessionStorage.setItem("currentUser", JSON.stringify(user))
+
         } else {
           throw new Error("Not Found");
         }

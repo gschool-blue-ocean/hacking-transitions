@@ -1,31 +1,67 @@
 import Image from "next/image";
-import {  useDispatch } from "react-redux";
+
 import { useEffect } from "react";
 import { server } from "../utility";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 import Login from "../components/Login";
 
-import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
+import {
+  setAllUserData,
+  setAllCohortData,
+  setCurrentUser,
+  setLoginState,
+  setActiveStudent,
+} from "../redux/features/app-slice";
 
 //=========================  LOGIN PAGE ==================
 
- function Home() {
+function Home() {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
-      const allUsers = await (await fetch(`${server}/api/users`)).json();
-      const allCohorts = await (await fetch(`${server}/api/cohorts`)).json();
-      dispatch(setAllUserData(allUsers));
-      dispatch(setAllCohortData(allCohorts));
+      try {
+        const allUsers = await (await fetch(`${server}/api/users`)).json();
+        const allCohorts = await (await fetch(`${server}/api/cohorts`)).json();
+        dispatch(setAllUserData(allUsers));
+        dispatch(setAllCohortData(allCohorts));
+
+        /*
+          Check local storage for a signed in user, if exist sign them in
+      */
+        if (window) {
+          const localUser = localStorage.getItem("currentUser");
+          const sessionUser = window.sessionStorage.getItem("currentUser");
+          localUser && checkStorageForUser(localUser);
+          sessionUser && checkStorageForUser(sessionUser);
+        }
+      } catch (error) {
+        console.error(error.stack);
+      }
     })();
   }, []);
-
+  const checkStorageForUser = async (currentUser) => {
+    if (currentUser) {
+      const currentUserObj = JSON.parse(currentUser);
+      const user = await (
+        await fetch(`${server}/api/users/${currentUserObj.username}`)
+      ).json();
+      if (user.password === currentUserObj.password) {
+        dispatch(setLoginState(true));
+        dispatch(setCurrentUser(user));
+        currentUserObj.admin ? router.push("/admin") : router.push("/student"),
+          dispatch(setActiveStudent(currentUserObj));
+      }
+    }
+  };
   return (
     <>
       <Login />
     </>
   );
 }
-Home.displayName = 'Login'
-export default Home
+Home.displayName = "Login";
+export default Home;
