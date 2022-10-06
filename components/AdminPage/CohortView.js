@@ -32,6 +32,7 @@ const CohortView = ({currCohort}) => {
         </table>
         </div>
         )}
+
     </div>
   )
 }
