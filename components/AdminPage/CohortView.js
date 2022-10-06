@@ -4,7 +4,9 @@ import s from '../../styles/CohortView.module.css'
 const CohortView = ({currCohort}) => {
   if (currCohort.length == 0) {
     return ( 
-      <div>No data</div>
+       <div className={s.default}>
+        <h1>Select A Cohort to begin</h1>
+       </div>
     ) 
     } else {
     return (

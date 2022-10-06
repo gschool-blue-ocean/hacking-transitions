@@ -15,11 +15,6 @@ import { useRouter } from "next/router";
 let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const { allUsersData } = useSelector(
-  //   ({ app: { allUsersData } }) => ({
-  //     allUsersData,
-  //   })
-  // );
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
