@@ -18,7 +18,11 @@ const CohortMenu = ({currCohorts,students, setCurrCohort, cohorts }) => {
         //if cohort div is clicked, will remove, else removes cohort from state
         if (data.isclicked === "false") {
           setCurrCohort(oldCohort => oldCohort.concat({cohort_id: id, cohort_name: data.cohort_name, students: filtStudents}))
+<<<<<<< HEAD
           e.target.setAttribute('style', 'color:#f79020')
+=======
+          e.target.setAttribute('style', 'color:blue')
+>>>>>>> f6ad539 (Added new features to admin page, still needs some work but its functional.)
           data.isclicked = true;
         } else {
           setCurrCohort(oldCohort => oldCohort.filter(cohort => cohort.cohort_id != id))
