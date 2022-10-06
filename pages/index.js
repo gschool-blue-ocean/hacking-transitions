@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { server } from "../utility";
 import Login from "../components/Login";
@@ -10,12 +10,6 @@ import styles from "../styles/Home.module.css";
 
 function Home() {
   const dispatch = useDispatch();
-  const { allUsersData, allCohortsData } = useSelector(
-    ({ app: { allUsersData, allCohortsData } }) => ({
-      allUsersData,
-      allCohortsData,
-    })
-  );
 
   useEffect(() => {
     (async () => {
@@ -27,9 +21,9 @@ function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <>
       <Login />
-    </div>
+    </>
   );
 }
 Home.displayName = "Login";
