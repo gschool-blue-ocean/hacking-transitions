@@ -1,9 +1,11 @@
-import s from '../../styles/AdminPage.module.css'
-import CohortMenu from './CohortMenu'
-import CohortView from './CohortView'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import s from "../../styles/AdminPage.module.css";
+import CohortMenu from "./CohortMenu";
+import CohortView from "./CohortView";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
 const AdminContainer = () => {
+
   const [students, setStudents] = useState([])
   const [cohorts, setCohorts] = useState([])
   const [currCohort, setCurrCohort] = useState([])
@@ -30,9 +32,12 @@ const AdminContainer = () => {
       <div className={s.container}>
         <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
         <CohortView students={students} currCohort={currCohort} />
+
       </div>
     </div>
-  )
-}
+  );
+};
+
 
 export default AdminContainer
+

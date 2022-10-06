@@ -8,9 +8,6 @@ const AdminCreate = () => {
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
 
-  /* 
-once the backend is finished, need to make an axios post creating new admin using stored states for submit button!!
-  */
   const createAdmin = (event) => {
     event.preventDefault();
     axios.post("/api/admin", {
