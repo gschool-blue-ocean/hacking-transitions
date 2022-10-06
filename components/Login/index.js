@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -44,8 +45,11 @@ let Login = () => {
         } else {
           throw new Error("Not Found");
         }
-        user.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(user));
+        user.admin
+          ? (router.push("/admin"), setLoginData(""))
+          : (router.push("/student"),
+            dispatch(setActiveStudent(user)),
+            setLoginData(""));
       })
       .catch(({ message }) => {
         setError(true);

@@ -4,7 +4,6 @@ import CohortView from "./CohortView";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-
 const AdminContainer = () => {
   const [students, setStudents] = useState([]);
   const [cohorts, setCohorts] = useState([]);
