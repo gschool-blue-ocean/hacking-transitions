@@ -35,26 +35,24 @@ function Home() {
         if (window) {
           const localUser = localStorage.getItem("currentUser");
           const sessionUser = window.sessionStorage.getItem("currentUser");
-          localUser && checkStorageForUser(localUser);
-          sessionUser && checkStorageForUser(sessionUser);
+          localUser && confirmStorageUser(localUser);
+          sessionUser && confirmStorageUser(sessionUser);
         }
       } catch (error) {
         console.error(error.stack);
       }
     })();
   }, []);
-  const checkStorageForUser = async (currentUser) => {
-    if (currentUser) {
-      const currentUserObj = JSON.parse(currentUser);
-      const user = await (
-        await fetch(`${server}/api/users/${currentUserObj.username}`)
-      ).json();
-      if (user.password === currentUserObj.password) {
-        dispatch(setLoginState(true));
-        dispatch(setCurrentUser(user));
-        currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(currentUserObj));
-      }
+  const confirmStorageUser = async (currentUser) => {
+    const currentUserObj = JSON.parse(currentUser);
+    const user = await (
+      await fetch(`${server}/api/users/${currentUserObj.username}`)
+    ).json();
+    if (user.password === currentUserObj.password) {
+      dispatch(setLoginState(true));
+      dispatch(setCurrentUser(user));
+      currentUserObj.admin ? router.push("/admin") : router.push("/student"),
+        dispatch(setActiveStudent(currentUserObj));
     }
   };
   return (
