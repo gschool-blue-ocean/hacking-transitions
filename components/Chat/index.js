@@ -10,7 +10,6 @@ import { server } from "../../utility";
 import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
 import styles from "../../styles/Chat.module.css";
-import { current } from "@reduxjs/toolkit";
 const Chat = () => {
   const { userData, activeStudent } = useSelector(
     ({ app: { currentUser, activeStudent } }) => ({
@@ -29,31 +28,32 @@ const Chat = () => {
   useEffect(() => {
     (async () => {
       await fetch(`${server}/api/socket`);
-      newSocket = io()
+      newSocket = io();
       setSocket(newSocket);
       /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
       const studentComments = await (
         await fetch(`${server}/api/comments/student/${9 /*userData.user_id*/}`)
       ).json();
       // console.log(studentComments);
-      
+
       setChatMessages(studentComments);
       /******** END GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
 
       newSocket.on("connect", () => {
         console.log("connected");
       });
+      // if put in a function will break and resend the message
       userData.admin
         ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
         : newSocket.emit("join_room", userData.user_id);
-
-        newSocket.on("recieve_message", (newMessage) => {
-        console.log("message recieved",newMessage.content);
-
+   
+      newSocket.on("recieve_message", (newMessage) => {
+        console.log("message recieved", newMessage.content);
         setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
       });
     })();
   }, []);
+
 
   const submitMsg = async () => {
     try {
