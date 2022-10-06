@@ -64,7 +64,8 @@ const EditStudentModal = ({ setShowEditStudentModal }) => {
             body: JSON.stringify(formData),
             headers: { 'Content-Type': 'application/json' }
         })
-            .then(res => res.json())
+            .then(res => res.json()
+            )
             .then(() => {
                 setActiveStudent((prevData) => {
                     return {
