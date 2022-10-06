@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import s from '../../styles/CohortView.module.css'
