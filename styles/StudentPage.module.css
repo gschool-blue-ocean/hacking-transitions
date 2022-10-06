@@ -55,34 +55,31 @@
 /* =============== Student Header ============= */
 .SDashHeader {
    grid-area: StuHeader;
-   display: grid;
-   grid-template-areas:
-      "StuName . ETStag"
-      "StuBranch . .";
+   display: flex;
+   flex-direction: row;
+}
+.SDashheaderCol {
+   display: flex;
+   flex-direction: column;
 }
 
 #StuHeaderName {
-   grid-area: StuName;
-   color: var(--clr-primary-accent);
-   text-align: start;
-   align-self: center;
+   margin: 1px;
 }
 
 #StuHeaderBranch {
-   grid-area: StuBranch;
-   color: var(--clr-bgsecondary-contrast);
-   padding: 5px;
+   margin: 1px;
 }
 
 .StuHeaderETStag {
-   grid-area: ETStag;
-   text-align: center;
    color: white;
    border-radius: 10px;
    font-weight: bold;
    width: fit-content;
-   padding: 5px 20px;
-   justify-self: end;
+   padding: 5px;
+   position: relative;
+   left: 77%;
+   margin: 1px;
 }
 
 #ETS-120 {
@@ -255,7 +252,6 @@ margin-left: auto;
       "TaskDesc"
       "TaskRemarks"
       "AddRemark";
-   font-family: var(--ff-primary);
    gap: 12px;
 }
 

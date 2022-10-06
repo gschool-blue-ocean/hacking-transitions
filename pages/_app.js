@@ -3,11 +3,18 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 // import Meta from "../components/Meta";
 import Layout from "../components/Layout";
+import CheckLogin from "../components/Login/checkLogin";
 function MyApp({ Component, pageProps }) {
-  return (
+  return Component.displayName === "Login" ? (
+    <Provider store={store}>
+      <Meta />
+      <Component {...pageProps} />{" "}
+    </Provider>
+  ) : (
     <Provider store={store}>
       {/* <Meta /> */}
       <Layout>
+        <CheckLogin />
         <Component {...pageProps} />{" "}
       </Layout>
     </Provider>

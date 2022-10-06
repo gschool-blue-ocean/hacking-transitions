@@ -5,30 +5,36 @@ const initialState = {
   allCohortsData: [],
   loginState: false,
   currentUser: {},
-  isAdmin: false,
+  activeStudent:{}
 };
 
 export const appSlice = createSlice({
   name: "app-slice",
   initialState,
   reducers: {
-    setAllUserData(state, {payload}) {
+    setAllUserData(state, { payload }) {
       state.allUsersData = payload;
     },
-    setAllCohortData(state, {payload}) {
-        state.allCohortsData = payload;
-      },
-      setLoginState(state, {payload}) {
-        state.loginState = payload;
-      },
-      setCurrentUser(state, {payload}) {
-        state.currentUser = payload;
-      },
-      setIsAdmin(state, {payload}) {
-        state.isAdmin = payload;
-      },
+    setAllCohortData(state, { payload }) {
+      state.allCohortsData = payload;
+    },
+    setLoginState(state, { payload }) {
+      state.loginState = payload;
+    },
+    setCurrentUser(state, { payload }) {
+      state.currentUser = payload;
+    },
+    setActiveStudent(state, { payload }) {
+      state.activeStudent = payload;
+    },
   },
 });
 
-export const {setAllUserData, setAllCohortData, setLoginState, setCurrentUser, setIsAdmin} = appSlice.actions
-export default appSlice.reducer
+export const {
+  setAllUserData,
+  setAllCohortData,
+  setLoginState,
+  setCurrentUser,
+  setActiveStudent
+} = appSlice.actions;
+export default appSlice.reducer;
