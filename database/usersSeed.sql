@@ -223,4 +223,4 @@ insert into users (admin, first, last, email, username, password, rank, branch, 
 ,  (false, 'Archived', 'Student2', 'mreiners5t@gov.uk', 'archivedStudent2', 'o9VsfyVDT7zO', 'SGT', 'Army', 'Fort Hood TX', true, '9/16/2022', '10/17/2022', true, 'Charleston', 'WV', 'Associates', false, 'MSCP-00', 1, true, true, '19d', 'My interests pop-up kombucha yes plz selvage lumbersexual affogato dreamcatcher readymade YOLO man bun gochujang coloring book. Raclette health goth tofu PBR&B organic. Humblebrag paleo dreamcatcher keytar meh. Gochujang hoodie aesthetic gentrify butcher. Edison bulb hell of jianbing selfies butcher, keffiyeh godard.', false, null, null, null);
 
 
-\i dependentsSeed.sql
+\ir dependentsSeed.sql

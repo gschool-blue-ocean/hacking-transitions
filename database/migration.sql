@@ -62,6 +62,7 @@ CREATE TABLE tasks (
 CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     student_id INTEGER,
+    cohort_id INTEGER,
     foreign key (student_id) references users(user_id),
     author_id INTEGER,
     author_name VARCHAR(100),

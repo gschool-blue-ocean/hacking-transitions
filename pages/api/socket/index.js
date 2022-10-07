@@ -1,5 +1,14 @@
 import { Server } from "socket.io";
 import { server } from "../../../utility";
+
+const updateDB = (msg) => {
+  fetch(`${server}/api/comments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(msg),
+  });
+};
+
 export default async function handler(req, res) {
   /******* ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   if (res.socket.server.io) {
@@ -10,7 +19,7 @@ export default async function handler(req, res) {
     res.socket.server.io = io;
 
     io.on("connection", (socket) => {
-      socket.removeAllListeners()
+      socket.removeAllListeners();
       console.log(`User Connected`);
 
       ///// JOIN A SPECIFIC STUDNETS CHAT ROOM
@@ -19,20 +28,36 @@ export default async function handler(req, res) {
         console.log("joined Room#", id);
       });
 
+      socket.on("admin_cohort_room", (ids) => {
+        const [cohortId, adminId] = [...ids];
+        socket.join(cohortId);
+        console.log(`admin ${adminId} joined cohort room ${cohortId}`);
+      });
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
       socket.on("send_new_message", (msg) => {
-        console.log('recieved new message',msg);
-        
-        ///// Create a new message in the database   
-        fetch(`${server}/api/comments`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(msg),
-        });
-        ///// Broadcast the new message to be recieved by all clients connected
+        console.log("recieved new message", msg);
+
+        ///// Create a new message in the database
+        updateDB(msg);
+        ///// Broadcast the new message to be recieved by all clients connected except the sender
         socket.to(msg.student_id).emit("recieve_message", msg);
-        /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
       });
+
+      socket.on("send_cohort_message", (msg, students) => {
+        // console.log(
+        //   `recieved new message for cohort ${students[0].cohort_id}`,
+        //   msg
+        // );
+        let groupSocket = socket;
+        
+        for (const { user_id } of students) {
+          msg.student_id = user_id;
+          updateDB(msg);
+          groupSocket = groupSocket.to(user_id);
+        }
+        groupSocket.emit("recieve_message", msg);
+      });
+      /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
       socket.on("disconnect", () => console.log("User Disconnected"));
     });

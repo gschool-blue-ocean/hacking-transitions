@@ -15,8 +15,8 @@ export default async function handler(req, res) {
   /******** END GET ALL COMMENTS ********/
   /******** CREATE NEW COMMENTS ********/
   if (checkApiMethod(req, "POST")) {
-    const { student_id, author_id, author_name, content, date_time } = req.body
-    const newComment = {  student_id, author_id, author_name, content, date_time };
+    const { student_id, author_id, author_name, content, date_time, cohort_id } = req.body
+    const newComment = {  student_id, author_id, author_name, content, date_time,cohort_id };
     try {
       const comment = (
         await sql`INSERT INTO comments ${sql(newComment)} RETURNING *`

@@ -11,10 +11,11 @@ import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
-  const { userData, activeStudent } = useSelector(
-    ({ app: { currentUser, activeStudent } }) => ({
+  const { userData, activeStudent, cohortChat } = useSelector(
+    ({ app: { currentUser, activeStudent, cohortChat } }) => ({
       userData: currentUser,
       activeStudent,
+      cohortChat,
     })
   );
 
@@ -30,30 +31,49 @@ const Chat = () => {
       await fetch(`${server}/api/socket`);
       newSocket = io();
       setSocket(newSocket);
-      /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
-      const studentComments = await (
-        await fetch(`${server}/api/comments/student/${9 /*userData.user_id*/}`)
-      ).json();
-      // console.log(studentComments);
 
-      setChatMessages(studentComments);
-      /******** END GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
+      let comments;
 
-      newSocket.on("connect", () => {
-        console.log("connected");
-      });
-      // if put in a function will break and resend the message
-      userData.admin
-        ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
-        : newSocket.emit("join_room", userData.user_id);
-   
+      !newSocket.connected &&
+        newSocket.on("connect", () => {
+          console.log("connected");
+        });
+
+      if (userData.admin && cohortChat[0]) {
+       
+        
+        comments = await (
+          await fetch(
+            `${server}/api/comments/cohort/${cohortChat[0].cohort_id}`
+          )
+        ).json();
+console.log(comments,'cohort commenst');
+
+        // if put in a function will break and resend the message
+        newSocket.emit("admin_cohort_room", [
+          cohortChat[0].cohort_id,
+          userData.user_id,
+        ]);
+      } else {
+        ;
+        userData.admin
+          ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
+          : newSocket.emit("join_room", userData.user_id);
+
+        comments = await (
+          await fetch(
+            `${server}/api/comments/student/${userData.user_id /*activeStudent.user_id*/}`
+          )
+        ).json();
+      }
+      setChatMessages(comments);
+
       newSocket.on("recieve_message", (newMessage) => {
         console.log("message recieved", newMessage.content);
         setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
       });
     })();
-  }, []);
-
+  }, [cohortChat]);
 
   const submitMsg = async () => {
     try {
@@ -67,14 +87,17 @@ const Chat = () => {
         content: newMessage,
         date_time: new Date(Date.now()).toUTCString(),
       };
+      if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
       // Update chat display with newly typed message
-      console.log(foundContent.test(newMessageObj));
+      console.log(newMessageObj);
 
       // setting state here causes this to render twice i think and, makes client recieve multiple of the same message
       setChatMessages((oldMsgs) => [...oldMsgs, newMessageObj]);
 
       // send the new message to the server
-      await socket.emit("send_new_message", newMessageObj);
+      cohortChat[0]
+        ? await socket.emit("send_cohort_message", newMessageObj, cohortChat)
+        : await socket.emit("send_new_message", newMessageObj);
 
       //reset input field
       setNewMessage("");

@@ -30,7 +30,7 @@ const AdminContainer = () => {
     <div className={s.background}>
       <div className={s.container}>
         <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
-        {/* <CohortView students={students} currCohort={currCohort} /> */}
+        <CohortView students={students} currCohort={currCohort} />
         <Chat />
       </div>
     </div>

@@ -5,7 +5,8 @@ const initialState = {
   allCohortsData: [],
   loginState: false,
   currentUser: {},
-  activeStudent:{}
+  activeStudent:{},
+  cohortChat: []
 };
 
 export const appSlice = createSlice({
@@ -27,6 +28,10 @@ export const appSlice = createSlice({
     setActiveStudent(state, { payload }) {
       state.activeStudent = payload;
     },
+    setStudentsForCohortChat(state, {payload}) {
+      state.cohortChat = payload;
+
+    }
   },
 });
 
@@ -35,6 +40,7 @@ export const {
   setAllCohortData,
   setLoginState,
   setCurrentUser,
-  setActiveStudent
+  setActiveStudent,
+  setStudentsForCohortChat
 } = appSlice.actions;
 export default appSlice.reducer;
