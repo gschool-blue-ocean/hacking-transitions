@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/Edit.Admin.module.css";
+
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
   const [newFirstName, setNewFirstName] = useState("");
@@ -21,24 +22,29 @@ const AdminList = () => {
         <h1>List of Admins</h1>
       </div>
       <div className={styles.adminListList}>
-        <ul>
-          {adminList.map((admin) => {
-            //delete admin by id
-            const deleteAdmin = (event) => {
-              event.preventDefault();
-              axios.delete(`/api/users/${admin.user_id}`, {
-                id: admin.user_id,
-              });
-              window.location.reload();
-            };
-            console.log(admin);
-            //update admin by id
-            const updateAdmin = (event) => {
-              event.preventDefault();
-              axios.patch(`/api/admin`, {});
-            };
-            return (
-              <>
+        {adminList.map((admin) => {
+          const updateAdmin = (event) => {
+            event.preventDefault();
+            axios.patch(`/api/admin/${admin.user_id}`, {
+              first: newFirstName,
+              last: newLastName,
+              email: newEmail,
+              username: newUsername,
+              password: newPassword,
+            });
+            window.location.reload();
+          };
+          const deleteAdmin = (event) => {
+            event.preventDefault();
+            axios.delete(`/api/users/${admin.user_id}`, {
+              id: admin.user_id,
+            });
+            window.location.reload();
+          };
+
+          return (
+            <>
+              <ul value={admin.user_id}>
                 <div className={styles.adminListListTextBox}>
                   <p className={styles.adminListListText}>
                     <b>{`${admin.first} ${admin.last}`}</b>
@@ -50,63 +56,66 @@ const AdminList = () => {
                   >
                     Delete
                   </button>
-                  <button className={styles.adminListListBtnTwo} type="submit">
+                  <button
+                    className={styles.adminListListBtnTwo}
+                    type="submit"
+                    onClick={updateAdmin}
+                  >
                     Update
                   </button>
                   <form className={styles.adminListListEdit}>
                     <input
                       className={styles.adminListListInputFirstName}
-                      id="FirstName"
+                      id={`first ${admin.user_id}`}
                       type="text"
-                      value={newFirstName}
+                      //value={newFirstName}
                       onChange={(event) => setNewFirstName(event.target.value)}
-                      aria-label="FirstName"
+                      aria-label={`first ${admin.user_id}`}
                       placeholder="First"
                     />
                     <input
                       className={styles.adminListListInputFirstName}
-                      id="LastName"
+                      id={`last ${admin.user_id}`}
                       type="text"
-                      value={newLastName}
+                      //value={newLastName}
                       onChange={(event) => setNewLastName(event.target.value)}
-                      aria-label="LastName"
+                      aria-label={`last ${admin.user_id}`}
                       placeholder="Last"
                     />
                     <input
                       className={styles.adminListListInputFirstName}
-                      id="Username"
+                      id={`username ${admin.user_id}`}
                       type="text"
-                      value={newUsername}
+                      //value={newUsername}
                       onChange={(event) => setNewUsername(event.target.value)}
-                      aria-label="Username"
+                      aria-label={`username ${admin.user_id}`}
                       placeholder="User"
                     />
                     <input
                       className={styles.adminListListInputFirstName}
-                      id="Password"
+                      id={`password ${admin.user_id}`}
                       type="text"
-                      value={newPassword}
+                      //value={newPassword}
                       onChange={(event) => setNewPassword(event.target.value)}
-                      aria-label="Password"
+                      aria-label={`password ${admin.user_id}`}
                       placeholder="Pass"
                     />
                     <input
                       className={styles.adminListListInputFirstName}
-                      id="Email"
+                      id={`email ${admin.user_id}`}
                       type="text"
-                      value={newEmail}
+                      //value={newEmail}
                       onChange={(event) => setNewEmail(event.target.value)}
-                      aria-label="Email"
+                      aria-label={`email ${admin.user_id}`}
                       placeholder="Email"
                     />
                   </form>
                 </div>
-
                 <hr className={styles.hr}></hr>
-              </>
-            );
-          })}
-        </ul>
+              </ul>
+            </>
+          );
+        })}
       </div>
     </div>
   );

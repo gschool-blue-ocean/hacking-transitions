@@ -5,18 +5,12 @@ import Meta from "../components/Meta";
 import Layout from "../components/Layout";
 import CheckLogin from "../components/Login/checkLogin";
 function MyApp({ Component, pageProps }) {
-
-
-  return Component.displayName === 'Login' ? 
-  (    <Provider store={store}>
-    <Meta />
-
-    <Layout>
+  return Component.displayName === "Login" ? (
+    <Provider store={store}>
+      <Meta />
       <Component {...pageProps} />{" "}
-    </Layout>
-  </Provider>)
-  :
-  (
+    </Provider>
+  ) : (
     <Provider store={store}>
       <Meta />
       <Layout>
