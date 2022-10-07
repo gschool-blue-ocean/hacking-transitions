@@ -60,7 +60,7 @@ const EditStudentModal = ({ setShowEditStudentModal }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("submitted", formData);
-        fetch(`${server}/api/admin/edit/${activeStudent.user_id}`, {
+        fetch(`/api/users/${activeStudent.user_id}`, {
             method: 'PATCH',
             body: JSON.stringify(formData),
             headers: { 'Content-Type': 'application/json' }

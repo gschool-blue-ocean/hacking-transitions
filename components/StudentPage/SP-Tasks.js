@@ -77,7 +77,7 @@ export default function SPTasks({ activeStudent }) {
   const getTasks = () => {
     if (activeStudent.user_id) {
       fetch(
-        `https://hacking-transition.herokuapp.com/api/tasks/student/${activeStudent.user_id}`
+        `api/tasks/student/${activeStudent.user_id}`
       )
         .then((res) => res.json())
         .then((tasks) => {

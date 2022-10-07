@@ -10,14 +10,87 @@ const SPChecklist = ({ setShowEditStudentModal }) => {
     const dispatch = useDispatch();
     const { userData, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({userData: currentUser, activeStudent}))
 
+    const [checklistData, setChecklistData] = useState({
+        first: activeStudent.first,
+        last: activeStudent.last,
+        email: activeStudent.email,
+        rank: activeStudent.rank,
+        branch: activeStudent.branch,
+        duty_station: activeStudent.duty_station,
+        taps_complete: activeStudent.taps_complete,
+        leave_start_date: convertDateToIso(activeStudent.leave_start_date),
+        ets_date: convertDateToIso(activeStudent.ets_date),
+        planning_to_relocate: activeStudent.planning_to_relocate,
+        city: activeStudent.city,
+        state: activeStudent.state,
+        has_dependents: activeStudent.has_dependents,
+        highest_education: activeStudent.highest_education,
+        seeking_further_education: activeStudent.seeking_further_education,
+        mos: activeStudent.mos,
+        interests: activeStudent.interests,
+        final_physical: activeStudent.final_physical,
+        gear_turn_in: activeStudent.gear_turn_in,
+        HHG_move: activeStudent.HHG_move,
+        barracks_checkout: activeStudent.barracks_checkout,
+        file_VA_claim: activeStudent.file_VA_claim
+    })
+
+    function convertDateToIso(date) {
+        if (date == '') {
+            return ''
+        }
+        if (date == null) {
+            return ''
+        }
+
+        else if (date.split('-')[0].length === 4) {
+            return date
+        }
+
+        else if (date.split('/')[0].length === 4) {
+            return date
+        }
+
+        else {
+            let newDate = new Date(date)
+            let dateArray = newDate.toLocaleDateString().split('/')
+            let year = dateArray[2]
+            let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`
+            let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`
+
+            return `${year}-${month}-${day}`
+        }
+    }
+
     const handleCancel = () => {
-        console.log('canceled')
+        console.log('canceled', checklistData)
     }
     const handleSubmit = () => {
-        console.log('submit')
+        e.preventDefault();
+        console.log("submitted", checklistData);
+        fetch(`/api/users/${activeStudent.user_id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(checklistData),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json()
+            )
+            .then(() => {
+                setActiveStudent(checklistData)
+                setCurrentUser(checklistData)
+            })
+            .catch(err => console.log(err))
     }
-    const handleChange = () => {
-        console.log('change')
+    
+    const handleChange = (e) => {
+        if (e.target.type === "checkbox") {
+            return setChecklistData((prevData) => {
+                return {
+                    ...prevData,
+                    [e.target.name]: e.target.checked
+                }
+            })
+        }
     }
 
     return (
@@ -32,8 +105,8 @@ const SPChecklist = ({ setShowEditStudentModal }) => {
                                 type='checkbox'
                                 name='seeking_further_education'
                                 onChange={handleChange}
-                                // checked={formData.seeking_further_education}
-                            /> Seeking further education?</label>
+                                checked={checklistData.final_physical}
+                            /> Seperation Physical Complete?</label>
                         <label className='checkboxLabel'>
                             <input
                                 type='checkbox'
