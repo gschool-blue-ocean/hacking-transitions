@@ -24,26 +24,29 @@ const CohortView = ({currCohort}) => {
     return (
     <div className={s.container}>
       {currCohort.map((cohort) => 
-      <div className={s.table}>
-        <h3>{cohort.cohort_name}</h3>
-      <table className={s.table}>
-            <tr>
+      <div>
+        <h1>{cohort.cohort_name}</h1>
+      <div className={s.div}>
+        <table className={s.table}>
+            <tr className={s.headtr}>
               <th className={s.tableheaders}>First</th>
               <th className={s.tableheaders}>Last</th>
               <th className={s.tableheaders}>ETS</th>
               <th className={s.tableheaders}>Terminal</th>
               <th className={s.tableheaders}>Branch</th>
             </tr> 
-            {cohort.students.map(student =>
-            <tr>
-              <td><btn onClick={handleClick} data-student_id={student.user_id}>{student.first}</btn></td>
-              <td><btn onClick={handleClick} data-student_id={student.user_id}>{student.last}</btn></td>
-              <td><btn onClick={handleClick} data-student_id={student.user_id}>{student.ets_date}</btn></td>
-              <td><btn onClick={handleClick} data-student_id={student.user_id}>{student.leave_start_date}</btn></td>
-              <td><btn onClick={handleClick} data-student_id={student.user_id}>{student.branch}</btn></td>
-            </tr>
-            )}
-        </table>
+              {cohort.students.map(student =>
+              <tr className={s.tr}>
+                <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.first}</btn></td>
+                <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.last}</btn></td>
+                <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.ets_date}</btn></td>
+                <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.leave_start_date}</btn></td>
+                <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.branch}</btn></td>
+              </tr>
+              )}
+
+          </table>
+        </div>
         </div>
         )}
     </div>
