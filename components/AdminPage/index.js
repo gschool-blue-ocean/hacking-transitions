@@ -1,24 +1,22 @@
-import s from "../../styles/AdminPage.module.css";
-import CohortMenu from "./CohortMenu";
-import CohortView from "./CohortView";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { motion } from "framer-motion";
-const AdminContainer = () => {
-  const [students, setStudents] = useState([]);
-  const [cohorts, setCohorts] = useState([]);
-  const [currCohort, setCurrCohort] = useState([]);
+import s from '../../styles/AdminPage.module.css'
+import CohortMenu from './CohortMenu'
+import CohortView from './CohortView'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import CreateCohort from './CreateCohort'
+const AdminContainer =   () => {
+  const allCohorts = useSelector(({app:{allCohortsData}}) => allCohortsData )
+    //redux state ^^
+  const [students, setStudents] = useState([])
+  const [cohorts, setCohorts] = useState(allCohorts)
+  const [currCohort, setCurrCohort] = useState([])
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/users/students",
-    }).then((res) => setStudents(res.data));
-    //**** UPDATE TO REDUX FOR COHORTS ********/
-    axios({
-      method: "get",
-      url: "/api/cohorts",
-    }).then((res) => setCohorts(res.data));
-  }, []);
+      axios({
+      method: 'get',
+      url: '/api/users/students',
+    }).then((res) => setStudents(res.data))
+  }, [])
   useEffect(() => {
     if (cohorts.length > 0) {
       let topcohort = cohorts[cohorts.length - 1];
@@ -37,16 +35,16 @@ const AdminContainer = () => {
   return (
     <div className={s.background}>
       <div className={s.container}>
-        <CohortMenu
-          cohorts={cohorts}
-          currCohort={currCohort}
-          setCurrCohort={setCurrCohort}
-          students={students}
-        />
+        <div className={s.tools_container}>
+         <CreateCohort />
+         <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
+        </div>
         <CohortView students={students} currCohort={currCohort} />
       </div>
     </div>
   );
 };
 
+
 export default AdminContainer;
+

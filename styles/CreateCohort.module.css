@@ -1,0 +1,9 @@
+.container {
+     /* border: 1px black solid; */
+     margin-top: 1.2rem;
+     margin-bottom: 2rem;
+     height: 3.5rem;
+     margin-left: 10rem;
+     width: 20rem;
+     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
