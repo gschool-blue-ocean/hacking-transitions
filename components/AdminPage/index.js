@@ -5,18 +5,19 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import CreateCohort from './CreateCohort'
-const AdminContainer = () => {
+const AdminContainer =   () => {
   const allCohorts = useSelector(({app:{allCohortsData}}) => allCohortsData )
+    //redux state ^^
   const [students, setStudents] = useState([])
   const [cohorts, setCohorts] = useState(allCohorts)
   const [currCohort, setCurrCohort] = useState([])
-  useEffect( () => {
+  useEffect(() => {
       axios({
       method: 'get',
       url: '/api/users/students',
     }).then((res) => setStudents(res.data))
   }, [])
-  useEffect( () => {
+  useEffect(() => {
     if (cohorts.length > 0) {
       let topcohort = cohorts[cohorts.length - 1]
       let filtStudents = students.filter((student) => student.cohort_id == topcohort.cohort_id)
