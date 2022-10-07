@@ -1,7 +1,7 @@
 import AdminContainer from "../../components/AdminPage"
 const admin = () => {
   return (
-    <div>Admin Page!
+    <div>
        <AdminContainer /> 
     </div>
   )

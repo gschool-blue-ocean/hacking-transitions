@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { MdSend } from "react-icons/md";
 import io from "socket.io-client";
 import dynamic from "next/dynamic";
+
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -9,6 +10,7 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 import { server } from "../../utility";
 import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
+
 import styles from "../../styles/Chat.module.css";
 import { current } from "@reduxjs/toolkit";
 const Chat = () => {

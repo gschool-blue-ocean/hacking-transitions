@@ -11,6 +11,11 @@
     color: #003B4C;
     background-color: #FFF;
 }
+.tools_container {
+    display: flex;
+    flex-direction: column;
+    
+}
 .menucontainer{
     /* border: 1px black solid; */
     height: 3.5rem;
