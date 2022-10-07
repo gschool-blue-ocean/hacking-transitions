@@ -19,11 +19,19 @@ const AdminContainer =   () => {
   }, [])
   useEffect(() => {
     if (cohorts.length > 0) {
-      let topcohort = cohorts[cohorts.length - 1]
-      let filtStudents = students.filter((student) => student.cohort_id == topcohort.cohort_id)
-      setCurrCohort([{cohort_id: topcohort.cohort_id, cohort_name: topcohort.cohort_name, students: filtStudents}])
-      } 
-  }, [cohorts])
+      let topcohort = cohorts[cohorts.length - 1];
+      let filtStudents = students.filter(
+        (student) => student.cohort_id == topcohort.cohort_id
+      );
+      setCurrCohort([
+        {
+          cohort_id: topcohort.cohort_id,
+          cohort_name: topcohort.cohort_name,
+          students: filtStudents,
+        },
+      ]);
+    }
+  }, [cohorts]);
   return (
     <div className={s.background}>
       <div className={s.container}>
@@ -34,7 +42,9 @@ const AdminContainer =   () => {
         <CohortView students={students} currCohort={currCohort} />
       </div>
     </div>
-  )
-}
+  );
+};
+
 
 export default AdminContainer;
+

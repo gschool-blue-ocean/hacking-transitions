@@ -1,6 +1,6 @@
 import Head from "next/head";
 
- const Meta = () => {
+const Meta = () => {
   return (
     <Head>
       <title>Hacking Transitions</title>
@@ -9,4 +9,4 @@ import Head from "next/head";
     </Head>
   );
 };
-export default Meta
+export default Meta;

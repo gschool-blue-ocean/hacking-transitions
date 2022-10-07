@@ -51,4 +51,5 @@ const CohortView = ({currCohort}) => {
 }
 }
 
-export default CohortView
+
+export default CohortView;
