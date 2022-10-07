@@ -3,15 +3,18 @@ import style from "../../styles/Header.module.css";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  // const currentUser = useSelector(({ app }) => (currentUser = app.currentUser));
+  const getUser = () => {
+    const currentUser = useSelector(
+      ({ app }) => (currentUser = app.currentUser)
+    );
+    return `${currentUser.first} ${currentUser.last}`;
+  };
+
   return (
     <nav className={style.header}>
       <div className={style.topNav}>
         <ul className={style.topList}>
-          <div className={style.listItem}>
-            {/* {`${currentUser.first} ${currentUser.last}`} */}
-            current user
-          </div>
+          <div className={style.listItem}>Current User</div>
           <a href={"/Logout"} className={style.link}>
             <div className={style.listItem}>Logout</div>
           </a>
