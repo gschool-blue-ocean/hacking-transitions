@@ -1,40 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "../../styles/Header.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const router = useRouter();
-  const currentUser = useSelector(({ app: { currentUser } }) => ({
-    currentUser,
-  }));
-
+  // const currentUser = useSelector(({ app }) => (currentUser = app.currentUser));
   return (
     <nav className={style.header}>
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            {currentUser.first + currentUser.last}
+            {/* {`${currentUser.first} ${currentUser.last}`} */}
+            current user
           </div>
-          <div className={style.listItem}>
-            <a href={"/Logout"}>Logout</a>
-          </div>
+          <a href={"/Logout"} className={style.link}>
+            <div className={style.listItem}>Logout</div>
+          </a>
         </ul>
       </div>
       <div className={style.bottomNav}>
-        <img
-          src="https://www.galvanize.com/images/galvanize-logo.svg"
-          alt="galvanizaeLogo"
-          className={style.logo}
-        ></img>
+        <div className={style.picCont}>
+          <img
+            src="https://www.galvanize.com/images/galvanize-logo.svg"
+            alt="galvanizaeLogo"
+            className={style.logo}
+          ></img>
+        </div>
         <h1 className={style.title}>Hacking Transitions</h1>
         <div className={style.pages}>
-          <ul className={style.bottomList}>
+          <a href="/admin" className={style.link}>
             <li className={style.page}>Home</li>
+          </a>
+          <a href="/admin/archive" className={style.link}>
             <li className={style.page}>Archive</li>
+          </a>
+          <a href="/admin/edit" className={style.link}>
             <li className={style.page}>Admin</li>
-          </ul>
+          </a>
         </div>
       </div>
     </nav>

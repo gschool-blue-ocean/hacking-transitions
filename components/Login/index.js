@@ -69,7 +69,13 @@ let Login = () => {
   return (
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
-
+      {/* <div className={style.picCont}> */}
+      <img
+        src="https://www.galvanize.com/images/galvanize-logo.svg"
+        alt="galvanizaeLogo"
+        className={style.logo}
+      ></img>
+      {/* </div> */}
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (

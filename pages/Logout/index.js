@@ -5,19 +5,16 @@ import { setLoginState, setCurrentUser } from "../../redux/features/app-slice";
 
 const Logout = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    localStorage.removeItem("currentUser");
+  const logout = () => {
     dispatch(setLoginState(false));
     dispatch(setCurrentUser({}));
+  };
+
+  useEffect(() => {
+    logout();
+    localStorage.removeItem("currentUser");
+    window.sessionStorage.removeItem("currentUser");
   }, []);
-  //   return (
-  // <div className={style.container}>
-  //   <a href="/" className={style.words}>
-  //     Return to Homepage
-  //   </a>
-  // </div>
-  //   );
 };
 
 export default Logout;

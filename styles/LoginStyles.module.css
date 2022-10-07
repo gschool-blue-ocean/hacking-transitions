@@ -30,4 +30,13 @@
     margin-bottom: 1rem;
 }
 
-
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+    width: 141px;
+}
