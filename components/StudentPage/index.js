@@ -2,11 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
-import styles from "../../styles/StudentPage.module.css"
-// import "../../StyleSheets/StudentPage.css";
-// import SideNav from "../SideNav/SideNav";
-// import LoginContext from "../../Context/LoginContext";
-// import ChatModal from "../../Components/Chat/ChatModal";
+import SPChecklist from "./SP-Checklist";
+import styles from "../../styles/StudentPage.module.css";
+import Chat from "../Chat";
+
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 
@@ -52,11 +51,10 @@ export default function Index({
       setShowEditStudentModal(!showEditStudentModal);
    };
 
-   console.log(activeStudent);
+  return (
+    <div className={styles.testgrid}>
+      {/* {userData.admin && (
 
-   return (
-      <div className={styles.testgrid}>
-         {/* {userData.admin && (
             <SideNav
                viewClickedCohort={viewClickedCohort}
                activeStudent={activeStudent}
@@ -188,12 +186,13 @@ export default function Index({
                   </ul>
                </div>
             </div>
-            <SPTasks activeStudent='activestudent'
-            // {activeStudent} 
-            />
-            {/* <ChatModal socket={socket} activeStudent={activeStudent} /> */}
-         </div >
-      </div >
+          </div>
+          <SPChecklist />
+          <SPTasks
+            activeStudent={activeStudent}
+          />
+          <Chat />
+        </div>
 
       </div>
    );
