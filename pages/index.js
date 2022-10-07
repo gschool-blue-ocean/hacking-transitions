@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { server } from "../utility";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-
-import Login from "../components/Login";
+import Login from "../components/Login/index";
+import Layout from "../components/Login/LoginLayout";
 
 import {
   setAllUserData,
@@ -57,7 +57,9 @@ function Home() {
   };
   return (
     <>
+    < Layout >
       <Login />
+    </ Layout >
     </>
   );
 }

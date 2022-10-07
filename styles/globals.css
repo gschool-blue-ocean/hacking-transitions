@@ -10,7 +10,10 @@ body {
     --secondary-accent:#F8F8F8;
     --font-color: #003B4C;
     --box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
+        
+   
 }
+
 
 .ql-toolbar.ql-snow {
     border: none!important;
