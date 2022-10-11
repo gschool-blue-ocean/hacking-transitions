@@ -12,7 +12,6 @@ import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
 
 import styles from "../../styles/Chat.module.css";
-import { current } from "@reduxjs/toolkit";
 const Chat = () => {
   const { userData, activeStudent } = useSelector(
     ({ app: { currentUser, activeStudent } }) => ({
@@ -43,13 +42,13 @@ const Chat = () => {
       setChatMessages(studentComments);
       /******** END GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
     })();
-  }, []);
+  });
 
   useEffect(() => {
     (async () => {
       if (socket.on) {
         socket.on("connect", () => {
-          console.log("connected");
+          // console.log("connected");
         });
         await joinRoom(); //join room by students id
         ////If not sender of message recieve the new message and display it

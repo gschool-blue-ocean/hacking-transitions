@@ -14,8 +14,13 @@ export default function StudentPage({
   setModalIsOpen,
   viewClickedCohort,
 }) {
-  const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
-  // const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+  const { currentUser, activeStudent } = useSelector(
+    ({ app: { currentUser, activeStudent } }) => ({
+      currentUser,
+      activeStudent,
+    })
+  );
+  const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -28,8 +33,8 @@ export default function StudentPage({
   }, []);
 
   const handleEditBtnClicked = (e) => {
-    // setShowEditStudentModal(!showEditStudentModal);
-    console.log('show edit student modal');
+    setShowEditStudentModal(!showEditStudentModal);
+    console.log("show edit student modal");
   };
 
   return (
@@ -45,16 +50,12 @@ export default function StudentPage({
         <div className={styles.StudentDashWrapper}>
           <div className={styles.SDashHeader}>
             <div className={styles.SDashheaderCol}>
-               <h3 id={styles.StuHeaderName}>
-                 {activeStudent.first} {activeStudent.last}
-               </h3>
-               <p id={styles.StuHeaderBranch}>
-                 {activeStudent.branch}
-               </p>
+              <h3 id={styles.StuHeaderName}>
+                {activeStudent.first} {activeStudent.last}
+              </h3>
+              <p id={styles.StuHeaderBranch}>{activeStudent.branch}</p>
             </div>
-            <SPETStag
-              userETS={activeStudent.ets_date}
-            />
+            <SPETStag userETS={activeStudent.ets_date} />
           </div>
 
           {/* User Data Card */}
@@ -62,7 +63,7 @@ export default function StudentPage({
             <div className={styles.infoCardcontainer}>
               <ul>
                 <div>
-                  {(
+                  {
                     <EditStudentModal
                     // setUserData={setUserData}
                     // userData={userData}
@@ -70,7 +71,7 @@ export default function StudentPage({
                     // activeStudent={activeStudent}
                     // setActiveStudent={setActiveStudent}
                     />
-                  )}
+                  }
                   <div
                     onClick={handleEditBtnClicked}
                     className={styles.editStudentBtnSpan}
@@ -82,29 +83,21 @@ export default function StudentPage({
 
                 <div>
                   <h4 className="text-left">ETS Date</h4>
-                  <span>
-                    {activeStudent.ets_date}
-                  </span>
+                  <span>{activeStudent.ets_date}</span>
                 </div>
 
                 <h4 className="text-left">Personal Info</h4>
                 <div>
                   <span className={styles.title}> Email: </span>
-                  <span className={styles.answer}>
-                    {activeStudent.email}
-                  </span>
+                  <span className={styles.answer}>{activeStudent.email}</span>
                 </div>
                 <div>
                   <span className="title under-line"> MOS: </span>
-                  <span className={styles.answer}>
-                    {activeStudent.mos} 
-                  </span>
+                  <span className={styles.answer}>{activeStudent.mos}</span>
                 </div>
                 <div>
                   <span className={styles.title}> Rank: </span>
-                  <span className={styles.answer}>
-                    {activeStudent.rank} 
-                  </span>
+                  <span className={styles.answer}>{activeStudent.rank}</span>
                 </div>
                 <div>
                   <span className={styles.title}> Duty Station: </span>
@@ -122,14 +115,18 @@ export default function StudentPage({
                 <div>
                   <span className={styles.title}> TAP Status: </span>
                   <span className={styles.answer}>
-                    {activeStudent.taps_complete ? "Complete" : "Incomplete"} 
+                    {activeStudent.taps_complete ? "Complete" : "Incomplete"}
                   </span>
                 </div>
 
                 <h4 className="text-left">Dependents</h4>
                 <div className={styles.title}>
                   <span>
-                    {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"}
+                    {activeStudent.has_dependents ? (
+                      <SPDependents student={activeStudent} />
+                    ) : (
+                      "None"
+                    )}
                   </span>
                 </div>
 
@@ -151,17 +148,13 @@ export default function StudentPage({
 
                 <h4>Interests</h4>
                 <div className={styles.title}>
-                  <span>
-                    {activeStudent.interests}
-                  </span>
+                  <span>{activeStudent.interests}</span>
                 </div>
               </ul>
             </div>
           </div>
           <SPChecklist />
-          <SPTasks
-            activeStudent={activeStudent}
-          />
+          <SPTasks activeStudent={activeStudent} />
           <Chat />
         </div>
       </div>
