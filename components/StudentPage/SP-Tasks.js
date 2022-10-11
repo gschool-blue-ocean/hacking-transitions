@@ -8,6 +8,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { miniSerializeError } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 //task modal styling
 const customStyles = {
@@ -76,12 +77,13 @@ export default function SPTasks({ activeStudent }) {
   const getTasks = () => {
     if (activeStudent.user_id) {
       fetch(
-        `https://hacking-transition.herokuapp.com/api/tasks/student/${activeStudent.user_id}`
+        `api/tasks/student/${activeStudent.user_id}`
       )
         .then((res) => res.json())
         .then((tasks) => {
           setLoading(false);
           setStudentTasks(tasks);
+          console.log('studentasks', studentTasks)
         });
     }
   };
@@ -107,7 +109,7 @@ export default function SPTasks({ activeStudent }) {
             <div>{activeStudent.first} has not started a task</div>
           ) : (
             studentTasks.map((task) => {
-              console.log(task);
+              // console.log(task);
 
               return (
                 <div className={styles.StuTasksCard}>
