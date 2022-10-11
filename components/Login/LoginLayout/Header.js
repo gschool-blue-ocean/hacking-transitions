@@ -7,7 +7,7 @@ const Header = () => {
     <nav className={style.header}>
       <div className={style.topNav}>
         <ul className={style.topList}>
-
+        
           <li className={style.listItem}>Register</li>
         </ul>
       </div>
