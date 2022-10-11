@@ -2,6 +2,8 @@
     /* background: #f6efe7; */
 }
 .container {
+    border: 1px solid grey;
+    border-radius: 10px;
     min-height: 100rem;
     height: auto;
     margin: 1rem;
@@ -10,6 +12,12 @@
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     color: #003B4C;
     background-color: #FFF;
+}
+.tools_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    
 }
 .menucontainer{
     /* border: 1px black solid; */

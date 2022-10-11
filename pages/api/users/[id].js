@@ -5,8 +5,13 @@ export default async function handler(req, res) {
   /************* GET A CERTAIN USER INFORMATION *************/
   if (checkApiMethod(req, "GET")) {
     try {
-      const user = (await sql`SELECT * FROM users WHERE user_id = ${id}`)[0];
-      res.json(user);
+      const user = (
+        await sql`SELECT * FROM users WHERE ${
+          isNaN(parseInt(id)) ? sql`username = ${id}` : sql`user_id = ${id}`
+        }`
+      )[0];
+      
+      user ? res.json(user) : res.status(404).send('Not Found');
     } catch (error) {
       console.log(error);
       handleErrors(res);
@@ -85,5 +90,5 @@ export default async function handler(req, res) {
     return;
   }
   /************* END DELETE A CERTAIN USER  *************/
-  notFound404(res)
+  notFound404(res);
 }

@@ -1,22 +1,28 @@
 import { useEffect, useState, useRef } from "react";
-import { server } from "../../utility";
-import io from "socket.io-client";
 import { MdSend } from "react-icons/md";
+import io from "socket.io-client";
 import dynamic from "next/dynamic";
+
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-import "react-quill/dist/quill.snow.css"; 
+import { server } from "../../utility";
+import "react-quill/dist/quill.snow.css";
+import { useSelector } from "react-redux";
+
 import styles from "../../styles/Chat.module.css";
+import { current } from "@reduxjs/toolkit";
 const Chat = () => {
-  const testUser = 11;
+  const { userData, activeStudent } = useSelector(
+    ({ app: { currentUser, activeStudent } }) => ({
+      userData: currentUser,
+      activeStudent,
+    })
+  );
+
   // user_data localstorage? redux?
-  const userData = {
-    user_id: testUser,
-    firstName: "BlueOcean",
-    lastName: "BlueOcean",
-  };
+
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
@@ -31,7 +37,7 @@ const Chat = () => {
 
       /******** GET ALL COMMENTS RELATED TO SPECIFIC STUDENT ********/
       const studentComments = await (
-        await fetch(`${server}/api/comments/student/${testUser}`)
+        await fetch(`${server}/api/comments/student/${userData.user_id}`)
       ).json();
       // console.log(studentComments);
       setChatMessages(studentComments);
@@ -55,11 +61,11 @@ const Chat = () => {
   }, [socket]);
 
   const submitMsg = async () => {
-    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g
+    const foundContent = /(<[a-z]+>(\s*?(\w+|\d+)\s*?)+<\/[a-z]+>)/g;
     if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
     // Create a new comment object
     const newMessageObj = {
-      student_id: testUser,
+      student_id: user_id,
       author_id: userData.user_id,
       author_name: `${userData.firstName} ${userData.lastName}`,
       content: newMessage,
@@ -139,7 +145,11 @@ const Chat = () => {
             key === "Enter" && ctrlDown && submitMsg();
           }}
         />
-        <button tabIndex={1}className={styles.submit} onClick={() => submitMsg()}>
+        <button
+          tabIndex={1}
+          className={styles.submit}
+          onClick={() => submitMsg()}
+        >
           <MdSend />
         </button>
       </div>
