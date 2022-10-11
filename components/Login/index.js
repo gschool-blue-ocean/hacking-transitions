@@ -7,7 +7,7 @@ import {
   setLoginState,
   setActiveStudent,
 } from "../../redux/features/app-slice.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 let Login = () => {
   const router = useRouter();
@@ -67,8 +67,10 @@ let Login = () => {
         if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
-          stayLogged &&
-            localStorage.setItem("currentUser", JSON.stringify(user));
+          stayLogged && window ?
+            localStorage.setItem("currentUser", JSON.stringify(user)):
+            window.sessionStorage.setItem("currentUser", JSON.stringify(user))
+
         } else {
           throw new Error("Not Found");
         }
