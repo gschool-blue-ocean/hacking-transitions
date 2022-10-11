@@ -24,6 +24,15 @@ export default function ArchivePage() {
     students: "long list of students",
   };
 
+  const student = {
+    first: "bob",
+    last: "bird",
+    cohort: "mcsp-13",
+    taskTotal: 20,
+    completedTasks: 15,
+    tranStatus: "complete",
+  };
+
   return (
     <div>
       {/* create a side bar with Students, Cohorts, Archived*/}
@@ -37,7 +46,12 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
-          <div className={style.card}></div>
+          <div className={style.card}>
+            <h3>
+              {student.first} {student.last}
+            </h3>
+            <h5>{student.cohort}</h5>
+          </div>
         </div>
       </div>
 

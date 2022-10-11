@@ -5,7 +5,8 @@ CREATE TABLE cohorts (
     cohort_name VARCHAR(20),
     start_date VARCHAR(20),
     end_date VARCHAR(20),
-    active BOOLEAN
+    active BOOLEAN,
+    archived BOOLEAN
 );
 
 CREATE TABLE users (
@@ -37,7 +38,8 @@ CREATE TABLE users (
     relocate_to_country boolean,
     relocate_city VARCHAR(50),
     relocate_state VARCHAR(50),
-    relocate_country VARCHAR(50)
+    relocate_country VARCHAR(50),
+    archived BOOLEAN
 );
 
 CREATE TABLE dependents (
