@@ -15,7 +15,7 @@ export default function StudentPage({
   viewClickedCohort,
 }) {
   const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
-  const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+  // const [showEditStudentModal, setShowEditStudentModal] = useState(false);
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -28,7 +28,8 @@ export default function StudentPage({
   }, []);
 
   const handleEditBtnClicked = (e) => {
-    setShowEditStudentModal(!showEditStudentModal);
+    // setShowEditStudentModal(!showEditStudentModal);
+    console.log('show edit student modal');
   };
 
   return (
@@ -61,7 +62,7 @@ export default function StudentPage({
             <div className={styles.infoCardcontainer}>
               <ul>
                 <div>
-                  {showEditStudentModal && (
+                  {(
                     <EditStudentModal
                     // setUserData={setUserData}
                     // userData={userData}
@@ -79,81 +80,81 @@ export default function StudentPage({
                   </div>
                 </div>
 
-                <li>
+                <div>
                   <h4 className="text-left">ETS Date</h4>
                   <span>
                     {activeStudent.ets_date}
                   </span>
-                </li>
+                </div>
 
                 <h4 className="text-left">Personal Info</h4>
-                <li>
+                <div>
                   <span className={styles.title}> Email: </span>
                   <span className={styles.answer}>
                     {activeStudent.email}
                   </span>
-                </li>
-                <li>
+                </div>
+                <div>
                   <span className="title under-line"> MOS: </span>
                   <span className={styles.answer}>
                     {activeStudent.mos} 
                   </span>
-                </li>
-                <li>
+                </div>
+                <div>
                   <span className={styles.title}> Rank: </span>
                   <span className={styles.answer}>
                     {activeStudent.rank} 
                   </span>
-                </li>
-                <li>
+                </div>
+                <div>
                   <span className={styles.title}> Duty Station: </span>
                   <span className={styles.answer}>
                     {activeStudent.duty_station}
                   </span>
-                </li>
-                <li>
+                </div>
+                <div>
                   <span className={styles.title}> Terminal Leave: </span>
                   <span className={styles.answer}>
                     {activeStudent.leave_start_date}
                   </span>
-                </li>
+                </div>
 
-                <li>
+                <div>
                   <span className={styles.title}> TAP Status: </span>
                   <span className={styles.answer}>
                     {activeStudent.taps_complete ? "Complete" : "Incomplete"} 
                   </span>
-                </li>
+                </div>
 
                 <h4 className="text-left">Dependents</h4>
-                <li className={styles.title}>
+                <div className={styles.title}>
                   <span>
                     {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"}
                   </span>
-                </li>
+                </div>
 
-                <li>
+                <div>
                   <h4 className="text-left"> Education </h4>
                   <span className={styles.title}> Degree: </span>
                   <span className={styles.answer}>
                     {activeStudent.highest_education}
                   </span>
-                </li>
+                </div>
 
-                <li>
+                <div>
                   <h4 className="text-left"> Relocation </h4>
                   <span className={styles.title}> Planning to Relocate?: </span>
                   <span className={styles.answer}>
                     {activeStudent.planning_to_relocate ? "Yes" : "No"}
                   </span>
-                </li>
+                </div>
 
                 <h4>Interests</h4>
-                <li className={styles.title}>
+                <div className={styles.title}>
                   <span>
                     {activeStudent.interests}
                   </span>
-                </li>
+                </div>
               </ul>
             </div>
           </div>
