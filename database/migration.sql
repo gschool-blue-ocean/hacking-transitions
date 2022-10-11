@@ -39,15 +39,12 @@ CREATE TABLE users (
     relocate_city VARCHAR(50),
     relocate_state VARCHAR(50),
     relocate_country VARCHAR(50),
-<<<<<<< HEAD
-    archived BOOLEAN
-=======
+    archived BOOLEAN,
     final_physical BOOLEAN,
     gear_turn_in BOOLEAN,
     HHG_move BOOLEAN,
     barracks_checkout BOOLEAN,
     file_VA_claim BOOLEAN
->>>>>>> b8558cde58d6a5bc59331e14d993af5714141b5a
 );
 
 CREATE TABLE dependents (

@@ -7,4 +7,4 @@ insert into cohorts (cohort_name, start_date, end_date, active, archived) values
 ,('MCSP-20', '12/6/2022', '4/7/2023', true, false)
 ,('MCSP-21', '1/10/2023', '5/12/2023', true, false);
 
-\i usersSeed.sql
+\ir usersSeed.sql
