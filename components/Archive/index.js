@@ -15,8 +15,9 @@ import style from "../../styles/Archive.module.css";
 export default function ArchivePage() {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
   const mcsp = {
-    title: "mcsp-13",
+    title: "MCSP-13",
     dates: "10/08/2010-01/01/2011",
+    graduationDate: "21 OCT 22",
     total: 30,
     studentsClearing: 10,
     studentsCleared: 10,
@@ -27,7 +28,7 @@ export default function ArchivePage() {
   const student = {
     first: "bob",
     last: "bird",
-    cohort: "mcsp-13",
+    cohort: "MCSP-13",
     taskTotal: 20,
     completedTasks: 15,
     tranStatus: "complete",
@@ -46,6 +47,11 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
+          <div className={style.card}>
+            <h3>{mcsp.title}</h3>
+            <h4>{mcsp.total} students</h4>
+            <h4>{mcsp.dates}</h4>
+          </div>
           <div className={style.card}>
             <h3>
               {student.first} {student.last}

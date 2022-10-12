@@ -1,7 +1,10 @@
-const archive = () => {
-  return (
-    <div>archive</div>
-  )
-}
+import React from "react";
+import ArchivePage from "../../components/Archive";
 
-export default archive
+export default function archive() {
+  return (
+    <div>
+      <ArchivePage />
+    </div>
+  );
+}

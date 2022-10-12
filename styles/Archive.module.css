@@ -66,7 +66,7 @@
    
     height:3em;
     width:2em;
-    border-radius: .7em;
+    border-radius: .5em;
     border-bottom-left-radius: 0%;
     border-top-left-radius: 0%;
     border: none;
@@ -86,7 +86,7 @@
 .searchS input {
     width:25em;
     height: 3em;
-    border-radius: .7em;
+    border-radius: .5em;
     border-bottom-right-radius: 0%;
     border-top-right-radius:0%;
     border-width: 1px;
@@ -96,3 +96,31 @@
 .searchS input:focus {
     outline:none;
 } 
+
+.cardDeck{
+    display:flex;
+    margin: 2em;
+}
+
+.card{
+    margin: 2em;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 1em;
+    width: 15%;
+    height: 7em;
+    border-style: solid;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius:0%;
+    border-width: 1px;
+    box-shadow: 5px 5px 5px #111;
+}
+
+.card h3,
+.card h4 {
+    margin-top: 2px;
+    margin-bottom: 0%;
+    
+}
+
