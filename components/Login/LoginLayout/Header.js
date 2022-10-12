@@ -1,18 +1,10 @@
-import React from "react";
+import {useState} from "react";
 import style from "../../../styles/LoginStyles.module.css";
-import { Modal } from "react-bootstrap";
-import { useState } from "react";
-
-// import Logo from "./galvanizeLogo.svg";
-
+import RegisterModal from "../Register";
 
 const Header = () => {
-  
-  const [isModalOpen, setIsModalOpen ] = useState(false)
-
-  
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
-    <>
     <nav className={style.header}>
       <div className={style.reasources_container}>
        
@@ -44,14 +36,19 @@ const Header = () => {
           <a className={style.hire_heros} href="https://www.hireheroesusa.org/">Hire For Heros</a>
           </ul>
         <ul className={style.topList}>
-          <button className={style.listItem} id= "registerBtn" onClick={()=>setIsModalOpen(true)}>Register</button>
-          
-    
+          <button 
+            className={style.listItem} 
+            onClick={() => setIsModalOpen(true)}>Register
+            </button>
+          <RegisterModal
+          open={isModalOpen}
+          onClose  = {() => setModalisOpen(false)}
+          />
         </ul>
       </div>
-          
+      {/* /////////////////////////////////////////////////////////////////////////////////////// */}
+
     </nav>
-    </>
   );
 };
 

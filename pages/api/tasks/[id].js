@@ -22,8 +22,9 @@ export default async function handler(req, res) {
   /************* END UPDATE A CERTAIN TASKS *************/
   /************* DELETE A CERTAIN TASKS *************/
   if (checkApiMethod(req, "DELETE")) {
+    console.log('id', id)
     try {
-      const task = (await sql`DELETE FROM tasks WHERE task_id = ${id}`)[0];
+      const task = (await sql`DELETE FROM tasks WHERE task_id = ${id} RETURNING *`)[0];
       res.json(task);
     } catch (error) {
       console.log(error);

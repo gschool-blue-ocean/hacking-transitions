@@ -18,38 +18,6 @@ let Login = () => {
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-  useEffect(() => {
-     localStorage.clear()
-    /*
-        Check local storage for a signed in user, if exist sign them in
-    */
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-      const currentUserObj = JSON.parse(currentUser);
-      fetch(`${server}/api/users/${currentUserObj.username}`)
-        .then((res) => {
-          if (res.status === 404) throw new Error("Not Found");
-          return res.json();
-        })
-        .then((user) => {
-          if (user.password === currentUserObj.password) {
-            dispatch(setLoginState(true));
-            dispatch(setCurrentUser(user));
-            stayLogged &&
-              localStorage.setItem("currentUser", JSON.stringify(user));
-          } else {
-            throw new Error("Not Found");
-          }
-          currentUserObj.admin
-            ? router.push("/admin")
-            : router.push("/student"),
-            dispatch(setActiveStudent(currentUserObj));
-        })
-        .catch(({ message }) => {
-          console.error(message);
-        });
-    }
-  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -67,15 +35,20 @@ let Login = () => {
         if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
-          stayLogged && window ?
-            localStorage.setItem("currentUser", JSON.stringify(user)):
-            window.sessionStorage.setItem("currentUser", JSON.stringify(user))
-
+          stayLogged && window
+            ? localStorage.setItem("currentUser", JSON.stringify(user))
+            : window.sessionStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+              );
         } else {
           throw new Error("Not Found");
         }
-        user.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(user));
+        user.admin
+          ? (router.push("/admin"), setLoginData(""))
+          : (router.push("/student"),
+            dispatch(setActiveStudent(user)),
+            setLoginData(""));
       })
       .catch(({ message }) => {
         setError(true);
@@ -95,8 +68,9 @@ let Login = () => {
   return (
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
-
-      <div className={style.loginContainer} >
+      {/* <div className={style.picCont}> */}
+      {/* </div> */}
+      <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>

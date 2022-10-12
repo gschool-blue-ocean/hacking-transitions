@@ -5,12 +5,9 @@ import styles from "../../../styles/Edit.Admin.module.css";
 const EditAdminTab = (user) => {
   return (
     <>
-      {/* header */}
       <div className={styles.adminEditParent}>
-        <AdminCreate />
         <AdminList />
       </div>
-      {/* footer */}
     </>
   );
 };

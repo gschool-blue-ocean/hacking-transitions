@@ -1,13 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../styles/StudentPage.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setStudentTasks } from '../../redux/features/app-slice';
 
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
    const { register, handleSubmit } = useForm();
+   const { studentTasks } = useSelector(({app: {studentTasks}}) => (studentTasks));
 
    const onSubmit = (data) => {
       addTask(data);
       closeModal(false);
+      // setStudentTasks(...studentTasks, newTask);
    };
 
    const addTask = (data) => {
@@ -20,7 +24,7 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
          completed: JSON.parse(data.completed),
       };
 
-      fetch(`https://hacking-transition.herokuapp.com/api/create/task`, {
+      fetch(`/api/tasks`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(newTask),

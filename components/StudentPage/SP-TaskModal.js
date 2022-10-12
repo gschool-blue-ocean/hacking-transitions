@@ -3,8 +3,10 @@ import styles from "../../styles/StudentPage.module.css";
 
 // Pull  Selected Task Info from DB
 export default function SPTaskModal({ task, closeModal }) {
-   const deleteTask = (taskID) => {
-      fetch(`https://hacking-transition.herokuapp.com/api/delete/task/${taskID}`, {
+   console.log("task from taskmodal", task)
+   const deleteTask = (task) => {
+      task = parseInt(task);
+      fetch(`/api/tasks/${task}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });
