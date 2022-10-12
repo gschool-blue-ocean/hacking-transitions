@@ -37,7 +37,12 @@ CREATE TABLE users (
     relocate_to_country boolean,
     relocate_city VARCHAR(50),
     relocate_state VARCHAR(50),
-    relocate_country VARCHAR(50)
+    relocate_country VARCHAR(50),
+    final_physical BOOLEAN,
+    gear_turn_in BOOLEAN,
+    HHG_move BOOLEAN,
+    barracks_checkout BOOLEAN,
+    file_VA_claim BOOLEAN
 );
 
 CREATE TABLE dependents (
@@ -69,3 +74,4 @@ CREATE TABLE comments (
     content TEXT, 
     date_time TEXT
 );
+
