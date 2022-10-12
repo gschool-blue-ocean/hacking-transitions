@@ -338,13 +338,15 @@ margin-left: auto;
 }
 
 .ModalTaskBtns {
-   font-family: var(--ff-primary);
-   background: var(--clr-accent-white);
+   background-color: rgba(255, 255, 255, 0.231);
    padding: 5px;
    width: 20%;
    border-radius: 10px;
    border: none;
    place-self: center;
+}
+.ModalTaskBtns:hover {
+   background-color: #fff;
 }
 
 .DependentCard {
@@ -356,3 +358,31 @@ margin-left: auto;
 #DependentAge {
    font-weight: bold;
 }
+
+.label {
+   color: #f79020;
+   font-weight: bold;
+   width: 35%;
+   margin-bottom: 1%;
+   float: left;
+ }
+
+ .addStudentModal {
+   display: flex;
+   flex-direction: column;
+   margin-left: 2%;
+ }
+
+ .addStudentForm {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .editStudentFormInputs {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .editInterestsTextarea {
+   margin-top: 1.7%;
+ }

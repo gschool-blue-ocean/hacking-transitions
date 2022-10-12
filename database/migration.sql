@@ -33,7 +33,7 @@ CREATE TABLE users (
     admin BOOLEAN NOT NULL,
     cohort_name VARCHAR(20),
     cohort_id INTEGER,
-    foreign key(cohort_id) references cohorts(cohort_id),
+    foreign key(cohort_id) references cohorts(cohort_id) ON DELETE CASCADE,
     new_user BOOLEAN,
     relocate_to_country boolean,
     relocate_city VARCHAR(50),
@@ -50,7 +50,7 @@ CREATE TABLE users (
 CREATE TABLE dependents (
     dependent_id SERIAL PRIMARY KEY,
     sponsor_id INTEGER,
-    foreign key(sponsor_id) references users(user_id),
+    foreign key(sponsor_id) references users(user_id) ON DELETE CASCADE,
     age NUMERIC,
     relation VARCHAR(10)
 );
@@ -58,7 +58,7 @@ CREATE TABLE dependents (
 CREATE TABLE tasks (
     task_id SERIAL PRIMARY KEY,
     student_id INTEGER,
-    foreign key(student_id) references users(user_id),
+    foreign key(student_id) references users(user_id) ON DELETE CASCADE,
     title VARCHAR(100),
     date VARCHAR(20),
     description TEXT,
@@ -69,10 +69,10 @@ CREATE TABLE tasks (
 CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     student_id INTEGER,
-    foreign key (student_id) references users(user_id),
+    foreign key (student_id) references users(user_id) ON DELETE CASCADE,
     author_id INTEGER,
     author_name VARCHAR(100),
-    foreign key (author_id) references users(user_id),
+    foreign key (author_id) references users(user_id) ON DELETE CASCADE,
     content TEXT, 
     date_time TEXT
 );

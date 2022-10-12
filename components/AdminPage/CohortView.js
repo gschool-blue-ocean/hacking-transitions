@@ -2,8 +2,15 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import s from '../../styles/CohortView.module.css'
 import { useRouter } from 'next/router'
+import { BsFillArrowUpRight } from "react-icons/bs"
+import { Button,Modal } from 'react-bootstrap'
+import App from './EditStudentModal'
+import EditStudentModal from './EditStudentModal'
 const CohortView = ({currCohort}) => {
+  const [show, setShow] = useState(false);
   const router = useRouter();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   //handle click for individual students
   const handleClick = (e) => {
     const data = e.target.dataset;
@@ -34,6 +41,7 @@ const CohortView = ({currCohort}) => {
               <th className={s.tableheaders}>ETS</th>
               <th className={s.tableheaders}>Terminal</th>
               <th className={s.tableheaders}>Branch</th>
+              <th className={s.tableheaders}>Edit</th>
             </tr> 
               {cohort.students.map(student =>
               <tr className={s.tr}>
@@ -42,9 +50,10 @@ const CohortView = ({currCohort}) => {
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.ets_date}</btn></td>
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.leave_start_date}</btn></td>
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.branch}</btn></td>
+                <td><App student_id={student.user_id} currCohor={currCohort} /></td>
               </tr>
               )}
-
+            
           </table>
         </div>
         </div>

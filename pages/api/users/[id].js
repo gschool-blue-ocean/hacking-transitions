@@ -62,7 +62,7 @@ export default async function handler(req, res) {
     try {
       // DONT FORGET TO ENCRYPT PASSWORD
       // newUser.password = await bcrypt.hash(password, 10);
-
+      console.log('req.body', req.body)
       const user = (
         await sql`UPDATE users SET ${sql(
           newUser
