@@ -50,7 +50,7 @@ const CohortView = ({currCohort}) => {
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.ets_date}</btn></td>
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.leave_start_date}</btn></td>
                 <td><btn className={s.td} onClick={handleClick} data-student_id={student.user_id}>{student.branch}</btn></td>
-                <td><App /></td>
+                <td><App student_id={student.user_id} currCohor={currCohort} /></td>
               </tr>
               )}
             
