@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import CreateCohort from './CreateCohort'
 const AdminContainer =  () => {
-  const allCohorts =   useSelector(({app:{allCohortsData}}) => allCohortsData )
+  const allCohorts = useSelector(({app:{allCohortsData}}) => allCohortsData )
     //redux state ^^
   const [students, setStudents] = useState([])
   const [cohorts, setCohorts] = useState(allCohorts)

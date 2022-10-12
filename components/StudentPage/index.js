@@ -17,7 +17,6 @@ export default function StudentPage({
 }) {
   const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
 
-
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
       elem.classList.remove("activeCohortTab");
@@ -29,6 +28,8 @@ export default function StudentPage({
   }, []);
 
   const handleEditBtnClicked = (e) => {
+
+
     // setShowEditStudentModal(!showEditStudentModal);
     console.log('show edit student modal');
   };
@@ -69,14 +70,12 @@ export default function StudentPage({
                     <div className={styles.editStudentToolTip}>Edit</div>
                   </div>
                 </div>
-
                 <div>
                   <h4 className="text-left">ETS Date</h4>
                   <span>
                     {activeStudent.ets_date}
                   </span>
                 </div>
-
                 <h4 className="text-left">Personal Info</h4>
                 <div>
                   <span className={styles.title}> Email: </span>
@@ -152,3 +151,4 @@ export default function StudentPage({
     </div>
   );
 }
+
