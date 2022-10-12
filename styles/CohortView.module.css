@@ -30,7 +30,7 @@
     border-bottom: 1px #F79020  solid;
     position: sticky;
     top: 0;
-    background-color: rgba(230, 229, 229, 0.79);
+    background-color: rgb(230, 229, 229);
 }
 .tableheaders{
     font-size: 2.3rem;
