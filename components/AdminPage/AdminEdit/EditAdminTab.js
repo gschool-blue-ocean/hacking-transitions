@@ -6,7 +6,6 @@ const EditAdminTab = (user) => {
   return (
     <>
       <div className={styles.adminEditParent}>
-        <AdminCreate />
         <AdminList />
       </div>
     </>
