@@ -26,8 +26,8 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const [ctrlDown, setCtrlDown] = useState(false);
   const [display, setDisplay] = useState({
-    dots: false,
     editBtns: false,
+    comment: null,
   });
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Chat = () => {
 
   const submitMsg = async () => {
     try {
-      const foundContent = /<[a-z]+> ( (\s|\W)* (\w|\d)+ (\s|\W)* )+ <\/[a-z]+>/g; //need to fix not picking up periods
+      const foundContent = /<[a-z]+>((\s|\W)*(\w|\d)+(\s|\W)*)+<\/[a-z]+>/g; //need to fix not picking up periods
       if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
       // Create a new comment object
       const newMessageObj = {
@@ -150,43 +150,56 @@ const Chat = () => {
                 className={`${styles.message} ${
                   author_id === userData.user_id && styles.right
                 }`}
+                onMouseEnter={() => {
+                  parseInt(userData.user_id) === parseInt(author_id) &&
+                    setDisplay((old) => ({
+                      editBtns: true,
+                      comment: comment_id,
+                    }));
+                }}
+                onMouseLeave={() =>
+                  setDisplay((old) => ({ editBtns: false, comment: null }))
+                }
               >
-                <button>...</button>
-                <div>
-                  <button
+                {display.editBtns && comment_id === display.comment && (
+                  <div className={styles.editContainer}>
+                    <button
+                    className={styles.editBtn}
+                      onClick={() => {
+                        setNewMessage(content);
+                        setEditInfo({
+                          id: cohortChat[0] ? cohort_id : comment_id,
+                          index,
+                          date_time,
+                        });
+                      }}
+                    >
+                      <MdOutlineModeEdit />
+                    </button>
+                    <button
+                    className={styles.editBtn}
                     onClick={() => {
-                      setNewMessage(content);
-                      setEditInfo({
-                        id: cohortChat[0] ? cohort_id : comment_id,
-                        index,
-                        date_time,
-                      });
-                    }}
-                  >
-                    <MdOutlineModeEdit />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setChatMessages((oldMsgs) => {
-                        const newChat = oldMsgs;
-                        newChat.splice(index, 1);
-                        return newChat;
-                      });
+                        setChatMessages((oldMsgs) => {
+                          const newChat = oldMsgs;
+                          newChat.splice(index, 1);
+                          return newChat;
+                        });
 
-                      !cohortChat[0]
-                        ? socket.emit("edit_message", null, comment_id, true)
-                        : socket.emit(
-                            "edit_cohort_message",
-                            { author_id, date_time },
-                            cohort_id,
-                            cohortChat,
-                            true
-                          );
-                    }}
-                  >
-                    <MdOutlineDelete />
-                  </button>
-                </div>
+                        !cohortChat[0]
+                          ? socket.emit("edit_message", null, comment_id, true)
+                          : socket.emit(
+                              "edit_cohort_message",
+                              { author_id, date_time },
+                              cohort_id,
+                              cohortChat,
+                              true
+                            );
+                      }}
+                    >
+                      <MdOutlineDelete />
+                    </button>
+                  </div>
+                )}
                 <div className={styles.body}>
                   <div
                     className={styles.content}
