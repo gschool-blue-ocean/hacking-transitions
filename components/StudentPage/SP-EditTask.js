@@ -15,7 +15,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
          remarks: null, // Remarks have been deleted
       };
 
-      fetch(`https://hacking-transition.herokuapp.com/api/update/task/${taskID}`, {
+      fetch(`/api/tasks/${taskID}`, {
          method: "PATCH",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(editData),

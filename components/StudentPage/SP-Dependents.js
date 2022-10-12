@@ -18,7 +18,7 @@ export default function SPDependents({ student }) {
    if (student.has_dependents) {
       return dependents.map((dep) => {
          return (
-            <div className={styles.DependentCard}>
+            <div className={styles.DependentCard} key={dep.dependent_id}>
                <div>{dep.relation}</div>
                <div id="Dependent--Age">{dep.age}</div>
             </div>

@@ -29,7 +29,6 @@
    display: block;
    margin: auto;
    width: 100vw;
-   background-color: darkgray;
    height: fit-content;
 }
 
@@ -39,13 +38,12 @@
    display: grid;
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
-      "StuInfo StuTasks StuTasks"
-      "StuInfo StuTasks StuTasks"
+      "StuInfo StuCheck StuTasks"
+      "StuInfo StuCheck StuTasks"
       "ChatModal ChatModal ChatModal";
 
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
-   background-color: darkgray;
    font-family: var(--ff-primary);
    /* max-height: 85vh; */
    width: 100%;
@@ -141,8 +139,11 @@ span {
 .infoCardcontainer {
    width: 100%;
    background-color: #fff;
-   padding: var(--spacer-smallItems);
    border-radius: 8px;
+}
+
+.ulStyling {
+   margin-top: 0%;
 }
 
 /* ul>h4,
@@ -158,6 +159,19 @@ margin-left: auto;
    margin-left: auto;
 }
 
+/* ============= Student Checklist ========== */
+
+.SDashChecklist {
+   grid-area: StuCheck;
+   display: flex;
+   flex-direction: column;
+   border-radius: 8px;
+   flex-wrap: nowrap;
+   align-items: center;
+   margin-left: 12px;
+   background-color: #fff;
+}
+
 /* ============= Student Tasks ============== */
 
 .SDashTasks {
@@ -170,7 +184,7 @@ margin-left: auto;
    margin-left: 12px;
    background-color: #fff;
    max-height: 93.7%;
-   margin-top: 2.5%;
+   /* margin-top: 2.5%; */
    overflow-y: scroll;
 }
 
@@ -324,13 +338,15 @@ margin-left: auto;
 }
 
 .ModalTaskBtns {
-   font-family: var(--ff-primary);
-   background: var(--clr-accent-white);
+   background-color: rgba(255, 255, 255, 0.231);
    padding: 5px;
    width: 20%;
    border-radius: 10px;
    border: none;
    place-self: center;
+}
+.ModalTaskBtns:hover {
+   background-color: #fff;
 }
 
 .DependentCard {
@@ -342,3 +358,31 @@ margin-left: auto;
 #DependentAge {
    font-weight: bold;
 }
+
+.label {
+   color: #f79020;
+   font-weight: bold;
+   width: 35%;
+   margin-bottom: 1%;
+   float: left;
+ }
+
+ .addStudentModal {
+   display: flex;
+   flex-direction: column;
+   margin-left: 2%;
+ }
+
+ .addStudentForm {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .editStudentFormInputs {
+   display: flex;
+   flex-direction: column;
+ }
+
+ .editInterestsTextarea {
+   margin-top: 1.7%;
+ }
