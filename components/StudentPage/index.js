@@ -8,6 +8,7 @@ import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import EditStudentModal from "./EditStudentModal";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export default function StudentPage({
   modalIsOpen,
@@ -15,7 +16,7 @@ export default function StudentPage({
   viewClickedCohort,
 }) {
   const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
-  // const [showEditStudentModal, setShowEditStudentModal] = useState(false);
+
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -56,26 +57,15 @@ export default function StudentPage({
               userETS={activeStudent.ets_date}
             />
           </div>
-
           {/* User Data Card */}
           <div className={styles.SDashInfocard}>
             <div className={styles.infoCardcontainer}>
-              <ul>
                 <div>
-                  {(
-                    <EditStudentModal
-                    // setUserData={setUserData}
-                    // userData={userData}
-                    // setShowEditStudentModal={setShowEditStudentModal}
-                    // activeStudent={activeStudent}
-                    // setActiveStudent={setActiveStudent}
-                    />
-                  )}
                   <div
                     onClick={handleEditBtnClicked}
                     className={styles.editStudentBtnSpan}
                   >
-                    <FiEdit className={styles.editStudentInfoBtn} />
+                    <Link href={"student/editStudentModal"}><FiEdit className={styles.editStudentInfoBtn} /></Link>
                     <div className={styles.editStudentToolTip}>Edit</div>
                   </div>
                 </div>
@@ -118,21 +108,18 @@ export default function StudentPage({
                     {activeStudent.leave_start_date}
                   </span>
                 </div>
-
                 <div>
                   <span className={styles.title}> TAP Status: </span>
                   <span className={styles.answer}>
                     {activeStudent.taps_complete ? "Complete" : "Incomplete"} 
                   </span>
                 </div>
-
                 <h4 className="text-left">Dependents</h4>
                 <div className={styles.title}>
                   <span>
                     {activeStudent.has_dependents ? <SPDependents student={activeStudent} /> : "None"}
                   </span>
                 </div>
-
                 <div>
                   <h4 className="text-left"> Education </h4>
                   <span className={styles.title}> Degree: </span>
@@ -140,7 +127,6 @@ export default function StudentPage({
                     {activeStudent.highest_education}
                   </span>
                 </div>
-
                 <div>
                   <h4 className="text-left"> Relocation </h4>
                   <span className={styles.title}> Planning to Relocate?: </span>
@@ -148,14 +134,12 @@ export default function StudentPage({
                     {activeStudent.planning_to_relocate ? "Yes" : "No"}
                   </span>
                 </div>
-
                 <h4>Interests</h4>
                 <div className={styles.title}>
                   <span>
                     {activeStudent.interests}
                   </span>
                 </div>
-              </ul>
             </div>
           </div>
           <SPChecklist />
