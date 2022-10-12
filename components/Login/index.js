@@ -18,7 +18,6 @@ let Login = () => {
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-  
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -36,15 +35,20 @@ let Login = () => {
         if (user.password === inputData.password) {
           dispatch(setLoginState(true));
           dispatch(setCurrentUser(user));
-          stayLogged && window ?
-            localStorage.setItem("currentUser", JSON.stringify(user)):
-            window.sessionStorage.setItem("currentUser", JSON.stringify(user))
-
+          stayLogged && window
+            ? localStorage.setItem("currentUser", JSON.stringify(user))
+            : window.sessionStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+              );
         } else {
           throw new Error("Not Found");
         }
-        user.admin ? router.push("/admin") : router.push("/student"),
-          dispatch(setActiveStudent(user));
+        user.admin
+          ? (router.push("/admin"), setLoginData(""))
+          : (router.push("/student"),
+            dispatch(setActiveStudent(user)),
+            setLoginData(""));
       })
       .catch(({ message }) => {
         setError(true);
@@ -64,7 +68,13 @@ let Login = () => {
   return (
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
-
+      {/* <div className={style.picCont}> */}
+      <img
+        src="https://www.galvanize.com/images/galvanize-logo.svg"
+        alt="galvanizaeLogo"
+        className={style.logo}
+      ></img>
+      {/* </div> */}
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (

@@ -32,13 +32,15 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
             students: filtStudents,
           })
         );
-        e.target.setAttribute("style", "color:blue");
+        e.target.setAttribute("style", "color:#f79020");
         data.isclicked = true;
       } else {
         setCurrCohort((oldCohort) =>
           oldCohort.filter((cohort) => cohort.cohort_id != id)
         );
         data.isclicked = false;
+          e.target.setAttribute('style', 'color:#003B4C')
+
       }
     }
   };

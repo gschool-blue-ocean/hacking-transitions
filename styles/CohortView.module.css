@@ -7,19 +7,41 @@
     color: #003B4C;
     background-color: #FFF;
     margin-left: 10rem;
-    width: 100rem;
+    width: 110rem;
     /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
 }
-.table {
-    margin-bottom: 2rem;
+.div {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    overflow-y:visible; 
+    overflow-x: hidden; 
+    margin-bottom: 2rem;
     font-size: 2rem;
     height: 30rem;
-    width: inherit;
-    overflow-y: auto;
-    overflow-x: hidden;
+    width: 100%;
+}
+.table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    height: 30rem;
+    width: 100%;
+    
+}
+.headtr{
+    border-bottom: 1px #F79020  solid;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 .tableheaders{
     font-size: 2.3rem;
     text-align: left;
+}
+.tr{
+    border-top: 1px rgb(232, 232, 232) solid;
+}
+.td{
+   padding-right: 2rem;
+}
+.default {
+    margin-left: 30rem
 }
