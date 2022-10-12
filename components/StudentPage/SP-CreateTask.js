@@ -11,7 +11,7 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
    const onSubmit = (data) => {
       addTask(data);
       closeModal(false);
-      setStudentTasks(...studentTasks, newTask);
+      // setStudentTasks(...studentTasks, newTask);
    };
 
    const addTask = (data) => {

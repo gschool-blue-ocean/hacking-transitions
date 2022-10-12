@@ -6,7 +6,7 @@ import { server } from '../../utility';
 import { setCurrentUser, setActiveStudent } from '../../redux/features/app-slice';
 
 
-const SPChecklist = ({ setShowEditStudentModal }) => {
+const SPChecklist = () => {
     const dispatch = useDispatch();
     const { userData, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({userData: currentUser, activeStudent}))
 
