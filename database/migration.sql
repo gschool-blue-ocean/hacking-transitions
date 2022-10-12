@@ -5,7 +5,8 @@ CREATE TABLE cohorts (
     cohort_name VARCHAR(20),
     start_date VARCHAR(20),
     end_date VARCHAR(20),
-    active BOOLEAN
+    active BOOLEAN,
+    archived BOOLEAN
 );
 
 CREATE TABLE users (
@@ -38,6 +39,7 @@ CREATE TABLE users (
     relocate_city VARCHAR(50),
     relocate_state VARCHAR(50),
     relocate_country VARCHAR(50),
+    archived BOOLEAN,
     final_physical BOOLEAN,
     gear_turn_in BOOLEAN,
     HHG_move BOOLEAN,
