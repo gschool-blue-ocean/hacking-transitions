@@ -1,6 +1,8 @@
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
+  
   /******** GET ALL COMMENTS ********/
   if (checkApiMethod(req, "GET")) {
     try {
@@ -16,11 +18,13 @@ export default async function handler(req, res) {
   /******** CREATE NEW COMMENTS ********/
   if (checkApiMethod(req, "POST")) {
     const { student_id, author_id, author_name, content, date_time, cohort_id } = req.body
-    const newComment = {  student_id, author_id, author_name, content, date_time,cohort_id };
+    const newComment = {  student_id, author_id, author_name, content, date_time };
+    newComment.cohort_id = cohort_id !== undefined ? cohort_id:null
     try {
       const comment = (
         await sql`INSERT INTO comments ${sql(newComment)} RETURNING *`
       )[0];
+      
       res.json(comment);
     } catch (error) {
       console.log(error);

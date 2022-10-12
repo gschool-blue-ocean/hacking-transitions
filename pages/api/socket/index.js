@@ -1,12 +1,22 @@
 import { Server } from "socket.io";
 import { server } from "../../../utility";
 
-const updateDB = (msg) => {
-  fetch(`${server}/api/comments`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(msg),
-  });
+const updateDB = (msg, id, del) => {
+  id
+    ? del
+      ? fetch(`${server}/api/comments/${id}`, {
+          method: "DELETE",
+        })
+      : fetch(`${server}/api/comments/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(msg),
+        })
+    : fetch(`${server}/api/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(msg),
+      });
 };
 
 export default async function handler(req, res) {
@@ -25,15 +35,50 @@ export default async function handler(req, res) {
       ///// JOIN A SPECIFIC STUDNETS CHAT ROOM
       socket.on("join_room", (id) => {
         socket.join(id);
+
         console.log("joined Room#", id);
       });
 
       socket.on("admin_cohort_room", (ids) => {
         const [cohortId, adminId] = [...ids];
-        socket.join(cohortId);
-        console.log(`admin ${adminId} joined cohort room ${cohortId}`);
+        socket.join(`C${cohortId}`);
+        console.log(`admin ${adminId} joined cohort room C${cohortId}`);
       });
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
+
+      socket.on("edit_message", (msg, id, del = undefined) => {
+        console.log("recieved edit message", msg, id);
+        fetch();
+        if (!del) msg.comment_id = id;
+        socket.to(msg.student_id).emit("edit_message", msg, del);
+      });
+
+      socket.on("edit_cohort_message", (msg, id, students, del = undefined) => {
+        console.log("recieved cohort edit message", msg, id);
+        del
+          ? fetch(`${server}/api/comments/cohort/${id}`, {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(msg),
+            })
+          : fetch(`${server}/api/comments/cohort/${id}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(msg),
+            });
+        if (!del) msg.comment_id = id;
+        let groupSocket = socket;
+
+        for (const { user_id } of students) {
+          msg.student_id = user_id;
+          groupSocket = groupSocket.to(user_id);
+        }
+        groupSocket.emit(
+          "edit_message",
+          del ? { delete: true, index: msg.index } : msg
+        );
+      });
+
       socket.on("send_new_message", (msg) => {
         console.log("recieved new message", msg);
 
@@ -49,7 +94,7 @@ export default async function handler(req, res) {
         //   msg
         // );
         let groupSocket = socket;
-        
+
         for (const { user_id } of students) {
           msg.student_id = user_id;
           updateDB(msg);
