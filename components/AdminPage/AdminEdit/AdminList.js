@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/Edit.Admin.module.css";
+import AdminCreate from "./AdminCreate";
+import AdminUpdate from "./AdminUpdate";
 
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
@@ -9,6 +11,8 @@ const AdminList = () => {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [isCreateOpen, setCreateIsOpen] = useState(false);
+  const [isUpdateOpen, setUpdateIsOpen] = useState(false);
   //pull list of admins
   useEffect(() => {
     axios.get("/api/admin", {}).then((res) => {
@@ -19,7 +23,7 @@ const AdminList = () => {
   return (
     <div className={styles.adminListParent}>
       <div className={styles.adminListHeader}>
-        <h1>List of Admins</h1>
+        <h1>Current Admins</h1>
       </div>
       <div className={styles.adminListList}>
         {adminList.map((admin) => {
@@ -44,7 +48,7 @@ const AdminList = () => {
 
           return (
             <>
-              <ul value={admin.user_id}>
+              <ul key={`keyadmin.user_id`}>
                 <div className={styles.adminListListTextBox}>
                   <p className={styles.adminListListText}>
                     <b>{`${admin.first} ${admin.last}`}</b>
@@ -58,64 +62,33 @@ const AdminList = () => {
                   </button>
                   <button
                     className={styles.adminListListBtnTwo}
-                    type="submit"
-                    onClick={updateAdmin}
+                    onClick={() => setUpdateIsOpen(true)}
                   >
                     Update
                   </button>
-                  <form className={styles.adminListListEdit}>
-                    <input
-                      className={styles.adminListListInputFirstName}
-                      id={`first ${admin.user_id}`}
-                      type="text"
-                      //value={newFirstName}
-                      onChange={(event) => setNewFirstName(event.target.value)}
-                      aria-label={`first ${admin.user_id}`}
-                      placeholder="First"
-                    />
-                    <input
-                      className={styles.adminListListInputFirstName}
-                      id={`last ${admin.user_id}`}
-                      type="text"
-                      //value={newLastName}
-                      onChange={(event) => setNewLastName(event.target.value)}
-                      aria-label={`last ${admin.user_id}`}
-                      placeholder="Last"
-                    />
-                    <input
-                      className={styles.adminListListInputFirstName}
-                      id={`username ${admin.user_id}`}
-                      type="text"
-                      //value={newUsername}
-                      onChange={(event) => setNewUsername(event.target.value)}
-                      aria-label={`username ${admin.user_id}`}
-                      placeholder="User"
-                    />
-                    <input
-                      className={styles.adminListListInputFirstName}
-                      id={`password ${admin.user_id}`}
-                      type="text"
-                      //value={newPassword}
-                      onChange={(event) => setNewPassword(event.target.value)}
-                      aria-label={`password ${admin.user_id}`}
-                      placeholder="Pass"
-                    />
-                    <input
-                      className={styles.adminListListInputFirstName}
-                      id={`email ${admin.user_id}`}
-                      type="text"
-                      //value={newEmail}
-                      onChange={(event) => setNewEmail(event.target.value)}
-                      aria-label={`email ${admin.user_id}`}
-                      placeholder="Email"
-                    />
-                  </form>
+                  <AdminUpdate
+                    admin={admin}
+                    open={isUpdateOpen}
+                    onClose={() => setUpdateIsOpen(false)}
+                  />
                 </div>
                 <hr className={styles.hr}></hr>
               </ul>
             </>
           );
         })}
+      </div>
+      <div className={styles.adminCreate}>
+        <button
+          className={styles.adminCreateBtn}
+          onClick={() => setCreateIsOpen(true)}
+        >
+          Create Admin
+        </button>
+        <AdminCreate
+          open={isCreateOpen}
+          onClose={() => setCreateIsOpen(false)}
+        />
       </div>
     </div>
   );
