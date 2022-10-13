@@ -8,6 +8,8 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { miniSerializeError } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { setStudentTasks } from '../../redux/features/app-slice';
 
 //task modal styling
 const customStyles = {
@@ -25,12 +27,14 @@ const customStyles = {
 };
 
 export default function SPTasks({ activeStudent }) {
-  const [studentTasks, setStudentTasks] = useState([]);
+  const studentTasks = useSelector(({app: {studentTasks}}) => (studentTasks));
+  // const [studentTasks, setStudentTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [editTask, setEditTask] = useState(false);
   const [createTask, setCreateTask] = useState(false);
+  const dispatch = useDispatch();
 
   function openModal() {
     setIsOpen(true);
@@ -76,12 +80,13 @@ export default function SPTasks({ activeStudent }) {
   const getTasks = () => {
     if (activeStudent.user_id) {
       fetch(
-        `https://hacking-transition.herokuapp.com/api/tasks/student/${activeStudent.user_id}`
+        `api/tasks/student/${activeStudent.user_id}`
       )
         .then((res) => res.json())
         .then((tasks) => {
           setLoading(false);
-          setStudentTasks(tasks);
+          dispatch(setStudentTasks(tasks));
+          console.log('studentasks', studentTasks)
         });
     }
   };
@@ -89,7 +94,7 @@ export default function SPTasks({ activeStudent }) {
   if (loading) {
     return;
     //  <Loading />;
-  } else {
+  } else if (studentTasks[0]){
     return (
       <div className={styles.SDashTasks}>
         <h4 id="StuTasksHeader">Tasks</h4>
@@ -110,7 +115,7 @@ export default function SPTasks({ activeStudent }) {
               // console.log(task);
 
               return (
-                <div className={styles.StuTasksCard}>
+                <div className={styles.StuTasksCard} key={task.task_id}>
                   <div
                     className={styles.StuTasksTitle}
                     key={task.task_id}

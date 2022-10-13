@@ -35,7 +35,7 @@ function Home() {
         if (window) {
           const localUser = localStorage.getItem("currentUser");
           const sessionUser = window.sessionStorage.getItem("currentUser");
-          localUser && confirmStorageUser(localUser);
+          localUser && confirmStorageUser(localUser,true);
           sessionUser && confirmStorageUser(sessionUser);
         }
       } catch (error) {
@@ -43,7 +43,8 @@ function Home() {
       }
     })();
   }, []);
-  const confirmStorageUser = async (currentUser) => {
+
+  const confirmStorageUser = async (currentUser, local = false) => {
     const currentUserObj = JSON.parse(currentUser);
     const user = await (
       await fetch(`${server}/api/users/${currentUserObj.username}`)
@@ -51,8 +52,11 @@ function Home() {
     if (user.password === currentUserObj.password) {
       dispatch(setLoginState(true));
       dispatch(setCurrentUser(user));
-      currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-        dispatch(setActiveStudent(currentUserObj));
+      local
+        ? localStorage.setItem("currentUser", JSON.stringify(user))
+        : window.sessionStorage.setItem("currentUser", JSON.stringify(user));
+      user.admin ? router.push("/admin") : router.push("/student"),
+        dispatch(setActiveStudent(user));
     }
   };
   return (

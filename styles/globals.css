@@ -1,38 +1,38 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
+
 :root{
     --primary-accent:#F79020;
     --secondary-accent:#F8F8F8;
     --font-color: #003B4C;
     --box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
-        
-   
+
 }
 
 
 .ql-toolbar.ql-snow {
-    border: none!important;
-    border-bottom: 1px solid #ccc !important;
-    box-sizing: border-box !important;
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
-    padding: 8px !important;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    /* background: white; */
-    z-index: 1;
+  border: none !important;
+  border-bottom: 1px solid #ccc !important;
+  box-sizing: border-box !important;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+  padding: 8px !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  /* background: white; */
+  z-index: 1;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
-    border-top: 0px;
-    padding-top: 40px;
-    overflow-wrap: "break-word";
-    overflow-y:'scroll';
+  border-top: 0px;
+  padding-top: 40px;
+  overflow-wrap: "break-word";
+  overflow-y: "scroll";
 }
-.ql-toolbar.ql-snow + .ql-container.ql-snow::-webkit-scrollbar{
+.ql-toolbar.ql-snow + .ql-container.ql-snow::-webkit-scrollbar {
   width: 5px;
 }

@@ -10,7 +10,7 @@ const CheckLogin = () => {
     }));
   
     useEffect(() => {
-      !loginState && router.push("/");
+      !localStorage.get('currentUser') || !window.sessionStorage.get('currentUser') && router.push("/");
       console.log('is logged in ?',loginState);
     }, [loginState]);
   return (

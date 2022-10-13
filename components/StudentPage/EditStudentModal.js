@@ -1,27 +1,43 @@
 import react, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from "../../styles/StudentPage.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { server } from '../../utility';
+import { setCurrentUser, setActiveStudent } from '../../redux/features/app-slice';
+import { useRouter } from 'next/router';
 
-const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStudent, setShowEditStudentModal }) => {
+
+
+const EditStudentModal = () => {
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const { userData, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({userData: currentUser, activeStudent}))
+    console.log({activeStudent});
 
     const [formData, setFormData] = useState({
-        // first: activeStudent.first,
-        // last: activeStudent.last,
-        // email: activeStudent.email,
-        // rank: activeStudent.rank,
-        // branch: activeStudent.branch,
-        // duty_station: activeStudent.duty_station,
-        // taps_complete: activeStudent.taps_complete,
-        // leave_start_date: convertDateToIso(activeStudent.leave_start_date),
-        // ets_date: convertDateToIso(activeStudent.ets_date),
-        // planning_to_relocate: activeStudent.planning_to_relocate,
-        // city: activeStudent.city,
-        // state: activeStudent.state,
-        // has_dependents: activeStudent.has_dependents,
-        // highest_education: activeStudent.highest_education,
-        // seeking_further_education: activeStudent.seeking_further_education,
-        // mos: activeStudent.mos,
-        // interests: activeStudent.interests
+        user_id: activeStudent.user_id,
+        first: activeStudent.first,
+        last: activeStudent.last,
+        email: activeStudent.email,
+        rank: activeStudent.rank,
+        branch: activeStudent.branch,
+        duty_station: activeStudent.duty_station,
+        taps_complete: activeStudent.taps_complete,
+        leave_start_date: convertDateToIso(activeStudent.leave_start_date),
+        ets_date: convertDateToIso(activeStudent.ets_date),
+        planning_to_relocate: activeStudent.planning_to_relocate,
+        city: activeStudent.city,
+        state: activeStudent.state,
+        has_dependents: activeStudent.has_dependents,
+        highest_education: activeStudent.highest_education,
+        seeking_further_education: activeStudent.seeking_further_education,
+        mos: activeStudent.mos,
+        interests: activeStudent.interests,
+        file_va_claim: activeStudent.file_va_claim,
+        HHG_move: activeStudent.HHG_move,
+        barracks_checkout: activeStudent.barracks_checkout,
+        final_physical: activeStudent.final_physical,
+        gear_turn_in: activeStudent.gear_turn_in
     })
 
     function convertDateToIso(date) {
@@ -52,34 +68,22 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
     }
 
     const handleSubmit = (e) => {
-        console.log("submitted")
-    //     e.preventDefault()
-    //     fetch(`https://hacking-transition.herokuapp.com/api/admin/edit/student/${activeStudent.user_id}`, {
-    //         method: 'PATCH',
-    //         body: JSON.stringify(formData),
-    //         headers: { 'Content-Type': 'application/json' }
-    //     })
-    //         .then(res => res.json())
-    //         .then(() => {
-    //             setActiveStudent((prevData) => {
-    //                 return {
-    //                     ...prevData,
-    //                     ...formData
-    //                 }
-    //             })
-    //         })
-    //         .then(() => {
-    //             setUserData((prevData) => {
-    //                 return {
-    //                     ...prevData,
-    //                     ...formData
-    //                 }
-    //             })
-    //         })
-
-    //         .then(() => setShowEditStudentModal(false))
-    //         .catch(err => console.log(err))
+        e.preventDefault();
+        console.log("submitted", formData);
+        fetch(`/api/users/${activeStudent.user_id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json()
+            )
+            .then(() => {
+                dispatch(setActiveStudent(formData));
+                router.push('/student');
+            })
+            .catch(err => console.log(err))
     }
+    console.log('activeStudent', activeStudent)
 
     const handleChange = (e) => {
         if (e.target.type === "checkbox") {
@@ -100,17 +104,16 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
     }
 
     const handleCancel = () => {
-        setShowEditStudentModal(false)
+        router.push('/student');
     }
 
-    return ReactDOM.createPortal(
-        <div className='portalContainer'>
-            <div className='addStudentModal'>
+    return (
+        // <div className='portalContainer'>
+            <div className={styles.addStudentModal}>
                 <h4 className='editStudentFormTitle'>Edit student information</h4>
-
-                <form className="addStudentForm" onSubmit={handleSubmit}>
-                    <div className='editStudentFormInputs'>
-                        <label>First
+                <form className={styles.addStudentForm} onSubmit={handleSubmit}>
+                    <div className={styles.editStudentFormInputs}>
+                        <label className={styles.label}>First
                             <input
                                 id='editStudentFirstName'
                                 required
@@ -122,7 +125,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.first} /></label>
 
 
-                        <label>Last
+                        <label className={styles.label}>Last
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -133,7 +136,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.last} />
                         </label>
 
-                        <label>Email
+                        <label className={styles.label}>Email
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -144,7 +147,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.email} />
                         </label>
 
-                        <label>Rank
+                        <label className={styles.label}>Rank
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -155,7 +158,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.rank} />
                         </label>
 
-                        <label>Branch
+                        <label className={styles.label}>Branch
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -166,7 +169,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.branch} />
                         </label>
 
-                        <label>Duty Station
+                        <label className={styles.label}>Duty Station
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -177,7 +180,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.duty_station} />
                         </label>
 
-                        <label>Leave start date
+                        <label className={styles.label}>Leave start date
                             <input
                                 required
                                 className='addStudentFormInput editStudentDate'
@@ -187,7 +190,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.leave_start_date} />
                         </label>
 
-                        <label>ETS date
+                        <label className={styles.label}>ETS date
                             <input
                                 required
                                 className='addStudentFormInput editStudentDate'
@@ -197,7 +200,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.ets_date} />
                         </label>
 
-                        <label>City
+                        <label className={styles.label}>City
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -208,7 +211,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.city} />
                         </label>
 
-                        <label>State
+                        <label className={styles.label}>State
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -219,7 +222,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.state} />
                         </label>
 
-                        <label>Highest education
+                        <label className={styles.label}>Highest education
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -230,7 +233,7 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                                 value={formData.highest_education} />
                         </label>
 
-                        <label>Military Occupation
+                        <label className={styles.label}>Military Occupation
                             <input
                                 required
                                 className='addStudentFormInput'
@@ -274,16 +277,16 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
                             /> Have dependents?</label>
                     </div>
 
-                    {/* {userData.admin ? null : <div className='myInterestsDiv'>
+                    {userData.admin ? null : <div className='myInterestsDiv'>
                     
                         <label>My interests:</label>
                         <textarea
-                            className='editInterestsTextarea'
+                            className={styles.editInterestsTextarea}
                             type='text'
                             onChange={handleChange}
                             name='interests'
                             value={formData.interests} />
-                    </div>} */}
+                    </div>}
 
 
                     <input
@@ -301,8 +304,8 @@ const EditStudentModal = ({ userData, setUserData, activeStudent, setActiveStude
 
             </div>
 
-        </div >,
-        document.getElementById('portal')
+        // </div >,
+        // document.getElementById('portal')
     )
 }
 
