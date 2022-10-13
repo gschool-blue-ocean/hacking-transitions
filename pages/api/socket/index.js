@@ -3,14 +3,14 @@ import { server } from "../../../utility";
 export default async function handler(req, res) {
   /******* ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   if (res.socket.server.io) {
-    console.log("Socket is already running");
+    // console.log("Socket is already running");
   } else {
     console.log("Socket is initializing");
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
 
     io.on("connection", (socket) => {
-      console.log(`User Connected`);
+      //   console.log(`User Connected`);
 
       ///// JOIN A SPECIFIC STUDNETS CHAT ROOM
       socket.on("join_room", (id) => {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
       socket.on("send_new_message", (msg) => {
-        ///// Create a new message in the database   
+        ///// Create a new message in the database
         fetch(`${server}/api/comments`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },

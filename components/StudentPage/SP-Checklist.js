@@ -34,9 +34,9 @@ const SPChecklist = () => {
     interests: activeStudent.interests,
     final_physical: activeStudent.final_physical,
     gear_turn_in: activeStudent.gear_turn_in,
-    HHG_move: activeStudent.HHG_move,
+    hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
-    file_VA_claim: activeStudent.file_VA_claim,
+    file_va_claim: activeStudent.file_va_claim,
   });
 
   function convertDateToIso(date) {
@@ -64,17 +64,17 @@ const SPChecklist = () => {
     console.log("canceled", checklistData);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`/api/users/${activeStudent.user_id}`, {
+    fetch(`/api/users/students${activeStudent.user_id}`, {
       method: "PATCH",
       body: JSON.stringify(checklistData),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then(() => {
-        dispatch(setActiveStudent(formData));
+        dispatch(setActiveStudent(checklistData));
       })
       .catch((err) => console.log(err));
   };
@@ -84,6 +84,7 @@ const SPChecklist = () => {
     if (e.target.type === "checkbox") {
       return setChecklistData((prevData) => {
         return {
+          ...prevData,
           [e.target.name]: e.target.checked,
         };
       });
@@ -100,7 +101,7 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="1"
-                type="radio"
+                type="checkbox"
                 name="final_physical"
                 onChange={handleChange}
               />{" "}
@@ -109,7 +110,7 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="2"
-                type="radio"
+                type="checkbox"
                 name="gear_turn_in"
                 onChange={handleChange}
               />{" "}
@@ -118,16 +119,16 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="3"
-                type="radio"
-                name="HHG_move"
+                type="checkbox"
+                name="hhg_move"
                 onChange={handleChange}
               />{" "}
-              HHG move?
+              hhg move?
             </label>
             <label className="checkboxLabel">
               <input
                 id="4"
-                type="radio"
+                type="checkbox"
                 name="barracks_checkout"
                 onChange={handleChange}
               />{" "}
@@ -136,8 +137,8 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="5"
-                type="radio"
-                name="file_VA_claim"
+                type="checkbox"
+                name="file_va_claim"
                 onChange={handleChange}
                 // checked={checklistData.file_VA_claim}
               />{" "}

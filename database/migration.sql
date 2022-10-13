@@ -40,9 +40,9 @@ CREATE TABLE users (
     relocate_country VARCHAR(50),
     final_physical BOOLEAN,
     gear_turn_in BOOLEAN,
-    HHG_move BOOLEAN,
+    hhg_move BOOLEAN,
     barracks_checkout BOOLEAN,
-    file_VA_claim BOOLEAN
+    file_va_claim BOOLEAN
 );
 
 CREATE TABLE dependents (
