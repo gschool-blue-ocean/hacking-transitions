@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setStudentTasks } from '../../redux/features/app-slice';
 
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
+   const dispatch = useDispatch();
    const { register, handleSubmit } = useForm();
-   const { studentTasks } = useSelector(({app: {studentTasks}}) => (studentTasks));
+   // const { studentTasks } = useSelector(({app: {studentTasks}}) => (studentTasks));
 
    const onSubmit = (data) => {
       addTask(data);
       closeModal(false);
-      // setStudentTasks(...studentTasks, newTask);
    };
 
    const addTask = (data) => {
@@ -23,6 +23,7 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
          remarks: null,
          completed: JSON.parse(data.completed),
       };
+      dispatch(setStudentTasks(newTask));
 
       fetch(`/api/tasks`, {
          method: "POST",
