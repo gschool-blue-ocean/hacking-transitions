@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import style from "../../styles/viewstudent.module.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import StudentPage from "../../components/StudentPage";
 
 //******FOR VIEWING STUDENT INFORMATION WHILE LOGGED IN AS AN ADMIN ***********/
 
@@ -33,7 +34,8 @@ const viewstudent = () => {
         <div className={style.search}>Student Search</div>
         <button className={style.next}>Next</button>
       </div>
-      <div className={style.bottom}>
+      <StudentPage />
+      {/* <div className={style.bottom}>
         <div className={style.card}>
           <div className={style.heading}>
             <div className={style.pic}>IN</div>
@@ -73,8 +75,8 @@ const viewstudent = () => {
             <div className={style.taskpoint}>Task 5: In Progress</div>
             <div className={style.taskpoint}>Task 6: Not Started</div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   );
 };
