@@ -1,12 +1,12 @@
 .container {
+    margin-top: 2.3rem;
     height: auto;
-    margin: 1rem;
     display: flex;
     flex-direction: column;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     color: #003B4C;
     background-color: #FFF;
-    margin-left: 10rem;
+    margin-left: 2rem;
     width: 110rem;
     /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
 }

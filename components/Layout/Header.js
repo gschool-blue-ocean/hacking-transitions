@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 
 const Header = () => {
   const dispatch = useDispatch();
-const router = useRouter()
-const {pathname} = router
-  const currentUser = useSelector(({ app }) => (currentUser = app.currentUser));
+  const router = useRouter();
+  const {pathname} = router;
+  const currentUser = useSelector(({ app }) => (app.currentUser));
   return (
     <nav className={style.header}>
       <div className={style.topNav}>
