@@ -1,13 +1,26 @@
-import useState from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 import styles from "../../styles/LoginStyles.module.css"
+import { useRouter } from 'next/router'
 
 
 
 const RegisterModal = ({open, onClose}) => {
+    const router = useRouter()
+    const [regCode, setRegCode] = useState("")
+    
     if (!open) return null; 
-    const register = (event) =>{
+    const register = () =>{
         event.preventDefault();
+        console.log('user input', regCode)
+        if(regCode === '123'){
+            console.log('code is good')
+            router.push('student/editStudentModal')
+            
+        } else{
+            console.log('code is NOT good')
+        }
+        
 
     }
   return (
@@ -26,7 +39,9 @@ const RegisterModal = ({open, onClose}) => {
                 className={styles.registerModalCreateFormInput}
                 id="reg code"
                 type="text"
-                onChange={(event) => console.log('clicked')}
+                onChange={(event) => setRegCode(event.target.value)}
+                onSubmit={register}
+                value={regCode}
               />
             </div>
            
@@ -34,7 +49,8 @@ const RegisterModal = ({open, onClose}) => {
               <button
                 className={styles.registerModalCreateFormSubmitBtn}
                 type="submit"
-                onClick={() => console.log('test')}
+                onClick={() => register()}
+                
               >
                 Submit
               </button>
