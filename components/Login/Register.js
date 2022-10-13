@@ -2,15 +2,7 @@ import useState from 'react'
 import axios from 'axios'
 import styles from "../../styles/LoginStyles.module.css"
 
-const MODAL_STYLES = {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transfrom: "translate(-50%, -50%)",
-    backgroundColor: "#FFF",
-    padding: "50px",
-    zIndex: 1000,
-  };
+
 
 const RegisterModal = ({open, onClose}) => {
     if (!open) return null; 
@@ -32,7 +24,7 @@ const RegisterModal = ({open, onClose}) => {
             <div className={styles.registerModalCreateFormInputLabel}>
               <input
                 className={styles.registerModalCreateFormInput}
-                id="FirstName"
+                id="reg code"
                 type="text"
                 onChange={(event) => console.log('clicked')}
               />
