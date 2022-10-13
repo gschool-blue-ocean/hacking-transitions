@@ -58,7 +58,6 @@ export default function StudentPage({
               userETS={activeStudent.ets_date}
             />
           </div>
-
           {/* User Data Card */}
           <div className={styles.SDashInfocard}>
             <div className={styles.infoCardcontainer}>
