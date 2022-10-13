@@ -31,6 +31,9 @@ export const appSlice = createSlice({
     setStudentTasks(state, { payload }) {
       state.studentTasks = payload;
     },
+    deleteStudentTask(state, { payload }) {
+      state.studentTasks = state.studentTasks.filter((task) => task.task_id !== payload.task_id)
+    }
   },
 });
 
@@ -40,6 +43,7 @@ export const {
   setLoginState,
   setCurrentUser,
   setActiveStudent,
-  setStudentTasks
+  setStudentTasks,
+  deleteStudentTask
 } = appSlice.actions;
 export default appSlice.reducer;
