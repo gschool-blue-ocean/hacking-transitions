@@ -36,6 +36,9 @@ export const appSlice = createSlice({
       state.cohortChat = payload;
 
     }
+    deleteStudentTask(state, { payload }) {
+      state.studentTasks = state.studentTasks.filter((task) => task.task_id !== payload.task_id)
+    }
   },
 });
 
@@ -46,6 +49,7 @@ export const {
   setCurrentUser,
   setActiveStudent,
   setStudentTasks,
-  setStudentsForCohortChat
+  setStudentsForCohortChat,
+  deleteStudentTask
 } = appSlice.actions;
 export default appSlice.reducer;

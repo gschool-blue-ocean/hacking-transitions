@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/StudentPage.module.css";
+import { server } from "../../utility";
 
 export default function SPDependents({ student }) {
    const [dependents, setDependents] = useState([]);
@@ -8,7 +9,7 @@ export default function SPDependents({ student }) {
    }, [student]);
 
    const getDependents = () => {
-      fetch(`https://hacking-transition.herokuapp.com/api/dependents/sponsor/${student.user_id}`)
+      fetch(`/api/dependents/sponsor/${student.user_id}`)
          .then((res) => res.json())
          .then((deps) => {
             setDependents(deps);

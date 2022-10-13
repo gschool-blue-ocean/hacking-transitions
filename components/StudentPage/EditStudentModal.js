@@ -4,14 +4,18 @@ import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { server } from '../../utility';
 import { setCurrentUser, setActiveStudent } from '../../redux/features/app-slice';
+import { useRouter } from 'next/router';
+
 
 
 const EditStudentModal = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { userData, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({userData: currentUser, activeStudent}))
     console.log({activeStudent});
 
     const [formData, setFormData] = useState({
+        user_id: activeStudent.user_id,
         first: activeStudent.first,
         last: activeStudent.last,
         email: activeStudent.email,
@@ -75,7 +79,7 @@ const EditStudentModal = () => {
             )
             .then(() => {
                 dispatch(setActiveStudent(formData));
-                // dispatch(setCurrentUser(formData));
+                router.push('/student');
             })
             .catch(err => console.log(err))
     }
@@ -100,7 +104,7 @@ const EditStudentModal = () => {
     }
 
     const handleCancel = () => {
-        // setShowEditStudentModal(false)
+        router.push('/student');
     }
 
     return (
