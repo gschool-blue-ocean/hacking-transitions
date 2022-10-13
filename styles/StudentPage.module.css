@@ -38,9 +38,9 @@
    display: grid;
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
-      "StuInfo StuCheck StuTasks"
-      "StuInfo StuCheck StuTasks"
-      "ChatModal ChatModal ChatModal";
+      "StuInfo StuTasks StuTasks"
+      "StuInfo StuTasks StuTasks"
+      "StuCheck ChatModal ChatModal";
 
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
