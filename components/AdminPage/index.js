@@ -35,7 +35,6 @@ const AdminContainer =  () => {
          <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
         </div>
         <CohortView students={students} currCohort={currCohort} />
-        <Chat />
       </div>
     </div>
   )

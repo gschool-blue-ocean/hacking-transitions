@@ -96,5 +96,8 @@
 .page:hover,
 .active {
     background-color: #F79020;
-    color: white !important;
+    color: white;
+}
+.loginTitle{
+    padding-left: -10px;
 }

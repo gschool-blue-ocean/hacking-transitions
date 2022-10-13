@@ -1,13 +1,9 @@
-import React, {useState} from "react";
-import { Modal } from "react-bootstrap";
+import {useState} from "react";
 import style from "../../../styles/LoginStyles.module.css";
-import Register from "./register";
-// import Logo from "./galvanizeLogo.svg";
+import RegisterModal from "../Register";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
-
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <nav className={style.header}>
       <div className={style.reasources_container}>
@@ -42,9 +38,14 @@ const Header = () => {
 
                 {/* this is the register button */}
         <ul className={style.topList}>
-            <div onClick={() => setIsOpen(true)}>Register</div>
-            <Register  open={isOpen} onClose={() => setIsOpen(false)}> this is a test</Register>
-
+          <button 
+            className={style.listItem} 
+            onClick={() => setIsModalOpen(true)}>Register
+            </button>
+          <RegisterModal
+          open={isModalOpen}
+          onClose  = {() => setModalisOpen(false)}
+          />
         </ul>
       </div>
       {/* /////////////////////////////////////////////////////////////////////////////////////// */}
