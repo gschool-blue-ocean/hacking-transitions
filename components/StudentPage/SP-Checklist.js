@@ -15,6 +15,7 @@ const SPChecklist = () => {
   );
 
   const [checklistData, setChecklistData] = useState({
+    user_id: activeStudent.user_id,
     first: activeStudent.first,
     last: activeStudent.last,
     email: activeStudent.email,
@@ -67,7 +68,7 @@ const SPChecklist = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`/api/users/students${activeStudent.user_id}`, {
+    fetch(`/pages/api/users/students/${checklistData.user_id}`, {
       method: "PATCH",
       body: JSON.stringify(checklistData),
       headers: { "Content-Type": "application/json" },
@@ -101,6 +102,7 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="1"
+                checked={checklistData.final_physical}
                 type="checkbox"
                 name="final_physical"
                 onChange={handleChange}
@@ -110,6 +112,7 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="2"
+                checked={checklistData.gear_turn_in}
                 type="checkbox"
                 name="gear_turn_in"
                 onChange={handleChange}
@@ -119,15 +122,17 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="3"
+                checked={checklistData.hhg_move}
                 type="checkbox"
                 name="hhg_move"
                 onChange={handleChange}
               />{" "}
-              hhg move?
+              HHG move?
             </label>
             <label className="checkboxLabel">
               <input
                 id="4"
+                checked={checklistData.barracks_checkout}
                 type="checkbox"
                 name="barracks_checkout"
                 onChange={handleChange}
@@ -137,6 +142,7 @@ const SPChecklist = () => {
             <label className="checkboxLabel">
               <input
                 id="5"
+                checked={checklistData.file_va_claim}
                 type="checkbox"
                 name="file_va_claim"
                 onChange={handleChange}

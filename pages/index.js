@@ -51,8 +51,8 @@ function Home() {
     if (user.password === currentUserObj.password) {
       dispatch(setLoginState(true));
       dispatch(setCurrentUser(user));
-      currentUserObj.admin ? router.push("/admin") : router.push("/student"),
-        dispatch(setActiveStudent(currentUserObj));
+      user.admin ? router.push("/admin") : router.push("/student"),
+        dispatch(setActiveStudent(user));
     }
   };
   return (

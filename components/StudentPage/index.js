@@ -155,7 +155,7 @@ export default function StudentPage({
           </div>
           <SPChecklist />
           <SPTasks activeStudent={activeStudent} />
-          <Chat />
+          {/* <Chat /> */}
         </div>
       </div>
     </div>
