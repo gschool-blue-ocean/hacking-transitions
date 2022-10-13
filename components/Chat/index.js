@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { MdSend, MdOutlineModeEdit, MdOutlineDelete } from "react-icons/md";
 import io from "socket.io-client";
 import dynamic from "next/dynamic";
-
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -13,6 +12,8 @@ import { useSelector } from "react-redux";
 
 import styles from "../../styles/Chat.module.css";
 const Chat = () => {
+  /****** Getting state from redux ******/
+  //cohortChat is an array of students from the given cohort
   const { userData, activeStudent, cohortChat } = useSelector(
     ({ app: { currentUser, activeStudent, cohortChat } }) => ({
       userData: currentUser,
@@ -20,9 +21,10 @@ const Chat = () => {
       cohortChat,
     })
   );
+  /****** END Getting state from redux ******/
 
-  let newSocket;
-  const [editInfo, setEditInfo] = useState(null);
+  let newSocket; //setting a socket var was the only way i found to get the socket methods to work that can be used in the useeffect
+  const [editInfo, setEditInfo] = useState(null); // info to be sent when editing an existing message,is a object
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
@@ -34,38 +36,48 @@ const Chat = () => {
 
   useEffect(() => {
     (async () => {
+      /****** Getting connected to the socket server ******/
+      
       await fetch(`${server}/api/socket`);
       newSocket = io();
       setSocket(newSocket);
-
-      let comments;
-
+      // if any socket.on methods are put in a function will break and resend the message incrementenly
+      
       !newSocket.connected &&
         newSocket.on("connect", () => {
           console.log("connected");
         });
+      /****** END Getting connected to the socket server ******/
 
+      /****** Setting the chat comments and joining socket rooms******/
+      let comments;
       if (userData.admin && cohortChat[0]) {
+        //// If the user is an admin and is in a group cohort chat then set the messages to display any admin messages sent to the cohort
         comments = await getCohortComments(cohortChat[0].cohort_id);
-        // if put in a function will break and resend the message
+        //// If the user is an admin and is in a group cohort chat then join the admin cohort room
         newSocket.emit("admin_cohort_room", [
           cohortChat[0].cohort_id,
           userData.user_id,
         ]);
       } else {
+        //// otherwise get all comments related to the student
         comments = await getStudentComments(
           userData.user_id /*activeStudent.user_id*/
         );
+        //// join the respective chat room of the student
         userData.admin
           ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
           : newSocket.emit("join_room", userData.user_id);
       }
       setChatMessages(comments);
+      /****** END Setting the chat comments and joining socket rooms******/
+      /****** Handle when the user recieves a message******/
 
       newSocket.on("recieve_message", (newMessage) => {
         console.log("message recieved", newMessage.content);
         setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
       });
+
       newSocket.on("edit_message", async (newMessage) => {
         console.log("edit message recieved", newMessage);
         const comments =
@@ -76,12 +88,13 @@ const Chat = () => {
               );
         setChatMessages(comments);
       });
+      /****** END Handle when the user recieves a message******/
     })();
   }, [cohortChat]);
 
   const submitMsg = async () => {
     try {
-      const foundContent = /<[a-z]+>((\s|\W)*(\w|\d)+(\s|\W)*)+<\/[a-z]+>/g; //need to fix not picking up periods
+      const foundContent = /<[a-z]+>((\s|\W)*(\w|\d)+(\s|\W)*)+<\/[a-z]+>/g; //check for words, or content other then periods spaces
       if (!foundContent.test(newMessage)) return; // If newMeessage is empty dont send
       // Create a new comment object
       const newMessageObj = {
@@ -93,9 +106,9 @@ const Chat = () => {
           ? editInfo.date_time
           : new Date(Date.now()).toUTCString(),
       };
+      //// Add properties to the newMessageObj depending on the usecase
       if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
       if (editInfo)
-        (newMessageObj.index = editInfo.index),
           !cohortChat[0] && (newMessageObj.comment_id = editInfo.id);
       // Update chat display with newly typed message
       editInfo
@@ -166,7 +179,7 @@ const Chat = () => {
                 {display.editBtns && comment_id === display.comment && (
                   <div className={styles.editContainer}>
                     <button
-                    className={styles.editBtn}
+                      className={styles.editBtn}
                       onClick={() => {
                         setNewMessage(content);
                         setEditInfo({
@@ -179,8 +192,8 @@ const Chat = () => {
                       <MdOutlineModeEdit />
                     </button>
                     <button
-                    className={styles.editBtn}
-                    onClick={() => {
+                      className={styles.editBtn}
+                      onClick={() => {
                         setChatMessages((oldMsgs) => {
                           const newChat = oldMsgs;
                           newChat.splice(index, 1);
