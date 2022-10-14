@@ -22,7 +22,7 @@ const Chat = () => {
     })
   );
   /****** END Getting state from redux ******/
-  let newSocket; //setting a socket var was the only way i found to get the socket methods to work that can be used in the useeffect
+   
   const [userData, setUserData] = useState({});
   const [editInfo, setEditInfo] = useState(null); // info to be sent when editing an existing message,is a object
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
@@ -40,7 +40,7 @@ const Chat = () => {
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
       await fetch(`${server}/api/socket`);
-      newSocket = io();
+      const newSocket = io();
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
@@ -162,6 +162,7 @@ const Chat = () => {
           ) => {
             return (
               <div
+              key={comment_id}
                 className={`${styles.message} ${
                   author_id === userData.user_id && styles.right
                 }`}

@@ -9,7 +9,7 @@ import { checkLogin } from "../../utility";
 
 //******FOR VIEWING STUDENT INFORMATION WHILE LOGGED IN AS AN ADMIN ***********/
 
-const viewstudent = () => {
+const ViewStudent = () => {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
@@ -62,4 +62,4 @@ const viewstudent = () => {
   );
 };
 
-export default viewstudent;
+export default ViewStudent;

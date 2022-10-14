@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-const admin = ({  allCohorts }) => {
+const Admin = ({  allCohorts }) => {
 
   const [admin, setAdmin] = useState(false);
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const admin = ({  allCohorts }) => {
   );
 };
 
-export default admin;
+export default Admin;
 
 export const getStaticProps = async () => {
 

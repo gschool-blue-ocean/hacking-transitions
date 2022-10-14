@@ -21,7 +21,6 @@ const CohortView = ({ currCohort }) => {
     dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
     router.push({
       pathname: "/admin/viewstudent",
-      
     });
   };
   if (currCohort.length == 0) {
@@ -34,7 +33,7 @@ const CohortView = ({ currCohort }) => {
     return (
       <div className={s.container}>
         {currCohort.map((cohort) => (
-          <div>
+          <div key={cohort.cohort_id}>
             <h1>{cohort.cohort_name}</h1>
             <div className={s.div}>
               <table className={s.table}>
@@ -47,7 +46,7 @@ const CohortView = ({ currCohort }) => {
                   <th className={s.tableheaders}>Edit</th>
                 </tr>
                 {cohort.students.map((student, index) => (
-                  <tr className={s.tr}>
+                  <tr className={s.tr} key={student.user_id}>
                     <td>
                       <btn
                         className={s.td}

@@ -14,7 +14,9 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
     const id = data.cohort_id;
     console.log("isclicked", data.isclicked);
     //filter students based on cohort id retrieved by event.target
-    const students = await (await fetch(`${server}/api/users/cohort/${id}`)).json();
+    const students = await (
+      await fetch(`${server}/api/users/cohort/${id}`)
+    ).json();
     if (cohorts.length == 0) {
       setCurrCohort([
         {
@@ -89,7 +91,11 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
         >
           {cohorts.map((cohort) => {
             return (
-              <motion.div className={s.listitem} whileHover={{ scale: 1.2 }}>
+              <motion.div
+                key={cohort.cohort_id}
+                className={s.listitem}
+                whileHover={{ scale: 1.2 }}
+              >
                 <motion.btn
                   className={s.cohortbtn}
                   onClick={handleClick}
@@ -105,7 +111,9 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
                 <button
                   onClick={async () => {
                     const cohortStudents = await (
-                      await fetch(`${server}/api/users/cohort/${cohort.cohort_id}`)
+                      await fetch(
+                        `${server}/api/users/cohort/${cohort.cohort_id}`
+                      )
                     ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
                   }}

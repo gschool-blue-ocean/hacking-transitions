@@ -25,7 +25,7 @@ const AdminContainer = ({ allCohorts }) => {
         ]);
       }
     })();
-  }, []);
+  });
 
   return (
     <div className={s.background}>

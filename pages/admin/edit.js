@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-const editAdmins = () => {
+
+
+const EditAdmins = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
@@ -34,4 +36,4 @@ const editAdmins = () => {
   );
 };
 
-export default editAdmins;
+export default EditAdmins;
