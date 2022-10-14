@@ -1,15 +1,6 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-const MODAL_STYLES = {
-  position: "fixed",
-  top: "50%",
-  left: "50%",
-  transfrom: "translate(-50%, -50%)",
-  backgroundColor: "#FFF",
-  padding: "50px",
-  zIndex: 1000,
-};
 
 const AdminCreate = ({ open, onClose }) => {
   if (!open) return null;
@@ -37,8 +28,17 @@ const AdminCreate = ({ open, onClose }) => {
       <div className={styles.adminCreateModal}>
         <div className={styles.adminCreateParent}>
           <div className={styles.adminCreateHeader}>
-            <h1>Create Admin</h1>
-            <button onClick={onClose}>Close</button>
+            <div className={styles.adminCreateHeaderText}>
+              <h1>Create Admin</h1>
+            </div>
+            <div className={styles.adminCreateHeaderBtn}>
+              <button
+                className={styles.adminCreateHeaderBtnClose}
+                onClick={onClose}
+              >
+                Close
+              </button>
+            </div>
           </div>
           <div className={styles.adminCreateForm}>
             <form>
