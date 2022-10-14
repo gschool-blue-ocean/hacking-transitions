@@ -1,4 +1,4 @@
-import s from "../../styles/AdminPage.module.css";
+import s from "../../styles/AdminHomePage/AdminPage.module.css";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -56,18 +56,16 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      rotateX: 0,
       transition: {
         duration: 0.5,
+        delay: .5, 
       },
       display: "block",
     },
     exit: {
       opacity: 0,
-      rotateX: -15,
       transition: {
         duration: 0.5,
-        delay: 0.3,
       },
       transitionEnd: {
         display: "none",
@@ -75,6 +73,7 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
     },
   };
   return (
+    <>
     <div className={s.menucontainer}>
       <div className={s.menutitle}>
         <motion.btn onClick={toggleClickedMenu} className={s.titlebtn}>
@@ -109,16 +108,29 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
                     ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
                   }}
-                >
-                  Chat {cohort.cohort_name}
-                </button>
+                  >
+                  Message
+                  </button>
               </motion.div>
             );
           })}
         </motion.div>
       </div>
     </div>
+    
+    </>
   );
 };
 
 export default CohortMenu;
+
+{/* <button
+onClick={() => {
+  const cohortStudents = students.filter(
+    (student) => student.cohort_id === cohort.cohort_id
+  );
+  dispatch(setStudentsForCohortChat(cohortStudents));
+}}
+>
+Chat {cohort.cohort_name}
+</button> */}

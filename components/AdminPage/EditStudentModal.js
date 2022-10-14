@@ -18,7 +18,7 @@ function EditStudentModal(props) {
     }).then(res => console.log(res))
    }
    const handleArchive = (event) => {
-
+     
    }
     return (
       <Modal

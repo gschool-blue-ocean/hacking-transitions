@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import s from "../../styles/CohortView.module.css";
+import s from '../../styles/AdminHomePage/CohortView.module.css'
 import { useRouter } from "next/router";
 import { BsFillArrowUpRight } from "react-icons/bs";
 import { Button, Modal } from "react-bootstrap";
@@ -11,6 +11,7 @@ import { setActiveStudent } from "../../redux/features/app-slice";
 
 const CohortView = ({ currCohort }) => {
   const dispatch = useDispatch();
+  const CohortView = ({currCohort}) => {
   const [show, setShow] = useState(false);
   const router = useRouter();
   const handleClose = () => setShow(false);
@@ -108,6 +109,7 @@ const CohortView = ({ currCohort }) => {
       </div>
     );
   }
-};
+}
+}
 
-export default CohortView;
+export default CohortView
