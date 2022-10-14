@@ -9,7 +9,7 @@ export default function SPTaskModal({ task, closeModal }) {
    const dispatch = useDispatch();
    const deleteTask = (task) => {
       dispatch(deleteStudentTask(task));
-      fetch(`${server}/api/tasks/${task.task_id}`, {
+      fetch(`/api/tasks/${task.task_id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });

@@ -24,7 +24,7 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
     };
     dispatch(setStudentTasks(newTask));
 
-    fetch(`${server}/api/tasks`, {
+    fetch(`/api/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTask),
