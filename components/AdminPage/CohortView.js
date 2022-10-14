@@ -11,7 +11,6 @@ import { setActiveStudent } from "../../redux/features/app-slice";
 
 const CohortView = ({ currCohort }) => {
   const dispatch = useDispatch();
-  const CohortView = ({currCohort}) => {
   const [show, setShow] = useState(false);
   const router = useRouter();
   const handleClose = () => setShow(false);
@@ -110,6 +109,6 @@ const CohortView = ({ currCohort }) => {
     );
   }
 }
-}
+
 
 export default CohortView

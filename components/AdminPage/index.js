@@ -56,13 +56,13 @@ const AdminContainer = ({ allCohorts }) => {
         <div className={s.tools_container}>
          <CreateCohort />
          <div onClick={toggleClickedMenu}>
-         <CohortMenu  cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
+         <CohortMenu  cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
          </div>
          <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
           <RevealChat />
          </motion.div>
         </div>
-        <CohortView students={students} currCohort={currCohort} />
+        <CohortView  currCohort={currCohort} />
     </div>
   </div>
   )
