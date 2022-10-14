@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import SPTaskModal from "./SP-TaskModal";
-// import Loading from "../../LoadingDisplay/Loading";
 import SPEditTask from "./SP-EditTask";
 import SPCreateTask from "./SP-CreateTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
-import { miniSerializeError } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudentTasks } from '../../redux/features/app-slice';
 
@@ -28,7 +26,6 @@ const customStyles = {
 
 export default function SPTasks({ activeStudent }) {
   const studentTasks = useSelector(({app: {studentTasks}}) => (studentTasks));
-  // const [studentTasks, setStudentTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -93,7 +90,6 @@ export default function SPTasks({ activeStudent }) {
 
   if (loading) {
     return;
-    //  <Loading />;
   } else if (studentTasks[0]){
     return (
       <div className={styles.SDashTasks}>
@@ -112,7 +108,6 @@ export default function SPTasks({ activeStudent }) {
             <div>{activeStudent.first} has not started a task</div>
           ) : (
             studentTasks.map((task) => {
-              // console.log(task);
 
               return (
                 <div className={styles.StuTasksCard} key={task.task_id}>

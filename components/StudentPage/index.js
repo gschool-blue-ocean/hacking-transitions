@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
@@ -6,17 +6,12 @@ import SPChecklist from "./SP-Checklist";
 import styles from "../../styles/StudentPage.module.css";
 import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
-import EditStudentModal from "./EditStudentModal";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 
-export default function StudentPage({
-  modalIsOpen,
-  setModalIsOpen,
-  viewClickedCohort,
-}) {
+export default function StudentPage({ viewClickedCohort}) {
 
-  const  activeStudent  = useSelector(({app: { activeStudent}}) => ( activeStudent))
+  const { activeStudent } = useSelector(({app: { activeStudent }}) => ({ activeStudent }))
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -29,21 +24,11 @@ export default function StudentPage({
   }, []);
 
   const handleEditBtnClicked = (e) => {
-
-
-    // setShowEditStudentModal(!showEditStudentModal);
     console.log('show edit student modal');
   };
 
   return (
     <div className={styles.testgrid}>
-      {/* {userData.admin && (
-            <SideNav
-               viewClickedCohort={viewClickedCohort}
-               activeStudent={activeStudent}
-               setActiveStudent={setActiveStudent}
-            />
-         )} */}
       <div className={styles.container}>
         <div className={styles.StudentDashWrapper}>
           <div className={styles.SDashHeader}>
@@ -59,7 +44,6 @@ export default function StudentPage({
               userETS={activeStudent.ets_date}
             />
           </div>
-          {/* User Data Card */}
           <div className={styles.SDashInfocard}>
             <div className={styles.infoCardcontainer}>
                 <div>
@@ -71,8 +55,9 @@ export default function StudentPage({
                     <div className={styles.editStudentToolTip}>Edit</div>
                   </div>
                 </div>
-                <div>
-                  <h4 className="text-left">ETS Date</h4>
+
+                <div className='styles.stuInfoETS'>
+                  <h4 className={styles.stuInfoETS}>ETS Date</h4>
                   <span>
                     {activeStudent.ets_date}
                   </span>

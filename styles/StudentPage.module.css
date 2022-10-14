@@ -38,10 +38,9 @@
    display: grid;
    grid-template-areas:
       "StuHeader StuHeader StuHeader"
-      "StuInfo StuTasks StuTasks"
-      "StuInfo StuTasks StuTasks"
-      "StuCheck ChatModal ChatModal";
-
+      "StuInfo StuCheck StuTasks"
+      "StuInfo StuCheck StuTasks"
+      "ChatModal ChatModal ChatModal";
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
    font-family: var(--ff-primary);
@@ -101,6 +100,13 @@
 }
 
 /* ============= Student Info =============== */
+.stuInfoETS {
+   margin-top: 5px;
+}
+
+.studentInfoCheckbox {
+   margin-top: 6px;
+}
 
 .editStudentBtnSpan {
    /* position: relative; */
@@ -128,35 +134,33 @@
 
 .SDashInfocard {
    grid-area: StuInfo;
+   max-height: 39.5rem;
+   min-height: 39.5rem;
 }
-
-/* .SDash--Info-card>ul,
-li,
-span {
-   list-style: none;
-} */
 
 .infoCardcontainer {
    width: 100%;
    background-color: #fff;
-   border-radius: 8px;
+   border-radius: 1px;
+   max-height: 39.5rem;
+   min-height: 39.5rem;
+   overflow-y: scroll;
+   margin-top: 5px;
 }
 
-.ulStyling {
-   margin-top: 0%;
+.myInterestsDiv {
+   margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   margin-top: 10px;
 }
-
-/* ul>h4,
-li>h4 {
-   margin-top: 1em;
-} */
 
 .title {
 margin-left: auto;
 }
 
 .answer {
-   margin-left: auto;
+   margin-left: 5.5px;
 }
 
 /* ============= Student Checklist ========== */
@@ -165,11 +169,14 @@ margin-left: auto;
    grid-area: StuCheck;
    display: flex;
    flex-direction: column;
-   border-radius: 8px;
+   border-radius: 1px;
    flex-wrap: nowrap;
    align-items: center;
    margin-left: 12px;
    background-color: #fff;
+   margin-top: 5px;
+   max-height: 39.5rem;
+   min-height: 39.5rem;
 }
 
 /* ============= Student Tasks ============== */
@@ -178,14 +185,15 @@ margin-left: auto;
    grid-area: StuTasks;
    display: flex;
    flex-direction: column;
-   border-radius: 8px;
+   border-radius: 1px;
    flex-wrap: nowrap;
    align-items: center;
    margin-left: 12px;
    background-color: #fff;
-   max-height: 93.7%;
-   /* margin-top: 2.5%; */
+   margin-top: 5px;
    overflow-y: scroll;
+   max-height: 39.5rem;
+   min-height: 39.5rem;
 }
 
 #StuTasksHeader {
@@ -360,7 +368,7 @@ margin-left: auto;
 }
 
 .label {
-   color: #f79020;
+   color: #de7505f2;
    font-weight: bold;
    width: 35%;
    margin-bottom: 1%;
@@ -383,6 +391,8 @@ margin-left: auto;
    flex-direction: column;
  }
 
- .editInterestsTextarea {
-   margin-top: 1.7%;
+ .editStudentBtn {
+   margin-right: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
  }
