@@ -36,9 +36,9 @@ export const appSlice = createSlice({
       state.cohortChat = payload;
 
     }
-    deleteStudentTask(state, { payload }) {
-      state.studentTasks = state.studentTasks.filter((task) => task.task_id !== payload.task_id)
-    }
+    // deleteStudentTask(state, { payload }) {
+    //   state.studentTasks = state.studentTasks.filter((task) => task.task_id !== payload.task_id)
+    // }
   },
 });
 
