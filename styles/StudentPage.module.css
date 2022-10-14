@@ -172,6 +172,25 @@ margin-left: auto;
    background-color: #fff;
 }
 
+.checklistForm {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.editStudentChecklist {
+   display: flex;
+   flex-direction: column;
+}
+.checkboxLabel {
+   padding-top: 7px;
+}
+.checklistButtonDiv{
+display: flex;
+
+}
+.checklistButtons{
+   margin-top: 20px;
+}
 /* ============= Student Tasks ============== */
 
 .SDashTasks {
