@@ -68,7 +68,7 @@ const SPChecklist = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`/pages/api/users/students/${checklistData.user_id}`, {
+    fetch(`/api/users/${checklistData.user_id}`, {
       method: "PATCH",
       body: JSON.stringify(checklistData),
       headers: { "Content-Type": "application/json" },
