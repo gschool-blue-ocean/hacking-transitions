@@ -21,6 +21,7 @@ const CohortView = ({ currCohort }) => {
     dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
     router.push({
       pathname: "/admin/viewstudent",
+      
     });
   };
   if (currCohort.length == 0) {

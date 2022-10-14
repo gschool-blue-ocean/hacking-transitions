@@ -15,7 +15,8 @@ export default function StudentPage({
   setModalIsOpen,
   viewClickedCohort,
 }) {
-  const { currentUser, activeStudent } = useSelector(({app: {currentUser, activeStudent}}) => ({currentUser, activeStudent}))
+
+  const  activeStudent  = useSelector(({app: { activeStudent}}) => ( activeStudent))
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {

@@ -3,38 +3,28 @@ import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
 import Chat from "../Chat";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
+
 import CreateCohort from "./CreateCohort";
-const AdminContainer = () => {
-  const allCohorts = useSelector(
-    ({ app: { allCohortsData } }) => allCohortsData
-  );
-  //redux state ^^
-  const [students, setStudents] = useState([]);
-  const [cohorts, setCohorts] = useState(allCohorts);
+import { server } from "../../utility";
+const AdminContainer = ({ allCohorts }) => {
+  const [cohorts] = useState(allCohorts);
   const [currCohort, setCurrCohort] = useState([]);
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "/api/users/students",
-    }).then((res) => {
-      setStudents(res.data);
+    (async () => {
       if (cohorts.length > 0) {
-        console.log(res);
-        let topcohort = cohorts[cohorts.length - 1];
-        let filtStudents = res.data.filter(
-          (student) => student.cohort_id == topcohort.cohort_id
-        );
+        const topcohort = cohorts[cohorts.length - 1];
+        const students = await (
+          await fetch(`${server}/api/users/cohort/${topcohort.cohort_id}`)
+        ).json();
         setCurrCohort([
           {
             cohort_id: topcohort.cohort_id,
             cohort_name: topcohort.cohort_name,
-            students: filtStudents,
+            students,
           },
         ]);
       }
-    });
+    })();
   }, []);
 
   return (
@@ -46,10 +36,9 @@ const AdminContainer = () => {
             cohorts={cohorts}
             currCohort={currCohort}
             setCurrCohort={setCurrCohort}
-            students={students}
           />
         </div>
-        <CohortView students={students} currCohort={currCohort} />
+        <CohortView currCohort={currCohort} />
         <Chat />
       </div>
     </div>
