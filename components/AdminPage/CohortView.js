@@ -6,7 +6,11 @@ import { BsFillArrowUpRight } from "react-icons/bs";
 import { Button, Modal } from "react-bootstrap";
 import App from "./EditStudentModal";
 import EditStudentModal from "./EditStudentModal";
+import { useDispatch } from "react-redux";
+import { setActiveStudent } from "../../redux/features/app-slice";
+
 const CohortView = ({ currCohort }) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const router = useRouter();
   const handleClose = () => setShow(false);
@@ -14,10 +18,9 @@ const CohortView = ({ currCohort }) => {
   //handle click for individual students
   const handleClick = (e) => {
     const data = e.target.dataset;
-    const id = data.student_id;
+    dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
     router.push({
       pathname: "/admin/viewstudent",
-      query: { user_id: id },
     });
   };
   if (currCohort.length == 0) {
@@ -42,13 +45,13 @@ const CohortView = ({ currCohort }) => {
                   <th className={s.tableheaders}>Branch</th>
                   <th className={s.tableheaders}>Edit</th>
                 </tr>
-                {cohort.students.map((student) => (
+                {cohort.students.map((student, index) => (
                   <tr className={s.tr}>
                     <td>
                       <btn
                         className={s.td}
                         onClick={handleClick}
-                        data-student_id={student.user_id}
+                        data-student_id={index}
                       >
                         {student.first}
                       </btn>
@@ -57,7 +60,7 @@ const CohortView = ({ currCohort }) => {
                       <btn
                         className={s.td}
                         onClick={handleClick}
-                        data-student_id={student.user_id}
+                        data-student_id={index}
                       >
                         {student.last}
                       </btn>
@@ -66,7 +69,7 @@ const CohortView = ({ currCohort }) => {
                       <btn
                         className={s.td}
                         onClick={handleClick}
-                        data-student_id={student.user_id}
+                        data-student_id={index}
                       >
                         {student.ets_date}
                       </btn>
@@ -75,7 +78,7 @@ const CohortView = ({ currCohort }) => {
                       <btn
                         className={s.td}
                         onClick={handleClick}
-                        data-student_id={student.user_id}
+                        data-student_id={index}
                       >
                         {student.leave_start_date}
                       </btn>
@@ -84,7 +87,7 @@ const CohortView = ({ currCohort }) => {
                       <btn
                         className={s.td}
                         onClick={handleClick}
-                        data-student_id={student.user_id}
+                        data-student_id={index}
                       >
                         {student.branch}
                       </btn>
