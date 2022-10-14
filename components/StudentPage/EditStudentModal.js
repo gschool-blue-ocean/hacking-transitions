@@ -1,5 +1,4 @@
-import react, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import react, { useState } from "react";
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { server } from "../../utility";
@@ -9,11 +8,11 @@ import { useRouter } from "next/router";
 const EditStudentModal = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const activeStudent = useSelector(
-    ({ app: { activeStudent } }) => activeStudent
-  );
+  const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
+    activeStudent,
+  }));
   console.log({ activeStudent });
-  const [userData, setUserData] = useState({});
+
   const [formData, setFormData] = useState({
     user_id: activeStudent.user_id,
     first: activeStudent.first,
@@ -34,14 +33,12 @@ const EditStudentModal = () => {
     mos: activeStudent.mos,
     interests: activeStudent.interests,
     file_va_claim: activeStudent.file_va_claim,
-    HHG_move: activeStudent.HHG_move,
+    hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
     final_physical: activeStudent.final_physical,
     gear_turn_in: activeStudent.gear_turn_in,
   });
-  useEffect(() => {
-    setUserData(JSON.parse(sessionStorage.getItem("currentUser")));
-  }, []);
+
   function convertDateToIso(date) {
     if (date == "") {
       return "";
@@ -58,7 +55,6 @@ const EditStudentModal = () => {
       let year = dateArray[2];
       let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
       let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
-
       return `${year}-${month}-${day}`;
     }
   }
@@ -66,7 +62,7 @@ const EditStudentModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submitted", formData);
-    fetch(`${server}/api/users/${activeStudent.user_id}`, {
+    fetch(`/api/users/${activeStudent.user_id}`, {
       method: "PATCH",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
@@ -103,9 +99,8 @@ const EditStudentModal = () => {
   };
 
   return (
-    // <div className='portalContainer'>
     <div className={styles.addStudentModal}>
-      <h4 className="editStudentFormTitle">Edit student information</h4>
+      <h3 className="editStudentFormTitle">Edit student information</h3>
       <form className={styles.addStudentForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentFormInputs}>
           <label className={styles.label}>
@@ -113,7 +108,7 @@ const EditStudentModal = () => {
             <input
               id="editStudentFirstName"
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student First name"
               onChange={handleChange}
@@ -121,12 +116,11 @@ const EditStudentModal = () => {
               value={formData.first}
             />
           </label>
-
           <label className={styles.label}>
             Last
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student Last name"
               onChange={handleChange}
@@ -134,12 +128,11 @@ const EditStudentModal = () => {
               value={formData.last}
             />
           </label>
-
           <label className={styles.label}>
             Email
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="email"
               placeholder="Student Email Address"
               onChange={handleChange}
@@ -147,12 +140,11 @@ const EditStudentModal = () => {
               value={formData.email}
             />
           </label>
-
           <label className={styles.label}>
             Rank
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student Rank"
               onChange={handleChange}
@@ -160,12 +152,11 @@ const EditStudentModal = () => {
               value={formData.rank}
             />
           </label>
-
           <label className={styles.label}>
             Branch
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student Branch of Service"
               onChange={handleChange}
@@ -173,12 +164,11 @@ const EditStudentModal = () => {
               value={formData.branch}
             />
           </label>
-
           <label className={styles.label}>
             Duty Station
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student Duty Station"
               onChange={handleChange}
@@ -186,36 +176,33 @@ const EditStudentModal = () => {
               value={formData.duty_station}
             />
           </label>
-
           <label className={styles.label}>
             Leave start date
             <input
               required
-              className="addStudentFormInput editStudentDate"
+              className={styles.answer}
               type="date"
               onChange={handleChange}
               name="leave_start_date"
               value={formData.leave_start_date}
             />
           </label>
-
           <label className={styles.label}>
             ETS date
             <input
               required
-              className="addStudentFormInput editStudentDate"
+              className={styles.answer}
               type="date"
               onChange={handleChange}
               name="ets_date"
               value={formData.ets_date}
             />
           </label>
-
           <label className={styles.label}>
             City
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student City"
               onChange={handleChange}
@@ -223,12 +210,11 @@ const EditStudentModal = () => {
               value={formData.city}
             />
           </label>
-
           <label className={styles.label}>
             State
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student State"
               onChange={handleChange}
@@ -236,12 +222,11 @@ const EditStudentModal = () => {
               value={formData.state}
             />
           </label>
-
           <label className={styles.label}>
             Highest education
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student highest education"
               onChange={handleChange}
@@ -249,12 +234,11 @@ const EditStudentModal = () => {
               value={formData.highest_education}
             />
           </label>
-
           <label className={styles.label}>
             Military Occupation
             <input
               required
-              className="addStudentFormInput"
+              className={styles.answer}
               type="text"
               placeholder="Student Military occupation"
               onChange={handleChange}
@@ -262,8 +246,7 @@ const EditStudentModal = () => {
               value={formData.mos}
             />
           </label>
-
-          <label className="checkboxLabel">
+          <label className={styles.studentInfoCheckbox}>
             <input
               type="checkbox"
               name="seeking_further_education"
@@ -272,8 +255,7 @@ const EditStudentModal = () => {
             />{" "}
             Seeking further education?
           </label>
-
-          <label className="checkboxLabel">
+          <label className={styles.studentInfoCheckbox}>
             <input
               type="checkbox"
               name="planning_to_relocate"
@@ -282,8 +264,7 @@ const EditStudentModal = () => {
             />{" "}
             Planning to relocate?
           </label>
-
-          <label className="checkboxLabel">
+          <label className={styles.studentInfoCheckbox}>
             <input
               type="checkbox"
               name="taps_complete"
@@ -292,8 +273,7 @@ const EditStudentModal = () => {
             />{" "}
             Taps complete?
           </label>
-
-          <label className="checkboxLabel">
+          <label className={styles.studentInfoCheckbox}>
             <input
               type="checkbox"
               name="has_dependents"
@@ -303,9 +283,8 @@ const EditStudentModal = () => {
             Have dependents?
           </label>
         </div>
-
-        {userData.admin ? null : (
-          <div className="myInterestsDiv">
+        {activeStudent.admin ? null : (
+          <div className={styles.myInterestsDiv}>
             <label>My interests:</label>
             <textarea
               className={styles.editInterestsTextarea}
@@ -316,24 +295,21 @@ const EditStudentModal = () => {
             />
           </div>
         )}
-
-        <input
-          className="addStudentFormButton createStudent"
-          type="submit"
-          value="Update Student"
-        />
-
-        <input
-          className="addStudentFormButton cancel"
-          onClick={handleCancel}
-          type="button"
-          value="Cancel"
-        />
+        <div className={styles.editStudentBtnDiv}>
+          <input
+            className={styles.editStudentBtn}
+            type="submit"
+            value="Update Student"
+          />
+          <input
+            className={styles.editStudentBtn}
+            onClick={handleCancel}
+            type="button"
+            value="Cancel"
+          />
+        </div>
       </form>
     </div>
-
-    // </div >,
-    // document.getElementById('portal')
   );
 };
 

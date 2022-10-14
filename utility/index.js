@@ -13,7 +13,7 @@ export const handleErrors = (res) =>
 export const server =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3000"
-    : "deployed website url";
+    : "https://hacking-transitions.netlify.app";
 /********** END Update Base Url For API request **********/
 
 /********** Checks if the current user is logged in. If not returns null, otherwise returns 'student', or 'admin'**********/

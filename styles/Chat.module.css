@@ -2,6 +2,7 @@
   height: fit-content;
   margin-top: .5rem;
   width: auto ;
+  grid-area: ChatModal;
 }
 .display {
   display: flex;
