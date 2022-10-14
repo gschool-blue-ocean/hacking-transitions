@@ -4,15 +4,15 @@ import { server } from "../../../utility";
 const updateDB = (msg, id, del = false) => {
   id
     ? del
-      ? fetch(`${server}/api/comments/${id}`, {
+      ? fetch(`/api/comments/${id}`, {
           method: "DELETE",
         })
-      : fetch(`${server}/api/comments/${id}`, {
+      : fetch(`/api/comments/${id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(msg),
         })
-    : fetch(`${server}/api/comments`, {
+    : fetch(`/api/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(msg),

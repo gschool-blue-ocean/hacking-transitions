@@ -39,7 +39,7 @@ const Chat = () => {
       /****** Getting connected to the socket server ******/
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
-      await fetch(`${server}/api/socket`);
+      await fetch(`/api/socket`);
       const newSocket = io();
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
@@ -271,7 +271,7 @@ const Chat = () => {
 export default Chat;
 
 const getCohortComments = async (id) =>
-  await (await fetch(`${server}/api/comments/cohort/${id}`)).json();
+  await (await fetch(`/api/comments/cohort/${id}`)).json();
 
 const getStudentComments = async (id) =>
-  await (await fetch(`${server}/api/comments/student/${id}`)).json();
+  await (await fetch(`/api/comments/student/${id}`)).json();

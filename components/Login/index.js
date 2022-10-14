@@ -23,7 +23,7 @@ let Login = () => {
       password: loginData.password,
     };
 
-    fetch(`${server}/api/users/${inputData.username}`)
+    fetch(`/api/users/${inputData.username}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();

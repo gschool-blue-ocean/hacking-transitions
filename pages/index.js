@@ -29,7 +29,7 @@ function Home() {
   const confirmStorageUser = async (currentUser, local = false) => {
     const currentUserObj = JSON.parse(currentUser);
     const user = await (
-      await fetch(`${server}/api/users/${currentUserObj.username}`)
+      await fetch(`/api/users/${currentUserObj.username}`)
     ).json();
     if (user.password === currentUserObj.password) {
       local && localStorage.setItem("currentUser", JSON.stringify(user));

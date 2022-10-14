@@ -15,7 +15,7 @@ const AdminContainer = ({ allCohorts }) => {
       if (cohorts.length > 0) {
         const topcohort = cohorts[cohorts.length - 1];
         const students = await (
-          await fetch(`${server}/api/users/cohort/${topcohort.cohort_id}`)
+          await fetch(`/api/users/cohort/${topcohort.cohort_id}`)
         ).json();
         setCurrCohort([
           {

@@ -28,7 +28,7 @@ export const checkLogin = async () => {
 const checkUser = JSON.parse(session)
 
   const user = await (
-    await fetch(`${server}/api/users/${checkUser.user_id}`)
+    await fetch(`/api/users/${checkUser.user_id}`)
   ).json();
   
   local && localStorage.setItem("currentUser", JSON.stringify(user));
