@@ -11,7 +11,7 @@ const RevealChat = () => {
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      x: -110, 
+      x: 0, 
       // rotateX: 0,
       transition: {
         duration: 0.5,
@@ -20,7 +20,7 @@ const RevealChat = () => {
     },
     exit: {
       opacity: 0,
-      x: -110,
+      x: 0,
       // rotateX: -15,
       transition: {
         duration: 0.5,
@@ -37,7 +37,7 @@ const RevealChat = () => {
           Chat     
         </motion.btn>
       </div>
-      <div>
+    <div className={s.chatBoxContainer}>
         <motion.div initial="enter" animate={isClicked ? "enter" : "exit"} variants={subMenuAnimate}>
               <motion.div whileHover={{ scale: 1.05 }}>
                 <motion.btn>
