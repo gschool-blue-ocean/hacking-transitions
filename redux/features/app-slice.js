@@ -18,6 +18,7 @@ export const appSlice = createSlice({
     },
     setStudentsForCohortChat(state, { payload }) {
       state.cohortChat = payload;
+
     },
     deleteStudentTask(state, { payload }) {
       state.studentTasks = state.studentTasks.filter(

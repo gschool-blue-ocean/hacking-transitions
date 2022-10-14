@@ -14,37 +14,47 @@
     background-color: #FFF;
 }
 .tools_container {
+    height: 70rem;
+    margin-left: 2rem;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;
+    align-items: center;
     
 }
 .menucontainer{
     /* border: 1px black solid; */
+    cursor: pointer;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
     height: 3.5rem;
-    margin-left: 10rem;
     width: 20rem;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    border-bottom: #F79020 solid 1px
  }
  .titlebtn{
     cursor: pointer;
  }
  .menutitle{
-    border-bottom: 1px #F79020 solid;
-
-    width: 20rem;
     font-size: 3rem;
  }
  .cohortsmenu{    
-    margin: 2rem;
     width: 12rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
     justify-content: center;
 }
 .listitem{
     /* border: 1px black solid; */
-    width: 10rem;
+    display: flex;
+    flex-direction: row;
+    width: 16rem;
     height: 2rem;
     margin: 1rem;
     align-items: center;
@@ -55,4 +65,15 @@
 .cohortbtn{
     font-size: 2rem;
     cursor: pointer;
+}
+.messageBtn{
+    width: 5rem;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 1rem;
+    color: grey;
+    border:white 1px solid;
+}
+.messageBtn:hover {
+    border: 2px solid #F79020;
 }

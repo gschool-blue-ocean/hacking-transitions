@@ -11,8 +11,8 @@ export default async function handler(req, res) {
           isNaN(parseInt(id)) ? sql`username = ${id}` : sql`user_id = ${id}`
         }`
       )[0];
-      
-      user ? res.json(user) : res.status(404).send('Not Found');
+
+      user ? res.json(user) : res.status(404).send("Not Found");
     } catch (error) {
       console.log(error);
       handleErrors(res);
@@ -40,6 +40,11 @@ export default async function handler(req, res) {
       seeking_further_education,
       mos,
       interests,
+      final_physical,
+      gear_turn_in,
+      hhg_move,
+      barracks_checkout,
+      file_va_claim,
     } = req.body;
     const newUser = {
       first,
@@ -59,6 +64,11 @@ export default async function handler(req, res) {
       seeking_further_education,
       mos,
       interests,
+      final_physical,
+      gear_turn_in,
+      hhg_move,
+      barracks_checkout,
+      file_va_claim,
     };
     try {
       // DONT FORGET TO ENCRYPT PASSWORD

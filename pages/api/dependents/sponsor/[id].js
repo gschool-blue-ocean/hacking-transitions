@@ -1,7 +1,7 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404, handleErrors} from "../../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../../utility";
 export default async function handler(req, res) {
-  console.log(req.method,req.url);
+  console.log(req.method, req.url);
   const { id } = req.query;
   /************* GET ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
   if (checkApiMethod(req, "GET") && typeof parseInt(id) === "number") {
@@ -19,8 +19,9 @@ export default async function handler(req, res) {
   /************* DELETE ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
   if (checkApiMethod(req, "DELETE") && typeof parseInt(id) === "number") {
     try {
-      const dependents =
-        (await sql`DELETE FROM dependents WHERE sponsor_id = ${id} RETURNING *`)[0];
+      const dependents = (
+        await sql`DELETE FROM dependents WHERE sponsor_id = ${id} RETURNING *`
+      )[0];
       res.json(dependents);
     } catch (error) {
       console.log(error);
@@ -29,5 +30,5 @@ export default async function handler(req, res) {
     return;
   }
   /************* END DELETE ALL DEPENDENTS FROM A CERTAIN SPONSOR *************/
-  notFound404(res)
+  notFound404(res);
 }
