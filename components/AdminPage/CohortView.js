@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import s from "../../styles/CohortView.module.css";
+import s from '../../styles/AdminHomePage/CohortView.module.css'
 import { useRouter } from "next/router";
 import { BsFillArrowUpRight } from "react-icons/bs";
 import { Button, Modal } from "react-bootstrap";
@@ -108,6 +108,7 @@ const CohortView = ({ currCohort }) => {
       </div>
     );
   }
-};
+}
 
-export default CohortView;
+
+export default CohortView

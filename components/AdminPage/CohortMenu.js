@@ -1,10 +1,10 @@
-import s from "../../styles/AdminPage.module.css";
+import s from "../../styles/AdminHomePage/AdminPage.module.css";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat } from "../../redux/features/app-slice";
 import { server } from "../../utility";
-const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
+const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
@@ -56,18 +56,16 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      rotateX: 0,
       transition: {
         duration: 0.5,
+        delay: .5, 
       },
       display: "block",
     },
     exit: {
       opacity: 0,
-      rotateX: -15,
       transition: {
         duration: 0.5,
-        delay: 0.3,
       },
       transitionEnd: {
         display: "none",
@@ -75,8 +73,9 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
     },
   };
   return (
+    <>
     <div className={s.menucontainer}>
-      <div className={s.menutitle}>
+      <div className={s.menutitle} onClick={toggleMoveChat}>
         <motion.btn onClick={toggleClickedMenu} className={s.titlebtn}>
           Cohorts
         </motion.btn>
@@ -102,23 +101,36 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
                 >
                   {cohort.cohort_name}
                 </motion.btn>{" "}
-                <button
+                <button className={s.messageBtn}
                   onClick={async () => {
                     const cohortStudents = await (
                       await fetch(`${server}/api/users/cohort/${cohort.cohort_id}`)
                     ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
                   }}
-                >
-                  Chat {cohort.cohort_name}
-                </button>
+                  >
+                  Message
+                  </button>
               </motion.div>
             );
           })}
         </motion.div>
       </div>
     </div>
+    
+    </>
   );
 };
 
 export default CohortMenu;
+
+{/* <button
+onClick={() => {
+  const cohortStudents = students.filter(
+    (student) => student.cohort_id === cohort.cohort_id
+  );
+  dispatch(setStudentsForCohortChat(cohortStudents));
+}}
+>
+Chat {cohort.cohort_name}
+</button> */}

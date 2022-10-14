@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 const Header = ({currentUser}) => {
   const router = useRouter();
   const { pathname } = router;
-
-
   return (
  
       <nav className={style.header}>
