@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import { server } from "../../../utility";
 
-const updateDB = (msg, id, del) => {
+const updateDB = (msg, id, del = false) => {
   id
     ? del
       ? fetch(`${server}/api/comments/${id}`, {
@@ -20,7 +20,7 @@ const updateDB = (msg, id, del) => {
 };
 
 export default async function handler(req, res) {
-  console.log(req.method,req.url);
+  console.log(req.method, req.url);
   /******* ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   if (res.socket.server.io) {
     console.log("Socket is already running");
@@ -47,26 +47,16 @@ export default async function handler(req, res) {
       });
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
-      socket.on("edit_message", (msg, id, del = undefined) => {
+      socket.on("edit_message", (msg, id, del = false) => {
         console.log("recieved edit message", msg, id);
         fetch();
         if (!del) msg.comment_id = id;
         socket.to(msg.student_id).emit("edit_message", msg, del);
       });
 
-      socket.on("edit_cohort_message", (msg, id, students, del = undefined) => {
+      socket.on("edit_cohort_message", (msg, id, students, del = false) => {
         console.log("recieved cohort edit message", msg, id);
-        del
-          ? fetch(`${server}/api/comments/cohort/${id}`, {
-              method: "DELETE",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(msg),
-            })
-          : fetch(`${server}/api/comments/cohort/${id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(msg),
-            });
+        del ? updateDB(msg, id, true) : updateDB(msg, id);
         if (!del) msg.comment_id = id;
         let groupSocket = socket;
 
@@ -96,9 +86,9 @@ export default async function handler(req, res) {
         // );
         let groupSocket = socket;
 
+        updateDB(msg);
         for (const { user_id } of students) {
           msg.student_id = user_id;
-          updateDB(msg);
           groupSocket = groupSocket.to(user_id);
         }
         groupSocket.emit("recieve_message", msg);
