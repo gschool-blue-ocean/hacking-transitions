@@ -13,7 +13,6 @@ const admin = ({  allCohorts }) => {
   useEffect(() => {
     
     (async () => {
-      console.log('hi');
       const user = await checkLogin();
       console.log(user);
 
