@@ -2,7 +2,6 @@ import sql from "../../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../../utility";
 export default async function handler(req, res) {
   console.log(req.method, req.url);
-  console.log(req.body);
   const { id } = req.query;
   /************* GET A CERTAIN COMMENTS INFORMATION *************/
   if (checkApiMethod(req, "GET")) {

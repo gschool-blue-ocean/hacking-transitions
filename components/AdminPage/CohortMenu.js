@@ -3,23 +3,24 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat } from "../../redux/features/app-slice";
+import { server } from "../../utility";
 const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
   const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active);
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     const data = e.target.dataset;
     const id = data.cohort_id;
     console.log("isclicked", data.isclicked);
     //filter students based on cohort id retrieved by event.target
-    let filtStudents = students.filter((student) => student.cohort_id == id);
+    const students = await (await fetch(`${server}/api/users/cohort/${id}`)).json();
     if (cohorts.length == 0) {
       setCurrCohort([
         {
           cohort_id: id,
           cohort_name: data.cohort_name,
-          students: filtStudents,
+          students,
         },
       ]);
     } else {
@@ -29,7 +30,7 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
           oldCohort.concat({
             cohort_id: id,
             cohort_name: data.cohort_name,
-            students: filtStudents,
+            students,
           })
         );
         e.target.setAttribute("style", "color:#f79020");
@@ -39,8 +40,7 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
           oldCohort.filter((cohort) => cohort.cohort_id != id)
         );
         data.isclicked = false;
-          e.target.setAttribute('style', 'color:#003B4C')
-
+        e.target.setAttribute("style", "color:#003B4C");
       }
     }
   };
@@ -103,10 +103,10 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts }) => {
                   {cohort.cohort_name}
                 </motion.btn>{" "}
                 <button
-                  onClick={() => {
-                    const cohortStudents = students.filter(
-                      (student) => student.cohort_id === cohort.cohort_id
-                    );
+                  onClick={async () => {
+                    const cohortStudents = await (
+                      await fetch(`${server}/api/users/cohort/${cohort.cohort_id}`)
+                    ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
                   }}
                 >

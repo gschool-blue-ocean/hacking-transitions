@@ -20,6 +20,7 @@ const updateDB = (msg, id, del) => {
 };
 
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
   /******* ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   if (res.socket.server.io) {
     console.log("Socket is already running");

@@ -14,16 +14,16 @@ import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   /****** Getting state from redux ******/
   //cohortChat is an array of students from the given cohort
-  const { userData, activeStudent, cohortChat } = useSelector(
-    ({ app: { currentUser, activeStudent, cohortChat } }) => ({
-      userData: currentUser,
+
+  const { activeStudent, cohortChat } = useSelector(
+    ({ app: {  activeStudent, cohortChat } }) => ({
       activeStudent,
       cohortChat,
     })
   );
   /****** END Getting state from redux ******/
-
   let newSocket; //setting a socket var was the only way i found to get the socket methods to work that can be used in the useeffect
+  const [userData, setUserData] = useState({})
   const [editInfo, setEditInfo] = useState(null); // info to be sent when editing an existing message,is a object
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
@@ -37,7 +37,8 @@ const Chat = () => {
   useEffect(() => {
     (async () => {
       /****** Getting connected to the socket server ******/
-      
+      const userData = JSON.parse(sessionStorage.getItem('currentUser'))
+      setUserData(userData)
       await fetch(`${server}/api/socket`);
       newSocket = io();
       setSocket(newSocket);

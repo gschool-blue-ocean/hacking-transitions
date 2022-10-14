@@ -9,7 +9,7 @@ export default function SPDependents({ student }) {
    }, [student]);
 
    const getDependents = () => {
-      fetch(`/api/dependents/sponsor/${student.user_id}`)
+      fetch(`${server}/api/dependents/sponsor/${student.user_id}`)
          .then((res) => res.json())
          .then((deps) => {
             setDependents(deps);

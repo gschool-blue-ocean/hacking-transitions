@@ -2,8 +2,9 @@ import sql from "../../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors} from "../../../../utility";
 export default async function handler(req, res) {
   
+  console.log(req.method,req.url);
   const { id } = req.query;
-  console.log(req.method,req.url,id);
+
   /************* GET ALL COMMENTS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "GET") && typeof parseInt(id) === "number") {
     try {
