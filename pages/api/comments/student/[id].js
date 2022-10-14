@@ -1,12 +1,14 @@
 import sql from "../../../../database/connection";
-import { checkApiMethod, notFound404, handleErrors} from "../../../../utility";
+import { checkApiMethod, notFound404, handleErrors } from "../../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method, req.url);
   const { id } = req.query;
+
   /************* GET ALL COMMENTS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "GET") && typeof parseInt(id) === "number") {
     try {
       const comments =
-        await sql`SELECT * FROM comments WHERE student_id = ${id} ORDER BY comment_id ASC`;        
+        await sql`SELECT * FROM comments WHERE comments.student_id = ${id} OR comments.cohort_id = (SELECT users.cohort_id FROM users WHERE user_id = ${id}) ORDER BY comment_id ASC`;
       res.json(comments);
     } catch (error) {
       console.log(error);
@@ -18,8 +20,9 @@ export default async function handler(req, res) {
   /************* DELETE ALL COMMENTS FROM A CERTAIN STUDENT *************/
   if (checkApiMethod(req, "DELETE") && typeof parseInt(id) === "number") {
     try {
-      const comments =
-        (await sql`DELETE FROM comments WHERE student_id = ${id} RETURNING *`)[0];
+      const comments = (
+        await sql`DELETE FROM comments WHERE student_id = ${id} RETURNING *`
+      )[0];
       res.json(comments);
     } catch (error) {
       console.log(error);
@@ -28,5 +31,5 @@ export default async function handler(req, res) {
     return;
   }
   /************* END DELETE ALL COMMENTS FROM A CERTAIN STUDENT *************/
-  notFound404(res)
+  notFound404(res);
 }

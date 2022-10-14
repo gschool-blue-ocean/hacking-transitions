@@ -1,17 +1,14 @@
 import react, { useState } from "react";
+import ReactDOM from "react-dom";
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setCurrentUser,
-  setActiveStudent,
-} from "../../redux/features/app-slice";
+import { server } from "../../utility";
+import { setActiveStudent } from "../../redux/features/app-slice";
+
 const SPChecklist = () => {
   const dispatch = useDispatch();
-  const { userData, activeStudent } = useSelector(
-    ({ app: { currentUser, activeStudent } }) => ({
-      userData: currentUser,
-      activeStudent,
-    })
+  const activeStudent = useSelector(
+    ({ app: { activeStudent } }) => activeStudent
   );
 
   const [checklistData, setChecklistData] = useState({

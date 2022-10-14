@@ -2,7 +2,8 @@
   height: fit-content;
   border: 1px solid red;
   margin-top: .5rem;
-  width: 30rem ;
+  /* width: 30rem ; */
+  grid-area: ChatModal;
 }
 .display {
   display: flex;
@@ -19,6 +20,7 @@
 .message {
   margin: 1rem 0;
   width: fit-content;
+  position: relative;
 }
 .message .body {
   border: 1px solid rgba(0, 0, 0, .1);
@@ -83,3 +85,27 @@ cursor: pointer;
 }
 
 
+.editContainer{
+  position: absolute;
+  right: .3rem;
+  top: -1.7rem;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 1rem;
+  width: 5rem;
+  padding: .25rem;
+  background: rgba(105, 96, 96, 0.05);
+}
+.editBtn{
+  background-color: transparent;
+  border: none;
+  margin-right: .75rem;
+  font-size: .9rem;
+
+}
+.editBtn:last-child{
+  margin-right: 0;
+}
+.editBtn:active,
+.editBtn:hover{
+  color: blue;
+}

@@ -1,10 +1,15 @@
 import React from "react";
 import styles from "../../styles/StudentPage.module.css";
+import { useDispatch } from "react-redux";
+import { deleteStudentTask } from '../../redux/features/app-slice';
+import { server } from "../../utility";
 
 // Pull  Selected Task Info from DB
 export default function SPTaskModal({ task, closeModal }) {
-   const deleteTask = (taskID) => {
-      fetch(`https://hacking-transition.herokuapp.com/api/delete/task/${taskID}`, {
+   const dispatch = useDispatch();
+   const deleteTask = (task) => {
+      dispatch(deleteStudentTask(task));
+      fetch(`${server}/api/tasks/${task.task_id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });
@@ -29,7 +34,7 @@ export default function SPTaskModal({ task, closeModal }) {
             <button
                className={styles.ModalTaskBtns}
                onClick={() => {
-                  deleteTask(task.task_id);
+                  deleteTask(task);
                   closeModal(false);
                }}
             >
