@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import style from "../../styles/viewstudent.module.css";
+import style from "../../styles/viewStudent.module.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import StudentPage from "../../components/StudentPage";
@@ -9,7 +9,7 @@ import { checkLogin } from "../../utility";
 
 //******FOR VIEWING STUDENT INFORMATION WHILE LOGGED IN AS AN ADMIN ***********/
 
-const viewstudent = () => {
+const ViewStudent = () => {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
@@ -62,4 +62,4 @@ const viewstudent = () => {
   );
 };
 
-export default viewstudent;
+export default ViewStudent;

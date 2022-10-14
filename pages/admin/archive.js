@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
 
-export default function archive() {
+export default function Archive() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [admin, setAdmin] = useState(false);

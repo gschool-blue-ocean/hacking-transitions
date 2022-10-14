@@ -48,7 +48,6 @@ const Footer = () => {
                 <a
                   className={style.lastLink}
                   href="https://www.tfaforms.com/4794969?_ga=2.107592388.719091361.1664475274-961043702.1644711180"
-                  target="_blank"
                 >
                   Do Not Sell My Personal Information
                 </a>

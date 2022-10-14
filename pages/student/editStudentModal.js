@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-function editStudentModal(props) {
+function EditStudent(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -29,4 +29,4 @@ function editStudentModal(props) {
   );
 }
 
-export default editStudentModal;
+export default EditStudent;
