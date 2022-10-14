@@ -1,4 +1,5 @@
-insert into comments (author_name, student_id, author_id, content, date_time) values ('Poli Gonzalez',  9, 1, 'felis donec semper sapien a libero nam dui', '7/15/2022, 8:30:00 AM')
+insert into comments (author_name, student_id, author_id, content, date_time) values 
+('Poli Gonzalez',  9, 1, 'felis donec semper sapien a libero nam dui', '7/15/2022, 8:30:00 AM')
 , ('Poli Gonzalez',  10, 1, 'habitasse platea dictumst morbi', '7/15/2022, 8:30:00 AM')
 , ('Poli Gonzalez',  11, 1, 'odio elementum eu interdum eu', '7/15/2022, 8:30:00 AM')
 , ('Poli Gonzalez',  12, 1, 'pede malesuada in imperdiet et commodo', '7/15/2022, 8:30:00 AM')
@@ -418,3 +419,4 @@ insert into comments (author_name, student_id, author_id, content, date_time) va
 , ('Test Msg',  216, 216, 'magna vulputate luctus cum sociis natoque penatibus et', '7/15/2022, 9:15:00 AM')
 , ('Test Msg',  217, 217, 'phasellus sit amet erat nulla tempus vivamus', '7/15/2022, 9:15:00 AM')
 , ('Test Msg',  218, 218, 'duis at velit eu', '7/15/2022, 9:15:00 AM');
+

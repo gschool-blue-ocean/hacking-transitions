@@ -79,28 +79,48 @@ const EditStudentModal = () => {
             })
             .catch(err => console.log(err))
     }
-    console.log('activeStudent', activeStudent)
+    if (date == null) {
+      return "";
+    } else if (date.split("-")[0].length === 4) {
+      return date;
+    } else if (date.split("/")[0].length === 4) {
+      return date;
+    } else {
+      let newDate = new Date(date);
+      let dateArray = newDate.toLocaleDateString().split("/");
+      let year = dateArray[2];
+      let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
+      let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
 
-    const handleChange = (e) => {
-        if (e.target.type === "checkbox") {
-            return setFormData((prevData) => {
-                return {
-                    ...prevData,
-                    [e.target.name]: e.target.checked
-                }
-            })
-        }
-
-        setFormData((prevData) => {
-            return {
-                ...prevData,
-                [e.target.name]: e.target.value
-            }
-        })
+      return `${year}-${month}-${day}`;
     }
+  }
 
-    const handleCancel = () => {
-        router.push('/student');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submitted", formData);
+    fetch(`${server}/api/users/${activeStudent.user_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        dispatch(setActiveStudent(formData));
+        router.push("/student");
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log("activeStudent", activeStudent);
+
+  const handleChange = (e) => {
+    if (e.target.type === "checkbox") {
+      return setFormData((prevData) => {
+        return {
+          ...prevData,
+          [e.target.name]: e.target.checked,
+        };
+      });
     }
 
     return (

@@ -2,13 +2,14 @@ import React from "react";
 import styles from "../../styles/StudentPage.module.css";
 import { useDispatch } from "react-redux";
 import { deleteStudentTask } from '../../redux/features/app-slice';
+import { server } from "../../utility";
 
 // Pull  Selected Task Info from DB
 export default function SPTaskModal({ task, closeModal }) {
    const dispatch = useDispatch();
    const deleteTask = (task) => {
       dispatch(deleteStudentTask(task));
-      fetch(`/api/tasks/${task.task_id}`, {
+      fetch(`${server}/api/tasks/${task.task_id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });

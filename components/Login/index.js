@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../../styles/LoginStyles.module.css";
 import { server } from "../../utility";
-import {
-  setCurrentUser,
-  setLoginState,
-  setActiveStudent,
-} from "../../redux/features/app-slice.js";
+import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+
 let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -33,14 +30,9 @@ let Login = () => {
       })
       .then((user) => {
         if (user.password === inputData.password) {
-          dispatch(setLoginState(true));
-          dispatch(setCurrentUser(user));
-          stayLogged && window
-            ? localStorage.setItem("currentUser", JSON.stringify(user))
-            : window.sessionStorage.setItem(
-                "currentUser",
-                JSON.stringify(user)
-              );
+          stayLogged &&
+            localStorage.setItem("currentUser", JSON.stringify(user));
+          sessionStorage.setItem("currentUser", JSON.stringify(user));
         } else {
           throw new Error("Not Found");
         }

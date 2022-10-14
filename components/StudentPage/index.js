@@ -62,7 +62,6 @@ export default function StudentPage({ viewClickedCohort}) {
                     {activeStudent.ets_date}
                   </span>
                 </div>
-
                 <h4 className="text-left">Personal Info</h4>
                 <div>
                   <span className={styles.title}> Email: </span>
@@ -138,3 +137,4 @@ export default function StudentPage({ viewClickedCohort}) {
     </div>
   );
 }
+

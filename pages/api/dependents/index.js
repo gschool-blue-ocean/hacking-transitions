@@ -2,6 +2,7 @@ import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors} from "../../../utility";
 export default async function handler(req, res) {
 
+  console.log(req.method,req.url);
   /************* GET ALL CERTAIN DEPENDENT *************/
   if (checkApiMethod(req, "GET")) {
     try {
