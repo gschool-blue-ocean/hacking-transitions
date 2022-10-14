@@ -4,7 +4,6 @@ import CohortView from "./CohortView";
 import Chat from "../Chat";
 import { motion } from 'framer-motion'
 import { useState, useEffect } from "react";
-import CreateCohort from "./CreateCohort";
 import { server } from "../../utility";
 import RevealChat from './RevealChat'
 const AdminContainer = ({ allCohorts }) => {
@@ -54,7 +53,6 @@ const AdminContainer = ({ allCohorts }) => {
     <div className={s.background}>
       <div className={s.container}>
         <div className={s.tools_container}>
-         <CreateCohort />
          <div >
             <CohortMenu toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
          </div>
