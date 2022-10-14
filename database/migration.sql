@@ -6,7 +6,8 @@ CREATE TABLE cohorts (
     start_date VARCHAR(20),
     end_date VARCHAR(20),
     active BOOLEAN,
-    archived BOOLEAN
+    archived BOOLEAN,
+    register_code VARCHAR(20)
 );
 
 CREATE TABLE users (

@@ -2,26 +2,32 @@ import {useState} from 'react'
 import axios from 'axios'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
+import { server } from "../../utility";
 
 
 
 const RegisterModal = ({open, onClose}) => {
     const router = useRouter()
-    const [regCode, setRegCode] = useState("")
+    const [regCode, setRegCode] = useState("");
+    const [email, setEmail] = useState("");
     
     if (!open) return null; 
     const register = () =>{
         event.preventDefault();
-        console.log('user input', regCode)
-        if(regCode === '123'){
+        // console.log('user input', regCode, email)
+
+        fetch(`${server}/api/cohorts/regCode/registration/${regCode}`)
+        .then((res) => {
+          if (res.status === 404) throw new Error("Not Found");
+          console.log('code is NOT good');
+          return res.json();
+        })
+          .then(()=> {
             console.log('code is good')
             router.push('student/editStudentModal')
             
-        } else{
-            console.log('code is NOT good')
-        }
+        })
         
-
     }
   return (
     <>
@@ -40,8 +46,14 @@ const RegisterModal = ({open, onClose}) => {
                 id="reg code"
                 type="text"
                 onChange={(event) => setRegCode(event.target.value)}
-                onSubmit={register}
                 value={regCode}
+              />
+              <div className={styles.registerModalEmail}>Email</div>
+              <input className={styles.registerModalEmailInput}
+              id="email"
+              type="text"
+              onChange={(event) => setEmail(event.target.value)}
+              value={email}
               />
             </div>
            
