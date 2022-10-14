@@ -11,7 +11,6 @@ const EditStudentModal = () => {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
-
   console.log({ activeStudent });
 
   const [formData, setFormData] = useState({
@@ -34,7 +33,7 @@ const EditStudentModal = () => {
     mos: activeStudent.mos,
     interests: activeStudent.interests,
     file_va_claim: activeStudent.file_va_claim,
-    HHG_move: activeStudent.HHG_move,
+    hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
     final_physical: activeStudent.final_physical,
     gear_turn_in: activeStudent.gear_turn_in,
@@ -75,48 +74,29 @@ const EditStudentModal = () => {
       })
       .catch((err) => console.log(err));
   };
-  if (date == null) {
-    return "";
-  } else if (date.split("-")[0].length === 4) {
-    return date;
-  } else if (date.split("/")[0].length === 4) {
-    return date;
-  } else {
-    let newDate = new Date(date);
-    let dateArray = newDate.toLocaleDateString().split("/");
-    let year = dateArray[2];
-    let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
-    let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
+  console.log("activeStudent", activeStudent);
 
-    return `${year}-${month}-${day}`;
-  }
-};
+  const handleChange = (e) => {
+    if (e.target.type === "checkbox") {
+      return setFormData((prevData) => {
+        return {
+          ...prevData,
+          [e.target.name]: e.target.checked,
+        };
+      });
+    }
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log("submitted", formData);
-  fetch(`${server}/api/users/${activeStudent.user_id}`, {
-    method: "PATCH",
-    body: JSON.stringify(formData),
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => res.json())
-    .then(() => {
-      dispatch(setActiveStudent(formData));
-      router.push("/student");
-    })
-    .catch((err) => console.log(err));
-};
-
-const handleChange = (e) => {
-  if (e.target.type === "checkbox") {
-    return setFormData((prevData) => {
+    setFormData((prevData) => {
       return {
         ...prevData,
-        [e.target.name]: e.target.checked,
+        [e.target.name]: e.target.value,
       };
     });
-  }
+  };
+
+  const handleCancel = () => {
+    router.push("/student");
+  };
 
   return (
     <div className={styles.addStudentModal}>
