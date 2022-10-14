@@ -28,7 +28,7 @@ const AdminContainer = ({ allCohorts }) => {
       }
     })();
   }, []);
-  const toggleClickedMenu = () => {
+  const toggleMoveChat = () => {
     setMenuClicked(!menuClicked);
   };
   const moveMenuAnimate = {
@@ -55,8 +55,8 @@ const AdminContainer = ({ allCohorts }) => {
       <div className={s.container}>
         <div className={s.tools_container}>
          <CreateCohort />
-         <div onClick={toggleClickedMenu}>
-         <CohortMenu  cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
+         <div >
+            <CohortMenu toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
          </div>
          <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
           <RevealChat />

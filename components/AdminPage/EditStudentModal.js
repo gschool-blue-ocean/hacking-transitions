@@ -7,8 +7,6 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
-
-
 function EditStudentModal(props) {
   const student_id = props.student_id;
    const handleDelete = (event) => {
@@ -18,7 +16,10 @@ function EditStudentModal(props) {
     }).then(res => console.log(res))
    }
    const handleArchive = (event) => {
-     
+     axios({
+      method: 'PATCH',
+      url: `/`
+     })
    }
     return (
       <Modal
