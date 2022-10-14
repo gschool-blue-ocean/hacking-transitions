@@ -44,7 +44,7 @@ const Header = () => {
             </button>
           <RegisterModal
           open={isModalOpen}
-          onClose  = {() => setModalisOpen(false)}
+          onClose={()=> setModalisOpen(false)}
           />
         </ul>
       </div>
