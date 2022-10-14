@@ -1,0 +1,16 @@
+.container {
+     /* border: 1px black solid; */
+     cursor: pointer;
+     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+     margin-top: 1.2rem;
+     margin-bottom: 2rem;
+     height: 3.5rem;
+     width: 20rem;
+     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+     display: flex;
+     align-items: center;
+     border-bottom: #F79020 solid 1px
+}
+.h1 {
+     font-size: 3rem;
+}

@@ -1,6 +1,7 @@
 import sql from "../../../database/connection";
 import { checkApiMethod,notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
   const { id } = req.query;
   /************* UPDATE A CERTAIN TASKS *************/
   if (checkApiMethod(req, "PATCH")) {
@@ -22,8 +23,9 @@ export default async function handler(req, res) {
   /************* END UPDATE A CERTAIN TASKS *************/
   /************* DELETE A CERTAIN TASKS *************/
   if (checkApiMethod(req, "DELETE")) {
+    console.log('id', id)
     try {
-      const task = (await sql`DELETE FROM tasks WHERE task_id = ${id}`)[0];
+      const task = (await sql`DELETE FROM tasks WHERE task_id = ${id} RETURNING *`)[0];
       res.json(task);
     } catch (error) {
       console.log(error);

@@ -1,12 +1,31 @@
-import Index from "../../components/StudentPage"
+import StudentPage from "../../components/StudentPage";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { checkLogin } from "../../utility";
+import { setActiveStudent } from "../../redux/features/app-slice";
+const Student = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  useEffect(() => {
+    (async () => {
+      const user = await checkLogin();
+      console.log(user);
 
-const student = () => {
+      !user ? router.push("/") : setLoggedIn(true);
+      user === "student" &&
+        dispatch(
+          setActiveStudent(JSON.parse(sessionStorage.getItem("currentUser")))
+        );
+    })();
+  }, []);
   return (
-    <div>
-      <h1>students</h1>
-      <Index/>
-    </div>
-
-  )
-}
-export default student
+    loggedIn && (
+      <div>
+        <StudentPage />
+      </div>
+    )
+  );
+};
+export default Student;

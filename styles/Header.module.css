@@ -1,40 +1,41 @@
 .header {
     background: #fff;
     width: 100%;
-    position: fixed;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    position: static;
 }
 
 .topNav {
     display: flex;
     justify-content: flex-end;
     background: #f4f4f4;
-    padding: 6px, 10px;
-    z-index: 9999;
     height: 33.8px;
-    align-items: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .topList {
     display: flex;
     list-style: none;
     justify-content: flex-end;
-    padding: 0;
-    margin-bottom: 0;
-    margin-right: 10px;
+    align-self: center;
+    margin: 0%;
 }
 
 .listItem {
     color: #000;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 12px;
     margin-top: 1px;
+    margin-bottom: 1px;
     line-height: 1.3;
     font-weight: 300;
-};
+    cursor: pointer;
+}
 
 .listItem:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
     cursor: pointer;
 }
 
@@ -42,12 +43,24 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    height: 67px;
+    height: 72px;
+    
+}
+
+.picCont {
+    height: 100%;
+    width: 300px;
 }
 
 .logo {
-    margin: 16px 20px;
     display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+    width: 141px;
 }
 
 .title {
@@ -58,24 +71,31 @@
 .pages {
     display: flex;
     flex-wrap: wrap;
-}
-
-.bottomList {
-    display: flex;
-    list-style: none;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+    width: 300px;
+    justify-content: space-between;
 }
 
 .page {
     font-size: 16px;
-    z-index: 1;
-    position: relative;
     cursor: default;
-    height: 42px;
-    width: 100px;
     display: flex;
-    padding-top: 25px;
+    justify-content: center;
+    list-style: none;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100px;
+    color: black;
+    cursor: pointer;
     
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.page:hover,
+.active {
+    background-color: #F79020;
+    color: white !important;
 }

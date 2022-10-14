@@ -8,14 +8,34 @@
 .adminEditParent {
   background-color: #fff;
   display: grid;
-  height: 100%;
+  height: 30rem;
   width: 70%;
-  grid-template-columns: 3fr 2fr;
-  grid-template-areas: "adminCreate adminList";
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "adminList adminCohort";
   margin: 0 auto;
   margin-top: 10%;
+  margin-bottom: 10%;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
 /* admin create */
+.adminCreateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 1000;
+  width: 50rem;
+}
+.adminCreateOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
 .adminCreateParent {
   display: grid;
   grid-area: adminCreate;
@@ -23,24 +43,48 @@
   grid-template-areas:
     "adminCreateHeader"
     "adminCreateForm";
-  margin-right: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-height: 100%;
+  max-height: 35rem;
+  min-height: 25rem;
+  background-color: #fff;
 }
 .adminCreateHeader {
   color: black;
   display: grid;
   grid-area: adminCreateHeader;
-  font-size: 50%;
+  grid-template-columns: 90% 10%;
+  grid-template-areas: "adminCreateHeaderText adminCreateHeaderBtn";
   justify-content: center;
-  border-bottom: #f79020;
   text-align: center;
   font-weight: 500;
-  font-size: 12px;
-  margin-bottom: 2.5%;
+  font-size: 10px;
+  border-bottom: 3px solid #f79020;
+}
+.adminCreateHeaderText {
+  grid-area: adminCreateHeaderText;
+  margin-left: 10%;
+}
+.adminCreateHeaderBtn {
+  grid-area: adminCreateHeaderBtn;
+}
+.adminCreateHeaderBtnClose {
+  height: 30px;
+  width: 100%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.adminCreateHeaderBtnClose:hover {
+  height: 30px;
+  width: 100%;
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .adminCreateForm {
-  background-color: white;
   display: grid;
   grid-area: adminCreateForm;
 }
@@ -49,14 +93,12 @@
   margin-top: 5%;
   margin-right: 12.5%;
   display: grid;
-
   color: black;
 }
 
 .adminCreateFormInput {
   display: grid;
   color: black;
-
   background-color: rgba(0, 0, 0, 0);
   border-color: black;
   border-radius: 3px;
@@ -91,42 +133,236 @@
 .adminListParent {
   display: grid;
   grid-area: adminList;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 10% 80% 10%;
   grid-template-areas:
     "adminListHeader"
-    "adminListList";
-  margin-left: 2.5%;
+    "adminListList"
+    "adminCreate";
+  margin-right: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  min-height: 20rem;
-  max-height: 30rem;
+  min-height: 30rem;
+  max-height: 40rem;
 }
 .adminListHeader {
-  display: grid;
+  display: flex;
   grid-area: adminListHeader;
   font-size: 50%;
   justify-content: center;
   font-weight: 500;
   font-size: 12px;
-  margin-bottom: 2.5%;
+  border-bottom: 3px solid #f79020;
 }
+
 .adminListList {
   display: grid;
   grid-area: adminListList;
   overflow-y: auto;
 }
-.adminListListText {
+.adminListListTextBox {
   display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+  grid-template-areas: "adminListListText adminListListBtn adminListListBtnTwo";
+}
+.adminListListText {
+  grid-area: adminListListText;
+}
+.adminListUpdateOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+.adminListUpdateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 1000;
+  width: 50rem;
 }
 .adminListListBtn {
+  grid-area: adminListListBtn;
+  display: flex;
+  border: 1px solid transparent;
+  border-radius: 0;
+  width: 5rem;
+  height: 1.5rem;
+  color: white;
+  background-color: #cd5c5c;
+  margin-left: 2.5%;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10%;
+  line-height: 1.25rem;
+}
+
+.adminListListInputFirstName {
+  height: 1.5rem;
+  width: 3rem;
+  margin-top: 2.5%;
+  justify-content: center;
+  text-align: center;
+  color: black;
+
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.adminListListBtnTwo {
   display: grid;
   border: 1px solid transparent;
   border-radius: 0;
-  width: 20%;
-  margin-top: 2.5%;
+  text-align: center;
+  width: 5rem;
+  height: 1.5rem;
+  grid-area: adminListListBtnTwo;
   color: white;
-  background-color: #cf1020;
+  background-color: #8fbc8f;
+  margin-left: 2.5%;
+  justify-content: center;
+  margin-top: 10%;
+  line-height: 1.25rem;
+}
+.adminListListBtnTwo:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+  background-color: #228b22;
 }
 .adminListListBtn:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
   background-color: #a52a2a;
+}
+.adminCreate {
+  grid-area: adminCreate;
+}
+.adminCreateBtn {
+  height: 30px;
+  width: 80%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  margin-left: 10%;
+  margin-top: 1.25%;
+}
+.adminCreateBtn:hover {
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.adminUpdateOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+.adminUpdateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 1000;
+  width: 50rem;
+}
+.adminUpdateParent {
+  display: grid;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "adminUpdateHeader"
+    "adminUpdateForm";
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 35rem;
+  min-height: 25rem;
+  background-color: #fff;
+}
+.adminUpdateHeader {
+  color: black;
+  display: grid;
+  grid-area: adminUpdateHeader;
+  grid-template-columns: 90% 10%;
+  grid-template-areas: "adminUpdateHeaderText adminUpdateHeaderBtn";
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+  font-size: 10px;
+  border-bottom: 3px solid #f79020;
+}
+.adminUpdateHeaderText {
+  grid-area: adminUpdateHeaderText;
+  margin-left: 10%;
+}
+.adminUpdateHeaderBtn {
+  grid-area: adminUpdateHeaderBtn;
+}
+.adminUpdateHeaderBtnClose {
+  height: 30px;
+  width: 100%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.adminUpdateHeaderBtnClose:hover {
+  height: 30px;
+  width: 100%;
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.adminUpdateForm {
+  display: grid;
+  grid-area: adminUpdateForm;
+}
+.adminUpdateFormLabel {
+  margin-left: 12.5%;
+  margin-top: 5%;
+  margin-right: 12.5%;
+  display: grid;
+  color: black;
+  border: 1px solid #e1e1e1;
+}
+.adminUpdateFormInput {
+  display: grid;
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.adminUpdateFormSubmit {
+  margin-top: 5%;
+  justify-content: center;
+  margin-left: 12.5%;
+  margin-right: 12.5%;
+}
+.adminUpdateFormSubmitBtn {
+  height: 30px;
+  width: 100%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.adminUpdateFormSubmitBtn:hover {
+  height: 30px;
+  width: 100%;
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

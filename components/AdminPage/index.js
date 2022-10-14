@@ -1,73 +1,69 @@
-import s from '../../styles/AdminPage.module.css'
-import { useState } from 'react'
+import s from '../../styles/AdminHomePage/AdminPage.module.css'
+import CohortMenu from "./CohortMenu";
+import CohortView from "./CohortView";
+import Chat from "../Chat";
 import { motion } from 'framer-motion'
-const AdminContainer = () => {
-  const cohorts = [
-    'MCSP-11',
-    'MCSP-12',
-    'MCSP-13',
-    'MCSP-14',
-    'MCSP-15'
-  ]
-  const handleClick = () => {
-    console.log('click')
-  }
-  const [isClicked, toggleClicked] = useState(false);
-  const toggleClickedMenu = () => {
-    toggleHClicked(!isClicked);
+import { useState, useEffect } from "react";
+import { server } from "../../utility";
+import RevealChat from './RevealChat'
+const AdminContainer = ({ allCohorts }) => {
+  const [cohorts] = useState(allCohorts);
+  const [currCohort, setCurrCohort] = useState([]);
+  const [menuClicked, setMenuClicked] = useState(false)
+  useEffect(() => {
+    (async () => {
+      if (cohorts.length > 0) {
+        const topcohort = cohorts[cohorts.length - 1];
+        const students = await (
+          await fetch(`${server}/api/users/cohort/${topcohort.cohort_id}`)
+        ).json();
+        setCurrCohort([
+          {
+            cohort_id: topcohort.cohort_id,
+            cohort_name: topcohort.cohort_name,
+            students,
+          },
+        ]);
+      }
+    })();
+  }, []);
+  const toggleMoveChat = () => {
+    setMenuClicked(!menuClicked);
   };
-  // const [isMouse, toggleMouse] = React.useState(false);
-  // const toggleMouseMenu = () => {
-  //   toggleMouse(!isMouse);
-  // };
-  //animation for 
-  const subMenuAnimate = {
+  const moveMenuAnimate = {
     enter: {
-      opacity: 1,
-      rotateX: 0,
+      y:0,
       transition: {
-        duration: 0.5
+        duration: 0.5,
+        delay: .1
       },
-      display: "block"
     },
     exit: {
-      opacity: 0,
-      rotateX: -15,
+      y: 300,
       transition: {
         duration: 0.5,
         delay: 0.3
       },
       transitionEnd: {
-        display: "none"
+         
       }
     }
-  }
+  };
   return (
-    <div className={s.container}>
-      <div className={s.menucontainer}> 
-        <div className={s.menutitle}>
-          <motion.btn 
-            onClick={toggleHoverMenu}>
-         Cohorts
-         </motion.btn>
+    <div className={s.background}>
+      <div className={s.container}>
+        <div className={s.tools_container}>
+         <div >
+            <CohortMenu toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
+         </div>
+         <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
+          <RevealChat />
+         </motion.div>
         </div>
-        <div className={s.cohortsmenu}> 
-          <motion.ul 
-              initial="exit"
-              animate={isHover ? "enter" : "exit"}
-              variants={subMenuAnimate}>
-            {cohorts.map(cohort => {return (
-                <li className={s.listitem}>
-                  <btn className={s.cohortbtn} onClick={handleClick}>{cohort}</btn>
-                </li>
-             )}
-            )}
-          </motion.ul >
-        </div>
-      </div>
-      
+        <CohortView  currCohort={currCohort} />
     </div>
+  </div>
   )
 }
 
-export default AdminContainer
+export default AdminContainer;

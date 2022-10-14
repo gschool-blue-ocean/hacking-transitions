@@ -1,51 +1,48 @@
-<<<<<<< HEAD
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { useSelector, useDispatch } from "react-redux";
-=======
->>>>>>> 6a5facf9638f2b5def352996a44a242d2c1a33b5
+
 import { useEffect } from "react";
-import Chat from '../components/Chat'
 import { server } from "../utility";
-<<<<<<< HEAD
-import Login from "../components/login";
-import { setAllUserData, setAllCohortData } from "../redux/features/app-slice.js"
-=======
-import { useSelector, useDispatch } from "react-redux";
-import { setAllUserData, setAllCohortData } from "../redux/features/app-slice";
-import styles from "../styles/Home.module.css";
->>>>>>> 6a5facf9638f2b5def352996a44a242d2c1a33b5
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import Login from "../components/Login";
+
+import { setActiveStudent } from "../redux/features/app-slice";
+
 //=========================  LOGIN PAGE ==================
-export default function Home() {
+
+function Home() {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const { allUsersData, allCohortsData } = useSelector(
-    ({ app: { allUsersData, allCohortsData } }) => ({
-      allUsersData,
-      allCohortsData,
-    })
-  );
 
   useEffect(() => {
-    (async () => {
-      const allUsers = await (await fetch(`${server}/api/users`)).json();
-      const allCohorts = await (await fetch(`${server}/api/cohorts`)).json();
-      dispatch(setAllUserData(allUsers));
-      dispatch(setAllCohortData(allCohorts));
-    })();
+    /*
+          Check local storage for a signed in user, if exist sign them in
+      */
+    if (window) {
+      const localUser = localStorage.getItem("currentUser");
+      const sessionUser = window.sessionStorage.getItem("currentUser");
+      localUser && confirmStorageUser(localUser, true);
+      sessionUser && confirmStorageUser(sessionUser);
+    }
   }, []);
-<<<<<<< HEAD
- 
-  
-  return (
-    <div className={styles.container}>
-      <Login />
-=======
 
-  
+  const confirmStorageUser = async (currentUser, local = false) => {
+    const currentUserObj = JSON.parse(currentUser);
+    const user = await (
+      await fetch(`${server}/api/users/${currentUserObj.username}`)
+    ).json();
+    if (user.password === currentUserObj.password) {
+      local && localStorage.setItem("currentUser", JSON.stringify(user));
+      window.sessionStorage.setItem("currentUser", JSON.stringify(user));
+      user.admin ? router.push("/admin") : router.push("/student"),
+        dispatch(setActiveStudent(user));
+    }
+  };
   return (
-    <div className={styles.container}>
-      <Chat />
->>>>>>> 6a5facf9638f2b5def352996a44a242d2c1a33b5
-    </div>
+    <>
+      <Login />
+    </>
   );
 }
+Home.displayName = "Login";
+export default Home;

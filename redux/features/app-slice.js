@@ -1,22 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  allUsersData: [],
-  allCohortsData: [],
+  activeStudent:{},
+  cohortChat: [],
+  studentTasks: [],
 };
 
 export const appSlice = createSlice({
   name: "app-slice",
   initialState,
   reducers: {
-    setAllUserData(state, {payload}) {
-      state.allUsersData = payload;
+    setActiveStudent(state, { payload }) {
+      state.activeStudent = payload;
     },
-    setAllCohortData(state, {payload}) {
-        state.allCohortsData = payload;
-      },
+    setStudentTasks(state, { payload }) {
+      state.studentTasks = payload;
+    },
+    setStudentsForCohortChat(state, { payload }) {
+      state.cohortChat = payload;
+
+    },
+    deleteStudentTask(state, { payload }) {
+      state.studentTasks = state.studentTasks.filter(
+        (task) => task.task_id !== payload.task_id
+      );
+    },
   },
 });
 
-export const {setAllUserData, setAllCohortData} = appSlice.actions
-export default appSlice.reducer
+export const {
+  setActiveStudent,
+  setStudentTasks,
+  setStudentsForCohortChat,
+  deleteStudentTask,
+} = appSlice.actions;
+export default appSlice.reducer;

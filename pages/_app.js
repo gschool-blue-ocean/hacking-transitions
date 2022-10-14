@@ -1,15 +1,23 @@
 import "../styles/globals.css";
 import store from "../redux/store";
 import { Provider } from "react-redux";
-import Meta  from "../components/meta";
-import styles from "../styles/GlobalContainer.module.css"
+import Meta from "../components/Meta";
+import Layout from "../components/Layout";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+//^^allows use of bootstrap css across website
 function MyApp({ Component, pageProps }) {
-  return (
+  return Component.displayName === "Login" ? (
     <Provider store={store}>
       <Meta />
-      <div className={styles.container}>
-       <Component {...pageProps} />{" "}
-      </div>
+      <Component {...pageProps} />{" "}
+    </Provider>
+  ) : (
+    <Provider store={store}>
+      <Meta />
+      <Layout>
+        <Component {...pageProps} />{" "}
+      </Layout>
     </Provider>
   );
 }

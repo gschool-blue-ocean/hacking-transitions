@@ -1,9 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/Edit.Admin.module.css";
+import AdminCreate from "./AdminCreate";
+import AdminUpdate from "./AdminUpdate";
+
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
+  const [isCreateOpen, setCreateIsOpen] = useState(false);
+  const [isUpdateOpen, setUpdateIsOpen] = useState(false);
+  const [updateData, setUpdateData] = useState(null);
   //pull list of admins
+
   useEffect(() => {
     axios.get("/api/admin", {}).then((res) => {
       setAdminList(res.data);
@@ -13,12 +20,11 @@ const AdminList = () => {
   return (
     <div className={styles.adminListParent}>
       <div className={styles.adminListHeader}>
-        <h1>List of Admins</h1>
+        <h1>Current Admins</h1>
       </div>
       <div className={styles.adminListList}>
         <ul>
-          {adminList.map((admin) => {
-            //delete admin by id
+          {adminList.map((admin, { i }) => {
             const deleteAdmin = (event) => {
               event.preventDefault();
               axios.delete(`/api/users/${admin.user_id}`, {
@@ -26,24 +32,57 @@ const AdminList = () => {
               });
               window.location.reload();
             };
-            console.log(admin);
+
             return (
-              <ul key={admin.user_id}>
-                <p className={styles.adminListListText}>
-                  <b>{`${admin.first} ${admin.last}`}</b>
-                  <button
-                    className={styles.adminListListBtn}
-                    type="submit"
-                    onClick={deleteAdmin}
-                  >
-                    Delete
-                  </button>
-                </p>
-                <hr className={styles.hr}></hr>
-              </ul>
+              <>
+                <ul className={i} key={admin.user_id}>
+                  <div className={styles.adminListListTextBox}>
+                    <p className={styles.adminListListText}>
+                      <b>{`${admin.first} ${admin.last}`}</b>
+                    </p>
+                    <button
+                      className={styles.adminListListBtn}
+                      type="submit"
+                      onClick={deleteAdmin}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      id={i}
+                      className={styles.adminListListBtnTwo}
+                      type="submit"
+                      onClick={() => {
+                        setUpdateData(admin);
+                        setUpdateIsOpen(true);
+                      }}
+                    >
+                      Update
+                    </button>
+                  </div>
+                  <hr className={styles.hr}></hr>
+                </ul>
+              </>
             );
           })}
         </ul>
+
+        <AdminUpdate
+          admin={updateData}
+          open={isUpdateOpen}
+          onClose={() => setUpdateIsOpen(false)}
+        />
+      </div>
+      <div className={styles.adminCreate}>
+        <button
+          className={styles.adminCreateBtn}
+          onClick={() => setCreateIsOpen(true)}
+        >
+          Create Admin
+        </button>
+        <AdminCreate
+          open={isCreateOpen}
+          onClose={() => setCreateIsOpen(false)}
+        />
       </div>
     </div>
   );

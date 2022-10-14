@@ -1,6 +1,8 @@
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
+  
   if (!req.query.slug) {
     /******** CREATE NEW ADMIN ********/
     if (checkApiMethod(req, "POST")) {
@@ -30,12 +32,10 @@ export default async function handler(req, res) {
     /******** END CREATE NEW ADMIN ********/
   } else {
     const { slug } = req.query;
+    console.log(slug);
 
     /******** UPDATE ESXISTING ADMIN ********/
-    if (
-      checkApiMethod(req, "PATCH") &&
-      typeof parseInt(req.query.slug[0]) === "number"
-    ) {
+    if (checkApiMethod(req, "PATCH") && !isNaN(parseInt(req.query.slug[0]))) {
       const { first, last, email, username, password } = req.body;
       const newAdmin = { first, last, email, username, password };
 
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
     if (
       checkApiMethod(req, "PATCH") &&
       slug[0] === "edit" &&
-      typeof parseInt(req.query.slug[1]) === "number"
+      !isNaN(parseInt(req.query.slug[1]))
     ) {
       const {
         first,
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
         mos,
         interests,
       } = req.body;
-      const newAdmin = {
+      const newStudent = {
         first,
         last,
         email,
@@ -98,8 +98,9 @@ export default async function handler(req, res) {
         interests,
       };
       try {
+        
         const student = (
-          await sql`UPDATE users SER ${sql(newAdmin)} WHERE user_id = ${
+          await sql`UPDATE users SET ${sql(newStudent)} WHERE user_id = ${
             slug[1]
           } RETURNING *`
         )[0];

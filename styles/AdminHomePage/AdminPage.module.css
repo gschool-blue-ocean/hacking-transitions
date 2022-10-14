@@ -1,0 +1,79 @@
+.background{
+    /* background: #f6efe7; */
+}
+.container {
+    border: 1px solid grey;
+    border-radius: 10px;
+    min-height: 100rem;
+    height: auto;
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    color: #003B4C;
+    background-color: #FFF;
+}
+.tools_container {
+    height: 70rem;
+    margin-left: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    align-items: center;
+    
+}
+.menucontainer{
+    /* border: 1px black solid; */
+    cursor: pointer;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
+    height: 3.5rem;
+    width: 20rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    border-bottom: #F79020 solid 1px
+ }
+ .titlebtn{
+    cursor: pointer;
+ }
+ .menutitle{
+    font-size: 3rem;
+ }
+ .cohortsmenu{    
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+.listitem{
+    /* border: 1px black solid; */
+    display: flex;
+    flex-direction: row;
+    width: 16rem;
+    height: 2rem;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+.cohortbtn{
+    font-size: 2rem;
+    cursor: pointer;
+}
+.messageBtn{
+    width: 5rem;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 1rem;
+    color: grey;
+    border:white 1px solid;
+}
+.messageBtn:hover {
+    border: 2px solid #F79020;
+}

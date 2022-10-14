@@ -1,16 +1,12 @@
-.spacer {
-    width: 100%;
-    height: 300px;
-}
 
 .footer {
     z-index: 9998;
-    position: relative;
+    /* position: relative; */
     border-top: 10px solid #f79020;
     height: 80px;
     background: #f4f4f4;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
 }
 

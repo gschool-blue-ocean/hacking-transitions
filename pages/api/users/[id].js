@@ -1,12 +1,18 @@
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
   const { id } = req.query;
   /************* GET A CERTAIN USER INFORMATION *************/
   if (checkApiMethod(req, "GET")) {
     try {
-      const user = (await sql`SELECT * FROM users WHERE user_id = ${id}`)[0];
-      res.json(user);
+      const user = (
+        await sql`SELECT * FROM users WHERE ${
+          isNaN(parseInt(id)) ? sql`username = ${id}` : sql`user_id = ${id}`
+        }`
+      )[0];
+
+      user ? res.json(user) : res.status(404).send("Not Found");
     } catch (error) {
       console.log(error);
       handleErrors(res);
@@ -34,6 +40,11 @@ export default async function handler(req, res) {
       seeking_further_education,
       mos,
       interests,
+      final_physical,
+      gear_turn_in,
+      hhg_move,
+      barracks_checkout,
+      file_va_claim,
     } = req.body;
     const newUser = {
       first,
@@ -53,11 +64,16 @@ export default async function handler(req, res) {
       seeking_further_education,
       mos,
       interests,
+      final_physical,
+      gear_turn_in,
+      hhg_move,
+      barracks_checkout,
+      file_va_claim,
     };
     try {
       // DONT FORGET TO ENCRYPT PASSWORD
       // newUser.password = await bcrypt.hash(password, 10);
-
+      console.log('req.body', req.body)
       const user = (
         await sql`UPDATE users SET ${sql(
           newUser
@@ -85,5 +101,5 @@ export default async function handler(req, res) {
     return;
   }
   /************* END DELETE A CERTAIN USER  *************/
-  notFound404(res)
+  notFound404(res);
 }
