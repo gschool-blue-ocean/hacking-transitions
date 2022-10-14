@@ -6,9 +6,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Login from "../components/Login";
 
-import {
-  setActiveStudent,
-} from "../redux/features/app-slice";
+import { setActiveStudent } from "../redux/features/app-slice";
 
 //=========================  LOGIN PAGE ==================
 
@@ -17,17 +15,15 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-        /*
+    /*
           Check local storage for a signed in user, if exist sign them in
       */
-        if (window) {
-          const localUser = localStorage.getItem("currentUser");
-          const sessionUser = window.sessionStorage.getItem("currentUser");
-          localUser && confirmStorageUser(localUser, true);
-          sessionUser && confirmStorageUser(sessionUser);
-        }
- 
+    if (window) {
+      const localUser = localStorage.getItem("currentUser");
+      const sessionUser = window.sessionStorage.getItem("currentUser");
+      localUser && confirmStorageUser(localUser, true);
+      sessionUser && confirmStorageUser(sessionUser);
+    }
   }, []);
 
   const confirmStorageUser = async (currentUser, local = false) => {
@@ -50,4 +46,3 @@ function Home() {
 }
 Home.displayName = "Login";
 export default Home;
-

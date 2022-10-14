@@ -109,7 +109,7 @@ const Chat = () => {
       };
       //// Add properties to the newMessageObj depending on the usecase
       if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
-      if (editInfo) (newMessageObj.comment_id = editInfo.id);
+      if (editInfo) newMessageObj.comment_id = editInfo.id;
       // Update chat display with newly typed message
       editInfo
         ? setChatMessages((oldMsgs) => {
@@ -186,7 +186,7 @@ const Chat = () => {
                           id: comment_id,
                           cohort_id,
                           date_time,
-                          index
+                          index,
                         });
                       }}
                     >

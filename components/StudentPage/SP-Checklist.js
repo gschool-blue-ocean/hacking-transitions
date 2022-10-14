@@ -32,9 +32,9 @@ const SPChecklist = () => {
     interests: activeStudent.interests,
     final_physical: activeStudent.final_physical,
     gear_turn_in: activeStudent.gear_turn_in,
-    HHG_move: activeStudent.HHG_move,
+    hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
-    file_VA_claim: activeStudent.file_VA_claim,
+    file_va_claim: activeStudent.file_va_claim,
   });
 
   function convertDateToIso(date) {
@@ -61,10 +61,11 @@ const SPChecklist = () => {
   const handleCancel = () => {
     console.log("canceled", checklistData);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`${server}/api/users/${activeStudent.user_id}`, {
+    fetch(`/api/users/${checklistData.user_id}`, {
       method: "PATCH",
       body: JSON.stringify(checklistData),
       headers: { "Content-Type": "application/json" },
@@ -72,13 +73,12 @@ const SPChecklist = () => {
       .then((res) => res.json())
       .then(() => {
         dispatch(setActiveStudent(checklistData));
-        if (!JSON.parse(sessionStorage.getItem("currentUser")).admin)
-          sessionStorage.setItem("currentUser", checklistData);
       })
       .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {
+    console.log("changed");
     if (e.target.type === "checkbox") {
       return setChecklistData((prevData) => {
         return {
@@ -91,60 +91,79 @@ const SPChecklist = () => {
 
   return (
     <div className={styles.SDashChecklist}>
-      <div className={styles.infoCardcontainer}>
+      <div className="undefined">
         <h4 className="editStudentFormTitle">Transition Checklist</h4>
-
-        <form className="addStudentForm" onSubmit={handleSubmit}>
-          <div className="editStudentFormInputs">
-            <label className="checkboxLabel">
-              <input
-                type="checkbox"
-                name="seeking_further_education"
-                onChange={handleChange}
-                checked={checklistData.final_physical}
-              />{" "}
-              Seperation Physical Complete?
-            </label>
-            <label className="checkboxLabel">
-              <input
-                type="checkbox"
-                name="planning_to_relocate"
-                onChange={handleChange}
-                // checked={formData.planning_to_relocate}
-              />{" "}
-              Planning to relocate?
-            </label>
-            <label className="checkboxLabel">
-              <input
-                type="checkbox"
-                name="taps_complete"
-                onChange={handleChange}
-                // checked={formData.taps_complete}
-              />{" "}
-              Taps complete?
-            </label>
-            <label className="checkboxLabel">
-              <input
-                type="checkbox"
-                name="has_dependents"
-                onChange={handleChange}
-                // checked={formData.has_dependents}
-              />{" "}
-              Have dependents?
-            </label>
-          </div>
+      </div>
+      <div className={styles.checklistForm} onSubmit={handleSubmit}>
+        <div className={styles.editStudentChecklist}>
+          <label className="checkboxLabel">
+            <input
+              id="1"
+              checked={checklistData.final_physical}
+              type="checkbox"
+              name="final_physical"
+              onChange={handleChange}
+            />{" "}
+            Seperation Physical Complete?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="2"
+              checked={checklistData.gear_turn_in}
+              type="checkbox"
+              name="gear_turn_in"
+              onChange={handleChange}
+            />{" "}
+            Final Gear Turn-In?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="3"
+              checked={checklistData.hhg_move}
+              type="checkbox"
+              name="hhg_move"
+              onChange={handleChange}
+            />{" "}
+            HHG move?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="4"
+              checked={checklistData.barracks_checkout}
+              type="checkbox"
+              name="barracks_checkout"
+              onChange={handleChange}
+            />{" "}
+            Barracks Checkout?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="5"
+              checked={checklistData.file_va_claim}
+              type="checkbox"
+              name="file_va_claim"
+              onChange={handleChange}
+              // checked={checklistData.file_VA_claim}
+            />{" "}
+            VA Claim Filed?
+          </label>
+        </div>
+        <div className={styles.checklistButtonDiv}>
           <input
-            className="addStudentFormButton createStudent"
+            id="6"
+            className={styles.checklistButtons}
+            onClick={handleSubmit}
             type="submit"
-            value="Update Student"
+            value="Update Checklist"
           />
           <input
-            className="addStudentFormButton cancel"
+            id="7"
+            className={styles.checklistButtons}
             onClick={handleCancel}
             type="button"
             value="Cancel"
           />
-        </form>
+        </div>
       </div>
     </div>
   );
