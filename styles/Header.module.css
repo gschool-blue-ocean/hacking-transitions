@@ -3,6 +3,7 @@
     width: 100%;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     position: static;
+    
 }
 
 .topNav {
@@ -84,7 +85,7 @@
     padding-bottom: 24px;
     width: 100px;
     color: black;
-    
+    text-decoration: underline #F79020;
 }
 
 .link {
