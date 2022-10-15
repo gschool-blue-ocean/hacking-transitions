@@ -14,10 +14,6 @@ const ViewStudent = () => {
     activeStudent,
   }));
   const [admin, setAdmin] = useState(false);
-  // const [student, setStudent] = useState({
-  //   first: "",
-  //   last: "",
-  // });
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
@@ -38,12 +34,28 @@ const ViewStudent = () => {
       }
     })();
   }, []);
-  const handleNext = () => {
-    console.log("next");
-  };
 
-  const handlePrev = () => {
-    console.log("prev");
+  const handleNav = (e) => {
+    e.preventDefault();
+    let id = activeStudent.user_id;
+    e.target.name === "prev" ? id-- : id++;
+
+    fetch(`/api/users/${id}`)
+      .then((res) => {
+        if (res.status === 404) throw new Error("User Not Found!");
+        return res.json();
+      })
+      .then((user) => {
+        if (user.admin) {
+          return;
+        } else {
+          dispatch(setActiveStudent(user));
+          // sessionStorage.setItem("activeStudent", JSON.stringify(user));
+        }
+      })
+      .catch(({ message }) => {
+        setError(true);
+      });
   };
 
   const handleChange = (e) => {
@@ -88,7 +100,7 @@ const ViewStudent = () => {
     admin && (
       <div className={style.container}>
         <div className={style.top}>
-          <button className={style.prev} onClick={handlePrev}>
+          <button name="prev" className={style.prev} onClick={handleNav}>
             Previous
           </button>
           <div className={style.spacer}></div>
@@ -111,7 +123,7 @@ const ViewStudent = () => {
               <input type="submit" hidden />
             </form>
           </div>
-          <button className={style.next} onClick={handleNext}>
+          <button name="next" className={style.next} onClick={handleNav}>
             Next
           </button>
         </div>
