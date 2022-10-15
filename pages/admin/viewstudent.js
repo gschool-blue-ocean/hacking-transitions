@@ -14,6 +14,11 @@ const ViewStudent = () => {
     activeStudent,
   }));
   const [admin, setAdmin] = useState(false);
+  // const [student, setStudent] = useState({
+  //   first: "",
+  //   last: "",
+  // });
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -41,16 +46,72 @@ const ViewStudent = () => {
     console.log("prev");
   };
 
+  const handleChange = (e) => {
+    setSearch((searchData) => {
+      return {
+        ...searchData,
+        [e.target.name]: e.target.value,
+      };
+    });
+    console.log(search);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let inputData = {
+      first: search.first,
+      last: search.last,
+    };
+    setSearch("");
+    e.target.reset();
+
+    fetch(`/api/users/students/${inputData.last}`)
+      .then((res) => {
+        if (res.status === 404) throw new Error("User Not Found!");
+        return res.json();
+      })
+      .then((user) => {
+        if (user.first === inputData.first) {
+          if (user.admin) throw new Error("User is Admin");
+          dispatch(setActiveStudent(user));
+          // sessionStorage.setItem("activeStudent", JSON.stringify(user));
+        } else {
+          throw new Error("User Not Found!");
+        }
+      })
+      .catch(({ message }) => {
+        setError(true);
+      });
+  };
+
   return (
     admin && (
       <div className={style.container}>
         <div className={style.top}>
-          <button className={style.prev} onClick={handlePrev()}>
+          <button className={style.prev} onClick={handlePrev}>
             Previous
           </button>
+          <div className={style.spacer}></div>
           <div className={style.cohort}>{activeStudent.cohort_name}</div>
-          <div className={style.search}>Student Search</div>
-          <button className={style.next} onClick={handleNext()}>
+          <div className={style.searchdiv}>
+            Search Students
+            <form className={style.search} onSubmit={handleSubmit}>
+              <input
+                name="first"
+                className={style.input}
+                placeholder="First Name"
+                onChange={handleChange}
+              ></input>
+              <input
+                name="last"
+                className={style.input}
+                placeholder="Last Name"
+                onChange={handleChange}
+              ></input>
+              <input type="submit" hidden />
+            </form>
+          </div>
+          <button className={style.next} onClick={handleNext}>
             Next
           </button>
         </div>

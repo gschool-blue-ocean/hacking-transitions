@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import s from '../../styles/AdminHomePage/CohortView.module.css'
+import s from "../../styles/AdminHomePage/CohortView.module.css";
 import { useRouter } from "next/router";
 import { BsFillArrowUpRight } from "react-icons/bs";
 import { Button, Modal } from "react-bootstrap";
@@ -19,6 +19,7 @@ const CohortView = ({ currCohort }) => {
   const handleClick = (e) => {
     const data = e.target.dataset;
     dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
+
     router.push({
       pathname: "/admin/viewstudent",
     });
@@ -107,7 +108,6 @@ const CohortView = ({ currCohort }) => {
       </div>
     );
   }
-}
+};
 
-
-export default CohortView
+export default CohortView;
