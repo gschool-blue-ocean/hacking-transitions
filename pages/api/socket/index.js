@@ -1,22 +1,16 @@
 import { Server } from "socket.io";
-
+import sql from "../../../database/connection";
 
 const updateDB = (msg, id, del = false) => {
+  const { student_id, ...newMsg } = { ...msg };
+
   id
     ? del
-      ? fetch(`/api/comments/${id}`, {
-          method: "DELETE",
-        })
-      : fetch(`/api/comments/${id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(msg),
-        })
-    : fetch(`/api/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(msg),
-      });
+      ? sql`DELETE FROM comments WHERE comment_id = ${id} RETURNING *`
+      : sql`UPDATE comments SET ${sql(
+          newMsg
+        )} WHERE comment_id = ${id} RETURNING *`
+    : sql`INSERT INTO comments ${sql(newMsg)} RETURNING *`;
 };
 
 export default async function handler(req, res) {
@@ -95,10 +89,12 @@ export default async function handler(req, res) {
       });
       /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
-      socket.on("disconnect", (reason) => console.log("User Disconnected because of", reason ));
+      socket.on("disconnect", (reason) =>
+        console.log("User Disconnected because of", reason)
+      );
     });
     /******* END ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   }
 
-  res.end();
+  res.send();
 }
