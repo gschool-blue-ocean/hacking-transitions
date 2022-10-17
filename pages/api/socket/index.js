@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { server } from "../../../utility";
+
 
 const updateDB = (msg, id, del = false) => {
   id
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
       });
       /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
-      socket.on("disconnect", () => console.log("User Disconnected"));
+      socket.on("disconnect", (reason) => console.log("User Disconnected because of", reason ));
     });
     /******* END ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   }
