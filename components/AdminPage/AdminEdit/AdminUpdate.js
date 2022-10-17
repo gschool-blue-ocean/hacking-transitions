@@ -96,7 +96,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                 className={styles.adminUpdateFormSubmitBtn}
                 onClick={adminPatch}
               >
-                submit
+                Submit
               </button>
             </div>
           </form>
