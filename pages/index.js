@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import Login from "../components/Login";
+import Login from "../components/Login/index";
+import Layout from "../components/Login/LoginLayout";
+
 
 import { setActiveStudent } from "../redux/features/app-slice";
 
@@ -37,7 +39,9 @@ function Home() {
   };
   return (
     <>
+    < Layout >
       <Login />
+    </ Layout >
     </>
   );
 }
