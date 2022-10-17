@@ -41,9 +41,7 @@ const Chat = () => {
       const resUrl = (await fetch(`/api/socket`)).url;
       const baseUrl = resUrl.substring(0,resUrl.indexOf('/api'))
   
-      const newSocket = io(baseUrl, {
-        transports: ["websocket", "polling"] // use WebSocket first, if available
-      });
+      const newSocket = io(baseUrl);
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
