@@ -1,8 +1,7 @@
 import {useState} from 'react'
-import axios from 'axios'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
-import { server } from "../../utility";
+
 
 
 
@@ -16,7 +15,7 @@ const RegisterModal = ({open, onClose}) => {
         event.preventDefault();
         // console.log('user input', regCode, email)
 
-        fetch(`${server}/api/cohorts/regCode/registration/${regCode}`)
+        fetch(`/api/cohorts/registration/${regCode}`)
         .then((res) => {
           if (res.status === 404) throw new Error("Not Found");
           console.log('code is NOT good');
