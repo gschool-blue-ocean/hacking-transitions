@@ -1,16 +1,18 @@
 import { Server } from "socket.io";
 import sql from "../../../database/connection";
 
-const updateDB = (msg, id, del = false) => {
+const updateDB = async (msg, id, del = false) => {
   const { student_id, ...newMsg } = { ...msg };
-
+  let res;
   id
     ? del
-      ? sql`DELETE FROM comments WHERE comment_id = ${id} RETURNING *`
-      : sql`UPDATE comments SET ${sql(
+      ? (res =
+          await sql`DELETE FROM comments WHERE comment_id = ${id} RETURNING *`)
+      : (res = await sql`UPDATE comments SET ${sql(
           newMsg
-        )} WHERE comment_id = ${id} RETURNING *`
-    : sql`INSERT INTO comments ${sql(newMsg)} RETURNING *`;
+        )} WHERE comment_id = ${id} RETURNING *`)
+    : (res = await sql`INSERT INTO comments ${sql(newMsg)} RETURNING *`);
+  console.log("res from updatedb on chat", res);
 };
 
 export default async function handler(req, res) {
@@ -20,7 +22,9 @@ export default async function handler(req, res) {
     console.log("Socket is already running");
   } else {
     console.log("Socket is initializing");
-    const io = new Server(res.socket.server);
+    const io = new Server(res.socket.server, {
+      transports: ["websocket", "polling"], // use WebSocket first, if available
+    });
     res.socket.server.io = io;
 
     io.on("connection", (socket) => {
@@ -96,5 +100,5 @@ export default async function handler(req, res) {
     /******* END ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   }
 
-  res.send();
+  res.end();
 }

@@ -38,9 +38,12 @@ const Chat = () => {
       /****** Getting connected to the socket server ******/
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
-      await fetch(`/api/socket`);
-
-      const newSocket = io();
+      const resUrl = (await fetch(`/api/socket`)).url;
+      const baseUrl = resUrl.substring(0,resUrl.indexOf('/api'))
+  
+      const newSocket = io(baseUrl, {
+        transports: ["websocket", "polling"] // use WebSocket first, if available
+      });
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
@@ -206,7 +209,7 @@ const Chat = () => {
                           ? socket.emit("edit_message", null, comment_id, true)
                           : socket.emit(
                               "edit_cohort_message",
-                              { comment_id},
+                              { comment_id },
                               comment_id,
                               cohortChat,
                               true
