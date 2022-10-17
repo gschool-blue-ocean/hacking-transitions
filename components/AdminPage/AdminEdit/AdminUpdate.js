@@ -100,8 +100,6 @@ const AdminUpdate = ({ admin, open, onClose }) => {
               </button>
             </div>
           </form>
-          {/* );
-          })} */}
         </div>
       </div>
     </>
