@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function ArchivePage() {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
   const [front, setFront] = useState(true);
+  //for Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  //
   const [displayCohorts, setDisplay] = useState([
     {
       title: "MCSP-13",
@@ -83,16 +90,22 @@ export default function ArchivePage() {
           {displayCohorts.map((e) => {
             return (
               <>
-                <div className={style.card}>
+                <div className={style.card} onClick={handleShow}>
                   <h3>{e.title}</h3>
                   <p>{e.total} students</p>
                   <p>{e.dates}</p>
                 </div>
-
-                {/* <div className={style.card}>
-                  <h3>List of Students</h3>
-                  <h4>Students cleared: {e.studentsCleared}</h4>
-                </div> */}
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{e.title} student list</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Here will be a list of students</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </>
             );
           })}
@@ -107,7 +120,15 @@ export default function ArchivePage() {
             <HiOutlineSearch />
           </button>
         </form>
-        <div className={style.cardDeck}></div>
+        <div className={style.cardDeck}>
+          <div className={style.card}>
+            <h3>
+              {student.first} {student.last}
+            </h3>
+            <p>Class: {student.cohort}</p>
+            <p>Transition: {student.tranStatus}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

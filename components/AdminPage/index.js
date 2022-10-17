@@ -1,41 +1,68 @@
-import s from '../../styles/AdminPage.module.css'
-import CohortMenu from './CohortMenu'
-import CohortView from './CohortView'
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
-import CreateCohort from './CreateCohort'
-const AdminContainer =  () => {
-  const allCohorts = useSelector(({app:{allCohortsData}}) => allCohortsData )
-    //redux state ^^
-  const [students, setStudents] = useState([])
-  const [cohorts, setCohorts] = useState(allCohorts)
-  const [currCohort, setCurrCohort] = useState([])
+import s from '../../styles/AdminHomePage/AdminPage.module.css'
+import CohortMenu from "./CohortMenu";
+import CohortView from "./CohortView";
+import Chat from "../Chat";
+import { motion } from 'framer-motion'
+import { useState, useEffect } from "react";
+import { server } from "../../utility";
+import RevealChat from './RevealChat'
+const AdminContainer = ({ allCohorts }) => {
+  const [cohorts] = useState(allCohorts);
+  const [currCohort, setCurrCohort] = useState([]);
+  const [menuClicked, setMenuClicked] = useState(false)
   useEffect(() => {
-      axios({
-      method: 'get',
-      url: '/api/users/students',
-    }).then((res) => {
-      setStudents(res.data)
+    (async () => {
       if (cohorts.length > 0) {
-        console.log(res)
-        let topcohort = cohorts[cohorts.length - 1]
-        let filtStudents = res.data.filter((student) => student.cohort_id == topcohort.cohort_id)
-        setCurrCohort([{cohort_id: topcohort.cohort_id, cohort_name: topcohort.cohort_name, students: filtStudents}])
-        } 
-    })
-  }, [])
-
+        const topcohort = cohorts[cohorts.length - 1];
+        const students = await (
+          await fetch(`/api/users/cohort/${topcohort.cohort_id}`)
+        ).json();
+        setCurrCohort([
+          {
+            cohort_id: topcohort.cohort_id,
+            cohort_name: topcohort.cohort_name,
+            students,
+          },
+        ]);
+      }
+    })();
+  }, []);
+  const toggleMoveChat = () => {
+    setMenuClicked(!menuClicked);
+  };
+  const moveMenuAnimate = {
+    enter: {
+      y:0,
+      transition: {
+        duration: 0.5,
+        delay: .1
+      },
+    },
+    exit: {
+      y: 300,
+      transition: {
+        duration: 0.5,
+        delay: 0.3
+      },
+      transitionEnd: {
+         
+      }
+    }
+  };
   return (
     <div className={s.background}>
       <div className={s.container}>
         <div className={s.tools_container}>
-         <CreateCohort />
-         <CohortMenu cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort} students={students} />
+         <div >
+            <CohortMenu toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
+         </div>
+         <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
+          <RevealChat />
+         </motion.div>
         </div>
-        <CohortView students={students} currCohort={currCohort} />
-      </div>
+        <CohortView  currCohort={currCohort} />
     </div>
+  </div>
   )
 }
 

@@ -309,4 +309,4 @@ insert into dependents (sponsor_id, age, relation) values (11, 10, 'Son')
 , (99, 33, 'Spouse')
 , (100, 25, 'Wife');
 
-\i tasksSeed.sql
+\ir tasksSeed.sql

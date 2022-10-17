@@ -44,7 +44,8 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    height: 67px;
+    height: 72px;
+    
 }
 
 .picCont {
@@ -85,14 +86,17 @@
     padding-bottom: 24px;
     width: 100px;
     color: black;
+    cursor: pointer;
     text-decoration: underline #F79020;
 }
 
 .link {
     text-decoration: none;
+    cursor: pointer;
 }
 
-.page:hover {
+.page:hover,
+.active {
     background-color: #F79020;
-    color: white;
+    color: white !important;
 }

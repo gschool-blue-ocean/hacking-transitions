@@ -2,12 +2,21 @@ import React from "react";
 import styles from "../../styles/GlobalContainer.module.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useState, useEffect } from "react";
 const Layout = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    const session = sessionStorage.getItem("currentUser")
+    console.log(session);
+    
+    setCurrentUser(JSON.parse(session));
+  }, []);
   return (
     <div className={styles.container}>
-      <Header />
+      {currentUser && <Header currentUser={currentUser} />}
       {children}
-      <Footer />
+      {currentUser && <Footer />}
     </div>
   );
 };
