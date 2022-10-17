@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
 import Modal from "react-bootstrap/Modal";
@@ -6,12 +6,19 @@ import Button from "react-bootstrap/Button";
 
 export default function ArchivePage() {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
-  const [front, setFront] = useState(true);
+  //const [front, setFront] = useState(true); //Tried to make cards flip (am struggling)
+
   //for Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //
+
+  //for Search
+  const [searchStudent, setStudent] = useState("");
+  const [searchCohort, setCohort] = useState("");
+  //
+
   const [displayCohorts, setDisplay] = useState([
     {
       title: "MCSP-13",
@@ -65,6 +72,22 @@ export default function ArchivePage() {
     },
   ]);
 
+  function lastFive() {
+    fetch(`/api/archive/cohorts`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((recentArchived) => {
+        const saved = [];
+        for (let i = 0; i < 5; i++) {
+          saved.push(recentArchived[i]);
+        }
+        setDisplay(saved);
+      });
+  }
+
+  lastFive();
+
   const student = {
     first: "bob",
     last: "bird",
@@ -76,8 +99,6 @@ export default function ArchivePage() {
 
   return (
     <div>
-      {/* create a side bar with Students, Cohorts, Archived*/}
-
       <div className={style.cohorts}>
         <h2>Archived Cohorts</h2>
         <form className={style.searchC}>
@@ -91,9 +112,10 @@ export default function ArchivePage() {
             return (
               <>
                 <div className={style.card} onClick={handleShow}>
-                  <h3>{e.title}</h3>
-                  <p>{e.total} students</p>
-                  <p>{e.dates}</p>
+                  <h3>{e.cohort_name}</h3>
+                  <p>
+                    {e.start_date}-{e.start_date}
+                  </p>
                 </div>
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
