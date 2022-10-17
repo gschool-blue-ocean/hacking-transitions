@@ -120,7 +120,7 @@ const ViewStudent = () => {
                 placeholder="Last Name"
                 onChange={handleChange}
               ></input>
-              <input type="submit" hidden />
+              <input className={style.submit} type="submit" />
             </form>
           </div>
           <button name="next" className={style.next} onClick={handleNav}>
