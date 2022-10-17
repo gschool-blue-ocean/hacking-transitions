@@ -4,8 +4,7 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 import Meta from "../components/Meta"
 import Layout from "../components/Layout";
-import CheckLogin from "../components/Login/checkLogin";
-
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 //^^allows use of bootstrap css across website
 function MyApp({ Component, pageProps }) {
@@ -18,7 +17,6 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       
       <Layout>
-        {/* <CheckLogin /> */}
         <Component {...pageProps} />{" "}
       </Layout>
     </Provider>

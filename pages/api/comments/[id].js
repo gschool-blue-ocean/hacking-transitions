@@ -1,11 +1,15 @@
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
+  console.log(req.method,req.url);
+  
   const { id } = req.query;
   /************* GET A CERTAIN COMMENTS INFORMATION *************/
   if (checkApiMethod(req, "GET")) {
     try {
+      console.log(comment,id);
       const comment = await sql`SELECT * FROM comments WHERE comment_id = ${id};`;
+      
       res.json(comment);
     } catch (error) {
       console.log(error);
@@ -27,6 +31,7 @@ export default async function handler(req, res) {
       console.log(error);
       handleErrors(res);
     }
+    return
   }
   /************* END UPDATE A CERTAIN COMMENTS INFORMATION *************/
   /************* DELETE A CERTAIN COMMENTS *************/

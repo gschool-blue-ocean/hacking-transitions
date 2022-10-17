@@ -43,7 +43,8 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    height: 67px;
+    height: 72px;
+    
 }
 
 .picCont {
@@ -84,17 +85,17 @@
     padding-bottom: 24px;
     width: 100px;
     color: black;
+    cursor: pointer;
     
 }
 
 .link {
     text-decoration: none;
+    cursor: pointer;
 }
 
-.page:hover {
+.page:hover,
+.active {
     background-color: #F79020;
-    color: white;
-}
-.loginTitle{
-    padding-left: -10px;
+    color: white !important;
 }

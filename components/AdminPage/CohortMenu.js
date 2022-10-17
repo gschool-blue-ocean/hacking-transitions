@@ -1,36 +1,56 @@
-import s from '../../styles/AdminPage.module.css'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-
-const CohortMenu = ({currCohorts,students, setCurrCohort, cohorts }) => {
+import s from "../../styles/AdminHomePage/AdminPage.module.css";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setStudentsForCohortChat } from "../../redux/features/app-slice";
+import { server } from "../../utility";
+const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveChat }) => {
+  const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
-  cohorts = cohorts.filter((cohort) => cohort.active)
-  const handleClick = (e) => {
-      const data = e.target.dataset;
-      const id = data.cohort_id;
-      console.log('isclicked',data.isclicked);
-      //filter students based on cohort id retrieved by event.target
-      let filtStudents = students.filter((student) => student.cohort_id == id);
-      if (cohorts.length == 0) {
-        setCurrCohort([{cohort_id: id, cohort_name: data.cohort_name, students: filtStudents}])
+  cohorts = cohorts.filter((cohort) => cohort.active);
+  const handleClick = async (e) => {
+    const data = e.target.dataset;
+    const id = data.cohort_id;
+    console.log("isclicked", data.isclicked);
+    //filter students based on cohort id retrieved by event.target
+    const students = await (
+      await fetch(`/api/users/cohort/${id}`)
+    ).json();
+    if (cohorts.length == 0) {
+      setCurrCohort([
+        {
+          cohort_id: id,
+          cohort_name: data.cohort_name,
+          students,
+        },
+      ]);
+    } else {
+      //if cohort div is clicked, will remove, else removes cohort from state
+      if (data.isclicked === "false") {
+        setCurrCohort((oldCohort) =>
+          oldCohort.concat({
+            cohort_id: id,
+            cohort_name: data.cohort_name,
+            students,
+          })
+        );
+        e.target.setAttribute("style", "color:#f79020");
+        data.isclicked = true;
       } else {
-        //if cohort div is clicked, will remove, else removes cohort from state
-        if (data.isclicked === "false") {
-          setCurrCohort(oldCohort => oldCohort.concat({cohort_id: id, cohort_name: data.cohort_name, students: filtStudents}))
-          e.target.setAttribute('style', 'color:#f79020')
-          data.isclicked = true;
-        } else {
-          setCurrCohort(oldCohort => oldCohort.filter(cohort => cohort.cohort_id != id))
-          data.isclicked = false;
-          e.target.setAttribute('style', 'color:#003B4C')
-
-        }
+        setCurrCohort((oldCohort) =>
+          oldCohort.filter((cohort) => cohort.cohort_id != id)
+        );
+        data.isclicked = false;
+        e.target.setAttribute("style", "color:#003B4C");
       }
-  }
+    }
+  };
   const removeFromState = (id) => {
-     setCurrCohort((cohort) => cohort.filter((cohort) => cohort.cohort_id != id))
-  }
+    setCurrCohort((cohort) =>
+      cohort.filter((cohort) => cohort.cohort_id != id)
+    );
+  };
   const toggleClickedMenu = () => {
     toggleClicked(!isClicked);
   };
@@ -38,57 +58,87 @@ const CohortMenu = ({currCohorts,students, setCurrCohort, cohorts }) => {
   const subMenuAnimate = {
     enter: {
       opacity: 1,
-      rotateX: 0,
       transition: {
-        duration: 0.5
+        duration: 0.5,
+        delay: .5, 
       },
-      display: "block"
+      display: "block",
     },
     exit: {
       opacity: 0,
-      rotateX: -15,
       transition: {
         duration: 0.5,
-        delay: 0.3
       },
       transitionEnd: {
-        display: "none"
-      }
-    }
-  }
+        display: "none",
+      },
+    },
+  };
   return (
-    <div className={s.menucontainer}> 
-    <div className={s.menutitle}>
-      <motion.btn 
-        onClick={toggleClickedMenu}
-        className={s.titlebtn}>
-     Cohorts
-     </motion.btn>
-    </div>
-    <div className={s.cohortsmenu}> 
-      <motion.div 
+    <>
+    <div className={s.menucontainer}>
+      <div className={s.menutitle} onClick={toggleMoveChat}>
+        <motion.btn onClick={toggleClickedMenu} className={s.titlebtn}>
+          Cohorts
+        </motion.btn>
+      </div>
+      <div className={s.cohortsmenu}>
+        <motion.div
           initial="exit"
           animate={isClicked ? "enter" : "exit"}
-          variants={subMenuAnimate}>
-        {cohorts.map(cohort => {return (
-            <motion.div className={s.listitem} whileHover={{scale: 1.2}}>
-              <motion.btn 
-              className={s.cohortbtn} 
-              onClick={handleClick} 
-              data-isclicked={false}
-              data-active={cohort.active} 
-              data-cohort_id={cohort.cohort_id}
-              data-cohort_name={cohort.cohort_name}
-              data-end_date={cohort.end_date}
-              data-start_date={cohort.start_date}
-              >{cohort.cohort_name}</motion.btn>
-            </motion.div>
-         )}
-        )}
-      </motion.div >
+          variants={subMenuAnimate}
+        >
+          {cohorts.map((cohort) => {
+            return (
+              <motion.div
+                key={cohort.cohort_id}
+                className={s.listitem}
+                whileHover={{ scale: 1.2 }}
+              >
+                <motion.btn
+                  className={s.cohortbtn}
+                  onClick={handleClick}
+                  data-isclicked={false}
+                  data-active={cohort.active}
+                  data-cohort_id={cohort.cohort_id}
+                  data-cohort_name={cohort.cohort_name}
+                  data-end_date={cohort.end_date}
+                  data-start_date={cohort.start_date}
+                >
+                  {cohort.cohort_name}
+                </motion.btn>{" "}
+                <button className={s.messageBtn}
+                  onClick={async () => {
+                    const cohortStudents = await (
+                      await fetch(
+                        `/api/users/cohort/${cohort.cohort_id}`
+                      )
+                    ).json();
+                    dispatch(setStudentsForCohortChat(cohortStudents));
+                  }}
+                  >
+                  Message
+                  </button>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
     </div>
-  </div>
-  )
-}
+    
+    </>
+  );
+};
 
-export default CohortMenu
+export default CohortMenu;
+
+{/* <button
+onClick={() => {
+  const cohortStudents = students.filter(
+    (student) => student.cohort_id === cohort.cohort_id
+  );
+  dispatch(setStudentsForCohortChat(cohortStudents));
+}}
+>
+Chat {cohort.cohort_name}
+</button> */}
