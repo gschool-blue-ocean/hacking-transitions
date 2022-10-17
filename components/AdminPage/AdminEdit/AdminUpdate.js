@@ -36,7 +36,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                 className={styles.adminUpdateHeaderBtnClose}
                 onClick={onClose}
               >
-                close
+                Close
               </button>
             </div>
           </div>
@@ -48,7 +48,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                 type="text"
                 onChange={(event) => setNewFirstName(event.target.value)}
                 aria-label={`first ${admin.user_id}`}
-                placeholder={`Current First Name ${admin.first}`}
+                placeholder={`Current First Name: ${admin.first}`}
               />
             </div>
             <div className={styles.adminUpdateFormLabel}>
