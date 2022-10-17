@@ -1,5 +1,6 @@
 import AdminCreate from "./AdminCreate";
 import AdminList from "./AdminList";
+import AdminCohort from "./AdminCohort";
 import styles from "../../../styles/Edit.Admin.module.css";
 
 const EditAdminTab = (user) => {
@@ -7,6 +8,7 @@ const EditAdminTab = (user) => {
     <>
       <div className={styles.adminEditParent}>
         <AdminList />
+        <AdminCohort />
       </div>
     </>
   );
