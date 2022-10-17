@@ -15,7 +15,7 @@ let Login = () => {
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-
+ 
   const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
@@ -61,11 +61,6 @@ let Login = () => {
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
       {/* <div className={style.picCont}> */}
-      <img
-        src="https://www.galvanize.com/images/galvanize-logo.svg"
-        alt="galvanizaeLogo"
-        className={style.logo}
-      ></img>
       {/* </div> */}
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
@@ -121,7 +116,7 @@ let Login = () => {
               Remember Me
             </label>
           </span>
-          <button type="submit" className={style.loginBtn}>
+          <button id="submit" type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
         </form>
