@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
     </Provider>
   ) : (
     <Provider store={store}>
-      
+      <Meta /> 
       <Layout>
         <Component {...pageProps} />{" "}
       </Layout>
