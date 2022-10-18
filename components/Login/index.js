@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../../styles/LoginStyles.module.css";
-import { server } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";

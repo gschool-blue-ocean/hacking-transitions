@@ -1,7 +1,4 @@
-import Image from "next/image";
-
 import { useEffect } from "react";
-import { server } from "../utility";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Login from "../components/Login/index";

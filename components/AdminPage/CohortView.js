@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import s from '../../styles/AdminHomePage/CohortView.module.css'
+import s from "../../styles/AdminHomePage/CohortView.module.css";
 import { useRouter } from "next/router";
 import { BsFillArrowUpRight } from "react-icons/bs";
 import { Button, Modal } from "react-bootstrap";
@@ -9,8 +9,9 @@ import EditStudentModal from "./EditStudentModal";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
 
-const CohortView = ({ currCohort }) => {
+const CohortView = ({ currCohort, setCurrCohort }) => {
   const dispatch = useDispatch();
+  const [clickedCohort, setClickedCohort] = useState([]);
   const [show, setShow] = useState(false);
   const router = useRouter();
   const handleClose = () => setShow(false);
@@ -19,10 +20,17 @@ const CohortView = ({ currCohort }) => {
   const handleClick = (e) => {
     const data = e.target.dataset;
     dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
+
     router.push({
       pathname: "/admin/viewstudent",
     });
   };
+  //handle click for cohort
+  const handleClickedCohort = (e) => {
+    const cohort_id = e.target.dataset.cohort_id;
+    console.log('from handle clicked cohort', cohort_id)
+    setClickedCohort(cohort_id);
+  }
   if (currCohort.length == 0) {
     return (
       <div className={s.default}>
@@ -92,11 +100,17 @@ const CohortView = ({ currCohort }) => {
                         {student.branch}
                       </btn>
                     </td>
-                    <td>
+                    <td>   
+                      <div>
                       <App
+                        cohort_id={student.cohort_id}
+                        setClickedCohort={setClickedCohort}
+                        clickedCohort={clickedCohort}
+                        setCurrCohort={setCurrCohort}
                         student_id={student.user_id}
-                        currCohor={currCohort}
+                        currCohort={currCohort}
                       />
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -107,7 +121,6 @@ const CohortView = ({ currCohort }) => {
       </div>
     );
   }
-}
+};
 
-
-export default CohortView
+export default CohortView;
