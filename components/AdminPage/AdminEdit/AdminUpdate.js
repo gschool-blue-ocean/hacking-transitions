@@ -1,14 +1,15 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const AdminUpdate = ({ admin, open, onClose }) => {
-
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const router = useRouter();
   const adminPatch = (event) => {
     event.preventDefault();
     axios.patch(`/api/admin/${admin.user_id}`, {
@@ -19,6 +20,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
       password: newPassword,
     });
     window.location.reload();
+    router.push("/admin/edit");
   };
 
   return (
@@ -36,7 +38,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   className={styles.adminUpdateHeaderBtnClose}
                   onClick={onClose}
                 >
-                  close
+                  Close
                 </button>
               </div>
             </div>
@@ -48,7 +50,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   type="text"
                   onChange={(event) => setNewFirstName(event.target.value)}
                   aria-label={`first ${admin.user_id}`}
-                  placeholder={`Current First Name ${admin.first}`}
+                  placeholder={`Current First Name: ${admin.first}`}
                 />
               </div>
               <div className={styles.adminUpdateFormLabel}>
@@ -96,12 +98,10 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   className={styles.adminUpdateFormSubmitBtn}
                   onClick={adminPatch}
                 >
-                  submit
+                  Submit
                 </button>
               </div>
             </form>
-            {/* );
-          })} */}
           </div>
         </div>
       </>

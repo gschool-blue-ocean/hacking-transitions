@@ -1,10 +1,8 @@
 import s from '../../styles/AdminHomePage/AdminPage.module.css'
 import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
-import Chat from "../Chat";
 import { motion } from 'framer-motion'
 import { useState, useEffect } from "react";
-import { server } from "../../utility";
 import RevealChat from './RevealChat'
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
@@ -60,7 +58,7 @@ const AdminContainer = ({ allCohorts }) => {
           <RevealChat />
          </motion.div>
         </div>
-        <CohortView  currCohort={currCohort} />
+        <CohortView setCurrCohort={setCurrCohort} currCohort={currCohort} />
     </div>
   </div>
   )

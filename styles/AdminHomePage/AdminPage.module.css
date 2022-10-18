@@ -47,7 +47,6 @@
     width: 12rem;
     display: flex;
     flex-direction: column;
-
     justify-content: center;
 }
 .listitem{
