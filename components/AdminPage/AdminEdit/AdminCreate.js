@@ -1,6 +1,7 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const AdminCreate = ({ open, onClose }) => {
   const [newFirstName, setNewFirstName] = useState("");
@@ -8,6 +9,7 @@ const AdminCreate = ({ open, onClose }) => {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const router = useRouter();
 
   const createAdmin = (event) => {
     event.preventDefault();
@@ -19,6 +21,7 @@ const AdminCreate = ({ open, onClose }) => {
       password: newPassword,
       email: newEmail,
     });
+    router.push("/admin/edit");
     window.location.reload();
   };
   return (

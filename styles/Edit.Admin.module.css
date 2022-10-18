@@ -52,9 +52,56 @@
 }
 .adminCohortDropdown {
   grid-area: adminCohortDropdown;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "adminCohortDropdownLabel"
+    "adminCohortDropdownSelect";
+}
+.adminCohortDropdownLabel {
+  grid-area: adminCohortDropdownLabel;
+  display: block;
+  text-align: center;
+  margin-top: 8%;
+  font-size: 1.5rem;
+}
+.adminCohortDropdownSelect {
+  grid-area: adminCohortDropdownSelect;
+  height: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
 }
 .adminCohortPassword {
   grid-area: adminCohortPassword;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "adminCohortPasswordLabel"
+    "adminCohortPasswordInput";
+}
+.adminCohortPasswordLabel {
+  grid-area: adminCohortPasswordLabel;
+  display: block;
+  text-align: center;
+  margin-top: 8%;
+  font-size: 1.5rem;
+}
+.adminCohortPasswordInput {
+  grid-area: adminCohortPasswordInput;
+  height: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 1rem;
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
 }
 .adminCohortGenerate {
   grid-area: adminCohortGenerate;
@@ -68,6 +115,13 @@
   border-radius: 0;
   margin-left: 10%;
   margin-top: 1.25%;
+}
+.adminCohortGenerateBtn:hover {
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 /* admin create */
 .adminCreateModal {
@@ -385,8 +439,6 @@
   margin-top: 5%;
   margin-right: 12.5%;
   display: grid;
-  color: black;
-  border: 1px solid #e1e1e1;
 }
 .adminUpdateFormInput {
   display: grid;
