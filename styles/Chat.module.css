@@ -16,6 +16,15 @@
   padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+.display::-webkit-scrollbar{
+  width: 5px;
+  background-color: transparent;
+}
+
+.display::-webkit-scrollbar-thumb{
+  background-color: lightgray;
+  border-radius: 1rem;
+}
 .message {
   margin: 1rem 0;
   width: fit-content;
@@ -70,7 +79,7 @@
 .submit {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 5px;
   background: transparent;
   border: none;
   font-size: 1.25rem;
@@ -85,18 +94,18 @@
   position: absolute;
   right: 0.3rem;
   top: -1.7rem;
+  height: fit-content;
+  width: auto;
+  padding: 0 .25rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
-  width: 5rem;
-  height: 20rem;
-  padding: 0.25rem;
   background: rgba(105, 96, 96, 0.05);
 }
 .editBtn {
   background-color: transparent;
   border: none;
   margin-right: 0.75rem;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .editBtn:last-child {
   margin-right: 0;
