@@ -1,7 +1,6 @@
 import react, { useState } from "react";
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { server } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import { useRouter } from "next/router";
 

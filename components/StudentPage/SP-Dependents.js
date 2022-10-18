@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/StudentPage.module.css";
-import { server } from "../../utility";
+
 
 export default function SPDependents({ student }) {
   const [dependents, setDependents] = useState([]);

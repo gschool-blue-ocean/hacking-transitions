@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styles from "../../styles/StudentPage.module.css";
 import { useDispatch } from "react-redux";
 import { setStudentTasks } from "../../redux/features/app-slice";
-import { server } from "../../utility";
+
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
