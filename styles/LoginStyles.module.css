@@ -1,5 +1,6 @@
+
 .modalContainer{
-    height: 100vh;
+    height: 75vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -67,16 +68,19 @@
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     position: static;
     
+    
 }
 
 .topNav {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     background: #f4f4f4;
     padding: 6px, 10px;
     /* z-index: 9999; */
     height: 33.8px;
-    align-items: center;
+    height: 5vh;
+    
     
 }
 
@@ -88,15 +92,17 @@
     margin-bottom: 0;
     margin-right: 10px;
     
+    
 }
 
 .listItem {
     color: var(--font-color);
-    border-left: solid var(--primary-accent) 1px;
-    border-right: solid var(--primary-accent) 1px;
     margin: 10px;
-    padding: 2px;
-    margin-top: 1px;
+    padding: 5px;
+    margin-bottom:2em;
+    border-radius: 25px;
+    background-color: white; 
+    
 };
 
 .listItem:hover {
@@ -108,12 +114,14 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    height: 70px;
+    align-items: center;
+    height: 7vh;
 }
 
 .logo {
-    margin: 16px 20px;
+    height: 5vh;
     display: flex;
+    
 }
 
 .title {
@@ -157,6 +165,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 25vh;
 }
 
 .cont {
@@ -236,12 +245,13 @@
 }
 .registerModalCreateModal {
     position: fixed;
-    top: 60%;
-    left: 39%;
+    top: 49.5%;
+    left: 37%;
     transform: translate(-50%, -50%);
     padding: 50px;
     z-index: 1000;
     width: 50rem;
+    
     
   }
   .registerModalCreateOverlay {
@@ -255,6 +265,7 @@
     
   }
   .registerModalCreateParent {
+    
     display: grid;
     grid-area: registerModalCreate;
     grid-template-rows: 10% 90%;
@@ -262,16 +273,18 @@
       "registerModalCreateHeader"
       "registerModalCreateForm";
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    max-height: 30rem;
+    height: 100%;
+    width: 50%;
+    margin: 47%;
     min-height: 20rem;
-    max-width: 20rem;
     min-width: 10rem;
-    margin-left: 50%;
+    
     background-color: #fff;
     border-radius: 25px;
     border: solid var(--primary-accent) 5px
   }
   .registerModalCreateForm {
+    
     display: grid;
     grid-area: registerModalCreateForm;
   }
@@ -291,6 +304,7 @@
     border-radius: 3px;
     border: 2px solid var(--primary-accent);
     margin-bottom: 2px;
+    height: 2em
   }
   .registerModalCreateFormInput::placeholder{
     text-align: center;
@@ -326,6 +340,7 @@
     justify-self: center;
     font-weight: 500;
     font-size: 13px;
+    
     
     
   }
