@@ -1,8 +1,8 @@
 INSERT INTO users (admin, first, last, email, cohort_name, archived, username, password) values (false, 'Bobby', 'Brown', 'email', 'MCSP-10', true, 'usern', 'password'),
-(false, 'Jane', 'Doe', 'email', 'MCSP-10', true, 'usern', 'password'), 
-(false, 'Wane', 'Doi', 'email', 'MCSP-10', true, 'usern', 'password'),
-(false, 'Rane', 'Do', 'email', 'MCSP-10', true, 'usern', 'password'),
-(false, 'Tane', 'Dou', 'email', 'MCSP-10', true, 'usern', 'password');
+(false, 'Jane', 'Doe', 'email', 'MCSP-03', true, 'usern', 'password'), 
+(false, 'Wane', 'Doi', 'email', 'MCSP-03', true, 'usern', 'password'),
+(false, 'Rane', 'Do', 'email', 'MCSP-03', true, 'usern', 'password'),
+(false, 'Tane', 'Dou', 'email', 'MCSP-03', true, 'usern', 'password');
 
 INSERT INTO cohorts (cohort_name, start_date, end_date, active, archived) values 
 

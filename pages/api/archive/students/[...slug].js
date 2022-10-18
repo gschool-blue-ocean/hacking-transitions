@@ -3,8 +3,8 @@ import { checkApiMethod, handleErrors, notFound404 } from "../../../../utility";
 
 export default async function handler(req, res) {
   const { slug } = req.query;
-  console.log("typeof", typeof slug);
-  console.log("this is the slug", slug);
+  //console.log("typeof", typeof slug);
+  //console.log("this is the slug", slug);
   //get Archived students by name//
 
   if (checkApiMethod(req, "GET") && slug) {
