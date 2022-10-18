@@ -76,3 +76,6 @@
 .messageBtn:hover {
     border: 2px solid #F79020;
 }
+.editRow {
+    cursor: pointer;
+}
