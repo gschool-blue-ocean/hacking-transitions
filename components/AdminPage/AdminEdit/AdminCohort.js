@@ -1,12 +1,13 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 const AdminCohort = () => {
   //pull list of cohorts
   const [cohortList, setCohortList] = useState([]);
   const [selectedCohort, setSelectedCohort] = useState(null);
   const [newPasscode, setNewPasscode] = useState("");
-
+  const router = useRouter();
   useEffect(() => {
     axios.get("/api/cohorts", {}).then((res) => {
       setCohortList(res.data);
@@ -19,6 +20,7 @@ const AdminCohort = () => {
       register_code: newPasscode,
     });
     window.location.reload();
+    router.push("/admin/edit");
   };
   console.log(selectedCohort);
   console.log(newPasscode);

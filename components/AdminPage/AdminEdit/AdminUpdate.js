@@ -1,6 +1,7 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const AdminUpdate = ({ admin, open, onClose }) => {
   const [newFirstName, setNewFirstName] = useState("");
@@ -8,6 +9,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const router = useRouter();
   const adminPatch = (event) => {
     event.preventDefault();
     axios.patch(`/api/admin/${admin.user_id}`, {
@@ -18,6 +20,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
       password: newPassword,
     });
     window.location.reload();
+    router.push("/admin/edit");
   };
 
   return (
