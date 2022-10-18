@@ -11,8 +11,7 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveC
   cohorts = cohorts.filter((cohort) => cohort.active);
   const handleClick = async (e) => {
     const data = e.target.dataset;
-    const id = data.cohort_id;
-    console.log("isclicked", data.isclicked);
+    const id = parseInt(data.cohort_id);
     //filter students based on cohort id retrieved by event.target
     const students = await (await fetch(`${server}/api/users/cohort/${id}`)).json();
     if (cohorts.length == 0) {
