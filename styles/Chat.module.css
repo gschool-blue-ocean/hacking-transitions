@@ -1,8 +1,8 @@
 .container {
-  height: fit-content;
-  margin-top: .5rem;
-  width: auto ;
+  margin-top: 0.5rem;
+  width: auto;
   grid-area: ChatModal;
+  max-height: 100%;
 }
 .display {
   display: flex;
@@ -10,11 +10,11 @@
   flex-wrap: nowrap;
   background-color: white;
   width: 100%;
-  height: fit-content;
   max-height: 15rem;
+  height: 10rem;
   overflow-y: scroll;
   padding: 0.5rem;
-  border-bottom: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .message {
   margin: 1rem 0;
@@ -22,14 +22,14 @@
   position: relative;
 }
 .message .body {
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem 0.75rem 1rem 0rem;
   padding: 0.25rem;
   margin-bottom: 0.75rem;
   background-color: lightgray;
   max-width: 25rem;
   hyphens: auto;
-  overflow-wrap:break-word;
+  overflow-wrap: break-word;
 }
 .message.right .body {
   background-color: #bee6f3;
@@ -53,58 +53,55 @@
   width: 100%;
 }
 
-.newMsgWrapper{
-    height: 10rem;
-    width: 100%;
-    padding: .1rem;
-    background-color: white;
-    position: relative;
+.newMsgWrapper {
+  height: 15rem;
+  width: 100%;
+  padding: 0.1rem;
+  background-color: white;
+  position: relative;
 }
 
-
-.newMsg{
+.newMsg {
   height: 100%;
   max-width: 10rem;
   overflow-wrap: break-word;
-
 }
 
-.submit{
-position: absolute;
-top: 8%;
-right: 5%;
-background: transparent;
-border: none;
-font-size: 1.25rem;
-z-index: 5;
-cursor: pointer;
+.submit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  z-index: 5;
+  cursor: pointer;
 }
-.submit:hover{
+.submit:hover {
   color: #06c;
 }
 
-
-.editContainer{
+.editContainer {
   position: absolute;
-  right: .3rem;
+  right: 0.3rem;
   top: -1.7rem;
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   width: 5rem;
-  padding: .25rem;
+  height: 20rem;
+  padding: 0.25rem;
   background: rgba(105, 96, 96, 0.05);
 }
-.editBtn{
+.editBtn {
   background-color: transparent;
   border: none;
-  margin-right: .75rem;
-  font-size: .9rem;
-
+  margin-right: 0.75rem;
+  font-size: 0.9rem;
 }
-.editBtn:last-child{
+.editBtn:last-child {
   margin-right: 0;
 }
 .editBtn:active,
-.editBtn:hover{
+.editBtn:hover {
   color: blue;
 }

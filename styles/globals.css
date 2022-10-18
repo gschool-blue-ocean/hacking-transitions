@@ -6,14 +6,12 @@ body {
   padding: 0;
 }
 
-:root{
-    --primary-accent:#F79020;
-    --secondary-accent:#F8F8F8;
-    --font-color: #003B4C;
-    --box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
-
+:root {
+  --primary-accent: #f79020;
+  --secondary-accent: #f8f8f8;
+  --font-color: #003b4c;
+  --box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-
 
 .ql-toolbar.ql-snow {
   border: none !important;
@@ -29,7 +27,10 @@ body {
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
   border-top: 0px;
-  padding-top: 40px;
+  padding-right: 1.25rem;
+  padding-top: 4rem;
+  height: 15rem;
+  max-height: 15rem;
   overflow-wrap: "break-word";
   overflow-y: "scroll";
 }
