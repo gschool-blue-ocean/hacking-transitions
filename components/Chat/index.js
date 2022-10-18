@@ -6,7 +6,6 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
-import { server } from "../../utility";
 import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
 
@@ -22,7 +21,7 @@ const Chat = () => {
     })
   );
   /****** END Getting state from redux ******/
-   
+
   const [userData, setUserData] = useState({});
   const [editInfo, setEditInfo] = useState(null); // info to be sent when editing an existing message,is a object
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
@@ -39,8 +38,10 @@ const Chat = () => {
       /****** Getting connected to the socket server ******/
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
-      await fetch(`/api/socket`);
-      const newSocket = io();
+      const resUrl = (await fetch(`/api/socket`)).url;
+      const baseUrl = resUrl.substring(0,resUrl.indexOf('/api'))
+  
+      const newSocket = io(baseUrl);
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
@@ -162,7 +163,7 @@ const Chat = () => {
           ) => {
             return (
               <div
-              key={comment_id}
+                key={comment_id}
                 className={`${styles.message} ${
                   author_id === userData.user_id && styles.right
                 }`}
@@ -206,7 +207,7 @@ const Chat = () => {
                           ? socket.emit("edit_message", null, comment_id, true)
                           : socket.emit(
                               "edit_cohort_message",
-                              { author_id, date_time },
+                              { comment_id },
                               comment_id,
                               cohortChat,
                               true
