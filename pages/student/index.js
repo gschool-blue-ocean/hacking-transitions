@@ -1,4 +1,4 @@
-import StudentPage from "../../components/StudentPage";
+import StudentPage from "../../components/StudentPage/index 2";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
