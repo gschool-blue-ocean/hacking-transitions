@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import s from '../../styles/AdminHomePage/AdminPage.module.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FiDelete } from 'react-icons/fi'
-import { AiOutlineEdit } from 'react-icons/ai'
+import { FiDelete } from 'react-icons/fi';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { BiArchive } from 'react-icons/bi';
 import axios from 'axios';
 
 function EditStudentModal(props) {
@@ -81,7 +83,7 @@ function EditStudentModal(props) {
               {aVisible && (
                 <Button variant='success' onClick={handleArchive} style={{
                     marginLeft: '1rem',
-                }}><AiOutlineEdit size={60} /></Button>
+                }}><BiArchive size={60} /></Button>
               )}
             </div>
         </Modal.Body>
@@ -93,7 +95,7 @@ function EditStudentModal(props) {
   
     return (
       <>
-        <btn variant="primary" onClick={() => setModalShow(true)}>
+        <btn className={s.editRow} variant="primary" onClick={() => setModalShow(true)}>
          <AiOutlineEdit />
         </btn>
          
