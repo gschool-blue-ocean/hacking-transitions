@@ -1,12 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../styles/StudentPage.module.css";
-import { useDispatch } from "react-redux";
-import { setStudentTasks } from "../../redux/features/app-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { studentTasks, setStudentTasks } from "../../redux/features/app-slice";
 import { server } from "../../utility";
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const studentTasks = useSelector(({app: {studentTasks}}) => (studentTasks));
 
   const onSubmit = (data) => {
     addTask(data);
@@ -22,7 +23,8 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
       remarks: null,
       completed: JSON.parse(data.completed),
     };
-    dispatch(setStudentTasks(newTask));
+    let allTasks = [...studentTasks, newTask];
+    dispatch(setStudentTasks(allTasks));
 
     fetch(`${server}/api/tasks`, {
       method: "POST",
