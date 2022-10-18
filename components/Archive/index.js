@@ -19,58 +19,7 @@ export default function ArchivePage() {
   const [searchCohort, setCohort] = useState("");
   //
 
-  const [displayCohorts, setDisplay] = useState([
-    {
-      title: "MCSP-13",
-      dates: "10/08/2010-01/01/2011",
-      graduationDate: "21 OCT 22",
-      total: 30,
-      studentsClearing: 10,
-      studentsCleared: 10,
-      studentsNotClearing: 10,
-      students: "long list of students",
-    },
-    {
-      title: "MCSP-13",
-      dates: "10/08/2010-01/01/2011",
-      graduationDate: "21 OCT 22",
-      total: 30,
-      studentsClearing: 10,
-      studentsCleared: 10,
-      studentsNotClearing: 10,
-      students: "long list of students",
-    },
-    {
-      title: "MCSP-13",
-      dates: "10/08/2010-01/01/2011",
-      graduationDate: "21 OCT 22",
-      total: 30,
-      studentsClearing: 10,
-      studentsCleared: 10,
-      studentsNotClearing: 10,
-      students: "long list of students",
-    },
-    {
-      title: "MCSP-13",
-      dates: "10/08/2010-01/01/2011",
-      graduationDate: "21 OCT 22",
-      total: 30,
-      studentsClearing: 10,
-      studentsCleared: 10,
-      studentsNotClearing: 10,
-      students: "long list of students",
-    },
-    {
-      title: "MCSP-13",
-      dates: "10/08/2010-01/01/2011",
-      graduationDate: "21 OCT 22",
-      total: 30,
-      studentsClearing: 10,
-      studentsCleared: 10,
-      studentsNotClearing: 10,
-      students: "long list of students",
-    },
-  ]);
+  const [displayCohorts, setDisplay] = useState([]);
 
   function lastFive() {
     fetch(`/api/archive/cohorts`)
