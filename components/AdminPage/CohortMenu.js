@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat } from "../../redux/features/app-slice";
-import { server } from "../../utility";
+
 const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
@@ -11,8 +11,7 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveC
   cohorts = cohorts.filter((cohort) => cohort.active);
   const handleClick = async (e) => {
     const data = e.target.dataset;
-    const id = data.cohort_id;
-    console.log("isclicked", data.isclicked);
+    const id = parseInt(data.cohort_id);
     //filter students based on cohort id retrieved by event.target
     const students = await (
       await fetch(`/api/users/cohort/${id}`)

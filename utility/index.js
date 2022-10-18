@@ -10,10 +10,10 @@ export const handleErrors = (res) =>
 /**********  END API Utility Functions **********/
 
 /********** Update Base Url For API request **********/
-export const server =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000"
-    : "https://next-transition-tracker-511169a3j-blue-ocean.vercel.app/";
+// export const server =
+//   process.env.NODE_ENV !== "production"
+//     ? "http://localhost:3000"
+//     : "https://next-transition-tracker-511169a3j-blue-ocean.vercel.app/";
 /********** END Update Base Url For API request **********/
 
 /********** Checks if the current user is logged in. If not returns null, otherwise returns 'student', or 'admin'**********/
