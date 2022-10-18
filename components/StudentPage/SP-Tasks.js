@@ -25,8 +25,7 @@ const customStyles = {
 };
 
 export default function SPTasks({ activeStudent }) {
-  const studentTasks = useSelector(({ app: { studentTasks } }) => studentTasks);
-  const [loading, setLoading] = useState(true);
+  const studentTasks = useSelector(({app: {studentTasks}}) => (studentTasks));
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [editTask, setEditTask] = useState(false);
@@ -49,7 +48,7 @@ export default function SPTasks({ activeStudent }) {
   }
 
   useEffect(() => {
-    getTasks();
+    setTimeout(() => {getTasks()}, '0010');
   }, [activeStudent, selectedTask, createTask, editTask, modalIsOpen]);
 
   function modalRendering() {
@@ -79,9 +78,7 @@ export default function SPTasks({ activeStudent }) {
       fetch(`api/tasks/student/${activeStudent.user_id}`)
         .then((res) => res.json())
         .then((tasks) => {
-          setLoading(false);
           dispatch(setStudentTasks(tasks));
-          console.log("studentasks", studentTasks);
         });
     }
   };
@@ -134,6 +131,7 @@ export default function SPTasks({ activeStudent }) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
+        ariaHideApp={false}
       >
         {modalRendering()}
       </Modal>
