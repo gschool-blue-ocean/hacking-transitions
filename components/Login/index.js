@@ -58,6 +58,7 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
+    
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
       {/* <div className={style.picCont}> */}

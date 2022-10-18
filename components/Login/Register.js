@@ -11,19 +11,25 @@ const RegisterModal = ({open, onClose}) => {
     const [email, setEmail] = useState("");
     
     if (!open) return null; 
+    
     const register = () =>{
         event.preventDefault();
-        // console.log('user input', regCode, email)
-
-        fetch(`/api/cohorts/registration/${regCode}`)
+      fetch(`/api/registration`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({regCode}),
+      })
         .then((res) => {
-          if (res.status === 404) throw new Error("Not Found");
-          console.log('code is NOT good');
+          
+          if (res.status === 404) {
+            console.log(res)
+            console.log('code is NOT good');
+          };
           return res.json();
         })
           .then(()=> {
             console.log('code is good')
-            router.push('student/editStudentModal')
+            router.push('student/editStudentModal2')
             
         })
         
@@ -34,7 +40,7 @@ const RegisterModal = ({open, onClose}) => {
     <div className={styles.registerModalCreateModal}>
       <div className={styles.registerModalCreateParent}>
         <div className={styles.registerModalCreateHeader}>
-          <h1>Sign Up</h1>
+          <h1 className={styles.modalHeader}>Sign Up</h1>
           
         </div>
         <div className={styles.registerModalCreateForm}>
@@ -47,14 +53,6 @@ const RegisterModal = ({open, onClose}) => {
                 placeholder='Registration Code'
                 onChange={(event) => setRegCode(event.target.value)}
                 value={regCode}
-              />
-              <div className={styles.registerModalEmail}></div>
-              <input className={styles.registerModalCreateFormInput}
-              id="email"
-              type="text"
-              placeholder='Email'
-              onChange={(event) => setEmail(event.target.value)}
-              value={email}
               />
             </div>
            
