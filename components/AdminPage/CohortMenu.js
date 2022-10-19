@@ -50,6 +50,10 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
       cohort.filter((cohort) => cohort.cohort_id != id)
     );
   };
+  const toggleCohortsBtn = (e) => {
+    toggleClickedMenu(e)
+    toggleMoveChat(e)
+  }
   const toggleClickedMenu = () => {
     toggleClicked(!isClicked);
   };
@@ -76,8 +80,8 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
   return (
     <>
     <div className={s.menucontainer}>
-      <div className={s.menutitle} onClick={toggleMoveChat}>
-        <motion.btn onClick={toggleClickedMenu} className={s.titlebtn}>
+      <div className={s.menutitle} onClick={toggleCohortsBtn}>
+        <motion.btn className={s.titlebtn}>
           Cohorts
         </motion.btn>
       </div>
