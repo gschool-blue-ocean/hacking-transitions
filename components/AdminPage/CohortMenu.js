@@ -132,13 +132,4 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
 
 export default CohortMenu;
 
-{/* <button
-onClick={() => {
-  const cohortStudents = students.filter(
-    (student) => student.cohort_id === cohort.cohort_id
-  );
-  dispatch(setStudentsForCohortChat(cohortStudents));
-}}
->
-Chat {cohort.cohort_name}
-</button> */}
+

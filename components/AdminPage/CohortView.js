@@ -1,14 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import s from "../../styles/AdminHomePage/CohortView.module.css";
 import { useRouter } from "next/router";
-import { BsFillArrowUpRight } from "react-icons/bs";
-import { Button, Modal } from "react-bootstrap";
 import App from "./EditStudentModal";
-import EditStudentModal from "./EditStudentModal";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
-
+import { motion } from "framer-motion";
 const CohortView = ({ currCohort, setCurrCohort }) => {
   const dispatch = useDispatch();
   const [clickedCohort, setClickedCohort] = useState([]);
@@ -54,7 +50,7 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                   <th className={s.tableheaders}>Edit</th>
                 </tr>
                 {cohort.students.map((student, index) => (
-                  <tr className={s.tr} key={student.user_id}>
+                  <motion.tr whileHover={{backgroundColor: '#F5F5F5'}} className={s.tr} key={student.user_id}>
                     <td>
                       <btn
                         className={s.td}
@@ -112,7 +108,7 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       />
                       </div>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </table>
             </div>

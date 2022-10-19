@@ -33,7 +33,7 @@ const RevealChat = ({ chatCohort }) => {
     <div className={s.container}>
       <div className={s.h1}>
         <motion.btn onClick={toggleClickedMenu} className={s.titlebtn}>
-          Chat {" "}
+          {!chatCohort && <span>Chat</span>}
           {chatCohort && <span className={s.cohortName}> {chatCohort}</span>}
         </motion.btn>
       </div>
