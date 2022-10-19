@@ -3,18 +3,19 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat } from "../../redux/features/app-slice";
-import { server } from "../../utility";
-const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveChat }) => {
+
+const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active);
   const handleClick = async (e) => {
     const data = e.target.dataset;
-    const id = data.cohort_id;
-    console.log("isclicked", data.isclicked);
+    const id = parseInt(data.cohort_id);
     //filter students based on cohort id retrieved by event.target
-    const students = await (await fetch(`${server}/api/users/cohort/${id}`)).json();
+    const students = await (
+      await fetch(`/api/users/cohort/${id}`)
+    ).json();
     if (cohorts.length == 0) {
       setCurrCohort([
         {
@@ -88,7 +89,11 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveC
         >
           {cohorts.map((cohort) => {
             return (
-              <motion.div className={s.listitem} whileHover={{ scale: 1.2 }}>
+              <motion.div
+                key={cohort.cohort_id}
+                className={s.listitem}
+                whileHover={{ scale: 1.2 }}
+              >
                 <motion.btn
                   className={s.cohortbtn}
                   onClick={handleClick}
@@ -104,9 +109,12 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveC
                 <button className={s.messageBtn}
                   onClick={async () => {
                     const cohortStudents = await (
-                      await fetch(`${server}/api/users/cohort/${cohort.cohort_id}`)
+                      await fetch(
+                        `/api/users/cohort/${cohort.cohort_id}`
+                      )
                     ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
+                    setChatCohort(cohort.cohort_name)
                   }}
                   >
                   Message
@@ -124,13 +132,4 @@ const CohortMenu = ({ currCohorts, students, setCurrCohort, cohorts, toggleMoveC
 
 export default CohortMenu;
 
-{/* <button
-onClick={() => {
-  const cohortStudents = students.filter(
-    (student) => student.cohort_id === cohort.cohort_id
-  );
-  dispatch(setStudentsForCohortChat(cohortStudents));
-}}
->
-Chat {cohort.cohort_name}
-</button> */}
+

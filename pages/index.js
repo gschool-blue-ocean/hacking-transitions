@@ -1,10 +1,9 @@
-import Image from "next/image";
-
 import { useEffect } from "react";
-import { server } from "../utility";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import Login from "../components/Login";
+import Login from "../components/Login/index";
+import Layout from "../components/Login/LoginLayout";
+
 
 import { setActiveStudent } from "../redux/features/app-slice";
 
@@ -29,7 +28,7 @@ function Home() {
   const confirmStorageUser = async (currentUser, local = false) => {
     const currentUserObj = JSON.parse(currentUser);
     const user = await (
-      await fetch(`${server}/api/users/${currentUserObj.username}`)
+      await fetch(`/api/users/${currentUserObj.username}`)
     ).json();
     if (user.password === currentUserObj.password) {
       local && localStorage.setItem("currentUser", JSON.stringify(user));
@@ -40,7 +39,9 @@ function Home() {
   };
   return (
     <>
+    < Layout >
       <Login />
+    </ Layout >
     </>
   );
 }

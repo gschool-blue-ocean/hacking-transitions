@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/Footer.module.css";
+import style from "../../../styles/LoginStyles.module.css";
 
 const Footer = () => {
   return (
@@ -48,6 +48,7 @@ const Footer = () => {
                 <a
                   className={style.lastLink}
                   href="https://www.tfaforms.com/4794969?_ga=2.107592388.719091361.1664475274-961043702.1644711180"
+                  target="..."
                 >
                   Do Not Sell My Personal Information
                 </a>

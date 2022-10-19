@@ -10,10 +10,10 @@ export const handleErrors = (res) =>
 /**********  END API Utility Functions **********/
 
 /********** Update Base Url For API request **********/
-export const server =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000"
-    : "https://hacking-transitions.netlify.app";
+// export const server =
+//   process.env.NODE_ENV !== "production"
+//     ? "http://localhost:3000"
+//     : "https://next-transition-tracker-511169a3j-blue-ocean.vercel.app/";
 /********** END Update Base Url For API request **********/
 
 /********** Checks if the current user is logged in. If not returns null, otherwise returns 'student', or 'admin'**********/
@@ -28,7 +28,7 @@ export const checkLogin = async () => {
 const checkUser = JSON.parse(session)
 
   const user = await (
-    await fetch(`${server}/api/users/${checkUser.user_id}`)
+    await fetch(`/api/users/${checkUser.user_id}`)
   ).json();
   
   local && localStorage.setItem("currentUser", JSON.stringify(user));

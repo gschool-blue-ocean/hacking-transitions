@@ -7,7 +7,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setStudentTasks } from '../../redux/features/app-slice';
+import { setStudentTasks } from "../../redux/features/app-slice";
 
 //task modal styling
 const customStyles = {
@@ -75,17 +75,13 @@ export default function SPTasks({ activeStudent }) {
 
   const getTasks = () => {
     if (activeStudent.user_id) {
-      fetch(
-        `api/tasks/student/${activeStudent.user_id}`
-      )
+      fetch(`api/tasks/student/${activeStudent.user_id}`)
         .then((res) => res.json())
         .then((tasks) => {
           dispatch(setStudentTasks(tasks));
         });
     }
   };
-
-  // addEventListener('load', (event) => {getTasks()});
 
   return (
     <div className={styles.SDashTasks}>
@@ -103,7 +99,7 @@ export default function SPTasks({ activeStudent }) {
         {studentTasks.length === 0 ? (
           <div>{activeStudent.first} has not started a task</div>
         ) : (
-          studentTasks.map(task => {
+          studentTasks.map((task) => {
             return (
               <div className={styles.StuTasksCard} key={task.task_id}>
                 <div

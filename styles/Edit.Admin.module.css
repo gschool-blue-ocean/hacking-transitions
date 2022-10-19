@@ -17,6 +17,112 @@
   margin-bottom: 10%;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
+/* admin cohort */
+.adminCohortParent {
+  display: grid;
+  grid-area: adminCohort;
+  grid-template-rows: 10% 80% 10%;
+  grid-template-areas:
+    "adminCohortHeader"
+    "adminCohortSelector"
+    "adminCohortGenerate";
+  margin-left: 2.5%;
+  /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
+  box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
+  min-height: 30rem;
+  max-height: 40rem;
+}
+.adminCohortHeader {
+  display: flex;
+  grid-area: adminCohortHeader;
+  font-size: 50%;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+  border-bottom: 3px solid #f79020;
+}
+.adminCohortSelector {
+  display: grid;
+  grid-area: adminCohortSelector;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "adminCohortDropdown"
+    "adminCohortPassword";
+  overflow-y: auto;
+}
+.adminCohortDropdown {
+  grid-area: adminCohortDropdown;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "adminCohortDropdownLabel"
+    "adminCohortDropdownSelect";
+}
+.adminCohortDropdownLabel {
+  grid-area: adminCohortDropdownLabel;
+  display: block;
+  text-align: center;
+  margin-top: 8%;
+  font-size: 1.5rem;
+}
+.adminCohortDropdownSelect {
+  grid-area: adminCohortDropdownSelect;
+  height: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.adminCohortPassword {
+  grid-area: adminCohortPassword;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "adminCohortPasswordLabel"
+    "adminCohortPasswordInput";
+}
+.adminCohortPasswordLabel {
+  grid-area: adminCohortPasswordLabel;
+  display: block;
+  text-align: center;
+  margin-top: 8%;
+  font-size: 1.5rem;
+}
+.adminCohortPasswordInput {
+  grid-area: adminCohortPasswordInput;
+  height: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 1rem;
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: black;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.adminCohortGenerate {
+  grid-area: adminCohortGenerate;
+}
+.adminCohortGenerateBtn {
+  height: 30px;
+  width: 80%;
+  background-color: #f79020;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  margin-left: 10%;
+  margin-top: 1.25%;
+}
+.adminCohortGenerateBtn:hover {
+  background-color: #be701d;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 /* admin create */
 .adminCreateModal {
   position: fixed;
@@ -139,7 +245,8 @@
     "adminListList"
     "adminCreate";
   margin-right: 2.5%;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
+  /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
   min-height: 30rem;
   max-height: 40rem;
 }
@@ -332,8 +439,6 @@
   margin-top: 5%;
   margin-right: 12.5%;
   display: grid;
-  color: black;
-  border: 1px solid #e1e1e1;
 }
 .adminUpdateFormInput {
   display: grid;

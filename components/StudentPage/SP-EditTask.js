@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../styles/StudentPage.module.css";
-import { server } from "../../utility";
+
 export default function SPEditTask({ task, cancelEdit, closeModal }) {
    const { register, handleSubmit } = useForm();
 
@@ -15,7 +15,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
          remarks: null, // Remarks have been deleted
       };
 
-      fetch(`${server}/api/tasks/${taskID}`, {
+      fetch(`/api/tasks/${taskID}`, {
          method: "PATCH",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(editData),

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-const student = () => {
+const Student = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -28,4 +28,4 @@ const student = () => {
     )
   );
 };
-export default student;
+export default Student;
