@@ -141,7 +141,6 @@ const SPChecklist = () => {
               type="checkbox"
               name="file_va_claim"
               onChange={handleChange}
-              // checked={checklistData.file_VA_claim}
             />{" "}
             VA Claim Filed?
           </label>
