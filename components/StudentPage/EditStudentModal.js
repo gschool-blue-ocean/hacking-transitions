@@ -245,7 +245,7 @@ const EditStudentModal = () => {
               value={formData.mos}
             />
           </label>
-          <label className={styles.studentInfoCheckbox}>
+          {/* <label className={styles.studentInfoCheckbox}>
             <input
               type="checkbox"
               name="seeking_further_education"
@@ -280,11 +280,11 @@ const EditStudentModal = () => {
               checked={formData.has_dependents}
             />{" "}
             Have dependents?
-          </label>
+          </label> */}
         </div>
         {activeStudent.admin ? null : (
           <div className={styles.myInterestsDiv}>
-            <label>My interests:</label>
+            <label className={styles.interestLabel}>My interests:</label>
             <textarea
               className={styles.editInterestsTextarea}
               type="text"

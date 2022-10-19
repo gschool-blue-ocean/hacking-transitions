@@ -2,6 +2,11 @@
 /* ================== TEST ==================== */
 .testgrid {
    display: grid;
+<<<<<<< HEAD
+   /* grid-template-areas: "sideNav content";
+   grid-template-columns: [first] 20% [second] auto; */
+=======
+>>>>>>> 9812fab180c59cef4c1d1b92bda4b455fae61e85
    gap: 10px;
    height: 100%;
    background-color: darkgray;
@@ -395,7 +400,8 @@ display: flex;
  .addStudentModal {
    display: flex;
    flex-direction: column;
-   margin-left: 2%;
+   margin-left: 27%;
+ 
  }
 
  .addStudentForm {
@@ -406,10 +412,24 @@ display: flex;
  .editStudentFormInputs {
    display: flex;
    flex-direction: column;
+   /* justify-content: center;
+   align-items: center; */
  }
 
  .editStudentBtn {
    margin-right: 10px;
    margin-top: 10px;
    margin-bottom: 10px;
+ }
+
+ .editInterestsTextarea {
+   width: 40rem;
+   min-height: 8rem;
+   margin-left: 1%;
+ }
+
+ .interestLabel {
+   color: #de7505f2;
+   font-weight: bold;
+   float: left;
  }
