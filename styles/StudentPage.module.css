@@ -2,11 +2,6 @@
 /* ================== TEST ==================== */
 .testgrid {
    display: grid;
-<<<<<<< HEAD
-   /* grid-template-areas: "sideNav content";
-   grid-template-columns: [first] 20% [second] auto; */
-=======
->>>>>>> 9812fab180c59cef4c1d1b92bda4b455fae61e85
    gap: 10px;
    height: 100%;
    background-color: darkgray;
