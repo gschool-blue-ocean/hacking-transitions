@@ -162,7 +162,7 @@ export default function ArchivePage() {
               listStudents.map((e) => {
                 return (
                   <li>
-                    {e.firtst} {e.last}
+                    {e.first} {e.last}
                   </li>
                 );
               })
