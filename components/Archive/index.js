@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
+import StudentPage from "../StudentPage";
 
 export default function ArchivePage({ cohorts, students }) {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
@@ -131,7 +132,6 @@ export default function ArchivePage({ cohorts, students }) {
             <Modal.Title>{cohort} student list</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {" "}
             {listStudents.length == 0 ? (
               <p>sorry no list</p>
             ) : (
