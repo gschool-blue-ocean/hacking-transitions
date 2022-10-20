@@ -49,7 +49,6 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       key={student.user_id}
                       onClick={() => {
                         dispatch(setActiveStudent(student));
-                        console.log(cohort.cohort_id);
                         
                       }}
                     >
