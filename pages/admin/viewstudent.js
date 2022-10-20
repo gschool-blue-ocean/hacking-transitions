@@ -105,10 +105,12 @@ const ViewStudent = ({ cohortStudents }) => {
     admin && (
       <div className={style.container}>
         <div className={style.top}>
-          {currentStudentIndex > 0 && (
+          {currentStudentIndex > 0 ? (
             <button name="prev" className={style.prev} onClick={handleNav}>
               Previous
             </button>
+          ) : (
+            <div className={style.btnSpace}></div>
           )}
           <div className={style.spacer}></div>
           <div className={style.cohort}>{activeStudent.cohort_name}</div>
@@ -130,10 +132,12 @@ const ViewStudent = ({ cohortStudents }) => {
               <input className={style.submit} type="submit" />
             </form>
           </div>
-          {currentStudentIndex < cohortStudents.length - 1 && (
+          {currentStudentIndex < cohortStudents.length - 1 ? (
             <button name="next" className={style.next} onClick={handleNav}>
               Next
             </button>
+          ) : (
+            <div className={style.btnSpace}></div>
           )}
         </div>
         <div className={style.card}>

@@ -13,11 +13,13 @@
     margin: auto;
     padding: 1rem;
     width: fit-content;
-    border-left: solid var(--primary-accent) 3px; 
-    border-right: solid var(--primary-accent) 3px; 
-    box-shadow: 2px 0px 10px;
+    /* border-left: solid var(--primary-accent) 3px; 
+    border-right: solid var(--primary-accent) 3px;  */
+    /* box-shadow: 2px 0px 10px; */
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     padding-bottom: 5%;
-    border-radius: 20px;
+    border-radius: 1px;
+    background-color: #f6efe748;
 }
 
 .loginTitle{
@@ -55,7 +57,8 @@
     background-color: var(--secondary-accent);
     border: solid var(--secondary-accent) 1px; 
     border-radius: 20px;
-    box-shadow: 1px 3px 5px var(--primary-accent);
+    /* box-shadow: 1px 3px 5px var(--primary-accent); */
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     
     
     
@@ -79,8 +82,8 @@
     padding: 6px, 10px;
     /* z-index: 9999; */
     height: 33.8px;
-    height: 5vh;
-    
+    height: 10vh;
+    margin-top: 3%;
     
 }
 
@@ -90,19 +93,19 @@
     justify-content: flex-end;
     padding: 0;
     margin-bottom: 0;
-    margin-right: 10px;
-    
-    
+    margin-right: 10px;   
 }
 
 .listItem {
     color: var(--font-color);
     margin: 10px;
     padding: 5px;
+    margin-top: 2em;
     margin-bottom:2em;
     border-radius: 25px;
     background-color: white; 
-    
+    border-color: #f4f4f4;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 };
 
 .listItem:hover {
@@ -115,13 +118,14 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    height: 7vh;
+    height: 10vh;
+    margin-top: 10;
 }
 
 .logo {
-    height: 5vh;
+    height: 10vh;
     display: flex;
-    
+    margin-top: 15%;
 }
 
 .title {
