@@ -8,8 +8,6 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     const session = sessionStorage.getItem("currentUser")
-    console.log(session);
-    
     setCurrentUser(JSON.parse(session));
   }, []);
   return (

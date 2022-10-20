@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../../styles/LoginStyles.module.css";
-import { server } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -15,7 +14,7 @@ let Login = () => {
   });
   const [error, setError] = useState(false);
   let stayLogged = false;
-
+ 
   const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
@@ -23,7 +22,7 @@ let Login = () => {
       password: loginData.password,
     };
 
-    fetch(`${server}/api/users/${inputData.username}`)
+    fetch(`/api/users/${inputData.username}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
@@ -58,14 +57,10 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
+    
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
       {/* <div className={style.picCont}> */}
-      <img
-        src="https://www.galvanize.com/images/galvanize-logo.svg"
-        alt="galvanizaeLogo"
-        className={style.logo}
-      ></img>
       {/* </div> */}
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
@@ -121,7 +116,7 @@ let Login = () => {
               Remember Me
             </label>
           </span>
-          <button type="submit" className={style.loginBtn}>
+          <button id="submit" type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
         </form>

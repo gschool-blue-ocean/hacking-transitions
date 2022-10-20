@@ -3,6 +3,7 @@
     width: 100%;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     position: static;
+    
 }
 
 .topNav {
@@ -87,7 +88,6 @@
     color: black;
     cursor: pointer;
     text-decoration: underline #F79020;
-    
 }
 
 .link {
@@ -98,6 +98,9 @@
 .page:hover,
 .active {
     background-color: #F79020;
-    color: white !important;
+    color: white;
+}
+.loginTitle{
+    padding-left: -10px;
 }
 

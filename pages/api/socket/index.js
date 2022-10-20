@@ -1,22 +1,18 @@
 import { Server } from "socket.io";
-import { server } from "../../../utility";
+import sql from "../../../database/connection";
 
-const updateDB = (msg, id, del = false) => {
+const updateDB = async (msg, id, del = false) => {
+  const { student_id, ...newMsg } = { ...msg };
+  let res;
   id
     ? del
-      ? fetch(`${server}/api/comments/${id}`, {
-          method: "DELETE",
-        })
-      : fetch(`${server}/api/comments/${id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(msg),
-        })
-    : fetch(`${server}/api/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(msg),
-      });
+      ? (res =
+          await sql`DELETE FROM comments WHERE comment_id = ${id} RETURNING *`)
+      : (res = await sql`UPDATE comments SET ${sql(
+          newMsg
+        )} WHERE comment_id = ${id} RETURNING *`)
+    : (res = await sql`INSERT INTO comments ${sql(newMsg)} RETURNING *`);
+  console.log("res from updatedb on chat", res);
 };
 
 export default async function handler(req, res) {
@@ -95,7 +91,9 @@ export default async function handler(req, res) {
       });
       /***** END HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
-      socket.on("disconnect", () => console.log("User Disconnected"));
+      socket.on("disconnect", (reason) =>
+        console.log("User Disconnected because of", reason)
+      );
     });
     /******* END ESTABLISH SOCKET CONNECTION ALLOWING CHAT *******/
   }

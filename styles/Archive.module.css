@@ -53,7 +53,7 @@
     flex-flow:column;
     height:70vh;
     padding: 2em;
-    margin:auto
+    margin:auto;
     
 }
 
@@ -76,7 +76,7 @@
 }
 
 .searchS button:hover{
-    font-size: .9rem;
+    font-size: 1.1rem;
     opacity: 1;
     color: white;
     background-color: #F79020;
@@ -110,14 +110,9 @@
     justify-content: center;
     flex-direction: column;
     padding-left: 1em;
-    padding-right: 1em;
-    /* width: 25%; */
-    width: 20vw;
-    height: 9em;
-    border-top: 1px solid #F79020;
-    /* border-style: solid; */
-    /* border-bottom-right-radius: 0%;
-    border-top-right-radius:0%; */
+    width: 15%;
+    height: 8em;
+    border-top:1px solid #F79020;
     /* border-width: 1px; */
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 }
@@ -126,6 +121,15 @@
 .card h4 {
     margin-top: 2px;
     margin-bottom: 0%;
-
 }
 
+.card h5 {
+    font-size: medium;
+}
+
+.students h2,
+.cohorts h2 {
+    color: #838282;
+    border-bottom:1px solid #F79020;
+    max-width: fit-content;
+}

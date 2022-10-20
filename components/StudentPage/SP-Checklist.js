@@ -1,8 +1,6 @@
 import react, { useState } from "react";
-import ReactDOM from "react-dom";
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { server } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
 
 const SPChecklist = () => {
@@ -143,9 +141,48 @@ const SPChecklist = () => {
               type="checkbox"
               name="file_va_claim"
               onChange={handleChange}
-              // checked={checklistData.file_VA_claim}
             />{" "}
             VA Claim Filed?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="6"
+              type="checkbox"
+              name="seeking_further_education"
+              onChange={handleChange}
+              checked={checklistData.seeking_further_education}
+            />{" "}
+            Seeking further education?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="7"
+              type="checkbox"
+              name="planning_to_relocate"
+              onChange={handleChange}
+              checked={checklistData.planning_to_relocate}
+            />{" "}
+            Planning to relocate?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="8"
+              type="checkbox"
+              name="taps_complete"
+              onChange={handleChange}
+              checked={checklistData.taps_complete}
+            />{" "}
+            Taps complete?
+          </label>
+          <label className={styles.checkboxLabel}>
+            <input
+              id="9"
+              type="checkbox"
+              name="has_dependents"
+              onChange={handleChange}
+              checked={checklistData.has_dependents}
+            />{" "}
+            Have dependents?
           </label>
         </div>
         <div className={styles.checklistButtonDiv}>

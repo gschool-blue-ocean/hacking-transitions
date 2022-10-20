@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/LoginStyles.module.css";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import Meta from "../components/Meta";

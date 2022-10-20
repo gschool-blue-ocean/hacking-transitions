@@ -1,21 +1,20 @@
 import s from '../../styles/AdminHomePage/AdminPage.module.css'
 import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
-import Chat from "../Chat";
 import { motion } from 'framer-motion'
 import { useState, useEffect } from "react";
-import { server } from "../../utility";
 import RevealChat from './RevealChat'
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
   const [currCohort, setCurrCohort] = useState([]);
   const [menuClicked, setMenuClicked] = useState(false)
+  const [chatCohort,setChatCohort] = useState('')
   useEffect(() => {
     (async () => {
       if (cohorts.length > 0) {
         const topcohort = cohorts[cohorts.length - 1];
         const students = await (
-          await fetch(`${server}/api/users/cohort/${topcohort.cohort_id}`)
+          await fetch(`/api/users/cohort/${topcohort.cohort_id}`)
         ).json();
         setCurrCohort([
           {
@@ -54,13 +53,13 @@ const AdminContainer = ({ allCohorts }) => {
       <div className={s.container}>
         <div className={s.tools_container}>
          <div >
-            <CohortMenu toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
+            <CohortMenu setChatCohort={setChatCohort} toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
          </div>
          <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
-          <RevealChat />
+          <RevealChat chatCohort={chatCohort}/>
          </motion.div>
         </div>
-        <CohortView  currCohort={currCohort} />
+        <CohortView setCurrCohort={setCurrCohort} currCohort={currCohort} />
     </div>
   </div>
   )
