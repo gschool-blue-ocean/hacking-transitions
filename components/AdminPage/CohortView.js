@@ -8,10 +8,6 @@ import { motion } from "framer-motion";
 const CohortView = ({ currCohort, setCurrCohort }) => {
   const dispatch = useDispatch();
   const [clickedCohort, setClickedCohort] = useState([]);
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   //handle click for cohort
   const handleClickedCohort = (e) => {
