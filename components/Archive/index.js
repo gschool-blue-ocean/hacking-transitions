@@ -1,76 +1,207 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
-
-//goal for this component
-//archive students button, puts checkboxes next to student names, can select students then push "OK"--> get message that student was archived
-//archive cohort button, puts checkboxes next to cohorts, can select multiple then push "OK"--> get message that cohort is archived
-//once state of "archived" should no longer display on other screens
-//should have a display archived button
-
-//now we only display the archived
-
-//make the rows today row: archived| false until archived then PATCH request and change archived to TRUE
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function ArchivePage() {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
-  const mcsp = {
-    title: "MCSP-13",
-    dates: "10/08/2010-01/01/2011",
-    graduationDate: "21 OCT 22",
-    total: 30,
-    studentsClearing: 10,
-    studentsCleared: 10,
-    studentsNotClearing: 10,
-    students: "long list of students",
+  //const [front, setFront] = useState(true); //Tried to make cards flip (am struggling)
+
+  const [displayCohorts, setDisplay] = useState([]);
+  const [resultStudent, setResultStudent] = useState([]);
+
+  //for Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+
+  const [cohort, setCohort] = useState([]);
+  const [listStudents, setListStudents] = useState([]);
+
+  const getList = () => {
+    fetch(`/api/archive/listStudents/${cohort}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((list) => {
+        if (list.length !== 0) {
+          setListStudents(list);
+        } else {
+          setListStudents([
+            { first: "no list, sorry", last: "no list, sorry" },
+          ]);
+        }
+      });
   };
 
-  const student = {
-    first: "bob",
-    last: "bird",
-    cohort: "MCSP-13",
-    taskTotal: 20,
-    completedTasks: 15,
-    tranStatus: "complete",
+  //
+
+  //for Search
+  const studentRef = useRef("");
+  const cohortRef = useRef("");
+
+  const searchStudent = (e) => {
+    e.preventDefault();
+    let search = studentRef.current.value;
+    let sStu = search.split(" ");
+    let data = `${sStu[0]}-${sStu[1]}`;
+    console.log("student search", data);
+
+    fetch(`/api/archive/students/${data}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((results) => {
+        if (results.length !== 0) {
+          setResultStudent(results);
+        } else {
+          setResultStudent([
+            {
+              first: "No Results",
+            },
+          ]);
+        }
+      });
   };
+
+  const searchCohort = (e) => {
+    e.preventDefault();
+    let search = cohortRef.current.value;
+    fetch(`/api/archive/cohorts/${search}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((results) => {
+        if (results.length !== 0) {
+          setDisplay(results);
+        } else {
+          setDisplay([
+            {
+              cohort_name: "No Results",
+            },
+          ]);
+        }
+      });
+  };
+
+  //
+
+  //This is for the initial display of the latest 5 archived students and cohorts
+  const lastFive = () => {
+    fetch(`/api/archive/cohorts`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((recentArchived) => {
+        const saved = [];
+        for (let i = 0; i < 5; i++) {
+          saved.push(recentArchived[i]);
+        }
+        setDisplay(saved);
+      });
+
+    fetch(`/api/archive/students`)
+      .then((data) => {
+        return data.json();
+      })
+      .then((recentStudents) => {
+        const stu = [];
+        for (let j = 0; j < 5; j++) {
+          stu.push(recentStudents[j]);
+        }
+        setResultStudent(stu);
+      });
+  };
+
+  useEffect(lastFive, []);
 
   return (
     <div>
-      {/* create a side bar with Students, Cohorts, Archived*/}
-
       <div className={style.cohorts}>
         <h2>Archived Cohorts</h2>
         <form className={style.searchC}>
-          <input type="text" placeholder="Search Cohorts..." />
-          <button type="submit">
+          <input ref={cohortRef} type="text" placeholder="Search Cohorts..." />
+          <button type="submit" onClick={searchCohort}>
             <HiOutlineSearch />
           </button>
         </form>
         <div className={style.cardDeck}>
-          <div className={style.card}>
-            <h3>{mcsp.title}</h3>
-            <h4>{mcsp.total} students</h4>
-            <h4>{mcsp.dates}</h4>
-          </div>
-          <div className={style.card}>
-            <h3>
-              {student.first} {student.last}
-            </h3>
-            <h5>{student.cohort}</h5>
-          </div>
+          {displayCohorts.map((e) => {
+            return (
+              <>
+                <div
+                  className={style.card}
+                  onClick={() => {
+                    setCohort(e.cohort_name);
+                    setShow(!show);
+                  }}
+                >
+                  <h3>{e.cohort_name}</h3>
+                  <p>
+                    {e.start_date}-{e.end_date}
+                  </p>
+                </div>
+              </>
+            );
+          })}
         </div>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          scrollable={true}
+          onEnter={getList}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>{cohort} student list</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {" "}
+            {listStudents.length == 0 ? (
+              <p>sorry no list</p>
+            ) : (
+              listStudents.map((e) => {
+                return (
+                  <li>
+                    {e.firtst} {e.last}
+                  </li>
+                );
+              })
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
 
       <div className={style.students}>
         <h2>Archived Students</h2>
         <form className={style.searchS}>
-          <input type="text" placeholder="Search Students..." />
-          <button type="submit">
+          <input
+            ref={studentRef}
+            type="text"
+            placeholder="Search Students..."
+          />
+          <button type="submit" onClick={searchStudent}>
             <HiOutlineSearch />
           </button>
         </form>
         <div className={style.cardDeck}>
-          <div className={style.card}></div>
+          {resultStudent.map((e) => {
+            return (
+              <>
+                <div className={style.card}>
+                  <h3>
+                    {e.first} {e.last}
+                  </h3>
+                  <p>Class: {e.cohort_name}</p>
+                  <p>ETS Date: {e.ets_date}</p>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
     </div>
