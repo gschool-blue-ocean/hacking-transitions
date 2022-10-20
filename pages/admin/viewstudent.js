@@ -57,23 +57,6 @@ const ViewStudent = ({ cohortStudents }) => {
       setCurrentStudentIndex(i + 1);
       dispatch(setActiveStudent(cohortStudents[i + 1]));
     }
-
-    // fetch(`/api/users/${id}`)
-    //   .then((res) => {
-    //     if (res.status === 404) throw new Error("User Not Found!");
-    //     return res.json();
-    //   })
-    //   .then((user) => {
-    //     if (user.admin) {
-    //       return;
-    //     } else {
-    //       dispatch(setActiveStudent(user));
-    //       // sessionStorage.setItem("activeStudent", JSON.stringify(user));
-    //     }
-    //   })
-    //   .catch(({ message }) => {
-    //     setError(true);
-    //   });
   };
 
   const handleChange = (e) => {
@@ -118,10 +101,12 @@ const ViewStudent = ({ cohortStudents }) => {
     admin && (
       <div className={style.container}>
         <div className={style.top}>
-          {currentStudentIndex > 0 && (
+          {currentStudentIndex > 0 ? (
             <button name="prev" className={style.prev} onClick={handleNav}>
               Previous
             </button>
+          ) : (
+            <div className={style.btnSpace}></div>
           )}
           <div className={style.spacer}></div>
           <div className={style.cohort}>{activeStudent.cohort_name}</div>
@@ -143,10 +128,12 @@ const ViewStudent = ({ cohortStudents }) => {
               <input className={style.submit} type="submit" />
             </form>
           </div>
-          {currentStudentIndex < cohortStudents.length - 1 && (
+          {currentStudentIndex < cohortStudents.length - 1 ? (
             <button name="next" className={style.next} onClick={handleNav}>
               Next
             </button>
+          ) : (
+            <div className={style.btnSpace}></div>
           )}
         </div>
         <div className={style.card}>
