@@ -1,3 +1,4 @@
+
 insert into cohorts (cohort_name, start_date, end_date, active, archived, register_code) values 
 ('MCSP-00', 'All', 'Archived Students', false, true, 'masterList')
 ,('MCSP-12', '4/5/2022', '8/12/2022', false, false, 'CapyBara')
