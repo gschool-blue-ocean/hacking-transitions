@@ -15,9 +15,6 @@ export default function ArchivePage({ cohorts, students }) {
 
   //for setting "Active" student global state
   const dispatch = useDispatch();
-  const handleActive = (data) => {
-    dispatch(setActiveStudent(data));
-  };
   //
 
   //for Modal
@@ -140,7 +137,12 @@ export default function ArchivePage({ cohorts, students }) {
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li key={student.user_id} onClick={handleActive(student)}>
+                  <li
+                    key={student.user_id}
+                    onClick={() => {
+                      dispatch(setActiveStudent(student));
+                    }}
+                  >
                     {student.first} {student.last}
                   </li>
                 );
