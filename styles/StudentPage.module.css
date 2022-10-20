@@ -4,8 +4,7 @@
    display: grid;
    gap: 10px;
    height: 100%;
-   background-color:#F8F8F8;
-   font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+   background-color: darkgray;
 }
 
 .studentView {
@@ -29,7 +28,6 @@
    margin: auto;
    width: 100%;
    height: fit-content;
-   font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif
 }
 
 .StudentDashWrapper {
@@ -43,7 +41,10 @@
       "ChatModal ChatModal ChatModal";
    grid-template-columns: 1fr 1fr 1fr;
    border-radius: 10px;
+   font-family: var(--ff-primary);
+   /* max-height: 85vh; */
    width: 100%;
+   /* overflow: auto !important; */
 }
 
 /* =============== Student Header ============= */
@@ -72,30 +73,28 @@
    width: fit-content;
    padding: 5px;
    position: relative;
-   left: 70%;
+   left: 77%;
    margin: 1px;
 }
 
-#ETS120 {
-   background-color: rgba(0, 0, 255, 0.709);
+#ETS-120 {
+   background-color: var(--clr-ets-blue);
 }
 
-#ETS90 {
-   background-color: rgba(255, 255, 0, 0.709);
-   color: black;
+#ETS-90 {
+   background-color: var(--clr-ets-yellow);
 }
 
-#ETS60 {
-   background-color: rgba(255, 166, 0, 0.709);
+#ETS-60 {
+   background-color: var(--clr-ets-orange);
 }
 
-#ETS30 {
-   background-color: rgba(255, 0, 0, 0.709);
+#ETS-30 {
+   background-color: var(--clr-ets-red);
 }
 
-#ETSd {
-   background-color: rgba(0, 128, 0, 0.709);
-   left: 25%;
+#ETS-d {
+   background-color: var(--clr-ets-green);
 }
 
 /* ============= Student Info =============== */
@@ -135,8 +134,6 @@
    grid-area: StuInfo;
    max-height: 39.5rem;
    min-height: 39.5rem;
-   display: flex;
-   justify-content: center;
 }
 
 .infoCardcontainer {
@@ -147,10 +144,6 @@
    min-height: 39.5rem;
    overflow-y: scroll;
    margin-top: 5px;
-   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
-   border-top: 1px solid #F79020;
-   padding-top: 2%;
-   padding-left: 4%;
 }
 
 .myInterestsDiv {
@@ -182,10 +175,6 @@ margin-left: auto;
    margin-top: 5px;
    max-height: 39.5rem;
    min-height: 39.5rem;
-   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
-   border-top: 1px solid #F79020;
-   padding-top: 3%;
-   overflow-y: scroll;
 }
 
 .checklistForm {
@@ -222,9 +211,6 @@ display: flex;
    overflow-y: scroll;
    max-height: 39.5rem;
    min-height: 39.5rem;
-   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
-   border-top: 1px solid #F79020;
-   padding-top: 3%;
 }
 
 #StuTasksHeader {
@@ -314,6 +300,7 @@ display: flex;
    grid-area: TaskHeader;
    text-align: center;
    background-color: var(--clr-accent-white);
+   font-family: var(--ff-primary);
 }
 
 .ModalTaskStatus {
@@ -354,11 +341,11 @@ display: flex;
    border-radius: 5px;
    padding: 10px;
    background-color: var(--clr-accent-white);
-   font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+   font-family: var(--ff-primary);
 }
 
 .ModalTaskInputs>input {
-   font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+   font-family: var(--ff-primary);
    background-color: rgb(232, 232, 232);
    border-radius: 5px;
    border: none;
@@ -367,7 +354,7 @@ display: flex;
 }
 
 .ModalTaskInputs>select {
-   font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+   font-family: var(--ff-primary);
    background-color: rgb(232, 232, 232);
    border-radius: 5px;
    border: none;
@@ -440,9 +427,4 @@ display: flex;
    color: #de7505f2;
    font-weight: bold;
    float: left;
- }
- .personalInfoSpacing {
-   padding-top: 1%;
-   margin-bottom: 0;
-   text-decoration: underline;
  }

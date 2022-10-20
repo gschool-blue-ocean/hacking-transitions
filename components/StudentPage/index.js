@@ -34,12 +34,12 @@ export default function StudentPage({ viewClickedCohort }) {
         <div className={styles.StudentDashWrapper}>
           <div className={styles.SDashHeader}>
             <div className={styles.SDashheaderCol}>
-              <h1 id={styles.StuHeaderName}>
+              <h3 id={styles.StuHeaderName}>
                 {activeStudent.first} {activeStudent.last}
-              </h1>
+              </h3>
               <p id={styles.StuHeaderBranch}>{activeStudent.branch}</p>
             </div>
-            <SPETStag userETS={activeStudent.ets_date}/>
+            <SPETStag userETS={activeStudent.ets_date} />
           </div>
           <div className={styles.SDashInfocard}>
             <div className={styles.infoCardcontainer}>
@@ -54,11 +54,12 @@ export default function StudentPage({ viewClickedCohort }) {
                   <div className={styles.editStudentToolTip}>Edit</div>
                 </div>
               </div>
+
               <div className="styles.stuInfoETS">
-                <h4 className={styles.personalInfoSpacing}>ETS Date</h4>
+                <h4 className={styles.stuInfoETS}>ETS Date</h4>
                 <span>{activeStudent.ets_date}</span>
               </div>
-              <h4 className={styles.personalInfoSpacing}>Personal Info</h4>
+              <h4 className="text-left">Personal Info</h4>
               <div>
                 <span className={styles.title}> Email: </span>
                 <span className={styles.answer}>{activeStudent.email}</span>
@@ -89,7 +90,7 @@ export default function StudentPage({ viewClickedCohort }) {
                   {activeStudent.taps_complete ? "Complete" : "Incomplete"}
                 </span>
               </div>
-              <h4 className={styles.personalInfoSpacing}>Dependents</h4>
+              <h4 className="text-left">Dependents</h4>
               <div className={styles.title}>
                 <span>
                   {activeStudent.has_dependents ? (
@@ -100,20 +101,20 @@ export default function StudentPage({ viewClickedCohort }) {
                 </span>
               </div>
               <div>
-                <h4 className={styles.personalInfoSpacing}> Education </h4>
+                <h4 className="text-left"> Education </h4>
                 <span className={styles.title}> Degree: </span>
                 <span className={styles.answer}>
                   {activeStudent.highest_education}
                 </span>
               </div>
               <div>
-                <h4 className={styles.personalInfoSpacing}> Relocation </h4>
+                <h4 className="text-left"> Relocation </h4>
                 <span className={styles.title}> Planning to Relocate?: </span>
                 <span className={styles.answer}>
                   {activeStudent.planning_to_relocate ? "Yes" : "No"}
                 </span>
               </div>
-              <h4 className={styles.personalInfoSpacing}>Interests</h4>
+              <h4>Interests</h4>
               <div className={styles.title}>
                 <span>{activeStudent.interests}</span>
               </div>
