@@ -3,6 +3,8 @@ import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
+import { setActiveStudent } from "../../redux/features/app-slice";
 
 export default function ArchivePage({ cohorts, students }) {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
@@ -10,6 +12,13 @@ export default function ArchivePage({ cohorts, students }) {
 
   const [displayCohorts, setDisplay] = useState(cohorts);
   const [resultStudent, setResultStudent] = useState(students);
+
+  //for setting "Active" student global state
+  const dispatch = useDispatch();
+  const handleActive = (data) => {
+    dispatch(setActiveStudent(data));
+  };
+  //
 
   //for Modal
   const [show, setShow] = useState(false);
@@ -131,7 +140,7 @@ export default function ArchivePage({ cohorts, students }) {
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li key={student.user_id}>
+                  <li key={student.user_id} onClick={handleActive(student)}>
                     {student.first} {student.last}
                   </li>
                 );
