@@ -41,6 +41,7 @@
 }
 .td{
    padding-right: 2rem;
+   cursor: pointer;
 }
 .default {
     margin-left: 30rem
