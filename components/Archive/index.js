@@ -188,14 +188,14 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
-          {resultStudent.map((e) => {
+          {resultStudent.map((student) => {
             return (
-              <div className={style.card}>
+              <div className={style.card} key={student.user_id}>
                 <h3>
-                  {e.first} {e.last}
+                  {student.first} {student.last}
                 </h3>
-                <p>Class: {e.cohort_name}</p>
-                <p>ETS Date: {e.ets_date}</p>
+                <p>Class: {student.cohort_name}</p>
+                <p>ETS Date: {student.ets_date}</p>
               </div>
             );
           })}
