@@ -3,7 +3,7 @@
 .cohorts{
     display:flex;
     flex-flow:column;
-    height:60vh;
+    height: 65vh;
     padding: 2em;
     margin:auto
 }
@@ -21,13 +21,13 @@
     border-bottom-left-radius: 0%;
     border-top-left-radius: 0%;
     border: none;
-    box-shadow: 5px 5px 5px #111;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     margin-top: .5rem;
     background: #f6efe7;
 }
 
 .searchC button:hover{
-    font-size: .9rem;
+    font-size: 1.1rem;
     opacity: 1;
     color: white;
     background-color: #F79020;
@@ -41,7 +41,7 @@
     border-bottom-right-radius: 0%;
     border-top-right-radius:0%;
     border-width: 1px;
-    box-shadow: 5px 5px 5px #111;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 }
 
 .searchC input:focus {
@@ -51,7 +51,7 @@
 .students {
     display:flex;
     flex-flow:column;
-    height:40vh;
+    height:70vh;
     padding: 2em;
     margin:auto
     
@@ -70,7 +70,7 @@
     border-bottom-left-radius: 0%;
     border-top-left-radius: 0%;
     border: none;
-    box-shadow: 5px 5px 5px #111;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     margin-top: .5rem;
     background: #f6efe7;
 }
@@ -90,7 +90,7 @@
     border-bottom-right-radius: 0%;
     border-top-right-radius:0%;
     border-width: 1px;
-    box-shadow: 5px 5px 5px #111;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 }
 
 .searchS input:focus {
@@ -100,27 +100,32 @@
 .cardDeck{
     display:flex;
     margin: 2em;
+    padding: 1em;
 }
 
 .card{
+    /* padding: 1em; */
     margin: 2em;
     display:flex;
     justify-content: center;
     flex-direction: column;
     padding-left: 1em;
-    width: 15%;
-    height: 7em;
-    border-style: solid;
-    border-bottom-right-radius: 0%;
-    border-top-right-radius:0%;
-    border-width: 1px;
-    box-shadow: 5px 5px 5px #111;
+    padding-right: 1em;
+    /* width: 25%; */
+    width: 20vw;
+    height: 9em;
+    border-top: 1px solid #F79020;
+    /* border-style: solid; */
+    /* border-bottom-right-radius: 0%;
+    border-top-right-radius:0%; */
+    /* border-width: 1px; */
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 }
 
 .card h3,
 .card h4 {
     margin-top: 2px;
     margin-bottom: 0%;
-    
+
 }
 

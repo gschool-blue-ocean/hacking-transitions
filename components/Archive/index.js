@@ -49,8 +49,8 @@ export default function ArchivePage() {
         <div className={style.cardDeck}>
           <div className={style.card}>
             <h3>{mcsp.title}</h3>
-            <h4>{mcsp.total} students</h4>
-            <h4>{mcsp.dates}</h4>
+            <p>{mcsp.total} students</p>
+            <p>{mcsp.dates}</p>
           </div>
           <div className={style.card}>
             <h3>
