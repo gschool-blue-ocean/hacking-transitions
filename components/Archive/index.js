@@ -126,22 +126,21 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
-          {displayCohorts.map((e) => {
+          {displayCohorts.map((cohort) => {
             return (
-              <>
-                <div
-                  className={style.card}
-                  onClick={() => {
-                    setCohort(e.cohort_name);
-                    setShow(!show);
-                  }}
-                >
-                  <h3>{e.cohort_name}</h3>
-                  <p>
-                    {e.start_date}-{e.end_date}
-                  </p>
-                </div>
-              </>
+              <div
+                key={cohort.cohort_id}
+                className={style.card}
+                onClick={() => {
+                  setCohort(cohort.cohort_name);
+                  setShow(!show);
+                }}
+              >
+                <h3>{cohort.cohort_name}</h3>
+                <p>
+                  {cohort.start_date}-{cohort.end_date}
+                </p>
+              </div>
             );
           })}
         </div>
@@ -159,10 +158,10 @@ export default function ArchivePage() {
             {listStudents.length == 0 ? (
               <p>sorry no list</p>
             ) : (
-              listStudents.map((e) => {
+              listStudents.map((student) => {
                 return (
-                  <li>
-                    {e.firtst} {e.last}
+                  <li key={student.user_id}>
+                    {student.first} {student.last}
                   </li>
                 );
               })
@@ -191,15 +190,13 @@ export default function ArchivePage() {
         <div className={style.cardDeck}>
           {resultStudent.map((e) => {
             return (
-              <>
-                <div className={style.card}>
-                  <h3>
-                    {e.first} {e.last}
-                  </h3>
-                  <p>Class: {e.cohort_name}</p>
-                  <p>ETS Date: {e.ets_date}</p>
-                </div>
-              </>
+              <div className={style.card}>
+                <h3>
+                  {e.first} {e.last}
+                </h3>
+                <p>Class: {e.cohort_name}</p>
+                <p>ETS Date: {e.ets_date}</p>
+              </div>
             );
           })}
         </div>
