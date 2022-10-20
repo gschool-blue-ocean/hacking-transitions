@@ -4,12 +4,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Contributors 
-- [Ilsa Hampton]() - Project Manager 
-- [Edward Sabbatino]() / [Justin Melendez]() - UI/UX Design Team
-- [Paul McDonald]() / [Moses Valerio]() - System Architecture Design Team
-- [Kameron Wescott]() - Login Page Team
-- [Drake Leslie]() / [Jacob Walters]() - Admin Section Team
-- [John Welle]() / [Matthew Mickler]() - Student Section Team
+- [Ilsa Hampton](https://github.com/ilsaann) - Project Manager 
+- [Edward Sabbatino](https://github.com/EntropicWind) / [Justin Melendez](https://github.com/CountDown2Extinction) - UI/UX Design Team
+- [Paul McDonald](https://github.com/pmcdonald1012) / [Moses Valerio](https://github.com/moses369) - System Architecture Design Team
+- [Kameron Wescott](https://github.com/Kamwescott) - Login Page Team
+- [Drake Leslie](https://github.com/drakeleslie) / [Jacob Walters](https://github.com/JacobDWalters) - Admin Section Team
+- [John Welle](https://github.com/Johnwelle11) / [Matthew Mickler](https://github.com/m-mickler) - Student Section Team
 
 ## What is the *Hacking Tranistions* Application?
 
