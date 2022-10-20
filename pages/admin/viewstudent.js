@@ -6,18 +6,22 @@ import { useEffect, useState } from "react";
 import StudentPage from "../../components/StudentPage";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import { checkLogin } from "../../utility";
+import sql from "../../database/connection";
 
 //******FOR VIEWING STUDENT INFORMATION WHILE LOGGED IN AS AN ADMIN ***********/
 
-const ViewStudent = () => {
+const ViewStudent = ({ cohortStudents }) => {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
   const [admin, setAdmin] = useState(false);
   const [search, setSearch] = useState("");
+  const [currentStudentIndex, setCurrentStudentIndex] = useState(null);
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
+    console.log(cohortStudents);
+
     (async () => {
       const user = await checkLogin();
       console.log(user);
@@ -33,29 +37,43 @@ const ViewStudent = () => {
         setAdmin(true);
       }
     })();
+    for (let i = 0; i < cohortStudents.length; i++) {
+      const student = cohortStudents[i];
+      if (student.user_id === activeStudent.user_id) {
+        console.log(i, "index of active studnt");
+
+        setCurrentStudentIndex(i);
+        break;
+      }
+    }
   }, []);
 
   const handleNav = (e) => {
-    e.preventDefault();
-    let id = activeStudent.user_id;
-    e.target.name === "prev" ? id-- : id++;
+    const i = currentStudentIndex;
+    if (e.target.name === "prev" && i > 0) {
+      setCurrentStudentIndex(i - 1);
+      dispatch(setActiveStudent(cohortStudents[i - 1]));
+    } else if (e.target.name === "next" && i < cohortStudents.length - 1) {
+      setCurrentStudentIndex(i + 1);
+      dispatch(setActiveStudent(cohortStudents[i + 1]));
+    }
 
-    fetch(`/api/users/${id}`)
-      .then((res) => {
-        if (res.status === 404) throw new Error("User Not Found!");
-        return res.json();
-      })
-      .then((user) => {
-        if (user.admin) {
-          return;
-        } else {
-          dispatch(setActiveStudent(user));
-          // sessionStorage.setItem("activeStudent", JSON.stringify(user));
-        }
-      })
-      .catch(({ message }) => {
-        setError(true);
-      });
+    // fetch(`/api/users/${id}`)
+    //   .then((res) => {
+    //     if (res.status === 404) throw new Error("User Not Found!");
+    //     return res.json();
+    //   })
+    //   .then((user) => {
+    //     if (user.admin) {
+    //       return;
+    //     } else {
+    //       dispatch(setActiveStudent(user));
+    //       // sessionStorage.setItem("activeStudent", JSON.stringify(user));
+    //     }
+    //   })
+    //   .catch(({ message }) => {
+    //     setError(true);
+    //   });
   };
 
   const handleChange = (e) => {
@@ -100,9 +118,11 @@ const ViewStudent = () => {
     admin && (
       <div className={style.container}>
         <div className={style.top}>
-          <button name="prev" className={style.prev} onClick={handleNav}>
-            Previous
-          </button>
+          {currentStudentIndex > 0 && (
+            <button name="prev" className={style.prev} onClick={handleNav}>
+              Previous
+            </button>
+          )}
           <div className={style.spacer}></div>
           <div className={style.cohort}>{activeStudent.cohort_name}</div>
           <div className={style.searchdiv}>
@@ -123,9 +143,11 @@ const ViewStudent = () => {
               <input className={style.submit} type="submit" />
             </form>
           </div>
-          <button name="next" className={style.next} onClick={handleNav}>
-            Next
-          </button>
+          {currentStudentIndex < cohortStudents.length - 1 && (
+            <button name="next" className={style.next} onClick={handleNav}>
+              Next
+            </button>
+          )}
         </div>
         <div className={style.card}>
           <StudentPage />
@@ -136,3 +158,10 @@ const ViewStudent = () => {
 };
 
 export default ViewStudent;
+
+export async function getServerSideProps({ query: { id } }) {
+  const cohortStudents =
+    await sql` SELECT * FROM users WHERE cohort_id=${id} ORDER BY first ASC`;
+
+  return { props: { cohortStudents } };
+}

@@ -64,11 +64,11 @@ const Chat = () => {
       } else {
         //// otherwise get all comments related to the student
         comments = await getStudentComments(
-          userData.user_id /*activeStudent.user_id*/
+         activeStudent.user_id
         );
         //// join the respective chat room of the student
         userData.admin
-          ? newSocket.emit("join_room", 9 /*activeStudent.user_id*/)
+          ? newSocket.emit("join_room", activeStudent.user_id)
           : newSocket.emit("join_room", userData.user_id);
       }
       setChatMessages(comments);
@@ -86,7 +86,7 @@ const Chat = () => {
           userData.admin && cohortChat[0]
             ? await getCohortComments(cohortChat[0].cohort_id)
             : await getStudentComments(
-                userData.user_id /*activeStudent.user_id*/
+                activeStudent.user_id
               );
         setChatMessages(comments);
       });
