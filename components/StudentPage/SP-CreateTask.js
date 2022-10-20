@@ -1,11 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../styles/StudentPage.module.css";
-<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
-=======
-import { useDispatch } from "react-redux";
->>>>>>> 2cf8c78626428dc6eb013f1687410610ca4fed87
 import { setStudentTasks } from "../../redux/features/app-slice";
 
 export default function SPCreateTask({ student, closeModal, cancelCreate }) {
