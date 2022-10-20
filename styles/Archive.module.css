@@ -3,7 +3,7 @@
 .cohorts{
     display:flex;
     flex-flow:column;
-    height: 65vh;
+    height: 60vh;
     padding: 2em;
     margin:auto
 }
@@ -51,7 +51,7 @@
 .students {
     display:flex;
     flex-flow:column;
-    height:70vh;
+    height:40vh;
     padding: 2em;
     margin:auto;
     
@@ -100,11 +100,9 @@
 .cardDeck{
     display:flex;
     margin: 2em;
-    padding: 1em;
 }
 
 .card{
-    /* padding: 1em; */
     margin: 2em;
     display:flex;
     justify-content: center;
