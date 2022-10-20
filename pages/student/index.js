@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
+
 const Student = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Student = () => {
         );
     })();
   }, []);
+
   return (
     loggedIn && (
       <div>
@@ -28,4 +30,5 @@ const Student = () => {
     )
   );
 };
+
 export default Student;
