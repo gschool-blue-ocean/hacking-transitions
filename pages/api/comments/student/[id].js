@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (checkApiMethod(req, "GET") && typeof parseInt(id) === "number") {
     try {
       const comments =
-        await sql`SELECT * FROM comments WHERE student_id = ${id} OR cohort_id = (SELECT users.cohort_id FROM users WHERE user_id = ${id}) ORDER BY comment_id ASC`;
+        await sql`SELECT * FROM comments WHERE student_id = ${id} OR cohort_id = (SELECT cohort_id FROM users WHERE user_id = ${id}) ORDER BY comment_id ASC`;
       res.json(comments);
     } catch (error) {
       console.log(error);

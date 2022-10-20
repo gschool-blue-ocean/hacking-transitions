@@ -1,16 +1,13 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import s from '../../styles/AdminHomePage/CohortView.module.css'
+import s from "../../styles/AdminHomePage/CohortView.module.css";
 import { useRouter } from "next/router";
-import { BsFillArrowUpRight } from "react-icons/bs";
-import { Button, Modal } from "react-bootstrap";
 import App from "./EditStudentModal";
-import EditStudentModal from "./EditStudentModal";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
-
-const CohortView = ({ currCohort }) => {
+import { motion } from "framer-motion";
+const CohortView = ({ currCohort, setCurrCohort }) => {
   const dispatch = useDispatch();
+  const [clickedCohort, setClickedCohort] = useState([]);
   const [show, setShow] = useState(false);
   const router = useRouter();
   const handleClose = () => setShow(false);
@@ -19,10 +16,17 @@ const CohortView = ({ currCohort }) => {
   const handleClick = (e) => {
     const data = e.target.dataset;
     dispatch(setActiveStudent(currCohort[0].students[data.student_id]));
+
     router.push({
       pathname: "/admin/viewstudent",
     });
   };
+  //handle click for cohort
+  const handleClickedCohort = (e) => {
+    const cohort_id = e.target.dataset.cohort_id;
+    console.log('from handle clicked cohort', cohort_id)
+    setClickedCohort(cohort_id);
+  }
   if (currCohort.length == 0) {
     return (
       <div className={s.default}>
@@ -46,7 +50,7 @@ const CohortView = ({ currCohort }) => {
                   <th className={s.tableheaders}>Edit</th>
                 </tr>
                 {cohort.students.map((student, index) => (
-                  <tr className={s.tr} key={student.user_id}>
+                  <motion.tr whileHover={{backgroundColor: '#F5F5F5'}} className={s.tr} key={student.user_id}>
                     <td>
                       <btn
                         className={s.td}
@@ -92,13 +96,19 @@ const CohortView = ({ currCohort }) => {
                         {student.branch}
                       </btn>
                     </td>
-                    <td>
+                    <td>   
+                      <div>
                       <App
+                        cohort_id={student.cohort_id}
+                        setClickedCohort={setClickedCohort}
+                        clickedCohort={clickedCohort}
+                        setCurrCohort={setCurrCohort}
                         student_id={student.user_id}
-                        currCohor={currCohort}
+                        currCohort={currCohort}
                       />
+                      </div>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </table>
             </div>
@@ -107,7 +117,6 @@ const CohortView = ({ currCohort }) => {
       </div>
     );
   }
-}
+};
 
-
-export default CohortView
+export default CohortView;

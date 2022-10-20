@@ -7,7 +7,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setStudentTasks } from '../../redux/features/app-slice';
+import { setStudentTasks } from "../../redux/features/app-slice";
 
 //task modal styling
 const customStyles = {
@@ -26,7 +26,6 @@ const customStyles = {
 
 export default function SPTasks({ activeStudent }) {
   const studentTasks = useSelector(({app: {studentTasks}}) => (studentTasks));
-  const [loading, setLoading] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [editTask, setEditTask] = useState(false);
@@ -49,7 +48,7 @@ export default function SPTasks({ activeStudent }) {
   }
 
   useEffect(() => {
-    getTasks();
+    setTimeout(() => {getTasks()}, '0010');
   }, [activeStudent, selectedTask, createTask, editTask, modalIsOpen]);
 
   function modalRendering() {
@@ -76,74 +75,66 @@ export default function SPTasks({ activeStudent }) {
 
   const getTasks = () => {
     if (activeStudent.user_id) {
-      fetch(
-        `api/tasks/student/${activeStudent.user_id}`
-      )
+      fetch(`api/tasks/student/${activeStudent.user_id}`)
         .then((res) => res.json())
         .then((tasks) => {
-          setLoading(false);
           dispatch(setStudentTasks(tasks));
-          console.log('studentasks', studentTasks)
         });
     }
   };
 
-  if (loading) {
-    return;
-  } else if (studentTasks[0]){
-    return (
-      <div className={styles.SDashTasks}>
-        <h4 id="StuTasksHeader">Tasks</h4>
-        <button
-          className={styles.StuTasksCreateBtn}
-          onClick={() => {
-            setCreateTask(true);
-            openModal();
-          }}
-        >
-          <BiMessageAltAdd />
-        </button>
-        <>
-          {studentTasks.length === 0 ? (
-            <div>{activeStudent.first} has not started a task</div>
-          ) : (
-            studentTasks.map((task) => {
-
-              return (
-                <div className={styles.StuTasksCard} key={task.task_id}>
-                  <div
-                    className={styles.StuTasksTitle}
-                    key={task.task_id}
-                    id={task.task_id}
-                    onClick={() => {
-                      viewTask(task);
-                    }}
-                  >
-                    {task.title}
-                  </div>
-                  <button
-                    className={styles.StuTasksButtons}
-                    onClick={() => {
-                      setEditTask(true);
-                      openModal();
-                      setSelectedTask(task);
-                    }}
-                  >
-                    <AiOutlineEdit />
-                  </button>
+  return (
+    <div className={styles.SDashTasks}>
+      <h4 id="StuTasksHeader">Tasks</h4>
+      <button
+        className={styles.StuTasksCreateBtn}
+        onClick={() => {
+          setCreateTask(true);
+          openModal();
+        }}
+      >
+        <BiMessageAltAdd />
+      </button>
+      <>
+        {studentTasks.length === 0 ? (
+          <div>{activeStudent.first} has not started a task</div>
+        ) : (
+          studentTasks.map((task) => {
+            return (
+              <div className={styles.StuTasksCard} key={task.task_id}>
+                <div
+                  className={styles.StuTasksTitle}
+                  key={task.task_id}
+                  id={task.task_id}
+                  onClick={() => {
+                    viewTask(task);
+                  }}
+                >
+                  {task.title}
                 </div>
-              );
-            })
-          )}
-        </>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-        >
-          {modalRendering()}
-        </Modal>
-      </div>
-    );
-  }
+                <button
+                  className={styles.StuTasksButtons}
+                  onClick={() => {
+                    setEditTask(true);
+                    openModal();
+                    setSelectedTask(task);
+                  }}
+                >
+                  <AiOutlineEdit />
+                </button>
+              </div>
+            );
+          })
+        )}
+      </>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        ariaHideApp={false}
+      >
+        {modalRendering()}
+      </Modal>
+    </div>
+  );
 }

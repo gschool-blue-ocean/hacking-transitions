@@ -47,7 +47,6 @@
     width: 12rem;
     display: flex;
     flex-direction: column;
-
     justify-content: center;
 }
 .listitem{
@@ -76,4 +75,7 @@
 }
 .messageBtn:hover {
     border: 2px solid #F79020;
+}
+.editRow {
+    cursor: pointer;
 }
