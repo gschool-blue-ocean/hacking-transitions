@@ -1,15 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-export default function ArchivePage() {
+export default function ArchivePage({ cohorts, students }) {
   //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
   //const [front, setFront] = useState(true); //Tried to make cards flip (am struggling)
 
-  const [displayCohorts, setDisplay] = useState([]);
-  const [resultStudent, setResultStudent] = useState([]);
+  const [displayCohorts, setDisplay] = useState(cohorts);
+  const [resultStudent, setResultStudent] = useState(students);
 
   //for Modal
   const [show, setShow] = useState(false);
@@ -86,35 +86,6 @@ export default function ArchivePage() {
 
   //
 
-  //This is for the initial display of the latest 5 archived students and cohorts
-  const lastFive = () => {
-    fetch(`/api/archive/cohorts`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((recentArchived) => {
-        const saved = [];
-        for (let i = 0; i < 5; i++) {
-          saved.push(recentArchived[i]);
-        }
-        setDisplay(saved);
-      });
-
-    fetch(`/api/archive/students`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((recentStudents) => {
-        const stu = [];
-        for (let j = 0; j < 5; j++) {
-          stu.push(recentStudents[j]);
-        }
-        setResultStudent(stu);
-      });
-  };
-
-  useEffect(lastFive, []);
-
   return (
     <div>
       <div className={style.cohorts}>
@@ -126,22 +97,21 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
-          {displayCohorts.map((e) => {
+          {displayCohorts.map((cohort) => {
             return (
-              <>
-                <div
-                  className={style.card}
-                  onClick={() => {
-                    setCohort(e.cohort_name);
-                    setShow(!show);
-                  }}
-                >
-                  <h3>{e.cohort_name}</h3>
-                  <p>
-                    {e.start_date}-{e.end_date}
-                  </p>
-                </div>
-              </>
+              <div
+                key={cohort.cohort_id}
+                className={style.card}
+                onClick={() => {
+                  setCohort(cohort.cohort_name);
+                  setShow(!show);
+                }}
+              >
+                <h3>{cohort.cohort_name}</h3>
+                <p>
+                  {cohort.start_date}-{cohort.end_date}
+                </p>
+              </div>
             );
           })}
         </div>
@@ -159,10 +129,10 @@ export default function ArchivePage() {
             {listStudents.length == 0 ? (
               <p>sorry no list</p>
             ) : (
-              listStudents.map((e) => {
+              listStudents.map((student) => {
                 return (
-                  <li>
-                    {e.first} {e.last}
+                  <li key={student.user_id}>
+                    {student.first} {student.last}
                   </li>
                 );
               })
@@ -189,17 +159,15 @@ export default function ArchivePage() {
           </button>
         </form>
         <div className={style.cardDeck}>
-          {resultStudent.map((e) => {
+          {resultStudent.map((student) => {
             return (
-              <>
-                <div className={style.card}>
-                  <h3>
-                    {e.first} {e.last}
-                  </h3>
-                  <p>Class: {e.cohort_name}</p>
-                  <p>ETS Date: {e.ets_date}</p>
-                </div>
-              </>
+              <div className={style.card} key={student.user_id}>
+                <h3>
+                  {student.first} {student.last}
+                </h3>
+                <p>Class: {student.cohort_name}</p>
+                <p>ETS Date: {student.ets_date}</p>
+              </div>
             );
           })}
         </div>

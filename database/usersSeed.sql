@@ -222,4 +222,12 @@ insert into users (admin, first, last, email, username, password, rank, branch, 
 ,  (false, 'Archived', 'Student1', 'mreiners5t@gov.uk', 'archivedStudent1', 'o9VsfyVDT7zO', 'Seaman', 'Navy', 'Fort Lewis WA', true, '10/16/2022', '12/17/2022', true, 'Las Vegas', 'NV', 'Associates', false, 'MSCP-00', 1, true, true, '19d', 'My interests pop-up kombucha yes plz selvage lumbersexual affogato dreamcatcher readymade YOLO man bun gochujang coloring book. Raclette health goth tofu PBR&B organic. Humblebrag paleo dreamcatcher keytar meh. Gochujang hoodie aesthetic gentrify butcher. Edison bulb hell of jianbing selfies butcher, keffiyeh godard.', false, null, null, null, false, false, false, false, false, false)
 ,  (false, 'Archived', 'Student2', 'mreiners5t@gov.uk', 'archivedStudent2', 'o9VsfyVDT7zO', 'SGT', 'Army', 'Fort Hood TX', true, '9/16/2022', '10/17/2022', true, 'Charleston', 'WV', 'Associates', false, 'MSCP-00', 1, true, true, '19d', 'My interests pop-up kombucha yes plz selvage lumbersexual affogato dreamcatcher readymade YOLO man bun gochujang coloring book. Raclette health goth tofu PBR&B organic. Humblebrag paleo dreamcatcher keytar meh. Gochujang hoodie aesthetic gentrify butcher. Edison bulb hell of jianbing selfies butcher, keffiyeh godard.', false, null, null, null, false, false, false, false, false, false);
 
+
+INSERT INTO users (admin, first, last, email, cohort_name, archived, username, password, ets_date) VALUES
+    (false, 'Bobby', 'Brown', 'email', 'MCSP-10', true, 'usern', 'password', '7/23/20' ),
+    (false, 'Jane', 'Doe', 'email', 'MCSP-03', true, 'usern', 'password', '7/23/20'), 
+    (false, 'Wane', 'Doi', 'email', 'MCSP-03', true, 'usern', 'password', '7/23/20'),
+    (false, 'Rane', 'Do', 'email', 'MCSP-03', true, 'usern', 'password', '7/23/20'),
+    (false, 'Tane', 'Dou', 'email', 'MCSP-03', true, 'usern', 'password', '7/23/20');
+
 \ir dependentsSeed.sql
