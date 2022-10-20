@@ -3,7 +3,7 @@
 .cohorts{
     display:flex;
     flex-flow:column;
-    height:60vh;
+    height: 60vh;
     padding: 2em;
     margin:auto
 }

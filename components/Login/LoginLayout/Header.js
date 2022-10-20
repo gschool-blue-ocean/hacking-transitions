@@ -38,10 +38,10 @@ const Header = () => {
 
                 {/* this is the register button */}
         <ul className={style.topList}>
-          <button 
+          <div 
             className={style.listItem} 
             onClick={() => setIsModalOpen(true)}>Register
-            </button>
+            </div>
           <RegisterModal
           open={isModalOpen}
           onClose={()=> setModalisOpen(false)}
