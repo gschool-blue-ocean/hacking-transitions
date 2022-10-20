@@ -2,10 +2,10 @@ import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
   console.log(req.method,req.url);
-  /******** GET ALL COHORTS ********/
+  /******** GET ALL ACTIVE COHORTS ********/
   if (checkApiMethod(req, "GET")) {
     try {
-      let cohorts = await sql`SELECT * FROM cohorts ORDER BY cohort_id ASC;`;
+      let cohorts = await sql`SELECT * FROM cohorts WHERE archived = false ORDER BY cohort_id ASC;`;
       res.json(cohorts);
     } catch (error) {
       console.log(error);
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     }
     return;
   }
-  /******** END GET ALL COHORTS ********/
+  /******** END GET ALL ACTIVE COHORTS ********/
   /******** CREATE NEW COHORTS ********/
   if (checkApiMethod(req, "POST")) {
     const { cohort_name, start_date, end_date, active } = req.body;

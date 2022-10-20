@@ -42,7 +42,7 @@ export default Admin;
 
 export const getStaticProps = async () => {
 
-  const allCohorts = await sql`SELECT * FROM cohorts ORDER BY cohort_id ASC;`;
+  const allCohorts = await sql`SELECT * FROM cohorts WHERE archived = false ORDER BY cohort_id ASC;`;
   return {
     props: {
       allCohorts,
