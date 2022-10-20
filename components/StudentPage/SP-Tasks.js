@@ -48,7 +48,7 @@ export default function SPTasks({ activeStudent }) {
   }
 
   useEffect(() => {
-    setTimeout(() => {getTasks()}, '0010');
+    setTimeout(() => {getTasks()}, '0140');
   }, [activeStudent, selectedTask, createTask, editTask, modalIsOpen]);
 
   function modalRendering() {
