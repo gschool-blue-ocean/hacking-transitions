@@ -116,6 +116,10 @@
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
 }
 
+.card:hover{
+    background-color: #e4e4e49d;
+}
+
 .card h3,
 .card h4 {
     margin-top: 2px;
