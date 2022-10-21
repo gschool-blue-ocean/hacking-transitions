@@ -158,7 +158,7 @@ export default function ArchivePage({ cohorts, students }) {
         </Modal>
       </div>
       <Modal
-        size="lg"
+        size="xl"
         show={showStudentPage}
         onHide={handleCloseSP}
         animation={false}
