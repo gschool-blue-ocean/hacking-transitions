@@ -18,7 +18,7 @@ export default function SPETStag({ userETS }) {
 
       if (DiffDays <= 0) {
          return (
-            <div className={styles.StuHeaderETStag} id="ETS-d">
+            <div className={styles.StuHeaderETStag} id={styles.ETSd}>
                ETS Complete
             </div>
          );
