@@ -13,7 +13,8 @@ import styles from "../../styles/Chat.module.css";
 const Chat = () => {
   /****** Getting state from redux ******/
   //cohortChat is an array of students from the given cohort
-
+  const chatRef = useRef();
+  const chatDisplay = chatRef.current;
   const { activeStudent, cohortChat } = useSelector(
     ({ app: { activeStudent, cohortChat } }) => ({
       activeStudent,
@@ -39,8 +40,8 @@ const Chat = () => {
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
       const resUrl = (await fetch(`/api/socket`)).url;
-      const baseUrl = resUrl.substring(0,resUrl.indexOf('/api'))
-  
+      const baseUrl = resUrl.substring(0, resUrl.indexOf("/api"));
+
       const newSocket = io(baseUrl);
       setSocket(newSocket);
       // if any socket.on methods are put in a function will break and resend the message incrementenly
@@ -63,9 +64,7 @@ const Chat = () => {
         ]);
       } else {
         //// otherwise get all comments related to the student
-        comments = await getStudentComments(
-         activeStudent.user_id
-        );
+        comments = await getStudentComments(activeStudent.user_id);
         //// join the respective chat room of the student
         userData.admin
           ? newSocket.emit("join_room", activeStudent.user_id)
@@ -85,9 +84,7 @@ const Chat = () => {
         const comments =
           userData.admin && cohortChat[0]
             ? await getCohortComments(cohortChat[0].cohort_id)
-            : await getStudentComments(
-                activeStudent.user_id
-              );
+            : await getStudentComments(activeStudent.user_id);
         setChatMessages(comments);
       });
       /****** END Handle when the user recieves a message******/
@@ -147,7 +144,7 @@ const Chat = () => {
   return (
     <div className={styles.container}>
       {/* CREATE EXISTING MESSAGES */}
-      <div className={styles.display}>
+      <div className={styles.display} ref={chatRef}>
         {chatMessages.map(
           (
             {
@@ -161,6 +158,11 @@ const Chat = () => {
             },
             index
           ) => {
+            if (index === chatMessages.length - 1)
+              setTimeout(
+                () => (chatDisplay.scrollTop = chatDisplay.scrollHeight),
+                200
+              );
             return (
               <div
                 key={comment_id}
@@ -258,7 +260,10 @@ const Chat = () => {
         <button
           tabIndex={1}
           className={styles.submit}
-          onClick={() => submitMsg()}
+          onClick={() => {
+            submitMsg();
+          }}
+          title="Ctrl + Enter, Send a message"
         >
           <MdSend />
         </button>

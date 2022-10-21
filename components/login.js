@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../styles/LoginStyles.module.css";
-import { setAllUserData, setAllCohortData, setCurrentUser, setIsAdmin, setLoginState, } from "../redux/features/app-slice.js"
+import {  setCurrentUser, setIsAdmin, setLoginState, } from "../redux/features/app-slice.js"
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-// import axios from "axios";
+
 
 
 
