@@ -35,7 +35,8 @@ export default function ArchivePage({ cohorts, students }) {
           setListStudents(list);
         } else {
           setListStudents([
-            { first: "no list, sorry", last: "no list, sorry" },
+            { first: "No Student Rosters Available" },
+            // { first: "no list, sorry", last: "no list, sorry" },
           ]);
         }
       });
@@ -129,15 +130,15 @@ export default function ArchivePage({ cohorts, students }) {
           onEnter={getList}
         >
           <Modal.Header closeButton>
-            <Modal.Title>{cohort} student list</Modal.Title>
+            <Modal.Title>{cohort} Student Roster</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {listStudents.length == 0 ? (
-              <p>sorry no list</p>
+              <p> No Roster Available </p>
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li
+                  <li className={style.listName}
                     key={student.user_id}
                     onClick={() => {
                       dispatch(setActiveStudent(student));

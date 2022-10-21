@@ -74,7 +74,9 @@
   background-color: rgba(0, 0, 0, 0);
   border-color: black;
   border-radius: 3px;
-  border: 1px solid #e1e1e1;
+  /* border: 1px solid #e1e1e1; */
+  border: 1px solid #f79020;
+  cursor: pointer;
 }
 .adminCohortPassword {
   grid-area: adminCohortPassword;
@@ -101,7 +103,9 @@
   background-color: rgba(0, 0, 0, 0);
   border-color: black;
   border-radius: 3px;
-  border: 1px solid #e1e1e1;
+  /* border: 1px solid #e1e1e1; */
+  border: 1px solid #f79020;
+  cursor: pointer;
 }
 .adminCohortGenerate {
   grid-area: adminCohortGenerate;
