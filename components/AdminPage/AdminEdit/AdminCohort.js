@@ -34,7 +34,7 @@ const AdminCohort = () => {
         <div className={styles.adminCohortSelector}>
           <div className={styles.adminCohortDropdown}>
             <label for="cohorts" className={styles.adminCohortDropdownLabel}>
-              Choose a cohort
+              Choose a Cohort:
             </label>
             <select
               name="cohorts"
@@ -60,11 +60,11 @@ const AdminCohort = () => {
               className={styles.adminCohortPasswordLabel}
               for="cohortPassword"
             >
-              One time password
+              One Time Password:
             </label>
             <input
               className={styles.adminCohortPasswordInput}
-              type="text"
+              type="text" placeholder="Enter OTP of your choice"
               onChange={(event) => setNewPasscode(event.target.value)}
             />
           </div>

@@ -98,13 +98,14 @@
 } 
 
 .cardDeck{
-    display:flex;
+    display: flex;
     margin: 2em;
+    cursor: pointer;
 }
 
 .card{
     margin: 2em;
-    display:flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     padding-left: 1em;
@@ -113,6 +114,10 @@
     border-top:1px solid #F79020;
     /* border-width: 1px; */
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
+}
+
+.card:hover{
+    background-color: #e4e4e49d;
 }
 
 .card h3,
@@ -130,4 +135,12 @@
     color: #838282;
     border-bottom:1px solid #F79020;
     max-width: fit-content;
+}
+
+.listName {
+    cursor: pointer;
+}
+
+.listName:hover {
+    background-color: #b9b5b59e;
 }
