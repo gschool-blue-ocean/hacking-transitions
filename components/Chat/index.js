@@ -29,7 +29,7 @@ const Chat = () => {
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
   const [ctrlDown, setCtrlDown] = useState(false);
-  const [recievedMessage, setRecievedMessage] = useState(false);
+  const [receivedMessage, setReceivedMessage] = useState(false);
   const [display, setDisplay] = useState({
     editBtns: false,
     comment: null,
@@ -77,22 +77,22 @@ const Chat = () => {
 
       newSocket.on("recieve_message", (newMessage) => {
         console.log(
-          "message recieved",
+          "message received",
           newMessage.content,
           newMessage.comment_id
         );
         setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
-        setRecievedMessage(true);
+        setReceivedMessage(true);
       });
 
       newSocket.on("edit_message", async (newMessage) => {
-        console.log("edit message recieved", newMessage);
+        console.log("edit message received", newMessage);
         const comments =
           userData.admin && cohortChat[0]
             ? await getCohortComments(cohortChat[0].cohort_id)
             : await getStudentComments(activeStudent.user_id);
         setChatMessages(comments);
-        setRecievedMessage(true);
+        setReceivedMessage(true);
       });
       /****** END Handle when the user recieves a message******/
     })();
@@ -167,14 +167,14 @@ console.log(editInfo);
             },
             index
           ) => {
-            if (recievedMessage && index === chatMessages.length - 1) {
+            if (receivedMessage && index === chatMessages.length - 1) {
               console.log("sroll down");
 
               setTimeout(
                 () => (chatDisplay.scrollTop = chatDisplay.scrollHeight),
                 500
               );
-              setRecievedMessage(false);
+              setReceivedMessage(false);
             }
             return (
               <div
