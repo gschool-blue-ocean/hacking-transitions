@@ -56,7 +56,7 @@ export default async function handler(req, res) {
       socket.on(
         "edit_cohort_message",
         async (msg, id, students, del = false) => {
-          console.log("recieved cohort edit message", msg, id);
+          console.log("received cohort edit message", msg, id);
 
           msg.comment_id = await updateDB(msg, id, del);
           let groupSocket = socket;
@@ -73,17 +73,17 @@ export default async function handler(req, res) {
       );
 
       socket.on("send_new_message", async (msg) => {
-        console.log("recieved new message", msg);
+        console.log("received new message", msg);
 
         ///// Create a new message in the database
         msg.comment_id = await updateDB(msg);
-        ///// Broadcast the new message to be recieved by all clients connected except the sender
+        ///// Broadcast the new message to be received by all clients connected except the sender
         socket.to(msg.student_id).emit("recieve_message", msg);
       });
 
       socket.on("send_cohort_message", async (msg, students) => {
         console.log(
-          `recieved new message for cohort ${students[0].cohort_id}`,
+          `received new message for cohort ${students[0].cohort_id}`,
           msg
         );
         let groupSocket = socket;
