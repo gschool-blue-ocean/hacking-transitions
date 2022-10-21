@@ -51,6 +51,8 @@
    grid-area: StuHeader;
    display: flex;
    flex-direction: row;
+   justify-content: space-between;
+   padding: 1rem;
 }
 .SDashheaderCol {
    display: flex;
@@ -72,7 +74,6 @@
    width: fit-content;
    padding: 5px;
    position: relative;
-   left: 70%;
    margin: 1px;
 }
 

@@ -30,10 +30,10 @@ const Header = () => {
 
       <div className={style.topNav}>
       <ul className={style.list_of_resources}>
-          <label className={style.resources_label}>resources: </label>
-          <a className={style.learn} href="https://auth.galvanize.com/sign_in">L E A R N</a>
-          <a className={style.mil_resources} href="https://www.military-transition.org/resources.html">Military Transistion</a>
-          <a className={style.hire_heros} href="https://www.hireheroesusa.org/">Hire For Heros</a>
+          <label className={style.resources_label}>Resources: </label>
+          <a className={style.learn} href="https://auth.galvanize.com/sign_in"> L E A R N</a>
+          <a className={style.mil_resources} href="https://www.military-transition.org/resources.html"> Military Transistion</a>
+          <a className={style.hire_heros} href="https://www.hireheroesusa.org/"> Hire For Heros</a>
           </ul>
 
                 {/* this is the register button */}
