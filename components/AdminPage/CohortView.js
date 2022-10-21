@@ -113,7 +113,6 @@ const LinkToViewStudent = ({ children, id }) => {
   const link = "/admin/viewstudent";
   return (
     <>
-      {/* {children} */}
       <Link href={{ pathname: link, query: { id } }}>{children}</Link>
     </>
   );
