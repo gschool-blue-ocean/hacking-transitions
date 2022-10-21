@@ -19,23 +19,30 @@ export const handleErrors = (res) =>
 /********** Checks if the current user is logged in. If not returns null, otherwise returns 'student', or 'admin'**********/
 
 export const checkLogin = async () => {
-  
   const local = localStorage.getItem("currentUser");
-  const session = sessionStorage.getItem("currentUser")
+  const session = sessionStorage.getItem("currentUser");
   if (!local && !session) {
-    return null
+    return null;
   }
-const checkUser = JSON.parse(session)
+  const checkUser = JSON.parse(session);
 
-  const user = await (
-    await fetch(`/api/users/${checkUser.user_id}`)
-  ).json();
-  
+  const user = await (await fetch(`/api/users/${checkUser.user_id}`)).json();
+
   local && localStorage.setItem("currentUser", JSON.stringify(user));
   sessionStorage.setItem("currentUser", JSON.stringify(user));
   if (user) {
-    return !user.admin ? 'student':'admin'
+    return !user.admin ? "student" : "admin";
   } else {
-    return null
+    return null;
   }
+};
+
+/****** Get days to ets ******/
+export const getDaysToEts = (ets_date) => {
+  const currentDate = new Date();
+  const studentETS = new Date(ets_date);
+
+  const DiffTime = studentETS.getTime() - currentDate.getTime();
+
+  return parseInt((DiffTime / (1000 * 3600 * 24)).toFixed(0));
 };

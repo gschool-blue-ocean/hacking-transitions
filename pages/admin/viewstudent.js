@@ -21,7 +21,7 @@ const ViewStudent = ({ cohortStudents }) => {
   const router = useRouter();
   useEffect(() => {
     console.log(cohortStudents);
-
+    const sessionStudent = JSON.parse(sessionStorage.getItem("activeStudent"));
     (async () => {
       const user = await checkLogin();
       console.log(user);
@@ -35,11 +35,15 @@ const ViewStudent = ({ cohortStudents }) => {
         router.push("/student");
       } else {
         setAdmin(true);
+        dispatch(
+          setActiveStudent(sessionStudent)
+        );
       }
     })();
+
     for (let i = 0; i < cohortStudents.length; i++) {
       const student = cohortStudents[i];
-      if (student.user_id === activeStudent.user_id) {
+      if (student.user_id === sessionStudent.user_id) {
         console.log(i, "index of active studnt");
 
         setCurrentStudentIndex(i);
@@ -149,6 +153,7 @@ export default ViewStudent;
 export async function getServerSideProps({ query: { id } }) {
   const cohortStudents =
     await sql` SELECT * FROM users WHERE cohort_id=${id} ORDER BY first ASC`;
+  
 
   return { props: { cohortStudents } };
 }

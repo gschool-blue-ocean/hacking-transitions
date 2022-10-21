@@ -78,25 +78,29 @@
 }
 
 #ETS120 {
-   background-color: rgba(0, 0, 255, 0.709);
+   background-color: rgba(0, 0, 255, 0.4);
 }
 
 #ETS90 {
-   background-color: rgba(255, 255, 0, 0.709);
+   background-color: rgba(255, 255, 0, 0.4);
    color: black;
 }
 
 #ETS60 {
-   background-color: rgba(255, 166, 0, 0.709);
+   background-color: rgba(255, 166, 0, 0.4);
 }
 
 #ETS30 {
-   background-color: rgba(255, 0, 0, 0.709);
+   background-color: rgba(255, 0, 0, 0.4);
 }
 
 #ETSd {
-   background-color: rgba(0, 128, 0, 0.709);
+   background-color: rgba(0, 128, 0, 0.4);
    left: 25%;
+}
+.adminColoring{
+   width: 10rem;
+   height: fit-content;
 }
 
 /* ============= Student Info =============== */

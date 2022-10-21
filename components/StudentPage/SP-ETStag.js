@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/StudentPage.module.css";
-
+import { getDaysToEts } from "../../utility";
 export default function SPETStag({ userETS }) {
-   const [days2ETS, setDays2ETS] = useState(null);
+  const [days2ETS, setDays2ETS] = useState(null);
 
-   useEffect(() => {
-      setDays2ETS(userETS);
-   }, [userETS]);
+  useEffect(() => {
+    setDays2ETS(userETS);
+  }, [userETS]);
 
-   const createETStag = () => {
-      const currentDate = new Date();
-      const studentETS = new Date(days2ETS);
-
-      let DiffTime = studentETS.getTime() - currentDate.getTime();
-
-      let DiffDays = parseInt((DiffTime / (1000 * 3600 * 24)).toFixed(0));
+  const createETStag = () => {
+    const DiffDays =  getDaysToEts(userETS);
 
       if (DiffDays <= 0) {
          return (
@@ -60,4 +55,5 @@ export default function SPETStag({ userETS }) {
    } else {
       return <div className={styles.StuHeaderETStag}>{createETStag()}</div>;
    }
+
 }
