@@ -50,3 +50,8 @@
     display: flex;
     flex-direction: row;
 }
+
+.chatBtn{
+    background-color: transparent;
+    border: none;
+}
