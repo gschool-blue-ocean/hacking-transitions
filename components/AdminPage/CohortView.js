@@ -5,9 +5,13 @@ import s from "../../styles/AdminHomePage/CohortView.module.css";
 import etsStyle from "../../styles/StudentPage.module.css";
 import App from "./EditStudentModal";
 import { useDispatch } from "react-redux";
-import { setActiveStudent, setStudentsForCohortChat} from "../../redux/features/app-slice";
+import {
+  setActiveStudent,
+  setStudentsForCohortChat,
+} from "../../redux/features/app-slice";
 import { motion } from "framer-motion";
-const CohortView = ({ currCohort, setCurrCohort }) => {
+import { BsChatText } from "react-icons/bs";
+const CohortView = ({ currCohort, setCurrCohort, setChatCohort}) => {
   const dispatch = useDispatch();
   const [clickedCohort, setClickedCohort] = useState([]);
 
@@ -39,6 +43,7 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                   <th className={s.tableheaders}>Terminal</th>
                   <th className={s.tableheaders}>Branch</th>
                   <th className={s.tableheaders}>Edit</th>
+                  <th className={s.tableheaders}>Chat</th>
                 </tr>
                 {cohort.students.map((student, index) => {
                   const daysToEts = getDaysToEts(student.ets_date);
@@ -49,7 +54,7 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       key={student.user_id}
                       onClick={() => {
                         dispatch(setActiveStudent(student));
-                        dispatch(setStudentsForCohortChat([]))
+                        dispatch(setStudentsForCohortChat([]));
                       }}
                     >
                       <LinkToViewStudent id={cohort.cohort_id}>
@@ -65,11 +70,11 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       </LinkToViewStudent>
 
                       <LinkToViewStudent id={cohort.cohort_id}>
-                          <ColorEts daysToEts={daysToEts}>
-                        <td>
+                        <ColorEts daysToEts={daysToEts}>
+                          <td>
                             <btn className={s.td}>{student.ets_date}</btn>
-                        </td>
-                          </ColorEts>
+                          </td>
+                        </ColorEts>
                       </LinkToViewStudent>
 
                       <LinkToViewStudent id={cohort.cohort_id}>
@@ -96,6 +101,19 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                           />
                         </div>
                       </td>
+
+                      <td>
+                        <button
+                          className={`${s.chatBtn} ${s.td}`}
+                          onClick={() => {
+                            dispatch(setActiveStudent(student));
+                            dispatch(setStudentsForCohortChat([]));
+                            setChatCohort(student.first +' ' + student.last.substring(0,1) + '.')
+                          }}
+                        >
+                          <BsChatText />
+                        </button>
+                      </td>
                     </motion.tr>
                   );
                 })}
@@ -114,7 +132,9 @@ const LinkToViewStudent = ({ children, id }) => {
   const link = "/admin/viewstudent";
   return (
     <>
-      <Link as='/admin' href={{ pathname: link, query: { id } }}>{children}</Link>
+      <Link as="/admin" href={{ pathname: link, query: { id } }}>
+        {children}
+      </Link>
     </>
   );
 };

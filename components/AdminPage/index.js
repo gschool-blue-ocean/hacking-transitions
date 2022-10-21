@@ -59,7 +59,7 @@ const AdminContainer = ({ allCohorts }) => {
           <RevealChat chatCohort={chatCohort}/>
          </motion.div>
         </div>
-        <CohortView setCurrCohort={setCurrCohort} currCohort={currCohort} />
+        <CohortView setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
     </div>
   </div>
   )
