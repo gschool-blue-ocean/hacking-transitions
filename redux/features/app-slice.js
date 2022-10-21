@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeStudent:{},
+  activeStudent: {},
   cohortChat: [],
   studentTasks: [],
 };
@@ -12,6 +12,7 @@ export const appSlice = createSlice({
   reducers: {
     setActiveStudent(state, { payload }) {
       state.activeStudent = payload;
+      sessionStorage.setItem("activeStudent", JSON.stringify(payload));
     },
     setStudentTasks(state, { payload }) {
       state.studentTasks = payload;
