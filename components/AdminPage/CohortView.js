@@ -5,7 +5,7 @@ import s from "../../styles/AdminHomePage/CohortView.module.css";
 import etsStyle from "../../styles/StudentPage.module.css";
 import App from "./EditStudentModal";
 import { useDispatch } from "react-redux";
-import { setActiveStudent } from "../../redux/features/app-slice";
+import { setActiveStudent, setStudentsForCohortChat} from "../../redux/features/app-slice";
 import { motion } from "framer-motion";
 const CohortView = ({ currCohort, setCurrCohort }) => {
   const dispatch = useDispatch();
@@ -49,6 +49,7 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       key={student.user_id}
                       onClick={() => {
                         dispatch(setActiveStudent(student));
+                        dispatch(setStudentsForCohortChat([]))
                       }}
                     >
                       <LinkToViewStudent id={cohort.cohort_id}>
@@ -113,7 +114,7 @@ const LinkToViewStudent = ({ children, id }) => {
   const link = "/admin/viewstudent";
   return (
     <>
-      <Link href={{ pathname: link, query: { id } }}>{children}</Link>
+      <Link as='/admin' href={{ pathname: link, query: { id } }}>{children}</Link>
     </>
   );
 };

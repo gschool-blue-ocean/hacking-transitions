@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import sql from "../../../database/connection";
 
 const updateDB = async (msg, id, del = false) => {
-  const { student_id, ...newMsg } = { ...msg };
+ 
   let res;
   id
     ? del
@@ -11,7 +11,7 @@ const updateDB = async (msg, id, del = false) => {
       : (res = await sql`UPDATE comments SET ${sql(
           newMsg
         )} WHERE comment_id = ${id} RETURNING *`)
-    : (res = await sql`INSERT INTO comments ${sql(newMsg)} RETURNING *`);
+    : (res = await sql`INSERT INTO comments ${sql(msg)} RETURNING *`);
   console.log("res from updatedb on chat", res);
 };
 
@@ -75,14 +75,14 @@ export default async function handler(req, res) {
         socket.to(msg.student_id).emit("recieve_message", msg);
       });
 
-      socket.on("send_cohort_message", (msg, students) => {
-        // console.log(
-        //   `recieved new message for cohort ${students[0].cohort_id}`,
-        //   msg
-        // );
+      socket.on("send_cohort_message", async (msg, students) => {
+        console.log(
+          `recieved new message for cohort ${students[0].cohort_id}`,
+          msg
+        );
         let groupSocket = socket;
-
-        updateDB(msg);
+        msg.student_id = null
+        await updateDB(msg);
         for (const { user_id } of students) {
           msg.student_id = user_id;
           groupSocket = groupSocket.to(user_id);
