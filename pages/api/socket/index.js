@@ -2,17 +2,20 @@ import { Server } from "socket.io";
 import sql from "../../../database/connection";
 
 const updateDB = async (msg, id, del = false) => {
- 
   let res;
   id
     ? del
       ? (res =
           await sql`DELETE FROM comments WHERE comment_id = ${id} RETURNING *`)
       : (res = await sql`UPDATE comments SET ${sql(
-          newMsg
+          msg
         )} WHERE comment_id = ${id} RETURNING *`)
     : (res = await sql`INSERT INTO comments ${sql(msg)} RETURNING *`);
-  console.log("res from updatedb on chat", res);
+  console.log(
+    `${id ? (del ? "deleted message" : "updated message") : "created message"}`,
+    res
+  );
+  return res[0].comment_id;
 };
 
 export default async function handler(req, res) {
@@ -43,34 +46,37 @@ export default async function handler(req, res) {
       });
       /***** HANDLE WHEN A NEW MESSAGE IS SENT *****/
 
-      socket.on("edit_message", (msg, id, del = false) => {
+      socket.on("edit_message", async (msg, id, del = false) => {
         console.log("recieved edit message", msg, id);
-        fetch();
-        if (!del) msg.comment_id = id;
+
+        msg.comment_id = await updateDB(msg, id, del);
         socket.to(msg.student_id).emit("edit_message", msg, del);
       });
 
-      socket.on("edit_cohort_message", (msg, id, students, del = false) => {
-        console.log("recieved cohort edit message", msg, id);
-        del ? updateDB(msg, id, true) : updateDB(msg, id);
-        if (!del) msg.comment_id = id;
-        let groupSocket = socket;
+      socket.on(
+        "edit_cohort_message",
+        async (msg, id, students, del = false) => {
+          console.log("recieved cohort edit message", msg, id);
 
-        for (const { user_id } of students) {
-          msg.student_id = user_id;
-          groupSocket = groupSocket.to(user_id);
+          msg.comment_id = await updateDB(msg, id, del);
+          let groupSocket = socket;
+
+          for (const { user_id } of students) {
+            msg.student_id = user_id;
+            groupSocket = groupSocket.to(user_id);
+          }
+          groupSocket.emit(
+            "edit_message",
+            del ? { delete: true, index: msg.index } : msg
+          );
         }
-        groupSocket.emit(
-          "edit_message",
-          del ? { delete: true, index: msg.index } : msg
-        );
-      });
+      );
 
-      socket.on("send_new_message", (msg) => {
+      socket.on("send_new_message", async (msg) => {
         console.log("recieved new message", msg);
 
         ///// Create a new message in the database
-        updateDB(msg);
+        msg.comment_id = await updateDB(msg);
         ///// Broadcast the new message to be recieved by all clients connected except the sender
         socket.to(msg.student_id).emit("recieve_message", msg);
       });
@@ -81,8 +87,8 @@ export default async function handler(req, res) {
           msg
         );
         let groupSocket = socket;
-        msg.student_id = null
-        await updateDB(msg);
+        msg.student_id = null;
+        msg.comment_id = await updateDB(msg);
         for (const { user_id } of students) {
           msg.student_id = user_id;
           groupSocket = groupSocket.to(user_id);
