@@ -1,15 +1,22 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import style from "../../styles/Archive.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
+import { setActiveStudent } from "../../redux/features/app-slice";
+import StudentPage from "../StudentPage";
 
-export default function ArchivePage() {
-  //STATES NEEDED: global=> archived(student/cohort data), local=> checked(boolean), chooseCohorts(boolean), chooseStudents(boolean)
-  //const [front, setFront] = useState(true); //Tried to make cards flip (am struggling)
+export default function ArchivePage({ cohorts, students }) {
+  const [displayCohorts, setDisplay] = useState(cohorts);
+  const [resultStudent, setResultStudent] = useState(students);
 
-  const [displayCohorts, setDisplay] = useState([]);
-  const [resultStudent, setResultStudent] = useState([]);
+  //for setting "Active" student global state and displaying "student page"
+  const dispatch = useDispatch();
+  const [showStudentPage, setSP] = useState(false);
+
+  const handleCloseSP = () => setSP(false);
+  //
 
   //for Modal
   const [show, setShow] = useState(false);
@@ -86,35 +93,6 @@ export default function ArchivePage() {
 
   //
 
-  //This is for the initial display of the latest 5 archived students and cohorts
-  const lastFive = () => {
-    fetch(`/api/archive/cohorts`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((recentArchived) => {
-        const saved = [];
-        for (let i = 0; i < 5; i++) {
-          saved.push(recentArchived[i]);
-        }
-        setDisplay(saved);
-      });
-
-    fetch(`/api/archive/students`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((recentStudents) => {
-        const stu = [];
-        for (let j = 0; j < 5; j++) {
-          stu.push(recentStudents[j]);
-        }
-        setResultStudent(stu);
-      });
-  };
-
-  useEffect(lastFive, []);
-
   return (
     <div>
       <div className={style.cohorts}>
@@ -154,13 +132,18 @@ export default function ArchivePage() {
             <Modal.Title>{cohort} student list</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {" "}
             {listStudents.length == 0 ? (
               <p>sorry no list</p>
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li key={student.user_id}>
+                  <li
+                    key={student.user_id}
+                    onClick={() => {
+                      dispatch(setActiveStudent(student));
+                      setSP(true);
+                    }}
+                  >
                     {student.first} {student.last}
                   </li>
                 );
@@ -174,7 +157,24 @@ export default function ArchivePage() {
           </Modal.Footer>
         </Modal>
       </div>
-
+      <Modal
+        size="xl"
+        show={showStudentPage}
+        onHide={handleCloseSP}
+        animation={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Student Page</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <StudentPage />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseSP}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className={style.students}>
         <h2>Archived Students</h2>
         <form className={style.searchS}>
@@ -190,7 +190,14 @@ export default function ArchivePage() {
         <div className={style.cardDeck}>
           {resultStudent.map((student) => {
             return (
-              <div className={style.card} key={student.user_id}>
+              <div
+                className={style.card}
+                key={student.user_id}
+                onClick={() => {
+                  dispatch(setActiveStudent(student));
+                  setSP(true);
+                }}
+              >
                 <h3>
                   {student.first} {student.last}
                 </h3>
