@@ -29,6 +29,7 @@ const Chat = () => {
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
   const [ctrlDown, setCtrlDown] = useState(false);
+  const [receivedMessage, setReceivedMessage] = useState(false);
   const [display, setDisplay] = useState({
     editBtns: false,
     comment: null,
@@ -75,17 +76,23 @@ const Chat = () => {
       /****** Handle when the user recieves a message******/
 
       newSocket.on("recieve_message", (newMessage) => {
-        console.log("message recieved", newMessage.content);
+        console.log(
+          "message received",
+          newMessage.content,
+          newMessage.comment_id
+        );
         setChatMessages((oldMsgs) => [...oldMsgs, newMessage]);
+        setReceivedMessage(true);
       });
 
       newSocket.on("edit_message", async (newMessage) => {
-        console.log("edit message recieved", newMessage);
+        console.log("edit message received", newMessage);
         const comments =
           userData.admin && cohortChat[0]
             ? await getCohortComments(cohortChat[0].cohort_id)
             : await getStudentComments(activeStudent.user_id);
         setChatMessages(comments);
+        setReceivedMessage(true);
       });
       /****** END Handle when the user recieves a message******/
     })();
@@ -108,17 +115,7 @@ const Chat = () => {
       //// Add properties to the newMessageObj depending on the usecase
       if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
       if (editInfo) newMessageObj.comment_id = editInfo.id;
-      // Update chat display with newly typed message
-      editInfo
-        ? setChatMessages((oldMsgs) => {
-            const newChat = oldMsgs;
-            newChat[editInfo.index] = newMessageObj;
-            return newChat;
-          })
-        : setChatMessages((oldMsgs) => [...oldMsgs, newMessageObj]);
-
-      // send the new message to the server
-      console.log(editInfo);
+    
 
       editInfo !== null
         ? cohortChat[0]
@@ -132,7 +129,19 @@ const Chat = () => {
         : cohortChat[0]
         ? await socket.emit("send_cohort_message", newMessageObj, cohortChat)
         : await socket.emit("send_new_message", newMessageObj);
+  // Update chat display with newly typed message
+  editInfo
+  ? setChatMessages((oldMsgs) => {
+      const newChat = oldMsgs;
+      newChat[editInfo.index] = newMessageObj;
+      return newChat;
+    })
+  : cohortChat[0]
+  ? setChatMessages(await getCohortComments(cohortChat[0].cohort_id))
+  : setChatMessages(await getStudentComments(activeStudent.user_id));
 
+// send the new message to the server
+console.log(editInfo);
       //reset input field
       setEditInfo(null);
       setNewMessage("");
@@ -158,11 +167,15 @@ const Chat = () => {
             },
             index
           ) => {
-            if (index === chatMessages.length - 1)
+            if (receivedMessage && index === chatMessages.length - 1) {
+              console.log("sroll down");
+
               setTimeout(
                 () => (chatDisplay.scrollTop = chatDisplay.scrollHeight),
-                200
+                500
               );
+              setReceivedMessage(false);
+            }
             return (
               <div
                 key={comment_id}
@@ -186,6 +199,8 @@ const Chat = () => {
                       className={styles.editBtn}
                       onClick={() => {
                         setNewMessage(content);
+                        console.log(comment_id);
+
                         setEditInfo({
                           id: comment_id,
                           cohort_id,
@@ -206,7 +221,12 @@ const Chat = () => {
                         });
 
                         !cohortChat[0]
-                          ? socket.emit("edit_message", null, comment_id, true)
+                          ? socket.emit(
+                              "edit_message",
+                              { student_id },
+                              comment_id,
+                              true
+                            )
                           : socket.emit(
                               "edit_cohort_message",
                               { comment_id },
@@ -254,7 +274,14 @@ const Chat = () => {
           }}
           onKeyUp={({ key }) => {
             key === "Control" && setCtrlDown(false);
-            key === "Enter" && ctrlDown && submitMsg();
+            key === "Enter" &&
+              ctrlDown &&
+              (submitMsg(),
+              !editInfo &&
+                setTimeout(
+                  () => (chatDisplay.scrollTop = chatDisplay.scrollHeight),
+                  500
+                ));
           }}
         />
         <button
@@ -262,6 +289,11 @@ const Chat = () => {
           className={styles.submit}
           onClick={() => {
             submitMsg();
+            !editInfo &&
+              setTimeout(
+                () => (chatDisplay.scrollTop = chatDisplay.scrollHeight),
+                500
+              );
           }}
           title="Ctrl + Enter, Send a message"
         >

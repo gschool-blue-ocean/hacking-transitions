@@ -2,7 +2,7 @@ import s from "../../styles/AdminHomePage/AdminPage.module.css";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { setStudentsForCohortChat } from "../../redux/features/app-slice";
+import { setStudentsForCohortChat, setActiveStudent } from "../../redux/features/app-slice";
 
 const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
@@ -118,6 +118,7 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
                       )
                     ).json();
                     dispatch(setStudentsForCohortChat(cohortStudents));
+                    dispatch(setActiveStudent({}));
                     setChatCohort(cohort.cohort_name)
                   }}
                   >
