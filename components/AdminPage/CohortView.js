@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { getDaysToEts } from "../../utility";
 import Link from "next/link";
 import s from "../../styles/AdminHomePage/CohortView.module.css";
+import etsStyle from "../../styles/StudentPage.module.css";
 import App from "./EditStudentModal";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
@@ -33,11 +35,13 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                   <th className={s.tableheaders}>First</th>
                   <th className={s.tableheaders}>Last</th>
                   <th className={s.tableheaders}>ETS</th>
+
                   <th className={s.tableheaders}>Terminal</th>
                   <th className={s.tableheaders}>Branch</th>
                   <th className={s.tableheaders}>Edit</th>
                 </tr>
                 {cohort.students.map((student, index) => {
+                  const daysToEts = getDaysToEts(student.ets_date);
                   return (
                     <motion.tr
                       whileHover={{ backgroundColor: "#F5F5F5" }}
@@ -45,7 +49,6 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       key={student.user_id}
                       onClick={() => {
                         dispatch(setActiveStudent(student));
-                        
                       }}
                     >
                       <LinkToViewStudent id={cohort.cohort_id}>
@@ -61,9 +64,11 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
                       </LinkToViewStudent>
 
                       <LinkToViewStudent id={cohort.cohort_id}>
+                          <ColorEts daysToEts={daysToEts}>
                         <td>
-                          <btn className={s.td}>{student.ets_date}</btn>
+                            <btn className={s.td}>{student.ets_date}</btn>
                         </td>
+                          </ColorEts>
                       </LinkToViewStudent>
 
                       <LinkToViewStudent id={cohort.cohort_id}>
@@ -105,15 +110,50 @@ const CohortView = ({ currCohort, setCurrCohort }) => {
 export default CohortView;
 
 const LinkToViewStudent = ({ children, id }) => {
-  
-  
-  
   const link = "/admin/viewstudent";
-
   return (
     <>
-    {/* {children} */}
-     <Link href={{ pathname: link, query: { id  } }}>{children}</Link>
+      {/* {children} */}
+      <Link href={{ pathname: link, query: { id } }}>{children}</Link>
     </>
   );
+};
+const ColorEts = ({ daysToEts, children }) => {
+  if (daysToEts <= 0) {
+    return (
+      <div id={`${etsStyle.ETSd}`} className={`${etsStyle.adminColoring}`}>
+        {children}
+      </div>
+    );
+  } else if (daysToEts > 0 && daysToEts <= 30) {
+    return (
+      <div id={`${etsStyle.ETS30}`} className={`${etsStyle.adminColoring}`}>
+        {children}
+      </div>
+    );
+  } else if (daysToEts > 30 && daysToEts <= 60) {
+    return (
+      <div id={`${etsStyle.ETS60}`} className={`${etsStyle.adminColoring}`}>
+        {children}
+      </div>
+    );
+  } else if (daysToEts > 60 && daysToEts <= 90) {
+    return (
+      <div id={`${etsStyle.ETS90}`} className={`${etsStyle.adminColoring}`}>
+        {children}
+      </div>
+    );
+  } else if (daysToEts > 90 && daysToEts <= 120) {
+    return (
+      <div id={`${etsStyle.ETS120}`} className={`${etsStyle.adminColoring}`}>
+        {children}
+      </div>
+    );
+  } else {
+    return (
+      <div id={`${etsStyle.ETS120}`} className={`${etsStyle.adminColoring}`}>
+        120+ Days
+      </div>
+    );
+  }
 };

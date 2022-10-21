@@ -153,6 +153,7 @@ export default ViewStudent;
 export async function getServerSideProps({ query: { id } }) {
   const cohortStudents =
     await sql` SELECT * FROM users WHERE cohort_id=${id} ORDER BY first ASC`;
+  
 
   return { props: { cohortStudents } };
 }
