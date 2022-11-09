@@ -1,9 +1,13 @@
 # HACKING TRANSITIONS 
-![CRUD Lords image](../next-transition-tracker/readme_Images/computer-hacking.jpeg)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Deployed Site: galvanize-transitions.onrender.com/
+  To access admin portal use: 
+   Password/Username: 'admin4'
+  To access student portal use: 
+   Password/Username: 'student4' 
 
 ## Contributors 
+
 - [Ilsa Hampton](https://github.com/ilsaann) - Project Manager 
 - [Edward Sabbatino](https://github.com/EntropicWind) / [Justin Melendez](https://github.com/CountDown2Extinction) - UI/UX Design Team
 - [Paul McDonald](https://github.com/pmcdonald1012) / [Moses Valerio](https://github.com/moses369) - System Architecture Design Team
@@ -33,11 +37,11 @@ The `student` is able to see, add and update their information, add, delete, and
 
 ## Tech Stacks Used 
 
+- Javascript
 - React
 - Next.js 
 - PSQL 
 - Redux 
-- Javascript 
 - CSS
 - Socket.io
 
@@ -47,8 +51,6 @@ The `student` is able to see, add and update their information, add, delete, and
 
 - One of the biggest learing points during this project was being able to look at legecy code, tear it down to the bare bones and rebuild it from the ground up with several unconnected components, then bringing them all together to make it mesh into a full functioning, fluid application. 
 
-## Unexpected Challenges
-
 
 ## How does the *Hacking Transitions* application work?
 
@@ -57,31 +59,19 @@ The application has a dedicated `Front-end` framework utilizing [React]() and [N
 The application utilizes [socket.io]() to conduct inner application chat operations. 
 
 
+## To Migrate/Seed Database
+Create your own .local.env as well as run the migration file 1st then the second run the seed.sql file. If you wish to see and test the Archive functionality then run the testArchive.sql file last.
 
-## To establish the back end
-you will need to create your own .local.env as well as run the migration file 1st then the second run the seed.sql file. If you wish to see and test the Archive functionality then run the testArchive.sql file last.
 
+## App deployment on Vercel
 
-## Learn More
+The easiest way to deploy a Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) 
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-*Major issues*: does not support web sockets so chat function wont work
+*Major issues*: does not support web sockets
 
 ## App deployment on Render
 
-The most efficient way to deploy this application is to use the [Render Platform](https://render.com). 
+The most efficient way to deploy THIS application is to use the [Render Platform](https://render.com). 
 
 Check out the [Render webservices documentation](https://render.com/docs/web-services)
 
