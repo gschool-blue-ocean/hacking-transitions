@@ -28,8 +28,8 @@ const Header = ({ currentUser }) => {
         <div className={style.picCont}>
           <Link href={currentUser.admin ? '/admin' : '/student'} passHref>
             <img
-              src="https://www.galvanize.com/images/galvanize-logo.svg"
-              alt="galvanizaeLogo"
+              src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_small-scale_full-color_dark-background.png"
+              alt="galvanizeLogo"
               className={style.logo}
             ></img>
           </Link>
