@@ -1,0 +1,27 @@
+.container {
+    cursor: pointer;
+    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
+    height: 6rem;
+    width: 20rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    color: #003B4C;
+    border-bottom: #F79020 solid 1px
+}
+
+.filterSelector {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+.columnFilter{
+   font-size: 1.5rem;
+    cursor: pointer;
+
+}
+
