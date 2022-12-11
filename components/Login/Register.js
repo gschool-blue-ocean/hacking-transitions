@@ -12,7 +12,7 @@ const RegisterModal = ({open, onClose}) => {
     
     if (!open) return null; 
     
-    const register = () =>{
+    const register = (event) =>{
         event.preventDefault();
       fetch(`/api/registration`, {
         method: "POST",
@@ -29,7 +29,7 @@ const RegisterModal = ({open, onClose}) => {
         })
           .then(()=> {
             console.log('code is good')
-            router.push('student/editStudentModal2')
+            router.push('student/editStudentModal')
             
         })
         
@@ -60,7 +60,7 @@ const RegisterModal = ({open, onClose}) => {
               <button
                 className={styles.registerModalCreateFormSubmitBtn}
                 type="submit"
-                onClick={() => register()}
+                onClick={(event) => register(event)} 
                 
               >
                 Submit

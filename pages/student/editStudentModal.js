@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
+
+
 function EditStudent(props) {
+  
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
