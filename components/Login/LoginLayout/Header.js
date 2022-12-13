@@ -44,7 +44,7 @@ const Header = () => {
             </div>
           <RegisterModal
           open={isModalOpen}
-          onClose={()=> setModalisOpen(false)}
+          onClose={()=> setIsModalOpen(false)}
           />
         </ul>
       </div>
