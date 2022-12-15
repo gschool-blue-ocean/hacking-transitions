@@ -24,7 +24,6 @@ let Login = () => {
   const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth(app);
-
   
   const router = useRouter();
   const dispatch = useDispatch();
@@ -48,18 +47,40 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-        if (user.password === inputData.password) {
-          signInWithEmailAndPassword(auth,inputData.username,user.password)
+        // .then((user) => {
+        //   if (user.password === inputData.password) {
+        //     signInWithEmailAndPassword(auth,inputData.username,user.password)
+        //     .then((userCredential)=>{
+        //       const user = userCredential.user;
+        //       console.log(user)
+        //     })
+        //     stayLogged &&
+        //       localStorage.setItem("currentUser", JSON.stringify(user));
+        //     sessionStorage.setItem("currentUser", JSON.stringify(user));
+        //   } else {
+        //     throw new Error("Not Found");
+        //   }
+        //   user.admin
+        //     ? (router.push("/admin"), setLoginData(""))
+        //     : (router.push("/student"),
+        //       dispatch(setActiveStudent(user)),
+        //       setLoginData(""));
+        // })
+          signInWithEmailAndPassword(auth,inputData.username,inputData.password)
           .then((userCredential)=>{
-            const user = userCredential.user;
-            console.log(user)
-          })
-          stayLogged &&
+            console.log('user done configure')
+            const currentUser = userCredential.user;
+            console.log(currentUser)
+            stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
           sessionStorage.setItem("currentUser", JSON.stringify(user));
-        } else {
-          throw new Error("Not Found");
-        }
+          })
+          .catch((error)=>{
+            const errorCode=error.code;
+            const errorMessage=error.message;
+            console.log(errorCode,errorMessage);
+          })
+
         user.admin
           ? (router.push("/admin"), setLoginData(""))
           : (router.push("/student"),

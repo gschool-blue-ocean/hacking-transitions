@@ -16,7 +16,6 @@ CREATE TABLE users (
     last VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     username VARCHAR(250) NOT NULL,
-    password VARCHAR(250) NOT NULL,
     rank VARCHAR(20),
     mos TEXT,
     interests TEXT,
