@@ -8,11 +8,13 @@ import { useRouter } from 'next/router'
 const RegisterModal = ({open, onClose}) => {
     const router = useRouter()
     const [regCode, setRegCode] = useState("");
+    //email state is not currently used
     const [email, setEmail] = useState("");
     
     if (!open) return null; 
     
-    const register = () =>{
+    // GET request called repeatedly after submit event
+    const register = (event) => {  //pass event to register as parameter
         event.preventDefault();
       fetch(`/api/registration`, {
         method: "POST",
@@ -23,13 +25,14 @@ const RegisterModal = ({open, onClose}) => {
           
           if (res.status === 404) {
             console.log(res)
+            // consider changing console log to error message
             console.log('code is NOT good');
           };
           return res.json();
         })
           .then(()=> {
             console.log('code is good')
-            router.push('student/editStudentModal2')
+            router.push('student/editStudentModal')
             
         })
         
@@ -60,7 +63,8 @@ const RegisterModal = ({open, onClose}) => {
               <button
                 className={styles.registerModalCreateFormSubmitBtn}
                 type="submit"
-                onClick={() => register()}
+                onClick={(event) => register(event)}
+                // passed in event as parameter to preventDefault
                 
               >
                 Submit
