@@ -12,64 +12,11 @@ import {
 import { motion } from "framer-motion";
 import { BsChatText } from "react-icons/bs";
 
-const CohortFilterTable = ({setCurrCohort, currCohort, clickedCohort, setClickedCohort})=>{
+const CohortFilterTable = ({studentData, setCurrCohort, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort})=>{
   const dispatch = useDispatch();
-  //console.log("filterTable:", currCohort);
-  
-   //handle click for cohort
-   const handleClickedCohort = (e) => {
-    const cohort_id = e.target.dataset.cohort_id;
-    setClickedCohort(cohort_id);
-  };
-
-    console.log("sortableData:" , currCohort)
-
-    //Create SortButton to be used for Column headers 
-    const SortButton = ({ direction, id, onClick, sortBy }) => {
-      const arrows = { ascending: '↓', descending: '↑' }
-      const arrow = sortBy === id ? arrows[direction] : '↕︎'
-    
       return (
-        <div className={s.blankbutton} id={id} onClick={onClick}>
-          {arrow}
-          <div className={s.sortDirection}>Sort {direction}</div>
-        </div>
-      )
-    }
-
-    //import useSortableDate on the list of students to be used in the Table
-    const {items, requestSort, sortConfig } = useSortableData(currCohort[0].students);
- 
-      return (
-        <div className={s.container}>
-        {currCohort.map((cohort) => (
-          <div key={cohort.cohort_id}>
-            <h1>{cohort.cohort_name}</h1>
-            <div className={s.div}>
-              <table className={s.table}>
-                        <tr className={s.headtr}>
-                          <th>
-                            First 
-                            <SortButton direction={sortConfig?.direction} id={cohort.id}  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th>
-                            Last 
-                            <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th>
-                            ETS
-                          <SortButton direction={sortConfig?.direction} id="ets"  onClick={()=> requestSort('ets')} sortBy = {sortConfig?.key}/>
-                          </th>
-
-                          <th className={s.tableheaders}>Terminal</th>
-                          <th>
-                            Branch
-                          <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th className={s.tableheaders}>Edit</th>
-                          <th className={s.tableheaders}>Chat</th>
-                        </tr>
-                        {cohort.students.map((student, index) => {
+                       <>
+                        {cohort.students.map((student) => {
                           const daysToEts = getDaysToEts(student.ets_date);
                           return (
                             <motion.tr
@@ -139,16 +86,11 @@ const CohortFilterTable = ({setCurrCohort, currCohort, clickedCohort, setClicked
                                 </button>
                               </td>
                             </motion.tr>
-                          );
+                            );
                         })}
-                      </table>
-                      </div>
-          </div>
-        ))}
-      </div>
-    );
-  } 
-  
+                    </> 
+       )
+}
 export default CohortFilterTable; 
 
 const LinkToViewStudent = ({ children, id }) => {

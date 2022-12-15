@@ -24,6 +24,8 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
           students,
         },
       ]);
+      //console.log("cohortMenu currCohort", currCohort)
+      //setStudentData([...students]);
     } else {
       //if cohort div is clicked, will remove, else removes cohort from state
       if (data.isclicked === "false") {
@@ -34,6 +36,8 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
             students,
           })
         );
+        //console.log("cohortMenu currCohort1", currCohort)
+        //setStudentData([...students])
         e.target.setAttribute("style", "color:#f79020");
         data.isclicked = true;
       } else {
@@ -42,6 +46,7 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
         );
         data.isclicked = false;
         e.target.setAttribute("style", "color:#003B4C");
+        //console.log("cohortMenu currCohort2", currCohort)
       }
     }
   };

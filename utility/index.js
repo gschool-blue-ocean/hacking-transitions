@@ -63,7 +63,7 @@ export const sortTableData = (array, { key, direction }) => {
 
 export const useSortableData = (items = [], config) => {
   const [sortConfig, setSortConfig] = React.useState(config)
-
+console.log("useSortableData input array", items)
   const sortedItems = React.useMemo(() => {
     // If no config was defined then return the unsorted array
     if (!sortConfig) return items
