@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import { BsChatText } from "react-icons/bs";
 
-const CohortFilterTable = ({ studentData, setCurrCohort, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort})=>{
+const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort})=>{
   
   const dispatch = useDispatch();
       return (

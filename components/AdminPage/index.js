@@ -8,7 +8,6 @@ import RevealChat from './RevealChat'
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
   const [currCohort, setCurrCohort] = useState([]);
-   const [studentData, setStudentData]= useState([])
   const [menuClicked, setMenuClicked] = useState(false)
   const [chatCohort,setChatCohort] = useState('')
 
@@ -26,8 +25,6 @@ const AdminContainer = ({ allCohorts }) => {
             students,
           },
         ]);
-        //setStudentData([...students])
-        console.log("adminpage currCohort:", currCohort)
       }
     })();
   }, []);
@@ -58,13 +55,13 @@ const AdminContainer = ({ allCohorts }) => {
       <div className={s.container}>
         <div className={s.tools_container}>
          <div >
-            <CohortMenu setStudentData={setStudentData} setChatCohort={setChatCohort} toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
+            <CohortMenu  setChatCohort={setChatCohort} toggleMoveChat={toggleMoveChat} cohorts={cohorts} currCohort={currCohort} setCurrCohort={setCurrCohort}  />
          </div>
          <motion.div initial="enter" animate={menuClicked ? "exit" : "enter" } variants={moveMenuAnimate}> 
           <RevealChat chatCohort={chatCohort}/>
          </motion.div>
         </div>
-        <CohortView studentData={studentData} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
+        <CohortView  setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
     </div>
   </div>
   )

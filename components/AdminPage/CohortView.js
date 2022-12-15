@@ -11,9 +11,9 @@ import {
 } from "../../redux/features/app-slice";
 import { motion } from "framer-motion";
 import { BsChatText } from "react-icons/bs";
-import CohortFilterTable from "./CohortFilterTable";
+import CohortFilterTitle from "./CohortFilterTitle";
 
-const CohortView = ({ studentData, currCohort, setCurrCohort, setChatCohort}) => {
+const CohortView = ({ currCohort, setCurrCohort, setChatCohort}) => {
 
   const [clickedCohort, setClickedCohort] = useState([]);
    //handle click for cohort
@@ -22,36 +22,7 @@ const CohortView = ({ studentData, currCohort, setCurrCohort, setChatCohort}) =>
     setClickedCohort(cohort_id);
   };
 
-
-  console.log("studentData", studentData);
-  
-  //Create SortButton to be used for Column headers 
-  const SortButton = ({ direction, id, onClick, sortBy }) => {
-    const arrows = { ascending: '↓', descending: '↑' }
-    const arrow = sortBy === id ? arrows[direction] : '↕︎'
-    
-    return (
-      <div className={s.blankbutton} id={id} onClick={onClick}>
-          {arrow}
-          <div className={s.sortDirection}>Sort {direction}</div>
-        </div>
-      )
-    }
-    //sets student data to be used in the sortableData Table 
-  //  const [studentData, setStudentData]= useState([])
-    
-////Need to find a way to ensure that the state is set prior to rendering
-//// so that it can be accessed when rendering the table view 
-//// potentially make a use effect to delay the render until currCohort is set.
-let index = currCohort.map((cohort, cohortIndex) => {
-return cohortIndex
-})
-
-console.log("index", index)
-    //import useSortableDate on the list of students to be used in the Table
-    const {items, requestSort, sortConfig } = useSortableData(currCohort[index]?.students);
-
-    console.log("sortableData:" , currCohort)
+  console.log("sortableData:" , currCohort)
     
     if (currCohort == 0) {
       return (
@@ -66,32 +37,8 @@ console.log("index", index)
           <div key={cohort.cohort_id} >
             <h1>{cohort.cohort_name}</h1>
             <div className={s.div}>
-              <table className={s.table}>
-                        <tr className={s.headtr}>
-                          <th>
-                            First 
-                            <SortButton direction={sortConfig?.direction} id={cohort.id}  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th>
-                            Last 
-                            <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th>
-                            ETS
-                          <SortButton direction={sortConfig?.direction} id="ets"  onClick={()=> requestSort('ets')} sortBy = {sortConfig?.key}/>
-                          </th>
-
-                          <th className={s.tableheaders}>Terminal</th>
-                          <th>
-                            Branch
-                          <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>
-                          </th>
-                          <th className={s.tableheaders}>Edit</th>
-                          <th className={s.tableheaders}>Chat</th>
-                        </tr>
-                          <CohortFilterTable  index ={cohortIndex} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
-                      </table>
-                      </div>
+              <CohortFilterTitle  index = {cohortIndex} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort}/>   
+             </div>
           </div>
         ))}
       </div>

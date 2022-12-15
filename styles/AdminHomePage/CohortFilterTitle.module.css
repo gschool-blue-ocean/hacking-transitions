@@ -1,0 +1,27 @@
+.table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    height: 30rem;
+    width: 100%;
+    
+}
+.headtr{
+    border-bottom: 1px #F79020  solid;
+    position: sticky;
+    top: 0;
+    background-color: rgb(230, 229, 229);
+}
+.tableheaders{
+    font-size: 2.3rem;
+    text-align: left;
+}
+.tr{
+    border-top: 1px rgb(232, 232, 232) solid;
+}
+.td{
+   padding-right: 2rem;
+   cursor: pointer;
+}
+.default {
+    margin-left: 30rem
+}
