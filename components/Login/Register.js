@@ -1,39 +1,61 @@
 import {useState} from 'react'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
-
-
+import axios from "axios";
 
 
 const RegisterModal = ({open, onClose}) => {
     const router = useRouter()
     const [regCode, setRegCode] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    
+    const [Username, setUsername] = useState("");
+    const [Password, setPassword] = useState("");
+
+
     if (!open) return null; 
     
-    const register = () =>{
+    const register =  (event) =>{
         event.preventDefault();
-      fetch(`/api/registration`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({regCode}),
-      })
-        .then((res) => {
-          
-          if (res.status === 404) {
-            console.log(res)
-            console.log('code is NOT good');
-          };
-          return res.json();
+         fetch("/api/registration")
+        .then ((data) => {
+          return data.json()
         })
-          .then(()=> {
-            console.log('code is good')
-            router.push('student/editStudentModal2')
-            
-        })
-        
-    }
+        .then (
+          ( data ) => {
+          console.log("this is my data", data)
+
+            data.map((passcode) => {
+              // console.log(res)
+                let cohortCode = passcode.register_code
+                let cohort = passcode.cohort_name
+                let cohortID = passcode.cohort_id
+                if ( regCode == cohortCode) {
+                  console.log(cohort)
+                  console.log(cohortID)
+                    axios.post("/api/admin", {
+                      admin: false,
+                      first: firstName,
+                      last: lastName,
+                      username: Username,
+                      password: Password,
+                      email: email,
+                      cohort_name: cohort,
+                      cohort_id: cohortID
+                  });
+                 window.location.reload();
+                }
+                
+                else {
+
+                  router.push('/registrationerror')
+              }
+            })
+          }
+            )
+          }
+
   return (
     <>
     <div className={styles.registerModalCreateOverlay}></div>
@@ -53,6 +75,62 @@ const RegisterModal = ({open, onClose}) => {
                 placeholder='Registration Code'
                 onChange={(event) => setRegCode(event.target.value)}
                 value={regCode}
+                required
+              />
+            </div>
+
+            <div className={styles.registerModalCreateFormInputLabel}>
+              <label> First Name</label>
+              <input
+                type="text"
+                placeholder='ex. "John"'
+                onChange={(event) => setFirstName(event.target.value)}
+                value={firstName}
+                required
+              />
+            </div>
+
+            <div className={styles.registerModalCreateFormInputLabel}>
+              <label> Last Name</label>
+              <input
+                type="text"
+                placeholder='ex. "Smith"'
+                onChange={(event) => setLastName(event.target.value)}
+                value={lastName}
+                required
+              />
+            </div>
+
+            <div className={styles.registerModalCreateFormInputLabel}>
+              <label> Email</label>
+              <input
+                type="text"
+                placeholder='ex. "JohnSmith@gmail.com"'
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                required
+              />
+            </div>
+
+            <div className={styles.registerModalCreateFormInputLabel}>
+              <label> Create Username</label>
+              <input
+                type="text"
+                placeholder='ex. "Username"'
+                onChange={(event) => setUsername(event.target.value)}
+                value={Username}
+                required
+              />
+            </div>
+
+            <div className={styles.registerModalCreateFormInputLabel}>
+              <label> Create Password</label>
+              <input
+                type="text"
+                placeholder='ex. "P@ssw0rd"'
+                onChange={(event) => setPassword(event.target.value)}
+                value={Password}
+                required
               />
             </div>
            
@@ -60,7 +138,7 @@ const RegisterModal = ({open, onClose}) => {
               <button
                 className={styles.registerModalCreateFormSubmitBtn}
                 type="submit"
-                onClick={() => register()}
+                onClick={(event) => register(event)}
                 
               >
                 Submit

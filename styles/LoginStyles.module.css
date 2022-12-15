@@ -1,3 +1,15 @@
+.notfound {
+        margin-top: 8%;
+        margin-bottom: 5%;
+        text-align: center;
+        position: relative
+      }
+      
+.notfound a{
+        color: #4979ff;
+        text-decoration: underline;
+      }
+
 
 .modalContainer{
     height: 70vh;
