@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat, setActiveStudent } from "../../redux/features/app-slice";
 
-const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
+const CohortMenu = ({ setStudentData, setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
   const [isClicked, toggleClicked] = useState(false);
   //filter out none active cohorts
@@ -37,7 +37,7 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
           })
         );
         //console.log("cohortMenu currCohort1", currCohort)
-        //setStudentData([...students])
+        setStudentData([...students])
         e.target.setAttribute("style", "color:#f79020");
         data.isclicked = true;
       } else {
