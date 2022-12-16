@@ -4,8 +4,27 @@ import style from "../../styles/LoginStyles.module.css";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+//import firebase
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
+//import config firebasee key
+const config = require('./config');
 
 let Login = () => {
+  const firebaseConfig = {
+    apiKey: config.REACT_APP_APIKEY,
+    authDomain: config.REACT_APP_AUTHDOMAIN,
+    projectId: config.REACT_APP_PROJECTID,
+    storageBucket: config.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: config.REACT_APP_MESSAGINGSENDERID,
+    appId: config.REACT_APP_APPID,
+    measurementId: config.REACT_APP_MEASUREMENTID,
+  };
+  //Initialize Firebase
+  const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  // Initialize Firebase Authentication and get a reference to the service
+  const auth = getAuth(app);
+  
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
@@ -28,13 +47,40 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-        if (user.password === inputData.password) {
-          stayLogged &&
+        // .then((user) => {
+        //   if (user.password === inputData.password) {
+        //     signInWithEmailAndPassword(auth,inputData.username,user.password)
+        //     .then((userCredential)=>{
+        //       const user = userCredential.user;
+        //       console.log(user)
+        //     })
+        //     stayLogged &&
+        //       localStorage.setItem("currentUser", JSON.stringify(user));
+        //     sessionStorage.setItem("currentUser", JSON.stringify(user));
+        //   } else {
+        //     throw new Error("Not Found");
+        //   }
+        //   user.admin
+        //     ? (router.push("/admin"), setLoginData(""))
+        //     : (router.push("/student"),
+        //       dispatch(setActiveStudent(user)),
+        //       setLoginData(""));
+        // })
+          signInWithEmailAndPassword(auth,inputData.username,inputData.password)
+          .then((userCredential)=>{
+            console.log('user done configure')
+            const currentUser = userCredential.user;
+            console.log(currentUser)
+            stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
           sessionStorage.setItem("currentUser", JSON.stringify(user));
-        } else {
-          throw new Error("Not Found");
-        }
+          })
+          .catch((error)=>{
+            const errorCode=error.code;
+            const errorMessage=error.message;
+            console.log(errorCode,errorMessage);
+          })
+
         user.admin
           ? (router.push("/admin"), setLoginData(""))
           : (router.push("/student"),
