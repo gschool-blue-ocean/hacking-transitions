@@ -21,7 +21,8 @@ let Login = () => {
     measurementId: config.REACT_APP_MEASUREMENTID,
   };
   //Initialize Firebase
-  const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  // const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  const app = initializeApp(firebaseConfig);
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth(app);
   
@@ -71,6 +72,7 @@ let Login = () => {
             console.log('user done configure')
             const currentUser = userCredential.user;
             console.log(currentUser)
+
             stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
           sessionStorage.setItem("currentUser", JSON.stringify(user));

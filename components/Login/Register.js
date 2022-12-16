@@ -2,7 +2,7 @@ import {useState} from 'react'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
 import axios from "axios";
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterModal = ({open, onClose}) => {
     const router = useRouter()
@@ -38,7 +38,7 @@ const RegisterModal = ({open, onClose}) => {
                       admin: false,
                       first: firstName,
                       last: lastName,
-                      username: Username,
+                      username: email,
                       password: Password,
                       email: email,
                       cohort_name: cohort,
