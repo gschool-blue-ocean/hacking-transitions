@@ -20,6 +20,8 @@ const AdminCreate = ({ open, onClose }) => {
       username: newUsername,
       password: newPassword,
       email: newEmail,
+      cohort_name: null,
+      cohort_id: null
     });
     router.push("/admin/edit");
     window.location.reload();
@@ -56,6 +58,7 @@ const AdminCreate = ({ open, onClose }) => {
                     placeholder="First Name"
                   />
                 </div>
+                
                 <div className={styles.adminCreateFormInputLabel}>
                   <input
                     className={styles.adminCreateFormInput}
