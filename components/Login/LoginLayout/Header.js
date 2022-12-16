@@ -15,7 +15,7 @@ const Header = () => {
         
         <a href="https://www.galvanize.com/">
           <img
-            src="https://www.galvanize.com/images/galvanize-logo.svg"
+            src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_small-scale_full-color_dark-background.png"
             alt="galvanizaeLogo"
             className={style.logo}
           ></img>
@@ -44,7 +44,7 @@ const Header = () => {
             </div>
           <RegisterModal
           open={isModalOpen}
-          onClose={()=> setModalisOpen(false)}
+          onClose={()=> setIsModalOpen(false)}
           />
         </ul>
       </div>

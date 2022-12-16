@@ -1,0 +1,91 @@
+import styles from "../../../styles/Edit.Admin.module.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const createCohort = () => {
+
+  const [cohortName, setCohortName] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [registerCode, setRegisterCode] = useState("");
+
+  const newCohort = (event) => {
+    axios.post("/api/cohorts", {
+      cohort_name: cohortName,
+      start_date: startDate,
+      end_date: endDate,
+      active: true,
+      archived: false,
+      register_code: registerCode
+    })
+  }
+
+  return (
+    <>
+      <div className={styles.createCohortParent}>
+        <div className={styles.createCohortHeader}>
+          <h1>Create Cohort</h1>
+        </div>
+
+        <div className={styles.createCohortSelector}>
+          <label for="create cohort" className={styles.createCohortInputLabel}>
+            Create New Cohort:
+          </label>
+          <input
+            className={styles.createCohortInput}
+            type="text" placeholder="Create Cohort"
+            onChange={(event) => setCohortName(event.target.value)}
+          />
+
+          <div className={styles.createCohortStartDate}>
+            <label for="Start Date" className={styles.createCohortStartDateLabel}>
+              Select Start Date:
+            </label>
+            <input
+              className={styles.createCohortStartDateInput}
+              type="text" placeholder="Start Date"
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+            <label for="End Date" className={styles.createCohortEndDateLabel}>
+              Select End Date:
+            </label>
+            <input
+              className={styles.createCohortEndDateInput}
+              type="text" placeholder="Start Date"
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+          </div>
+
+          <div className={styles.createCohortPassword}>
+            <label
+              className={styles.createCohortPasswordLabel}
+              for="cohortPassword"
+            >
+              One Time Password:
+            </label>
+            <input
+              className={styles.createCohortPasswordInput}
+              type="text" placeholder="Enter OTP of your choice"
+              onChange={(event) => setRegisterCode(event.target.value)}
+            />
+          </div>
+
+        </div>
+
+        <div className={styles.createCohortGenerate}>
+          <button
+            className={styles.createCohortGenerateBtn}
+            onClick={newCohort}
+          >
+            Generate
+          </button>
+        </div>
+
+      </div>
+
+    </>
+
+  );
+}
+
+export default createCohort;
