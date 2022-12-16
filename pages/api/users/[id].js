@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     try {
       const user = (
         await sql`SELECT * FROM users WHERE ${
-          isNaN(parseInt(id)) ? sql`username = ${id}` : sql`user_id = ${id}`
+          isNaN(parseInt(id)) ? sql`email = ${id}` : sql`user_id = ${id}`
         }`
       )[0];
 

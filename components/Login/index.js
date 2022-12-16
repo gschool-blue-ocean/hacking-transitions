@@ -21,14 +21,15 @@ let Login = () => {
     measurementId: config.REACT_APP_MEASUREMENTID,
   };
   //Initialize Firebase
-  const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  // const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  const app = initializeApp(firebaseConfig);
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth(app);
   
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState(false);
@@ -37,11 +38,11 @@ let Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
-      username: loginData.username,
+      email: loginData.email,
       password: loginData.password,
     };
 
-    fetch(`/api/users/${inputData.username}`)
+    fetch(`/api/users/${inputData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
@@ -66,11 +67,12 @@ let Login = () => {
         //       dispatch(setActiveStudent(user)),
         //       setLoginData(""));
         // })
-          signInWithEmailAndPassword(auth,inputData.username,inputData.password)
+          signInWithEmailAndPassword(auth,inputData.email,inputData.password)
           .then((userCredential)=>{
             console.log('user done configure')
             const currentUser = userCredential.user;
             console.log(currentUser)
+
             stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
           sessionStorage.setItem("currentUser", JSON.stringify(user));
@@ -126,9 +128,9 @@ let Login = () => {
               id="formInput"
               className={`${style.input} ${style.username}`}
               type="text"
-              placeholder="Username"
-              name="username"
-              value={loginData.username}
+              placeholder="Email"
+              name="email"
+              value={loginData.email}
               onChange={handleChange}
             />
           </span>

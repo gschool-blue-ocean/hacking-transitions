@@ -2,7 +2,7 @@ import {useState} from 'react'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
 import axios from "axios";
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterModal = ({open, onClose}) => {
     const router = useRouter()
@@ -25,7 +25,7 @@ const RegisterModal = ({open, onClose}) => {
         .then (
           ( data ) => {
           console.log("this is my data", data)
-
+            
             data.map((passcode) => {
               // console.log(res)
                 let cohortCode = passcode.register_code
