@@ -48,25 +48,6 @@ let Login = () => {
         return res.json();
       })
       .then((user) => {
-        // .then((user) => {
-        //   if (user.password === inputData.password) {
-        //     signInWithEmailAndPassword(auth,inputData.username,user.password)
-        //     .then((userCredential)=>{
-        //       const user = userCredential.user;
-        //       console.log(user)
-        //     })
-        //     stayLogged &&
-        //       localStorage.setItem("currentUser", JSON.stringify(user));
-        //     sessionStorage.setItem("currentUser", JSON.stringify(user));
-        //   } else {
-        //     throw new Error("Not Found");
-        //   }
-        //   user.admin
-        //     ? (router.push("/admin"), setLoginData(""))
-        //     : (router.push("/student"),
-        //       dispatch(setActiveStudent(user)),
-        //       setLoginData(""));
-        // })
           signInWithEmailAndPassword(auth,inputData.email,inputData.password)
           .then((userCredential)=>{
             console.log('user done configure')
