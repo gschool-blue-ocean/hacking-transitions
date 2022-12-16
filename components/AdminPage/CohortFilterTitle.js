@@ -4,23 +4,27 @@ import Link from "next/link";
 import etsStyle from "../../styles/StudentPage.module.css";
 import {useState} from "react";
 import CohortFilterTable from "./CohortFilterTable";
+import {BiSort,BiSortAZ,BiSortZA } from "react-icons/bi"
 
 //CohortFilterTitle renders the headers of each individual Cohort Table based off of the index of the selected Cohort from the CohortMenu
 // On-click event for First, Last, and Branch are set to requestSort() which allows to sort the table contents by column ASC/DESC
 
 const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort, setCurrCohort}) => { 
 
+    console.log("cohort", cohort);
 
     //Create SortButton to be used for Column headers 
     const SortButton = ({ direction, id, onClick, sortBy }) => {
-        const arrows = { ascending: '↓', descending: '↑' }
-        const arrow = sortBy === id ? arrows[direction] : '↕︎'
+        // const arrows = { ascending: '↓', descending: '↑' }
+        // const arrow = sortBy === id ? arrows[direction] : '↕︎'
         
+        const arrows = { ascending: <BiSortAZ/>, descending: <BiSortZA/> }
+        const arrow = sortBy === id ? arrows[direction] : <BiSort/>
         return (
-        <div className={s.blankButton} id={id} onClick={onClick}>
-            {arrow}
-            <div className={s.sortDirection}> Sort {direction}</div>
-        </div>
+      <div className={s.sortButton}>     
+        <div className={s.blankButton} id={id} onClick={onClick}>{arrow}</div> 
+        {/* <div className={s.sortDirection}> Sort {direction}</div> */}
+      </div> 
       )
     }
 
@@ -32,7 +36,7 @@ return (
         <table className={s.table}>
             <tr className={s.headtr}>
                 <th className={s.tableheaders}>
-                    <SortButton direction={sortConfig?.direction} id={cohort.id}  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
+                    <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
                     <h1 className={s.title}> First </h1>
                 </th>
                 <th className={s.tableheaders}>
@@ -40,7 +44,7 @@ return (
                    <h1 className={s.title}>Last</h1>  
                 </th>
                 <th className={s.tableheaders}>
-                    <SortButton direction={sortConfig?.direction} id="ets"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
+                    <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
                     <h1 className={s.title}>ETS</h1>
                 </th>
                 <th className={s.tableheaders}>
