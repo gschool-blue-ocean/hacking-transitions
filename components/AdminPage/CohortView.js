@@ -13,6 +13,10 @@ import { motion } from "framer-motion";
 import { BsChatText } from "react-icons/bs";
 import CohortFilterTitle from "./CohortFilterTitle";
 
+// CohortView component is the parent component to CohortFilterTitle
+// Creates the container that will hold all of the Cohort Tables that populate from an on-Click event in the CohortMenu
+// maps through CurrCohort and sets table titles and passes props down to CohortFilterTitle component
+
 const CohortView = ({ currCohort, setCurrCohort, setChatCohort}) => {
 
   const [clickedCohort, setClickedCohort] = useState([]);

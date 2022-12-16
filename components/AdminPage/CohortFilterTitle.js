@@ -5,6 +5,8 @@ import etsStyle from "../../styles/StudentPage.module.css";
 import {useState} from "react";
 import CohortFilterTable from "./CohortFilterTable";
 
+//CohortFilterTitle renders the headers of each individual Cohort Table based off of the index of the selected Cohort from the CohortMenu
+// On-click event for First, Last, and Branch are set to requestSort() which allows to sort the table contents by column ASC/DESC
 
 const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort, setCurrCohort}) => { 
 
@@ -15,44 +17,44 @@ const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, 
         const arrow = sortBy === id ? arrows[direction] : '↕︎'
         
         return (
-            <div className={s.blankbutton} id={id} onClick={onClick}>
-          {arrow}
-          <div className={s.sortDirection}>Sort {direction}</div>
+        <div className={s.blankButton} id={id} onClick={onClick}>
+            {arrow}
+            <div className={s.sortDirection}> Sort {direction}</div>
         </div>
       )
     }
 
-  //import useSortableDate on the list of students to be used in the Table
+  //import useSortableDate (a custom hook defined in the Utiliy file) on the list of students to be used in the Table 
   const {items, requestSort, sortConfig } = useSortableData(currCohort[index]?.students);
 
 return (
     <>
         <table className={s.table}>
             <tr className={s.headtr}>
-                <th>
-                    First 
+                <th className={s.tableheaders}>
                     <SortButton direction={sortConfig?.direction} id={cohort.id}  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
+                    <h1 className={s.title}> First </h1>
                 </th>
-                <th>
-                    Last 
+                <th className={s.tableheaders}>
                     <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
-                </th>
-                <th>
-                    ETS
-                    <SortButton direction={sortConfig?.direction} id="ets"  onClick={()=> requestSort('ets')} sortBy = {sortConfig?.key}/>
+                   <h1 className={s.title}>Last</h1>  
                 </th>
                 <th className={s.tableheaders}>
-                    Terminal
+                    <SortButton direction={sortConfig?.direction} id="ets"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
+                    <h1 className={s.title}>ETS</h1>
                 </th>
-                <th>
-                    Branch
+                <th className={s.tableheaders}>
+                    <h1 className={s.title}>Terminal</h1>
+                </th>
+                <th className={s.tableheaders}>
                     <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>
+                   <h1 className={s.title}> Branch</h1>
                 </th>
                 <th className={s.tableheaders}>
-                    Edit
+                    <h1 className={s.title}>Edit</h1>
                 </th>
                 <th className={s.tableheaders}>
-                    Chat 
+                    <h1 className={s.title}>Chat </h1>
                 </th>
             </tr>
             <CohortFilterTable  index = {index} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />

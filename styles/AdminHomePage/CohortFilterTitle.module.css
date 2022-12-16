@@ -12,8 +12,16 @@
     background-color: rgb(230, 229, 229);
 }
 .tableheaders{
-    font-size: 2.3rem;
-    text-align: left;
+    font-size: 2rem;
+    text-align: center;
+  
+
+
+}
+.title{
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center
 }
 .tr{
     border-top: 1px rgb(232, 232, 232) solid;
@@ -24,4 +32,19 @@
 }
 .default {
     margin-left: 30rem
+}
+
+.blankButton {
+    margin: auto 0; 
+    font-size: 1.5rem;
+    display:flex;
+    gap: 2px;
+
+
+
+}
+
+.sortDirection {
+    display: flex-start;
+    flex-direction: column;
 }

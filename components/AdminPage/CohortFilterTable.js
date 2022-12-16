@@ -12,6 +12,8 @@ import {
 import { motion } from "framer-motion";
 import { BsChatText } from "react-icons/bs";
 
+//CohortFitlerTable renders the content of the table the mapping over the students information of each selected Cohort
+
 const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort})=>{
   
   const dispatch = useDispatch();
@@ -94,6 +96,7 @@ const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClicke
 }
 export default CohortFilterTable; 
 
+// Defines reusable function that wraps each student row elements to navigate to their student page when clicked
 const LinkToViewStudent = ({ children, id }) => {
   const link = "/admin/viewstudent";
   return (
@@ -105,6 +108,7 @@ const LinkToViewStudent = ({ children, id }) => {
   );
 };
 
+// Function that determines color styling of ETS block based off of daysToETS and rerenders 
 const ColorEts = ({ daysToEts, children }) => {
   if (daysToEts <= 0) {
     return (
