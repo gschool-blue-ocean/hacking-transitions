@@ -24,8 +24,7 @@ const RegisterModal = ({open, onClose}) => {
         })
         .then (
           ( data ) => {
-          console.log("this is my data", data)
-            
+            console.log("this is my data", data)
             data.map((passcode) => {
               // console.log(res)
                 let cohortCode = passcode.register_code
@@ -52,6 +51,8 @@ const RegisterModal = ({open, onClose}) => {
                   router.push('/registrationerror')
               }
             })
+
+
           }
             )
           }
