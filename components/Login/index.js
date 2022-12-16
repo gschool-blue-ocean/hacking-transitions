@@ -29,7 +29,7 @@ let Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState(false);
@@ -38,11 +38,11 @@ let Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
-      username: loginData.username,
+      email: loginData.email,
       password: loginData.password,
     };
 
-    fetch(`/api/users/${inputData.username}`)
+    fetch(`/api/users/${inputData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
@@ -67,7 +67,7 @@ let Login = () => {
         //       dispatch(setActiveStudent(user)),
         //       setLoginData(""));
         // })
-          signInWithEmailAndPassword(auth,inputData.username,inputData.password)
+          signInWithEmailAndPassword(auth,inputData.email,inputData.password)
           .then((userCredential)=>{
             console.log('user done configure')
             const currentUser = userCredential.user;
@@ -128,9 +128,9 @@ let Login = () => {
               id="formInput"
               className={`${style.input} ${style.username}`}
               type="text"
-              placeholder="Username"
-              name="username"
-              value={loginData.username}
+              placeholder="Email"
+              name="email"
+              value={loginData.email}
               onChange={handleChange}
             />
           </span>

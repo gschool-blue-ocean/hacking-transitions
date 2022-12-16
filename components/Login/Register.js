@@ -25,7 +25,7 @@ const RegisterModal = ({open, onClose}) => {
         .then (
           ( data ) => {
           console.log("this is my data", data)
-
+            
             data.map((passcode) => {
               // console.log(res)
                 let cohortCode = passcode.register_code
@@ -38,7 +38,7 @@ const RegisterModal = ({open, onClose}) => {
                       admin: false,
                       first: firstName,
                       last: lastName,
-                      username: email,
+                      username: Username,
                       password: Password,
                       email: email,
                       cohort_name: cohort,
