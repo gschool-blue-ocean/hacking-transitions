@@ -1,6 +1,8 @@
 import style from "../../styles/Header.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
+
 const Header = ({ currentUser }) => {
   const router = useRouter();
   const { pathname } = router;
@@ -15,8 +17,16 @@ const Header = ({ currentUser }) => {
             <a
               className={`${style.link} `}
               onClick={() => {
+                const auth = getAuth();
                 localStorage.removeItem("currentUser");
                 window.sessionStorage.removeItem("currentUser");
+                signOut(auth).then(() => {
+                  // Sign-out successful.
+                  alert('You have succesfully logged out');
+                }).catch((error) => {
+                  // An error happened.
+                  console.log(error);
+                });
               }}
             >
               <div className={style.listItem}>Logout</div>
