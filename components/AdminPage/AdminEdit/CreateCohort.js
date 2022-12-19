@@ -9,14 +9,35 @@ const createCohort = () => {
   const [endDate, setEndDate] = useState("");
   const [registerCode, setRegisterCode] = useState("");
 
+  let existingCohortList = []
+
   const newCohort = (event) => {
-    axios.post("/api/cohorts", {
-      cohort_name: cohortName,
-      start_date: startDate,
-      end_date: endDate,
-      active: true,
-      archived: false,
-      register_code: registerCode
+    axios.get("/api/cohorts", {}).then((res) => {
+      console.log("this is the data", res.data)
+      res.data.map((cohortData) => {
+
+        existingCohortList.push(cohortData.cohort_name)
+        console.log("THIS IS existing cohort", existingCohortList)
+      })
+      console.log("THIS IS cohortName", cohortName)
+      if (existingCohortList.includes(cohortName)) {
+        window.alert("Cohort already exists!")
+        // window.location.reload();
+        console.log("cohort already exists")
+      }
+      else {
+        axios.post("/api/cohorts", {
+          cohort_name: cohortName,
+          start_date: startDate,
+          end_date: endDate,
+          active: true,
+          archived: false,
+          register_code: registerCode
+        })
+        window.alert("Cohort created!")
+        // window.location.reload();
+      }
+      existingCohortList = []
     })
   }
 

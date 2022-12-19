@@ -39,7 +39,7 @@ export default function StudentPage({ viewClickedCohort }) {
               </h1>
               <p id={styles.StuHeaderBranch}>{activeStudent.branch}</p>
             </div>
-            <SPETStag userETS={activeStudent.ets_date}/>
+            <SPETStag userETS={activeStudent.ets_date} />
           </div>
           <div className={styles.SDashInfocard}>
             <div className={styles.infoCardcontainer}>
