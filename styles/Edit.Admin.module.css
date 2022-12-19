@@ -55,6 +55,10 @@
   overflow-y: auto;
 }
 
+.adminCohortSelector::-webkit-scrollbar {
+  display: none;
+}
+
 .adminCohortDropdown {
   grid-area: adminCohortDropdown;
   display: grid;
@@ -302,6 +306,10 @@
   grid-area: adminListList;
   overflow-y: auto;
   margin-top: 1em;
+}
+
+.adminListList::-webkit-scrollbar {
+  display: none;
 }
 
 .adminListListTextBox {
@@ -592,7 +600,10 @@
     "createCohortInput"
     "createCohortStartDate"
     "createCohortPassword";
-  overflow-y: auto;
+  overflow-y: auto
+}
+.createCohortSelector::-webkit-scrollbar {
+  display: none;
 }
 
 .createCohortInputLabel {
