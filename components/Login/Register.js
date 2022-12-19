@@ -51,8 +51,32 @@ const RegisterModal = ({open, onClose}) => {
                   router.push('/registrationerror')
               }
             })
-
-
+            fetch(`/api/users/${email}`)
+            .then((res) => {
+              if (res.status === 404) throw new Error("Not Found");
+              return res.json();
+            })
+            .then((user) => {
+              //register user in firebase
+              const auth = getAuth();
+              createUserWithEmailAndPassword(auth, email, Password)
+                .then((userCredential) => {
+                  // Signed in 
+                  const currentUser = userCredential.user;
+                  localStorage.setItem("currentUser", JSON.stringify(user));
+                  sessionStorage.setItem("currentUser", JSON.stringify(user));
+                  user.admin
+                  ? (router.push("/admin"), setLoginData(""))
+                  : (router.push("/student"),
+                    dispatch(setActiveStudent(user)),
+                    setLoginData(""));
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log(errorCode,errorMessage);
+                });
+            })
           }
             )
           }

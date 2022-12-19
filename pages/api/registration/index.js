@@ -1,4 +1,3 @@
-import { application } from "express";
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
