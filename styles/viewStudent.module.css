@@ -5,6 +5,7 @@
     width: 95%;
     margin: auto;
     padding-bottom: 20px;
+    background:#e0eaf8;
 }
 
 .top {
@@ -16,13 +17,13 @@
 }
 
 .prev {
-    background-color: #F79020;
+    background-color: #ff6900;
     color: white;
     width: 80px;
 }
 
 .prev:hover {
-    background-color: #de821d;
+    background-color: #0d0f4a83;
 }
 
 .cohort {
@@ -54,13 +55,13 @@
 }
 
 .next {
-    background-color: #F79020;
+    background-color: #ff6900;
     color: white;
     width: 80px;
 }
 
 .next:hover {
-    background-color: #de821d;
+    background-color:  #0d0f4a83;;
 }
 
 .bottom {

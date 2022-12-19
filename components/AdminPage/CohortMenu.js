@@ -34,7 +34,7 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
             students,
           })
         );
-        e.target.setAttribute("style", "color:#f79020");
+        e.target.setAttribute("style", "color:#ff6900");
         data.isclicked = true;
       } else {
         setCurrCohort((oldCohort) =>
