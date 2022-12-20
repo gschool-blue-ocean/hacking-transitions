@@ -1,7 +1,7 @@
 import sql from "../../../database/connection";
 import { checkApiMethod, notFound404, handleErrors } from "../../../utility";
 export default async function handler(req, res) {
-  console.log(req.method,req.url);
+  console.log(req.method, req.url);
   /******** GET ALL ACTIVE COHORTS ********/
   if (checkApiMethod(req, "GET")) {
     try {
@@ -16,8 +16,8 @@ export default async function handler(req, res) {
   /******** END GET ALL ACTIVE COHORTS ********/
   /******** CREATE NEW COHORTS ********/
   if (checkApiMethod(req, "POST")) {
-    const { cohort_name, start_date, end_date, active } = req.body;
-    const newCohort = { cohort_name, start_date, end_date, active };
+    const { cohort_name, start_date, end_date, active, archived, register_code } = req.body;
+    const newCohort = { cohort_name, start_date, end_date, active, archived, register_code };
     try {
       let cohort = (
         await sql`INSERT INTO cohorts ${sql(newCohort)} RETURNING *`

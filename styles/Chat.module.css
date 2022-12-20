@@ -16,14 +16,8 @@
   padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.display::-webkit-scrollbar{
-  width: 5px;
-  background-color: transparent;
-}
-
-.display::-webkit-scrollbar-thumb{
-  background-color: lightgray;
-  border-radius: 1rem;
+.display::-webkit-scrollbar {
+  display: none;
 }
 .message {
   margin: 1rem 0;
