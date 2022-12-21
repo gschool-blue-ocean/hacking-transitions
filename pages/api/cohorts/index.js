@@ -30,5 +30,25 @@ export default async function handler(req, res) {
     return;
   }
   /******** END CREATE NEW COHORTS ********/
+
+  /******** EDIT COHORTS ********/
+
+  if (checkApiMethod(req, "PATCH")) {
+    const { cohort_name, start_date, end_date } = req.body;
+    const editCohort = { cohort_name, start_date, end_date };
+    try {
+      const cohort = (
+        await sql`INSERT INTO cohorts ${sql(editCohort)} RETURNING *`
+      )[0];
+      res.json(cohort);
+    } catch (error) {
+      console.log(error);
+      handleErrors(res);
+    }
+    return;
+  }
+
+
+  /******** EDIT COHORTS ********/
   notFound404(res);
 }
