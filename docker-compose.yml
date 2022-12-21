@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  hackingTransitions-db: 
+    container_name: hackingTransitions_db_postgress_container
+    image: postgres
+    restart: always
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: blueocean
+      PGDATA: /var/lib/postgresql/data
+    ports:
+     - '6432:5432'
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+    volumes:
+      - pgdatasource:/var/lib/postgresql/data
+
+
+  pgadmin:
+    container_name: hackingTransitions_pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: joseph.t.low@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: docker
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - 'hackingTransitions-db'
+
+
+  hackingTransitions-FE:
+    container_name: hackingTransitions_FE_container
+    image: docker-nextjs-dev
+    build: .
+    depends_on:
+      - 'hackingTransitions-db'
+    ports:
+    - 3000:3000
+   # volumes: 
+   # - ./Frontend/pages:/app/pages
+   # - ./Frontend/public:/app/public
+    command: npm run dev
+
+volumes: 
+  pgdatasource:
+  pgadmin-data:
+
+networks:
+  default:
