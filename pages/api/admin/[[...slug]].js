@@ -6,8 +6,8 @@ export default async function handler(req, res) {
   if (!req.query.slug) {
     /******** CREATE NEW ADMIN ********/
     if (checkApiMethod(req, "POST")) {
-      const { admin, first, last, email, username, password, cohort_name, cohort_id } = req.body;
-      const newAdmin = { admin, first, last, email, username, password, cohort_name, cohort_id };
+      const { admin, first, last, email, username, cohort_name, cohort_id } = req.body;
+      const newAdmin = { admin, first, last, email, username, cohort_name, cohort_id };
 
       try {
         const admin = await sql`INSERT INTO users ${sql(newAdmin)} RETURNING *`;

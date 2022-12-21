@@ -39,8 +39,9 @@ const AdminUpdate = ({ admin, open, onClose }) => {
       last: newLastName,
       email: admin.email,
       username: newUsername,
-    })
-    window.location.reload();
+      password: newPassword,
+    });
+    // window.location.reload();
     router.push("/admin/edit");
   };
 
@@ -114,7 +115,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   aria-label={`password ${admin.user_id}`}
                   placeholder={`Change Password:`}
                 />
-              </div>
+              </div> */}
               <div className={styles.adminUpdateFormLabel}>
                 Email
                 <input
