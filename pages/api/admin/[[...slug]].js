@@ -36,8 +36,8 @@ export default async function handler(req, res) {
 
     /******** UPDATE ESXISTING ADMIN ********/
     if (checkApiMethod(req, "PATCH") && !isNaN(parseInt(req.query.slug[0]))) {
-      const { first, last, email, username, password } = req.body;
-      const newAdmin = { first, last, email, username, password };
+      const { first, last, username } = req.body;
+      const newAdmin = { first, last, username };
 
       try {
         const admin = await sql`UPDATE users SET ${sql(

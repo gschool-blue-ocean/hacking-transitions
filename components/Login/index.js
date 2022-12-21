@@ -91,14 +91,14 @@ let Login = () => {
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
-            Username/Password is Incorrect
+            Email/Password is Incorrect
           </span>
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
           <span>
             <label htmlFor="username" className={style.label}>
-              Username
+              Email
             </label>
             <input
               required
