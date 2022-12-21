@@ -19,7 +19,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
       username: newUsername,
       password: newPassword,
     });
-    window.location.reload();
+    // window.location.reload();
     router.push("/admin/edit");
   };
 
@@ -73,7 +73,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   placeholder={`Current Username: ${admin.username}`}
                 />
               </div>
-              <div className={styles.adminUpdateFormLabel}>
+              {/* <div className={styles.adminUpdateFormLabel}>
                 <input
                   className={styles.adminUpdateFormInput}
                   id={`password ${admin.user_id}`}
@@ -82,7 +82,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   aria-label={`password ${admin.user_id}`}
                   placeholder={`Current Password: ${admin.password}`}
                 />
-              </div>
+              </div> */}
               <div className={styles.adminUpdateFormLabel}>
                 <input
                   className={styles.adminUpdateFormInput}
