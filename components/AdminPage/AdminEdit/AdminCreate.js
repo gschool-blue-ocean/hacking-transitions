@@ -37,41 +37,42 @@ const AdminCreate = ({ open, onClose }) => {
   };
 
   const createAdmin = (event) => {
-    event.preventDefault();
-    console.log("New First Name: ", newFirstName)
-    axios.post("/api/admin", {
-      admin: true,
-      first: newFirstName,
-      last: newLastName,
-      username: newUsername,
-      // password: newPassword, password no longer stored in our database
-      email: newEmail,
-      cohort_name: null,
-      cohort_id: null
-    })
-    .then(() => {
+    event.preventDefault()
       createUserWithEmailAndPassword(auth, newEmail, newPassword)
-      .then((userCredential) => {
-      // Signed in, automatic due to the firebase function 
-      const user = userCredential.user;
-      console.log('Successfully created admin: ', user);
-        signOut(auth).then(() => {
-          // Sign-out successful.
-          alert('New Admin account created for email ', newEmail);
-          //resetting text box inputs to give appearance of refresh
-          resetStateOnClose();
-        }).catch((error) => {
-          console.log(error)
-        });
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode == 'auth/email-already-in-use') {
+          alert('This user for this email already exists');
+        } else {
+          alert(errorMessage);
+        }
+        // console.log(errorCode)
       })
-    })
-    .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-    });
-    window.location.reload();
-    router.push("/admin/edit");
+      .then((userCredential) => {
+        //If no error, signed in, automatic due to the firebase function 
+        if(userCredential){
+          //Will post to app database if verified by firebase
+          axios.post("/api/admin", {
+            admin: true,
+            first: newFirstName,
+            last: newLastName,
+            username: newUsername,
+            // password: newPassword, password no longer stored in our database
+            email: newEmail,
+            cohort_name: null,
+            cohort_id: null
+          })
+          signOut(auth).then(() => {
+              // Sign-out successful.
+              alert('New Admin account created for email ', newEmail);
+              //resetting text box inputs to give appearance of refresh
+              resetStateOnClose();
+              window.location.reload();
+              router.push("/admin/edit");
+            })
+        }
+      })
     
   };
   return (
@@ -145,6 +146,7 @@ const AdminCreate = ({ open, onClose }) => {
                     id="Password"
                     type="password"
                     required
+                    minLength='6'
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
                     aria-label="Password"
