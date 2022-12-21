@@ -70,9 +70,9 @@ const AdminCreate = ({ open, onClose }) => {
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
     });
-    
+    window.location.reload();
     router.push("/admin/edit");
-    // window.location.reload();
+    
   };
   return (
     open && (
@@ -97,12 +97,14 @@ const AdminCreate = ({ open, onClose }) => {
               </div>
             </div>
             <div className={styles.adminCreateForm}>
-              <form>
+              <form onSubmit={createAdmin}>
                 <div className={styles.adminCreateFormInputLabel}>
                   <input
+                    required
                     className={styles.adminCreateFormInput}
                     id="FirstName"
                     type="text"
+                    
                     value={newFirstName}
                     onChange={(event) =>{
                       console.log(event.target.value)
@@ -118,6 +120,7 @@ const AdminCreate = ({ open, onClose }) => {
                     className={styles.adminCreateFormInput}
                     id="LastName"
                     type="text"
+                    required
                     value={newLastName}
                     onChange={(event) => setNewLastName(event.target.value)}
                     aria-label="LastName"
@@ -129,6 +132,7 @@ const AdminCreate = ({ open, onClose }) => {
                     className={styles.adminCreateFormInput}
                     id="Username"
                     type="text"
+                    required
                     value={newUsername}
                     onChange={(event) => setNewUsername(event.target.value)}
                     aria-label="Username"
@@ -139,7 +143,8 @@ const AdminCreate = ({ open, onClose }) => {
                   <input
                     className={styles.adminCreateFormInput}
                     id="Password"
-                    type="text"
+                    type="password"
+                    required
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
                     aria-label="Password"
@@ -150,7 +155,8 @@ const AdminCreate = ({ open, onClose }) => {
                   <input
                     className={styles.adminCreateFormInput}
                     id="Email"
-                    type="text"
+                    type="email"
+                    required
                     value={newEmail}
                     onChange={(event) => setNewEmail(event.target.value)}
                     aria-label="Email"
@@ -161,7 +167,6 @@ const AdminCreate = ({ open, onClose }) => {
                   <button
                     className={styles.adminCreateFormSubmitBtn}
                     type="submit"
-                    onClick={createAdmin}
                   >
                     Submit
                   </button>

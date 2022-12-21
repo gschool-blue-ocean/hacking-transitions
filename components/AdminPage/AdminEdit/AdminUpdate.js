@@ -115,7 +115,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   aria-label={`password ${admin.user_id}`}
                   placeholder={`Change Password:`}
                 />
-              </div> */}
+              </div>
               <div className={styles.adminUpdateFormLabel}>
                 Email
                 <input
