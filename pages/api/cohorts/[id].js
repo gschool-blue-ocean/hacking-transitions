@@ -17,13 +17,15 @@ export default async function handler(req, res) {
   /************* END GET A CERTAIN COHORT INFORMATION *************/
   /************* UPDATE A CERTAIN COHORT INFORMATION *************/
   if (checkApiMethod(req, "PATCH")) {
-    const { cohort_name, start_date, end_date } =
+    const { cohort_name, start_date, end_date, active, archived } =
       req.body;
     // const { register_code } = req.body;
     const newCohort = {
       cohort_name,
       start_date,
       end_date,
+      active,
+      archived
     };
     // const newCohort = { register_code };
     try {

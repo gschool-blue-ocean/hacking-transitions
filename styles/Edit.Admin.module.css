@@ -602,6 +602,7 @@
     "createCohortPassword";
   overflow-y: auto
 }
+
 .createCohortSelector::-webkit-scrollbar {
   display: none;
 }
@@ -744,4 +745,31 @@
   /* border: 1px solid #e1e1e1; */
   border: 1px solid #f79020;
   cursor: pointer;
+}
+
+.archiveButton {
+  margin-left: 37%
+}
+
+.deleteButton {
+
+  margin-left: 20%;
+}
+
+.deleteButtonDiv {
+  padding: 2%;
+  margin-left: 20%;
+}
+
+
+.endDateDiv {
+  padding: 2%;
+}
+
+.startDateDiv {
+  padding: 2%;
+}
+
+.cohortNameDiv {
+  padding: 2%;
 }
