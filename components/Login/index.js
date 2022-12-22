@@ -4,12 +4,32 @@ import style from "../../styles/LoginStyles.module.css";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+//import firebase
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
+//import config firebasee key
+const config = require('./config');
 
 let Login = () => {
+  const firebaseConfig = {
+    apiKey: config.REACT_APP_APIKEY,
+    authDomain: config.REACT_APP_AUTHDOMAIN,
+    projectId: config.REACT_APP_PROJECTID,
+    storageBucket: config.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: config.REACT_APP_MESSAGINGSENDERID,
+    appId: config.REACT_APP_APPID,
+    measurementId: config.REACT_APP_MEASUREMENTID,
+  };
+  //Initialize Firebase
+  // const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  const app = initializeApp(firebaseConfig);
+  // Initialize Firebase Authentication and get a reference to the service
+  const auth = getAuth(app);
+  
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState(false);
@@ -18,32 +38,37 @@ let Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
-      username: loginData.username,
+      email: loginData.email,
       password: loginData.password,
     };
 
-    fetch(`/api/users/${inputData.username}`)
+    fetch(`/api/users/${inputData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
       })
       .then((user) => {
-        if (user.password === inputData.password) {
-          stayLogged &&
+          signInWithEmailAndPassword(auth,inputData.email,inputData.password)
+          .then((userCredential)=>{
+            console.log('user done configure')
+            const currentUser = userCredential.user;
+            console.log(currentUser)
+
+            stayLogged &&
             localStorage.setItem("currentUser", JSON.stringify(user));
           sessionStorage.setItem("currentUser", JSON.stringify(user));
-        } else {
-          throw new Error("Not Found");
-        }
-        user.admin
+          user.admin
           ? (router.push("/admin"), setLoginData(""))
           : (router.push("/student"),
             dispatch(setActiveStudent(user)),
             setLoginData(""));
+          })
+          .catch((error)=>{
+            const errorCode=error.code;
+            const errorMessage=error.message;
+            console.log(errorCode,errorMessage);
+          })
       })
-      .catch(({ message }) => {
-        setError(true);
-      });
   };
 
   const handleChange = (e) => {
@@ -66,23 +91,23 @@ let Login = () => {
         <h1 className={style.loginTitle}>Hacking Transition</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
-            Username/Password is Incorrect
+            Email/Password is Incorrect
           </span>
         )}
 
         <form className={style.loginForm} onSubmit={handleLogin}>
           <span>
             <label htmlFor="username" className={style.label}>
-              Username
+              Email
             </label>
             <input
               required
               id="formInput"
               className={`${style.input} ${style.username}`}
               type="text"
-              placeholder="Username"
-              name="username"
-              value={loginData.username}
+              placeholder="Email"
+              name="email"
+              value={loginData.email}
               onChange={handleChange}
             />
           </span>

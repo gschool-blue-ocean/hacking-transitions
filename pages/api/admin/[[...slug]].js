@@ -6,8 +6,8 @@ export default async function handler(req, res) {
   if (!req.query.slug) {
     /******** CREATE NEW ADMIN ********/
     if (checkApiMethod(req, "POST")) {
-      const { admin, first, last, email, username, password, cohort_name, cohort_id } = req.body;
-      const newAdmin = { admin, first, last, email, username, password, cohort_name, cohort_id };
+      const { admin, first, last, email, username, cohort_name, cohort_id } = req.body;
+      const newAdmin = { admin, first, last, email, username, cohort_name, cohort_id };
 
       try {
         const admin = await sql`INSERT INTO users ${sql(newAdmin)} RETURNING *`;
@@ -36,8 +36,8 @@ export default async function handler(req, res) {
 
     /******** UPDATE EXISTING ADMIN ********/
     if (checkApiMethod(req, "PATCH") && !isNaN(parseInt(req.query.slug[0]))) {
-      const { first, last, email, username, password } = req.body;
-      const newAdmin = { first, last, email, username, password };
+      const { first, last, username } = req.body;
+      const newAdmin = { first, last, username };
 
       try {
         const admin = await sql`UPDATE users SET ${sql(

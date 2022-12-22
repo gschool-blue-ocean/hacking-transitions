@@ -1,15 +1,20 @@
-import styles from "../../../styles/Edit.Admin.module.css";
+import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 
-const AdminUpdate = ({ admin, open, onClose }) => {
+const AdminUpdate = () => {
+  const [open,setOpen]=useState(true);
+  const admin =JSON.parse(sessionStorage.getItem('currentUser'));
+  const onClose =()=>setOpen(!open);
+  console.log(admin)
+
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
-  // const [newPassword, setNewPassword] = useState("");
-  // const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newEmail, setNewEmail] = useState("");
   const router = useRouter();
   const resetStateWhenCanceled = () =>{
     setNewFirstName("");
@@ -34,14 +39,14 @@ const AdminUpdate = ({ admin, open, onClose }) => {
     // if(newEmail===''){
     //   newEmail=admin.email;
     // }
-    axios.patch(`/api/admin/${admin.user_id}`, {
-      first: newFirstName,
-      last: newLastName,
-      email: admin.email,
-      username: newUsername,
-      password: newPassword,
-    });
-    // window.location.reload();
+    // axios.patch(`/api/admin/${admin.user_id}`, {
+    //   first: newFirstName,
+    //   last: newLastName,
+    //   email: admin.email,
+    //   username: newUsername,
+    //   password: newPassword,
+    // });
+    window.location.reload();
     router.push("/admin/edit");
   };
 
@@ -53,7 +58,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
           <div className={styles.adminUpdateParent}>
             <div className={styles.adminUpdateHeader}>
               <div className={styles.adminUpdateHeaderText}>
-                <h1>Update Admin</h1>
+                <h1>Update User</h1>
               </div>
               <div className={styles.adminUpdateHeaderBtn}>
                 <button
@@ -67,7 +72,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                 </button>
               </div>
             </div>
-            <form>
+            <form onSubmit={adminPatch}>
               <div className={styles.adminUpdateFormLabel}>
                 Firstname
                 <input
@@ -105,7 +110,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                 />
               </div>
               {/* Assume Admin cannot change other Admin email and password */}
-              {/* <div className={styles.adminUpdateFormLabel}>
+              <div className={styles.adminUpdateFormLabel}>
                 Password
                 <input
                   className={styles.adminUpdateFormInput}
@@ -127,11 +132,11 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   aria-label={`email ${admin.user_id}`}
                   placeholder={`Current email: ${admin.email}`}
                 />
-              </div> */}
+              </div>
               <div className={styles.adminUpdateFormSubmit}>
                 <button
                   className={styles.adminUpdateFormSubmitBtn}
-                  onClick={adminPatch}
+                  type={"submit"}
                 >
                   Submit
                 </button>

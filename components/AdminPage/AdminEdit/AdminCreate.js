@@ -2,8 +2,25 @@ import styles from "../../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+//pull in the firebase config file with the assigned api keys for our app 
+const config = require('../../Login/config');
+const firebaseConfig = {
+  apiKey: config.REACT_APP_APIKEY,
+  authDomain: config.REACT_APP_AUTHDOMAIN,
+  projectId: config.REACT_APP_PROJECTID,
+  storageBucket: config.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: config.REACT_APP_MESSAGINGSENDERID,
+  appId: config.REACT_APP_APPID,
+  measurementId: config.REACT_APP_MEASUREMENTID,
+};
+
 
 const AdminCreate = ({ open, onClose }) => {
+  const app = initializeApp(firebaseConfig);
+  //auth links any user info sent to firebass api correlated with this app
+  const auth = getAuth(app);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -11,20 +28,52 @@ const AdminCreate = ({ open, onClose }) => {
   const [newEmail, setNewEmail] = useState("");
   const router = useRouter();
 
+  const resetStateOnClose = () => {
+    setNewEmail("");
+    setNewFirstName("");
+    setNewLastName("");
+    setNewPassword("");
+    setNewUsername("");
+  };
+
   const createAdmin = (event) => {
-    event.preventDefault();
-    axios.post("/api/admin", {
-      admin: true,
-      first: newFirstName,
-      last: newLastName,
-      username: newUsername,
-      password: newPassword,
-      email: newEmail,
-      cohort_name: null,
-      cohort_id: null
-    });
-    router.push("/admin/edit");
-    window.location.reload();
+    event.preventDefault()
+      createUserWithEmailAndPassword(auth, newEmail, newPassword)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode == 'auth/email-already-in-use') {
+          alert('This user for this email already exists');
+        } else {
+          alert(errorMessage);
+        }
+        // console.log(errorCode)
+      })
+      .then((userCredential) => {
+        //If no error, signed in, automatic due to the firebase function 
+        if(userCredential){
+          //Will post to app database if verified by firebase
+          axios.post("/api/admin", {
+            admin: true,
+            first: newFirstName,
+            last: newLastName,
+            username: newUsername,
+            // password: newPassword, password no longer stored in our database
+            email: newEmail,
+            cohort_name: null,
+            cohort_id: null
+          })
+          signOut(auth).then(() => {
+              // Sign-out successful.
+              alert('New Admin account created for email ', newEmail);
+              //resetting text box inputs to give appearance of refresh
+              resetStateOnClose();
+              window.location.reload();
+              router.push("/admin/edit");
+            })
+        }
+      })
+    
   };
   return (
     open && (
@@ -39,21 +88,29 @@ const AdminCreate = ({ open, onClose }) => {
               <div className={styles.adminCreateHeaderBtn}>
                 <button
                   className={styles.adminCreateHeaderBtnClose}
-                  onClick={onClose}
+                  onClick={() => {
+                  resetStateOnClose();  
+                  onClose();
+                }}
                 >
                   Close
                 </button>
               </div>
             </div>
             <div className={styles.adminCreateForm}>
-              <form>
+              <form onSubmit={createAdmin}>
                 <div className={styles.adminCreateFormInputLabel}>
                   <input
+                    required
                     className={styles.adminCreateFormInput}
                     id="FirstName"
                     type="text"
+                    
                     value={newFirstName}
-                    onChange={(event) => setNewFirstName(event.target.value)}
+                    onChange={(event) =>{
+                      console.log(event.target.value)
+                      setNewFirstName(event.target.value)}
+                    } 
                     aria-label="FirstName"
                     placeholder="First Name"
                   />
@@ -64,6 +121,7 @@ const AdminCreate = ({ open, onClose }) => {
                     className={styles.adminCreateFormInput}
                     id="LastName"
                     type="text"
+                    required
                     value={newLastName}
                     onChange={(event) => setNewLastName(event.target.value)}
                     aria-label="LastName"
@@ -75,6 +133,7 @@ const AdminCreate = ({ open, onClose }) => {
                     className={styles.adminCreateFormInput}
                     id="Username"
                     type="text"
+                    required
                     value={newUsername}
                     onChange={(event) => setNewUsername(event.target.value)}
                     aria-label="Username"
@@ -85,7 +144,9 @@ const AdminCreate = ({ open, onClose }) => {
                   <input
                     className={styles.adminCreateFormInput}
                     id="Password"
-                    type="text"
+                    type="password"
+                    required
+                    minLength='6'
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
                     aria-label="Password"
@@ -96,7 +157,8 @@ const AdminCreate = ({ open, onClose }) => {
                   <input
                     className={styles.adminCreateFormInput}
                     id="Email"
-                    type="text"
+                    type="email"
+                    required
                     value={newEmail}
                     onChange={(event) => setNewEmail(event.target.value)}
                     aria-label="Email"
@@ -107,7 +169,6 @@ const AdminCreate = ({ open, onClose }) => {
                   <button
                     className={styles.adminCreateFormSubmitBtn}
                     type="submit"
-                    onClick={createAdmin}
                   >
                     Submit
                   </button>
