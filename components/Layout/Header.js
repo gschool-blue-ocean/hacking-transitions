@@ -1,6 +1,8 @@
 import style from "../../styles/Header.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
+
 const Header = ({ currentUser }) => {
   const router = useRouter();
   const { pathname } = router;
@@ -9,14 +11,28 @@ const Header = ({ currentUser }) => {
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            {`${currentUser.first} ${currentUser.last}`}
+            {/* {`${currentUser.first} ${currentUser.last}`} */}
+            <Link href={"/admin/profile"} as={"/"} passHref>
+                <a
+                  className={`${style.link} `}
+                >{`${currentUser.first} ${currentUser.last}`}
+                </a>
+              </Link>
           </div>
           <Link href={"/"} passHref>
             <a
               className={`${style.link} `}
               onClick={() => {
+                const auth = getAuth();
                 localStorage.removeItem("currentUser");
                 window.sessionStorage.removeItem("currentUser");
+                signOut(auth).then(() => {
+                  // Sign-out successful.
+                  alert('You have succesfully logged out');
+                }).catch((error) => {
+                  // An error happened.
+                  console.log(error);
+                });
               }}
             >
               <div className={style.listItem}>Logout</div>
