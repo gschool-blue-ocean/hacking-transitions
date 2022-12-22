@@ -19,9 +19,6 @@
     height: 30rem;
     width: 100%;
 }
-.div::-webkit-scrollbar {
-    display: none;
-  }
 .table {
     table-layout: fixed;
     border-collapse: collapse;

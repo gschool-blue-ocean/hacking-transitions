@@ -158,6 +158,10 @@
    padding-left: 4%;
 }
 
+.infoCardcontainer::-webkit-scrollbar {
+   display: none;
+ }
+
 .myInterestsDiv {
    margin-bottom: 10px;
    display: flex;
@@ -192,6 +196,11 @@ margin-left: auto;
    padding-top: 3%;
    overflow-y: scroll;
 }
+
+.SDashChecklist::-webkit-scrollbar {
+   display: none;
+ }
+
 
 .checklistForm {
    display: flex;
@@ -231,6 +240,10 @@ display: flex;
    border-top: 1px solid #F79020;
    padding-top: 3%;
 }
+
+.SDashTasks::-webkit-scrollbar {
+   display: none;
+ }
 
 #StuTasksHeader {
    margin: 10px;

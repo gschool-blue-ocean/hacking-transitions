@@ -1,3 +1,5 @@
+import React from "react";
+
 /**********  API Utility Functions **********/
 export const checkApiMethod = ({ method }, string) => method === string;
 export const notFound404 = (res) =>
@@ -46,3 +48,42 @@ export const getDaysToEts = (ets_date) => {
 
   return parseInt((DiffTime / (1000 * 3600 * 24)).toFixed(0));
 };
+
+
+/************ Custom Hook to useSortable Data on a table ******/
+
+export const sortTableData = (array, { key, direction }) => {
+  return array.sort((a, b) => {
+    if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1
+    if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1
+
+    return 0
+  })
+}
+
+export const useSortableData = (items = [], config) => {
+  const [sortConfig, setSortConfig] = React.useState(config)
+console.log("useSortableData input array", items)
+  const sortedItems = React.useMemo(() => {
+    // If no config was defined then return the unsorted array
+    if (!sortConfig) return items
+
+    return sortTableData(items, { ...sortConfig })
+  }, [items, sortConfig])
+
+  const requestSort = key => {
+    let direction = 'descending'
+
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig?.direction === 'descending'
+    ) {
+      direction = 'ascending'
+    }
+
+    setSortConfig({ key, direction })
+  }
+
+  return { items: sortedItems, requestSort, sortConfig }
+}

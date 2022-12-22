@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     const { slug } = req.query;
     console.log(slug);
 
-    /******** UPDATE ESXISTING ADMIN ********/
+    /******** UPDATE EXISTING ADMIN ********/
     if (checkApiMethod(req, "PATCH") && !isNaN(parseInt(req.query.slug[0]))) {
       const { first, last, username } = req.body;
       const newAdmin = { first, last, username };
@@ -51,9 +51,9 @@ export default async function handler(req, res) {
       }
       return;
     }
-    /******** END UPDATE ESXISTING ADMIN ********/
+    /******** END UPDATE EXISTING ADMIN ********/
 
-    /******** UPDATE ESXISTING STUDENT ********/
+    /******** UPDATE EXISTING STUDENT ********/
     if (
       checkApiMethod(req, "PATCH") &&
       slug[0] === "edit" &&

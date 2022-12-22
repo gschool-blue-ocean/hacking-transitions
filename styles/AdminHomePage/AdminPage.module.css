@@ -1,5 +1,5 @@
 .background{
-    /* background: #f6efe7; */
+    /* background: #e0eaf8; */
 }
 .container {
     border: 1px solid grey;
@@ -35,7 +35,9 @@
     display: flex;
     flex-direction: column;
     /* align-items: center; */
-    border-bottom: #F79020 solid 1px
+    border-bottom: #ff6900 solid 1px;
+    background: #e0eaf8;
+    color: #0d0f4a;
  }
  .titlebtn{
     cursor: pointer;
@@ -74,7 +76,7 @@
     border:white 1px solid;
 }
 .messageBtn:hover {
-    border: 2px solid #F79020;
+    border: 2px solid #ff6900;
 }
 .editRow {
     cursor: pointer;

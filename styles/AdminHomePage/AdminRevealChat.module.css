@@ -9,7 +9,9 @@
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     display: flex;
     flex-direction: column;
-    border-bottom: #F79020 solid 1px;
+    border-bottom: #ff6900 solid 1px;
+    background: #e0eaf8;
+    color: #0d0f4a;
 }
 .h1 {
     font-size: 3rem;

@@ -31,7 +31,7 @@
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     padding-bottom: 5%;
     border-radius: 1px;
-    background-color: #f6efe748;
+    background-color: #ffffff;
 }
 
 .loginTitle{
@@ -81,7 +81,7 @@
 
 
 .header {
-    background: rgba(203, 202, 202, 0.442);
+    background: #0d0f4a;
     width: 100%;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     position: static;
@@ -143,10 +143,10 @@
 }
 
 .logo {
-    height: 12vh;
+    height: 10vh;
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 .title {

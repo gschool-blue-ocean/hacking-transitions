@@ -4,6 +4,7 @@
 body {
   margin: 0;
   padding: 0;
+  background: #e0eaf8;
 }
 
 :root {
@@ -33,11 +34,12 @@ body {
 }
 
 .ql-container.ql-snow > .ql-editor::-webkit-scrollbar{
-  width: 5px;
-  background-color: transparent;
+  display: none;
 }
 
+
 .ql-container.ql-snow > .ql-editor::-webkit-scrollbar-thumb{
-  background-color: lightgray;
-  border-radius: 1rem;
+  display: none;
 }
+
+
