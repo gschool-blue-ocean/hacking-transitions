@@ -30,6 +30,7 @@ const Example = ({ cohort, setCurrCohort }) => {
     })
 
     const editCohort = (event) => {
+        event.preventDefault();
         // axios.get("/api/cohorts", {}).then((res) => {
         // console.log("this is the data", res.data)
         // res.data.map((cohortData) => {
@@ -52,16 +53,17 @@ const Example = ({ cohort, setCurrCohort }) => {
         //         setCohortEndDate(editData.end_date)
         //     })
         // })
-
-        axios.patch(`/api/cohorts/${cohort.cohort_id}`, {
-            cohort_name: cohortName,
-            start_date: cohortStartDate,
-            end_date: cohortEndDate,
-        })
-
-        window.alert("Edit completed")
-        window.location.reload()
-
+        if(cohortName === "" || cohortStartDate === "" || cohortEndDate === ""){
+            window.alert("Please Fill in required information")
+        } else{
+            axios.patch(`/api/cohorts/${cohort.cohort_id}`, {
+                cohort_name: cohortName,
+                start_date: cohortStartDate,
+                end_date: cohortEndDate,
+            })
+            window.alert("Edit completed")
+            window.location.reload()
+        }
     }
 
 
@@ -87,6 +89,7 @@ const Example = ({ cohort, setCurrCohort }) => {
                             <input type="text"
                                 placeholder="MCSP-XX"
                                 onChange={(event) => setCohortName(event.target.value)}
+                                // ref={cohortNameRef}
                                 value={cohortName}
                                 required />
                         </div>
@@ -98,6 +101,7 @@ const Example = ({ cohort, setCurrCohort }) => {
                             <input type="text"
                                 placeholder="mm/dd/yyyy"
                                 onChange={(event) => setCohortStartDate(event.target.value)}
+                                // ref={cohortStartDateRef}
                                 value={cohortStartDate}
                                 required />
                         </div>
@@ -109,12 +113,14 @@ const Example = ({ cohort, setCurrCohort }) => {
                             <input type="text"
                                 placeholder="mm/dd/yyyy"
                                 onChange={(event) => setCohortEndDate(event.target.value)}
+                                // ref={cohortEndDateRef}
                                 value={cohortEndDate}
                                 required />
                         </div>
 
-                        <Button variant="danger" onClick={handleClose}>
-                            Delete Cohort
+                        
+                        <Button variant="primary" type="submit" onClick={editCohort}>
+                            Accept
                         </Button>
                     </form>
 
@@ -122,12 +128,13 @@ const Example = ({ cohort, setCurrCohort }) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={editCohort}>
-                        Accept
-                    </Button>
+                        <Button variant="danger" onClick={handleClose}>
+                            Delete Cohort
+                        </Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    
                 </Modal.Footer>
             </Modal>
         </>
