@@ -11,7 +11,13 @@ const Header = ({ currentUser }) => {
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            {`${currentUser.first} ${currentUser.last}`}
+            {/* {`${currentUser.first} ${currentUser.last}`} */}
+            <Link href={"/admin/profile"} as={"/"} passHref>
+                <a
+                  className={`${style.link} `}
+                >{`${currentUser.first} ${currentUser.last}`}
+                </a>
+              </Link>
           </div>
           <Link href={"/"} passHref>
             <a
