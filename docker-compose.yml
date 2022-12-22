@@ -47,9 +47,9 @@ services:
       - 'hackingTransitions-db'
     ports:
     - 3000:3000
-   # volumes: 
-   # - ./Frontend/pages:/app/pages
-   # - ./Frontend/public:/app/public
+    volumes: 
+    - .:/app
+  
     command: npm run dev
 
 volumes: 
