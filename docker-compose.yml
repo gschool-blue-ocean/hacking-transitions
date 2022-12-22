@@ -3,13 +3,14 @@ version: '3.8'
 services:
   hackingTransitions-db: 
     container_name: hackingTransitions_db_postgress_container
-    image: postgres
+    image: postgres:15-alpine
     restart: always
     environment:
-      DATABASE_HOST: 127.0.0.1
+      #DATABASE_HOST: 127.0.0.1
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
-      POSTGRES_PORT: 5432
+      POSTGRES_HOST_AUTH_METHOD: trust
+      #POSTGRES_PORT: 5432
       POSTGRES_DB: blueocean
       PGDATA: /var/lib/postgresql/data
     ports:
@@ -42,6 +43,8 @@ services:
   hackingTransitions-FE:
     container_name: hackingTransitions_FE_container
     image: docker-nextjs-dev
+    environment:
+      DATABASE_URL: postgresql://postgres:docker@hackingTransitions-db/blueocean
     build: .
     depends_on:
       - 'hackingTransitions-db'
