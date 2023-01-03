@@ -1,0 +1,9 @@
+module.exports={
+    REACT_APP_APIKEY:'AIzaSyAXeIgqECNIcRcpe_KSF4n_wvuGCsYyqOU',
+    REACT_APP_AUTHDOMAIN:'blueocean-5a04c.firebaseapp.com',
+    REACT_APP_PROJECTID:'blueocean-5a04c',
+    REACT_APP_STORAGEBUCKET:'blueocean-5a04c.appspot.com',
+    REACT_APP_MESSAGINGSENDERID:'268327929687',
+    REACT_APP_APPID:'1:268327929687:web:467d5a49e47fd987e5a012',
+    REACT_APP_MEASUREMENTID:'G-N84YM6HBLX'
+}

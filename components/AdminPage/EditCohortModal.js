@@ -62,7 +62,8 @@ const Example = ({ cohort, setCurrCohort }) => {
                 end_date: cohortEndDate,
             })
             window.alert("Edit completed")
-            window.location.reload()
+            window.location.reload();
+            router.push("/admin/edit");
         }
     }
 

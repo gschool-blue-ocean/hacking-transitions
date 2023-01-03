@@ -47,6 +47,7 @@ const RegisterModal = ({ open, onClose }) => {
               window.alert("User Created")
 
               window.location.reload();
+              router.push("/admin/edit");
             }
 
             else {

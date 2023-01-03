@@ -31,6 +31,7 @@ const AdminList = () => {
                 id: admin.user_id,
               });
               window.location.reload();
+              router.push("/admin/edit");
             };
 
             return (

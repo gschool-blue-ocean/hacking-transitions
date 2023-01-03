@@ -22,7 +22,8 @@ const createCohort = () => {
       console.log("THIS IS cohortName", cohortName)
       if (existingCohortList.includes(cohortName)) {
         window.alert("Cohort already exists!")
-        // window.location.reload();
+        window.location.reload();
+        router.push("/admin/edit");
         console.log("cohort already exists")
       }
       else {
@@ -35,7 +36,8 @@ const createCohort = () => {
           register_code: registerCode
         })
         window.alert("Cohort created!")
-        // window.location.reload();
+        window.location.reload();
+        router.push("/admin/edit");
       }
       existingCohortList = []
     })
