@@ -47,7 +47,7 @@ const AdminUpdate = () => {
     //   password: newPassword,
     // });
     window.location.reload();
-    router.push("/admin/edit");
+    router.push("/admin");
   };
 
   return (
@@ -66,6 +66,7 @@ const AdminUpdate = () => {
                   onClick={()=>{
                     resetStateWhenCanceled();
                     onClose();
+                    router.push("/admin");
                   }}
                 >
                   Close

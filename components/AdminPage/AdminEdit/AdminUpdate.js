@@ -20,7 +20,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
   }
   const adminPatch = (event) => {
     event.preventDefault();
-    const inputPassword = newPassword;
+    //const inputPassword = newPassword;
     //check if the input is empty, if yes, set it equal to old value
     if(newFirstName===''){
       newFirstName=admin.first;
@@ -39,9 +39,9 @@ const AdminUpdate = ({ admin, open, onClose }) => {
       last: newLastName,
       email: admin.email,
       username: newUsername,
-      password: newPassword,
+      
     });
-    // window.location.reload();
+    window.location.reload();
     router.push("/admin/edit");
   };
 

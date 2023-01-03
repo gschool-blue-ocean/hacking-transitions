@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { AiOutlineEdit } from 'react-icons/ai';
 import axios from "axios";
 import style from "../../styles/Edit.Admin.module.css"
+import { useRouter } from "next/router"; 
 
 
 const Example = ({ cohort, setCurrCohort }) => {
@@ -14,6 +15,8 @@ const Example = ({ cohort, setCurrCohort }) => {
     const [cohortName, setCohortName] = useState("")
     const [cohortStartDate, setCohortStartDate] = useState("")
     const [cohortEndDate, setCohortEndDate] = useState("")
+
+    const router = useRouter(); 
 
     let cohortDataName = ""
     let cohortDataStartDate = ""
@@ -39,6 +42,7 @@ const Example = ({ cohort, setCurrCohort }) => {
         })
         window.alert("Edit completed")
         window.location.reload()
+        router.push("/admin");
     }
 
     const deleteCohort = (event) => {
@@ -46,6 +50,7 @@ const Example = ({ cohort, setCurrCohort }) => {
         })
         window.alert("Cohort deleted!")
         window.location.reload()
+        router.push("/admin");
     }
 
     const archiveCohort = (event) => {
@@ -58,6 +63,7 @@ const Example = ({ cohort, setCurrCohort }) => {
         })
         window.alert("Cohort Archived!")
         window.location.reload()
+        router.push("/admin");
     }
 
 
