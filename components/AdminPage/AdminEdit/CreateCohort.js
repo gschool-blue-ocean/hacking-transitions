@@ -1,6 +1,7 @@
 import styles from "../../../styles/Edit.Admin.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const createCohort = () => {
 
@@ -8,6 +9,7 @@ const createCohort = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [registerCode, setRegisterCode] = useState("");
+  const router = useRouter();
 
   let existingCohortList = []
 
@@ -22,8 +24,9 @@ const createCohort = () => {
       console.log("THIS IS cohortName", cohortName)
       if (existingCohortList.includes(cohortName)) {
         window.alert("Cohort already exists!")
-        // window.location.reload();
+        //window.location.reload();
         console.log("cohort already exists")
+        router.push("/admin/edit");
       }
       else {
         axios.post("/api/cohorts", {
@@ -35,7 +38,8 @@ const createCohort = () => {
           register_code: registerCode
         })
         window.alert("Cohort created!")
-        // window.location.reload();
+        window.location.reload();
+        router.push("/admin/edit");
       }
       existingCohortList = []
     })

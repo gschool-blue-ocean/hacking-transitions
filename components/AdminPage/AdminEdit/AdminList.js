@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import styles from "../../../styles/Edit.Admin.module.css";
 import AdminCreate from "./AdminCreate";
 import AdminUpdate from "./AdminUpdate";
+import { useRouter } from "next/router";
 
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
   const [isCreateOpen, setCreateIsOpen] = useState(false);
   const [isUpdateOpen, setUpdateIsOpen] = useState(false);
   const [updateData, setUpdateData] = useState(null);
+  const router = useRouter(); 
   //pull list of admins
 
   useEffect(() => {
@@ -31,6 +33,8 @@ const AdminList = () => {
                 id: admin.user_id,
               });
               window.location.reload();
+              router.push("/admin/edit")
+
             };
 
             return (
