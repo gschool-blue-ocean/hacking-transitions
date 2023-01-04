@@ -10,7 +10,7 @@ import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 //import config firebasee key for local
 //const config = require('./config');
 //import config firebase key for production
-const config = require('/etc/secrets/config.js')
+const config = require('/etc/secrets/config')
 
 let Login = () => {
   const firebaseConfig = {
