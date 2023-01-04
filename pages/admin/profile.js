@@ -1,19 +1,24 @@
 import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
+import { json } from "react-router-dom";
+//import { getAuth } from "firebase/auth";
 
 const AdminUpdate = () => {
   const [open,setOpen]=useState(true);
-  const admin =JSON.parse(sessionStorage.getItem('currentUser'));
+ //set state for admin with getAdmin. useEffect is to wait for the page to render prior to pulling the session data.
+  const [admin, setAdmin]=useState('');
+  //fixes build issue but needs to reset admin once logged in
+  const getAdmin =()=> sessionStorage?setAdmin(JSON.parse(sessionStorage.getItem('currentUser'))):'loading';
+  useEffect(()=>getAdmin, [])
   const onClose =()=>setOpen(!open);
-  console.log(admin)
+  console.log("profile admin", admin)
 
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  //const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const router = useRouter();
   const resetStateWhenCanceled = () =>{
@@ -25,7 +30,7 @@ const AdminUpdate = () => {
   }
   const adminPatch = (event) => {
     event.preventDefault();
-    const inputPassword = newPassword;
+    //const inputPassword = newPassword;
     //check if the input is empty, if yes, set it equal to old value
     if(newFirstName===''){
       newFirstName=admin.first;
