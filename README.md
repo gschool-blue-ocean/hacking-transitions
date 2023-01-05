@@ -1,24 +1,23 @@
 # HACKING TRANSITIONS 
 
-[Deployed Site](galvanize-transitions.onrender.com)
+[Deployed Site](https://hacking-transitions-webservice.onrender.com/)
 
 - To access admin portal use: Password/Username: 'admin4'
 - To access student portal use: Password/Username: 'student4'
 
-[MCSP-13 Presentation](https://drive.google.com/file/d/1t4cZxz5oCqSZG4gyADg2ADRblIMQFjSB/view?usp=share_link)
 
 ## Contributors 
 
-- [Ilsa Hampton](https://github.com/ilsaann) - Project Manager 
-- [Edward Sabbatino](https://github.com/EntropicWind) / [Justin Melendez](https://github.com/CountDown2Extinction) - UI/UX Design Team
-- [Paul McDonald](https://github.com/pmcdonald1012) / [Moses Valerio](https://github.com/moses369) - System Architecture Design Team
-- [Kameron Wescott](https://github.com/Kamwescott) - Login Page Team
-- [Drake Leslie](https://github.com/drakeleslie) / [Jacob Walters](https://github.com/JacobDWalters) - Admin Section Team
-- [John Welle](https://github.com/Johnwelle11) / [Matthew Mickler](https://github.com/m-mickler) - Student Section Team
+- [Joe Low](https://github.com/Lowjoejoe) - Project Manager 
+- [Idris Yusuf](https://github.com/daleyusuf23) / [Halimat Usman-Isiaka](https://github.com/HAliUsm) - UI/UX Design Team
+- [Dre Hurtado](https://github.com/DreLorenz) / [Jakari Thoman](https://github.com/JDT521) - System Architecture Design Team
+- [Bryon Yang](https://github.com/yangbyron) - Login/Authentication  Page Team
+- [Rene Marquez](https://github.com/drakeleslie) / [Luis Guzman](https://github.com/Lguzman9) - Admin Section Team/ Student Section Team
+
 
 ## What is the *Hacking Tranistions* Application?
 
-Hacking transitions was a `10 person group project`. This project was a brief `1-week sprint` where our team tried to complete an MVP for an external user *Mag Rosario*.
+Hacking transitions was a `8 person group project`. This project was a brief `1-week sprint` where our team tried to complete an MVP for an external user *Moses Valerio*.
 
 Some goals we had was to render a design similar to that of the Galvanize program. Have full functioning sections utilizing all CRUD operations allowing the ability to fully manipulate any section the user see. Another goal was to add in [animate.js](https://animejs.com) animations to give a little more life to the project.
 
@@ -45,13 +44,13 @@ The `student` is able to see, add and update their information, add, delete, and
 - Redux 
 - CSS
 - Socket.io
+- Google Firebase
 
 ## Technical Challenges
 
 - The largest technical challenge the team encounted was restructuring the entire application from `vanilla React` to React using `Next.js` 
 
-- One of the biggest learing points during this project was being able to look at legecy code, tear it down to the bare bones and rebuild it from the ground up with several unconnected components, then bringing them all together to make it mesh into a full functioning, fluid application. 
-
+- One of the biggest learning points during this project was being able to look at legacy code, and break down the changes that were previously made. Understand how everything was being called and breaking down the use of different state management [Redux]. Redux is a very powerful state managment tool when all parties involved know how to use the management system.  
 
 ## How does the *Hacking Transitions* application work?
 
@@ -59,21 +58,19 @@ The application has a dedicated `Front-end` framework utilizing [React]() and [N
 
 The application utilizes [socket.io]() to conduct inner application chat operations. 
 
+The application uses Google Firebase as an authentication service to make the application more secure. 
+
 
 ## To Migrate/Seed Database
 Create your own .local.env as well as run the migration file 1st then the second run the seed.sql file. If you wish to see and test the Archive functionality then run the testArchive.sql file last.
 
-
-## App deployment on Vercel
-
-The easiest way to deploy a Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) 
 
 *Major issues*: does not support web sockets
 
 ## App deployment on Render
 
 The most efficient way to deploy THIS application is to use the [Render Platform](https://render.com). 
-
+THIS application must be deployed as a web service, with the use of Next.js the server and front end are combined.  
 Check out the [Render webservices documentation](https://render.com/docs/web-services)
 
 *Potential Issues*: Darwin error. 
