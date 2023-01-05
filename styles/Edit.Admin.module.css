@@ -318,6 +318,7 @@
   justify-content: left;
   text-align: left;
   grid-template-areas: "adminListListText adminListListBtn adminListListBtnTwo";
+  margin-right: 1.5em;
 }
 
 .adminListListText {
