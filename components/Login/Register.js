@@ -2,7 +2,20 @@ import { useState } from 'react'
 import styles from "../../styles/LoginStyles.module.css"
 import { useRouter } from 'next/router'
 import axios from "axios";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+//pull in the firebase config file with the assigned api keys for our app 
+const config = require('./config');
+const firebaseConfig = {
+  apiKey: config.REACT_APP_APIKEY,
+  authDomain: config.REACT_APP_AUTHDOMAIN,
+  projectId: config.REACT_APP_PROJECTID,
+  storageBucket: config.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: config.REACT_APP_MESSAGINGSENDERID,
+  appId: config.REACT_APP_APPID,
+  measurementId: config.REACT_APP_MEASUREMENTID,
+};
+
 
 const RegisterModal = ({ open, onClose }) => {
   const router = useRouter()
@@ -12,7 +25,9 @@ const RegisterModal = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
-
+  const app = initializeApp(firebaseConfig);
+  //auth links any user info sent to firebass api correlated with this app
+  const auth = getAuth(app);
 
   if (!open) return null;
 
@@ -33,52 +48,46 @@ const RegisterModal = ({ open, onClose }) => {
             if (regCode == cohortCode) {
               console.log(cohort)
               console.log(cohortID)
-              axios.post("/api/admin", {
-                admin: false,
-                first: firstName,
-                last: lastName,
-                username: Username,
-                password: Password,
-                email: email,
-                cohort_name: cohort,
-                cohort_id: cohortID
-              });
-              window.alert("User Created")
-
-              window.location.reload();
+              createUserWithEmailAndPassword(auth, email, Password)
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode == 'auth/email-already-in-use') {
+                  alert('This user for this email already exists');
+                } else {
+                  alert(errorMessage);
+                }
+                // console.log(errorCode)
+              })
+              .then((userCredential)=>{
+                console.log(userCredential)
+                if(userCredential){
+                  axios.post("/api/admin", {
+                    admin: false,
+                    first: firstName,
+                    last: lastName,
+                    username: Username,
+                    //password: Password,
+                    email: email,
+                    cohort_name: cohort,
+                    cohort_id: cohortID
+                  });
+                  signOut(auth).then(() => {
+                    // Sign-out successful.
+                    //alert('New Admin account created for email ', newEmail);
+                    window.alert("User Created")
+                    //window.location.reload();
+                    router.push("/admin/edit");
+                  })
+                }
+              })
+              //window.location.reload();
             }
-
             else {
-
               router.push('/registrationerror')
             }
+
           })
-            fetch(`/api/users/${email}`)
-            .then((res) => {
-              if (res.status === 404) throw new Error("Not Found");
-              return res.json();
-            })
-            .then((user) => {
-              //register user in firebase
-              const auth = getAuth();
-              createUserWithEmailAndPassword(auth, email, Password)
-                .then((userCredential) => {
-                  // Signed in 
-                  const currentUser = userCredential.user;
-                  localStorage.setItem("currentUser", JSON.stringify(user));
-                  sessionStorage.setItem("currentUser", JSON.stringify(user));
-                  user.admin
-                  ? (router.push("/admin"), setLoginData(""))
-                  : (router.push("/student"),
-                    dispatch(setActiveStudent(user)),
-                    setLoginData(""));
-                })
-                .catch((error) => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log(errorCode,errorMessage);
-                });
-            })
         }
       )
   }
