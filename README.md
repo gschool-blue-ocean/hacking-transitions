@@ -1,11 +1,10 @@
 # HACKING TRANSITIONS 
 
-[Deployed Site](galvanize-transitions.onrender.com)
+[Deployed Site](https://hacking-transitions-webservice.onrender.com/)
 
 - To access admin portal use: Password/Username: 'admin4'
 - To access student portal use: Password/Username: 'student4'
 
-[MCSP-13 Presentation](https://drive.google.com/file/d/1t4cZxz5oCqSZG4gyADg2ADRblIMQFjSB/view?usp=share_link)
 
 ## Contributors 
 
@@ -18,7 +17,7 @@
 
 ## What is the *Hacking Tranistions* Application?
 
-Hacking transitions was a `8 person group project`. This project was a brief `1-week sprint` where our team tried to complete an MVP for an external user *Mag Rosario*.
+Hacking transitions was a `8 person group project`. This project was a brief `1-week sprint` where our team tried to complete an MVP for an external user *Moses Valerio*.
 
 Some goals we had was to render a design similar to that of the Galvanize program. Have full functioning sections utilizing all CRUD operations allowing the ability to fully manipulate any section the user see. Another goal was to add in [animate.js](https://animejs.com) animations to give a little more life to the project.
 
@@ -51,7 +50,7 @@ The `student` is able to see, add and update their information, add, delete, and
 
 - The largest technical challenge the team encounted was restructuring the entire application from `vanilla React` to React using `Next.js` 
 
-- One of the biggest learing points during this project was being able to look at legecy code, and break down the changes that were previously made. Understand how everything was being called and breaking down the use of different state management [Redux]. Redux is a very powerful state managment tool when all parties involved know how to use the management system.  
+- One of the biggest learning points during this project was being able to look at legacy code, and break down the changes that were previously made. Understand how everything was being called and breaking down the use of different state management [Redux]. Redux is a very powerful state managment tool when all parties involved know how to use the management system.  
 
 ## How does the *Hacking Transitions* application work?
 
@@ -71,7 +70,7 @@ Create your own .local.env as well as run the migration file 1st then the second
 ## App deployment on Render
 
 The most efficient way to deploy THIS application is to use the [Render Platform](https://render.com). 
-
+THIS application must be deployed as a web service, with the use of Next.js the server and front end are combined.  
 Check out the [Render webservices documentation](https://render.com/docs/web-services)
 
 *Potential Issues*: Darwin error. 
