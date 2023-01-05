@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 //import firebase
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
-//import config firebasee key for local
+//import config firebase key for local
 //const config = require('./config');
 //import config firebase key for production
 const config = require('../../config')
