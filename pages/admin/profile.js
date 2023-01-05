@@ -8,12 +8,11 @@ import { json } from "react-router-dom";
 const AdminUpdate = () => {
   const [open,setOpen]=useState(true);
  //set state for admin with getAdmin. useEffect is to wait for the page to render prior to pulling the session data.
-  const [admin, setAdmin]=useState('');
-  //fixes build issue but needs to reset admin once logged in
-  const getAdmin =()=> sessionStorage?setAdmin(JSON.parse(sessionStorage.getItem('currentUser'))):'loading';
-  useEffect(()=>getAdmin, [])
+  const [admin, setAdmin]=useState({});
+  //fixes build issue with by having sessionStorage called after page is rendered 
+  useEffect(()=>setAdmin(JSON.parse(sessionStorage.getItem('currentUser'))),[])
   const onClose =()=>setOpen(!open);
-  console.log("profile admin", admin)
+
 
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
