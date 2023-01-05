@@ -4,8 +4,11 @@ import { useRouter } from 'next/router'
 import axios from "axios";
 import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-//pull in the firebase config file with the assigned api keys for our app 
-const config = require('./config');
+//pull in the firebase config file with the assigned api keys for our app local
+//const config = require('./config');
+//import config firebase key for production
+const config = require('../../config')
+
 const firebaseConfig = {
   apiKey: config.REACT_APP_APIKEY,
   authDomain: config.REACT_APP_AUTHDOMAIN,
