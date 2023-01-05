@@ -10,8 +10,8 @@
 
 - [Joe Low](https://github.com/Lowjoejoe) - Project Manager 
 - [Idris Yusuf](https://github.com/daleyusuf23) / [Halimat Usman-Isiaka](https://github.com/HAliUsm) - UI/UX Design Team
-- [Dre Hurtado](https://github.com/DreLorenz) / [Jakari Thoman](https://github.com/JDT521) - System Architecture Design Team
-- [Bryon Yang](https://github.com/yangbyron) - Login/Authentication  Page Team
+- [Dre Hurtado](https://github.com/DreLorenz) / [Jakari Thomas](https://github.com/JDT521) - System Architecture Design Team
+- [Bolun Yang](https://github.com/yangbyron) - Login/Authentication  Page Team
 - [Rene Marquez](https://github.com/drakeleslie) / [Luis Guzman](https://github.com/Lguzman9) - Admin Section Team/ Student Section Team
 
 
