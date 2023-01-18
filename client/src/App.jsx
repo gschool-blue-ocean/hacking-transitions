@@ -1,6 +1,6 @@
-// import LandingPage from "./components/LandingPage/LandingPage";
+// import LandingPage from "./components/landing-page/LandingPage";
 
-import SignUp from "./components/LandingPage/landing-page-subcomponents/SignUp";
+import SignUp from "./components/landing-page/landing-page-subcomponents/SignUp";
 
 function App() {
   return (
