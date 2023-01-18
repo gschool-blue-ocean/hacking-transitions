@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import style from "../../../styles/LoginStyles.module.css";
 import style from "../../../styles/LandingPage.css";
-import RegisterModal from "./RegisterModal";
+// import RegisterModal from "./RegisterModal";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,8 +12,11 @@ const Header = () => {
       {/* this is where the logo is taking you to galvanize official website */}
       <div className={style.bottomNav}>
         <a href="https://www.galvanize.com/">
-          <img
-            src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_small-scale_full-color_dark-background.png"
+          <img  style={{"width":"250px", "height":"auto"}}
+  
+  
+            src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_full-color_light-background-768x148.png
+            "
             alt="galvanizeLogo"
             className={style.logo}
           ></img>
@@ -22,7 +25,7 @@ const Header = () => {
           <ul className={style.bottomList}></ul>
         </div>
       </div>
-      {/* /////////////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
 
       <div className={style.topNav}>
         <ul className={style.list_of_resources}>
@@ -31,6 +34,7 @@ const Header = () => {
             {" "}
             L E A R N
           </a>
+          || 
           <a
             className={style.mil_resources}
             href="https://www.military-transition.org/resources.html"
@@ -38,6 +42,7 @@ const Header = () => {
             {" "}
             Military Transistion
           </a>
+           ||
           <a className={style.hire_heros} href="https://www.hireheroesusa.org/">
             {" "}
             Hire For Heros
@@ -49,13 +54,13 @@ const Header = () => {
           <div className={style.listItem} onClick={() => setIsModalOpen(true)}>
             Register
           </div>
-          <RegisterModal
-            open={isModalOpen}
+          {/* <RegisterModal */}
+            {/* open={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-          />
+          /> */}
         </ul>
       </div>
-      {/* /////////////////////////////////////////////////////////////////////////////////////// */}
+      {/* //////////////////////////////////////////////////////////////////////////////////////////////// */}
     </nav>
   );
 };
