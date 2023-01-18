@@ -131,19 +131,18 @@ border-right: solid var(--primary-accent) 3px;  */
 
 .bottomNav {
   display: flex;
-  width: 200px;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  height: 120px;
+  height: 10vh;
   margin-top: 10;
 }
 
-
 .logo {
+  height: 10vh;
+  display: flex;
   justify-content: center;
   margin-top: 3em;
-  display: flex;
-
 }
 
 .title {

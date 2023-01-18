@@ -1,10 +1,17 @@
-// import LandingPage from "./components/LandingPage/LandingPage";
+// import LandingPage from "./components/landing-page/LandingPage";
 
-import SignUp from "./components/LandingPage/landing-page-subcomponents/SignUp";
-import Header from "./components/LandingPage/landing-page-subcomponents/Header";
+
+
+
+import Header from "./components/landing-page/landing-page-subcomponents/Header";
+
+import SignUp from "./components/landing-page/landing-page-subcomponents/SignUp";
+
+
 function App() {
   return (
     <div className="App">
+     
       <Header/>
       <SignUp />
       {/* <LandingPage /> */}
