@@ -14,7 +14,7 @@ services:
       POSTGRES_DB: blueocean
       PGDATA: /var/lib/postgresql/data
     ports:
-     - '6432:5432'
+      - '6432:5432'
     healthcheck:
         test: ["CMD-SHELL", "pg_isready -U postgres"]
         interval: 5s
@@ -22,6 +22,8 @@ services:
         retries: 5
     volumes:
       - pgdatasource:/var/lib/postgresql/data
+      - ./database/migration.sql:/docker-entrypoint-initdb.d/migration.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
 
 
   pgadmin:
@@ -43,6 +45,7 @@ services:
   hackingTransitions-FE:
     container_name: hackingTransitions_FE_container
     image: docker-nextjs-dev
+    restart: always
     environment:
       DATABASE_URL: postgresql://postgres:docker@hackingTransitions-db/blueocean
     build: .

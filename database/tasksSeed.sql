@@ -419,4 +419,4 @@ insert into tasks (student_id, title, date, description, remarks, completed) val
 , (217, 'erat fermentum justo', '9/4/2022', 'pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue', 'quis libero nullam sit amet', false)
 , (218, 'luctus cum', '9/9/2022', 'luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor', 'et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien', false);
 
-\ir commentsSeed.sql
+-- \ir commentsSeed.sql
