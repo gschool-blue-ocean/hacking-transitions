@@ -4,26 +4,23 @@ import style from "../../styles/LoginStyles.module.css";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-//import firebase
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-//import config firebasee key
-// const config = require('./config');
+import { auth } from "../../firebase/firebase";
 
 let Login = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
-    authDomain: "hackingtransitions-development.firebaseapp.com",
-    projectId: "hackingtransitions-development",
-    storageBucket: "hackingtransitions-development.appspot.com",
-    messagingSenderId: "473992713297",
-    appId: "1:473992713297:web:68e712395d1ccf79c49470",
-  };
-  //Initialize Firebase
-  // const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
-  const app = initializeApp(firebaseConfig);
-  // Initialize Firebase Authentication and get a reference to the service
-  const auth = getAuth(app);
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
+  //   authDomain: "hackingtransitions-development.firebaseapp.com",
+  //   projectId: "hackingtransitions-development",
+  //   storageBucket: "hackingtransitions-development.appspot.com",
+  //   messagingSenderId: "473992713297",
+  //   appId: "1:473992713297:web:68e712395d1ccf79c49470",
+  // };
+
+  // const app = initializeApp(firebaseConfig);
+
+  // const auth = getAuth(app);
 
   const router = useRouter();
   const dispatch = useDispatch();

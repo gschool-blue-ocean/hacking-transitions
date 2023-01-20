@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Login from "../components/Login/index";
 import Layout from "../components/Login/LoginLayout";
 
-
 import { setActiveStudent } from "../redux/features/app-slice";
 
 //=========================  LOGIN PAGE ==================
@@ -16,7 +15,7 @@ function Home() {
   useEffect(() => {
     /*
           Check local storage for a signed in user, if exist sign them in
-      */
+    */
     if (window) {
       const localUser = localStorage.getItem("currentUser");
       const sessionUser = window.sessionStorage.getItem("currentUser");
@@ -37,13 +36,15 @@ function Home() {
         dispatch(setActiveStudent(user));
     }
   };
+
   return (
     <>
-    < Layout >
-      <Login />
-    </ Layout >
+      <Layout>
+        <Login />
+      </Layout>
     </>
   );
 }
+
 Home.displayName = "Login";
 export default Home;
