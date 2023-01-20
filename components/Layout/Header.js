@@ -11,7 +11,8 @@ const Header = ({ currentUser }) => {
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            <Link href={"/admin/profile"} passHref>
+            {/* {`${currentUser.first} ${currentUser.last}`} */}
+            <Link href={"/admin/profile"} as={"/admin/profile"} passHref>
                 <a
                   className={`${style.link} `}
                 >{`${currentUser.first} ${currentUser.last}`}
@@ -46,7 +47,6 @@ const Header = ({ currentUser }) => {
               src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_small-scale_full-color_dark-background.png"
               alt="galvanizeLogo"
               className={style.logo}
-              style={{cursor:"pointer"}}
             ></img>
           </Link>
         </div>
@@ -54,7 +54,7 @@ const Header = ({ currentUser }) => {
         <div className={style.pages}>
           {currentUser.admin && (
             <>
-              <Link href={"/admin"} passHref>
+              <Link href={"/admin"} as={"/admin"} passHref>
                 <a
                   className={`${style.link} ${
                     pathname === "/admin" && style.active
@@ -63,7 +63,7 @@ const Header = ({ currentUser }) => {
                   <li className={style.page}>Home</li>
                 </a>
               </Link>
-              <Link href={"/admin/archive"} passHref>
+              <Link href={"/admin/archive"} as={"/admin/edit"} passHref>
                 <a
                   className={`${style.link} ${
                     pathname === "/admin/archive" && style.active
@@ -72,7 +72,7 @@ const Header = ({ currentUser }) => {
                   <li className={style.page}>Archive</li>
                 </a>
               </Link>
-              <Link href={"/admin/edit"} passHref>
+              <Link href={"/admin/edit"} as={"/admin/edit"} passHref>
                 <a
                   className={`${style.link} ${
                     pathname === "/admin/edit" && style.active
