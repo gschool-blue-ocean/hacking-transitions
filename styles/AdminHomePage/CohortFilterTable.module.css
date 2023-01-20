@@ -40,6 +40,7 @@
     border-top: 1px rgb(232, 232, 232) solid;
 }
 .td{
+  font-size: 3vmin;
    padding-right: 2rem;
    cursor: pointer;
 }
