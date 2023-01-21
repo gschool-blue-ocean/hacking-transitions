@@ -110,7 +110,7 @@ const Chat = () => {
         content: newMessage,
         date_time: editInfo
           ? editInfo.date_time
-          : new Date(Date.now()).toUTCString(),
+          : new Date(Date.now()).toLocaleString(),
       };
       //// Add properties to the newMessageObj depending on the usecase
       if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
