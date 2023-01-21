@@ -103,6 +103,7 @@ let Login = () => {
               id="formInput"
               className={`${style.input} ${style.username}`}
               type="text"
+              autoComplete="email"
               placeholder="Email"
               name="email"
               value={loginData.email}
@@ -115,9 +116,10 @@ let Login = () => {
             </label>
             <input
               required
-              id="formInput"
+              id="formInput2"
               className={style.input}
               type="password"
+              autoComplete="current-password"
               placeholder="Password"
               name="password"
               value={loginData.password}

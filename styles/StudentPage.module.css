@@ -123,6 +123,7 @@
    float: right;
    display: grid;
    justify-items: center;
+   color: black;
 }
 
 .studentview {

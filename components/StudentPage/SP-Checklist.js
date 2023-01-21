@@ -95,7 +95,7 @@ const SPChecklist = () => {
         keys.push(key);
       }
     }
-    console.log(keys.length)
+    // console.log(keys.length)
   }
 
   checklistItems(checklistData);
@@ -117,7 +117,7 @@ const SPChecklist = () => {
     let total = checkArr.length
     let trues = checkArr.filter(value => !!value).length
     let percent = Math.floor((trues/total)*100);
-    console.log('percent', percent)
+    // console.log('percent', percent)
     return percent;
   }
 getCheckedPercent(checklistData);
@@ -159,7 +159,7 @@ const formStyles = {
       <div className="undefined">
         <h4 className="editStudentFormTitle" style={formStyles}>Transition Checklist</h4>
       </div>
-      <div className={styles.checklistForm} onSubmit={[handleSubmit, checklistItems]}>
+      <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
           <label className="checkboxLabel">
             <input
