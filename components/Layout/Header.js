@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
-import style from "../../styles/LogInNew/LoginUI.module.css";
+import style from "../../styles/LoginNew/LoginUI.module.css";
 
 const Header = ({ currentUser }) => {
   const router = useRouter();

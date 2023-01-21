@@ -82,6 +82,7 @@
     align-items: center;
     justify-content: center;
     margin-left: 6em;
+    white-space: nowrap;
   }
   
   .privacy {
@@ -97,6 +98,7 @@
   .privacy > * {
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
   
   .overlapGroup1 {
