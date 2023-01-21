@@ -38,10 +38,15 @@ function Home() {
     }
   };
   return (
+    // <>
+    // < Layout >
+    //   <Login />
+    // </ Layout >
+    // </>
     <>
-    < Layout >
-      <Login />
-    </ Layout >
+      < Layout >
+        <Login />
+      </ Layout>
     </>
   );
 }

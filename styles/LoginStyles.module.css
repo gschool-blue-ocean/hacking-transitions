@@ -11,32 +11,29 @@
       }
 
 
-.modalContainer{
-    height: 70vh;
-    width: 100%;
+.mainStage{
     display: flex;
+    flex: 1;
     justify-content: center;
     flex-direction: column;
-    /* background-color: var(--secondary-accent); */
-    background-color: #f4f4f4;
+    font-family: "Darker Grotesque";
 }
 .loginContainer{
     
-    margin: auto;
-    padding: 1rem;
-    width: fit-content;
-    /* border-left: solid var(--primary-accent) 3px; 
-    border-right: solid var(--primary-accent) 3px;  */
-    /* box-shadow: 2px 0px 10px; */
+    margin-top: 5%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 5%;
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
-    padding-bottom: 5%;
-    border-radius: 1px;
-    background-color: #ffffff;
+    border-radius: 2%;
+    background-color: rgba(217, 217, 217, .3)
+
 }
 
 .loginTitle{
     text-align: center;
-    color: var(--font-color);
+    font-size: 2.6em;
+    color: white;
     padding: 5px;
     border-top: solid var(--primary-accent) 2px; 
     border-top-left-radius: 5px;
@@ -49,8 +46,10 @@
 .loginForm{
     display: flex;
     flex-direction: column;
-    color: var(--font-color);
+    color: white;
+    margin-bottom: 0;
     margin-top: 2em;
+    height:  15em;
 }
 .input{
     border: none;
@@ -69,7 +68,7 @@
     background-color: var(--secondary-accent);
     border: solid var(--secondary-accent) 1px; 
     border-radius: 20px;
-    /* box-shadow: 1px 3px 5px var(--primary-accent); */
+    width: 100%;
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
     
 }
@@ -80,14 +79,14 @@
 }
 
 
-.header {
+/* .header {
     background: #0d0f4a;
     width: 100%;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
     position: static;
     height: 20vh;
     
-}
+} */
 
 .topNav {
     display: flex;
@@ -401,5 +400,46 @@
     color: #fff;
     border: 1px solid transparent;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  }
+/* /////// New UI ////// */
+
+  .resources {
+    font-size: 1.5em;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+  }
+
+  .subBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 6em;
+    margin-top: 3em;
+  }
+
+  .overlapGroup2 {
+    background-color: rgb(212, 80, 6);
+    display: flex;
+    height: 48px;
+    min-width: 10%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .signUp {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: .25em;
+  }
+
+  .loginFormContainer{
+    margin: 1em;
+    padding: 5%;
+    background-color: rgba(217, 217, 217, .2);
+    display: flex;
+    flex-direction: column;
+
   }
   
