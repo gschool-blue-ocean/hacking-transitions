@@ -3,7 +3,8 @@ import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import SPChecklist from "./SP-Checklist";
-import styles from "../../styles/StudentPage.module.css";
+// import style from "../../styles/StudentNew/StudentUi.module.css";
+import styles from "../../styles/StudentPage.module.css"
 import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -29,7 +30,19 @@ export default function StudentPage({ viewClickedCohort }) {
   };
 
   return (
-    <div className={styles.testgrid}>
+    // <div className={style.mainStage}>
+    //   <div className={style.subBar}>
+    //     <div className={style.welcomeCont}>
+    //         <div className={style.welcome}>Student Portal</div>
+    //         <div className={style.welcome}>Welcome, Jordan Napoleon</div>
+    //     </div>
+    //     <div className={style.logOutTab}>
+    //         <img className={style.vector} src="/Logout.svg" alt="Vector" />
+    //         <div className={style.logOut}>Log Out</div>
+    //       </div>
+    //   </div>
+    // </div>
+    <div className="find_me">
       <div className={styles.container}>
         <div className={styles.StudentDashWrapper}>
           <div className={styles.SDashHeader}>

@@ -152,10 +152,10 @@ let Login = () => {
               Remember Me
             </label>
           </span>
-        </form>
           <button id="submit" type="submit" className={style.loginBtn}>
             LOG IN <CgEnter />{" "}
           </button>
+        </form>
         </div>
       </div>
     </div>

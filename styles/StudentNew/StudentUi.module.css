@@ -1,0 +1,464 @@
+.subBar {
+    display: flex;
+    flex-direction: row;
+    padding-left: 6em;
+    margin-top: 3em;
+    justify-content: space-between;
+  }
+
+  .mainStage{
+    display: flex;
+    flex: 1;
+
+    flex-direction: column;
+    font-family: "Darker Grotesque";
+}
+
+.overlap-group15 {
+    height: 1925px;
+    margin-left: -433px;
+    margin-top: -28px;
+    position: relative;
+    width: 2419px;
+  }
+  
+  .page-accents {
+    align-items: flex-start;
+    display: flex;
+    gap: 685px;
+    height: 1858px;
+    left: 0;
+    min-width: 2419px;
+    position: absolute;
+    top: 0;
+  }
+  
+  .overlap-group-3 {
+    align-items: flex-start;
+    background-color: var(--grenadier);
+    display: flex;
+    gap: 317px;
+    height: 90px;
+    justify-content: flex-end;
+    left: 433px;
+    min-width: 1440px;
+    padding: 29px 15px;
+    position: absolute;
+    top: 1835px;
+  }
+  
+  .resource-section {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    left: 535px;
+    min-height: 670px;
+    position: absolute;
+    top: 1117px;
+    width: 1249px;
+  }
+  
+  .resources {
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: 24px;
+    min-height: 87px;
+  }
+  
+  .overlap-group1 {
+    align-items: center;
+    background-size: 100% 100%;
+    display: flex;
+    height: 583px;
+    justify-content: flex-end;
+    min-width: 1247px;
+    padding: 0 23px;
+  }
+  
+  .entries {
+    height: 531px;
+    width: 1199px;
+  }
+  
+  .chat-section {
+    align-items: flex-start;
+    background-color: var(--alto);
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    left: 1383px;
+    min-height: 718px;
+    padding: 20px;
+    position: absolute;
+    top: 399px;
+    width: 420px;
+  }
+  
+  .overlap-group-container {
+    align-items: flex-end;
+    background-color: var(--alto);
+    display: flex;
+    flex-direction: column;
+    min-height: 607px;
+    padding: 10px 11px;
+    width: 376px;
+  }
+  
+  .overlap-group9 {
+    align-items: flex-start;
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    display: flex;
+    gap: 70px;
+    height: 57px;
+    justify-content: flex-end;
+    margin-right: 1px;
+    min-width: 199px;
+    padding: 0 6px;
+  }
+  
+  .message {
+    letter-spacing: 0;
+    line-height: normal;
+    min-height: 20px;
+    min-width: 49px;
+    text-align: center;
+  }
+  
+  .overlap-group {
+    align-self: flex-end;
+    height: 32px;
+    margin-bottom: 5px;
+    position: relative;
+    width: 67px;
+  }
+  
+  .place {
+    left: 35px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 0;
+  }
+  
+  .text {
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 18px;
+  }
+  
+  .overlap-group-1 {
+    align-items: flex-start;
+    align-self: flex-start;
+    background-color: var(--gravel);
+    border-radius: 10px;
+    display: flex;
+    gap: 70px;
+    height: 57px;
+    justify-content: flex-end;
+    margin-top: 9px;
+    min-width: 199px;
+    padding: 0 6px;
+  }
+  
+  .overlap-group-2 {
+    align-items: flex-start;
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    display: flex;
+    gap: 70px;
+    height: 57px;
+    justify-content: flex-end;
+    margin-right: 1px;
+    margin-top: 9px;
+    min-width: 199px;
+    padding: 0 6px;
+  }
+  
+  .overlap-group-4 {
+    align-items: flex-start;
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    display: flex;
+    gap: 70px;
+    height: 57px;
+    justify-content: flex-end;
+    margin-right: 1px;
+    margin-top: 5px;
+    min-width: 199px;
+    padding: 0 6px;
+  }
+  
+  .send-container {
+    background-color: var(--alto);
+    height: 53px;
+    width: 376px;
+  }
+  
+  .overlap-group11 {
+    height: 732px;
+    left: 943px;
+    position: absolute;
+    top: 397px;
+    width: 420px;
+  }
+  
+  .transition-panel {
+    background-color: var(--alto);
+    height: 720px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 420px;
+  }
+  
+  .tasks-container {
+    background-color: var(--alto);
+    height: 469px;
+    left: 22px;
+    position: absolute;
+    top: 230px;
+    width: 376px;
+  }
+  
+  .progress-circle-template {
+    background-color: #d9d9d9;
+    border-radius: 82.5px;
+    height: 165px;
+    left: 127px;
+    position: absolute;
+    top: 47px;
+    width: 165px;
+  }
+  
+  .date {
+    left: 127px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 653px;
+    width: 166px;
+  }
+  
+  .separation-date {
+    left: 105px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 627px;
+    width: 209px;
+  }
+  
+  .add-task {
+    height: 28px;
+    left: 354px;
+    position: absolute;
+    top: 242px;
+    width: 28px;
+  }
+  
+  .overlap-group12 {
+    background-size: 100% 100%;
+    height: 718px;
+    left: 503px;
+    position: absolute;
+    top: 397px;
+    width: 420px;
+  }
+  
+  .profile-details-container {
+    height: 679px;
+    left: 18px;
+    position: absolute;
+    top: 20px;
+    width: 384px;
+  }
+  
+  .jordannapoleonlivecom {
+    left: 57px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 320px;
+  }
+  
+  .email {
+    left: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 289px;
+  }
+  
+  .beale-afb {
+    left: 56px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 393px;
+  }
+  
+  .duty-station {
+    left: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 359px;
+  }
+  
+  .united-states-air-force {
+    left: 57px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 462px;
+  }
+  
+  .military-branch {
+    left: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 427px;
+  }
+  
+  .about-me-text {
+    color: var(--white);
+    font-family: var(--font-family-darker_grotesque);
+    font-size: var(--font-size-xl);
+    font-weight: 400;
+    left: 57px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 536px;
+    width: 325px;
+  }
+  
+  .about-me {
+    left: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 496px;
+  }
+  
+  .mcsp-16 {
+    left: 150px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 244px;
+  }
+  
+  .name {
+    left: 103px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 212px;
+  }
+  
+  .profile-picture-section {
+    align-items: flex-end;
+    background-color: #03024e;
+    border-radius: 82.5px;
+    display: flex;
+    height: 165px;
+    left: 128px;
+    min-width: 165px;
+    padding: 6px 34px;
+    position: absolute;
+    top: 43px;
+  }
+  
+  .profile-picture {
+    height: 145px;
+    object-fit: cover;
+    width: 95px;
+  }
+  
+  .icon-settings {
+    height: 28px;
+    left: 359px;
+    position: absolute;
+    top: 29px;
+    width: 28px;
+  }
+  
+  .welcomeCont {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .welcome {
+    letter-spacing: 0;
+    line-height: normal;
+    font-size: 3.5em;
+    color: white;
+  }
+  
+  .logOutTab {
+    background-color: rgb(212, 80, 6);
+    display: flex;
+    height: 74px;
+    padding: 7px 12px;
+    align-self: flex-end;
+    margin-right: 0;
+  }
+  
+  .vector {
+    align-self: center;
+    height: 36px;
+    width: 36px;
+  }
+  
+  .logOut {
+    color: white;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    min-height: 54px;
+  }
+
+  .galvanize-logo {
+    height: 90px;
+    margin-bottom: 7px;
+    object-fit: cover;
+    width: 480px;
+  }
+  
+  .overlap-group14 {
+    height: 130px;
+    position: relative;
+    width: 727px;
+  }
+  
+  .orange-accent {
+    background-color: var(--grenadier);
+    height: 90px;
+    left: 0;
+    position: absolute;
+    top: 33px;
+    width: 727px;
+  }
+  
+  .title {
+    color: var(--white);
+    font-family: var(--font-family-darker_grotesque);
+    font-size: 96px;
+    font-weight: 400;
+    left: 51px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    width: 627px;
+  }
