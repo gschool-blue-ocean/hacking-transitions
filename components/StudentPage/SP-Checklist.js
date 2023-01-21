@@ -87,6 +87,19 @@ const SPChecklist = () => {
     }
   };
 
+  const checklistItems = (checklistData) => {
+    let keys = [];
+    for(let key in checklistData) {      
+      // console.log(checklistData[key] === true);
+      if (checklistData[key] === true || checklistData[key] === false){
+        keys.push(key);
+      }
+    }
+    console.log(keys.length)
+  }
+
+  checklistItems(checklistData);
+
   // ============ Progress Bar ============= //
 
   const getCheckedPercent = (checklistData) => {
@@ -146,7 +159,7 @@ const formStyles = {
       <div className="undefined">
         <h4 className="editStudentFormTitle" style={formStyles}>Transition Checklist</h4>
       </div>
-      <div className={styles.checklistForm} onSubmit={handleSubmit}>
+      <div className={styles.checklistForm} onSubmit={[handleSubmit, checklistItems]}>
         <div className={styles.editStudentChecklist}>
           <label className="checkboxLabel">
             <input
