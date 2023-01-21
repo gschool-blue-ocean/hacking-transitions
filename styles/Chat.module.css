@@ -1,6 +1,6 @@
 .container {
   margin-top: 0.5rem;
-  width: auto;
+  width: 100%;
   grid-area: ChatModal;
   max-height: 100%;
 }
