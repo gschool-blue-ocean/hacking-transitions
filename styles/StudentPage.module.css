@@ -98,6 +98,12 @@
    background-color: rgba(0, 128, 0, 0.4);
    left: 25%;
 }
+
+#ETSna {
+   background-color: red;
+   padding: 1em;
+}
+
 .adminColoring{
    width: 10rem;
    height: fit-content;
@@ -464,3 +470,5 @@ display: flex;
    margin-bottom: 0;
    text-decoration: underline;
  }
+
+ 

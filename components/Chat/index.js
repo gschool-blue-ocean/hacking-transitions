@@ -28,7 +28,7 @@ const Chat = () => {
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
-  const [ctrlDown, setCtrlDown] = useState(false);
+  const [shftDown, setShftDown] = useState(false);
   const [receivedMessage, setReceivedMessage] = useState(false);
   const [display, setDisplay] = useState({
     editBtns: false,
@@ -150,6 +150,10 @@ console.log(editInfo);
     }
   };
 
+// const handleShftDown = (e) => {
+//   if (e.keyCode = 16) setShftDown(true)
+// }
+
   return (
     <div className={styles.container}>
       {/* CREATE EXISTING MESSAGES */}
@@ -270,12 +274,12 @@ console.log(editInfo);
           onChange={setNewMessage}
           value={newMessage}
           onKeyDown={({ key }) => {
-            key === "Control" && setCtrlDown(true);
+            key === "Shift" && setShftDown(true);
           }}
           onKeyUp={({ key }) => {
-            key === "Control" && setCtrlDown(false);
+            key === "Shift" && setShftDown(false);
             key === "Enter" &&
-              ctrlDown &&
+               !shftDown &&
               (submitMsg(),
               !editInfo &&
                 setTimeout(
@@ -295,7 +299,7 @@ console.log(editInfo);
                 500
               );
           }}
-          title="Ctrl + Enter, Send a message"
+          title="Enter, Send a message"
         >
           <MdSend />
         </button>
