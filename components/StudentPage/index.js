@@ -66,7 +66,9 @@ export default function StudentPage({ viewClickedCohort }) {
             <div className={style.profileSection}>
               <div className={style.profileSectionInner}>
                   <div>Icon</div>
-                  <div>Picture</div>
+                  <div className={style.profilePictureContainer}>
+                    <div className={style.profilePicture}></div>
+                  </div>
                   <h1>{activeStudent.first} {activeStudent.last}</h1>
                   <h2>Cohort</h2>
                   <div>Email:</div>

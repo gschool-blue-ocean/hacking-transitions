@@ -14,39 +14,6 @@
   font-family: "Darker Grotesque";
 }
 
-.overlap-group15 {
-  height: 1925px;
-  margin-left: -433px;
-  margin-top: -28px;
-  position: relative;
-  width: 2419px;
-}
-
-.page-accents {
-  align-items: flex-start;
-  display: flex;
-  gap: 685px;
-  height: 1858px;
-  left: 0;
-  min-width: 2419px;
-  position: absolute;
-  top: 0;
-}
-
-.overlap-group-3 {
-  align-items: flex-start;
-  background-color: var(--grenadier);
-  display: flex;
-  gap: 317px;
-  height: 90px;
-  justify-content: flex-end;
-  left: 433px;
-  min-width: 1440px;
-  padding: 29px 15px;
-  position: absolute;
-  top: 1835px;
-}
-
 .resource-section {
   align-items: flex-start;
   display: flex;
@@ -443,15 +410,6 @@
   width: 727px;
 }
 
-.orange-accent {
-  background-color: var(--grenadier);
-  height: 90px;
-  left: 0;
-  position: absolute;
-  top: 33px;
-  width: 727px;
-}
-
 
 /* ========== LOWER STAGE ========== */
 .lowerStage {
@@ -481,7 +439,25 @@
 .profileSectionInner > div {
     width: 100%;
     flex: 1;
+    padding: 0 5%;
+    font-size: 1.1em;
 }
+
+.profilePictureContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+}
+.profilePicture{
+  width: 7vw;
+  height: 7vw;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(217, 217, 217, .3);
+}
+
+
 .profileSectionInner > :nth-child(2), .profileSectionInner > :nth-child(12) {
     flex: 5;
 }
@@ -497,11 +473,11 @@
 }
 .progressSection{
     width: 100%;
-    height: 25%;
+    height: 10%;
 }
 .transitionSectionLower{
     width: 100%;
-    height: 75%;
+    height: 90%;
 }
 
 .profileSection{}
