@@ -29,6 +29,7 @@ const AdminList = () => {
           {adminList.map((admin, { i }) => {
             const deleteAdmin = (event) => {
               event.preventDefault();
+              
               axios.delete(`/api/users/${admin.user_id}`, {
                 id: admin.user_id,
               });

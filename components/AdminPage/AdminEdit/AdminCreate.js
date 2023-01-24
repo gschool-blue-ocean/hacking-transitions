@@ -66,14 +66,16 @@ const AdminCreate = ({ open, onClose }) => {
             cohort_name: null,
             cohort_id: null,
           });
-          signOut(auth).then(() => {
-            // Sign-out successful.
-            alert("New Admin account created for email ", newEmail);
-            //resetting text box inputs to give appearance of refresh
-            resetStateOnClose();
-            window.location.reload();
-            router.push("/admin/edit");
-          });
+          // signOut(auth).then(() => {
+          //   // Sign-out successful.
+          //   alert("New Admin account created for email ", newEmail);
+          //   //resetting text box inputs to give appearance of refresh
+          //   resetStateOnClose();
+          // });
+          onClose();
+          window.location.reload();
+          // router.push("/admin/edit");
+
         }
       });
   };
@@ -91,8 +93,8 @@ const AdminCreate = ({ open, onClose }) => {
                 <button
                   className={styles.adminCreateHeaderBtnClose}
                   onClick={() => {
-                    resetStateOnClose();
                     onClose();
+                    resetStateOnClose();
                   }}
                 >
                   Close
