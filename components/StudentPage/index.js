@@ -65,12 +65,17 @@ export default function StudentPage({ viewClickedCohort }) {
           <div className={style.studentContainer}>
             <div className={style.profileSection}>
               <div className={style.profileSectionInner}>
-                  <div>Icon</div>
-                  <div className={style.profilePictureContainer}>
-                    <div className={style.profilePicture}></div>
-                  </div>
-                  <h1>{activeStudent.first} {activeStudent.last}</h1>
-                  <h2>Cohort</h2>
+              <div className={style.studentSettings}>
+                  <svg id={style.studentIcon} xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                    <path d="m19.4 44-1-6.3q-.95-.35-2-.95t-1.85-1.25l-5.9 2.7L4 30l5.4-3.95q-.1-.45-.125-1.025Q9.25 24.45 9.25 24q0-.45.025-1.025T9.4 21.95L4 18l4.65-8.2 5.9 2.7q.8-.65 1.85-1.25t2-.9l1-6.35h9.2l1 6.3q.95.35 2.025.925Q32.7 11.8 33.45 12.5l5.9-2.7L44 18l-5.4 3.85q.1.5.125 1.075.025.575.025 1.075t-.025 1.05q-.025.55-.125 1.05L44 30l-4.65 8.2-5.9-2.7q-.8.65-1.825 1.275-1.025.625-2.025.925l-1 6.3ZM24 30.5q2.7 0 4.6-1.9 1.9-1.9 1.9-4.6 0-2.7-1.9-4.6-1.9-1.9-4.6-1.9-2.7 0-4.6 1.9-1.9 1.9-1.9 4.6 0 2.7 1.9 4.6 1.9 1.9 4.6 1.9Z"/>
+                  </svg>
+              </div>
+              <div className={style.profilePictureContainer}>
+                <div className={style.profilePicture}></div>
+                <h1>{activeStudent.first} {activeStudent.last}</h1>
+                <h2>MCSP-16</h2>
+              </div>
+              <div className={style.studentDetails}>
                   <div>Email:</div>
                   <div>{activeStudent.email}</div>
                   <div>Duty Station:</div>
@@ -78,9 +83,20 @@ export default function StudentPage({ viewClickedCohort }) {
                   <div>Military Branch:</div>
                   <div>{activeStudent.branch}</div>
                   <div>About Me</div>
-                  <p>adsfhnasdkjfhas</p>
+                  <div className={style.aboutText}>
+                    {/* <p>
+                      Im baby hexagon mumblecore intelligentsia, live-edge prism sus meh sriracha 3 wolf moon raw denim pok pok waistcoat forage. 
+                      Paleo echo park art party gastropub locavore. Keffiyeh try-hard semiotics adaptogen flexitarian pour-over marfa lo-fi meh williamsburg bruh. 
+                      Butcher chillwave crucifix narwhal. Enamel pin aesthetic DIY readymade ramps thundercats chambray, ethical hoodie glossier next level. Quinoa ascot 
+                      tumblr tbh irony. Disrupt VHS fanny pack, hell of flexitarian cronut migas kinfolk.
+                    </p> */}
+                    <p>
+                      Currently not set
+                    </p>
+                  </div>
               </div>
             </div>
+          </div>
             <div className={style.transitionSection}>
                 <div className={style.progressSection}></div>
                 <div className={style.transitionSectionLower}></div>
@@ -90,8 +106,12 @@ export default function StudentPage({ viewClickedCohort }) {
             </div>
           </div>
           <div className={style.resourceContainer}>
-            <div className={style.resourceTitle}></div>
-            <div className={style.resourceSection}></div>
+            <div className={style.resourceTitle}>
+              Resources:
+            </div>
+            <div className={style.resourceSection}>
+
+            </div>
           </div>
       </div>
     </div>

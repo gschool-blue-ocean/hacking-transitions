@@ -174,34 +174,6 @@
   width: 420px;
 }
 
-.transition-panel {
-  background-color: var(--alto);
-  height: 720px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 420px;
-}
-
-.tasks-container {
-  background-color: var(--alto);
-  height: 469px;
-  left: 22px;
-  position: absolute;
-  top: 230px;
-  width: 376px;
-}
-
-.progress-circle-template {
-  background-color: #d9d9d9;
-  border-radius: 82.5px;
-  height: 165px;
-  left: 127px;
-  position: absolute;
-  top: 47px;
-  width: 165px;
-}
-
 .date {
   left: 127px;
   letter-spacing: 0;
@@ -237,91 +209,6 @@
   position: absolute;
   top: 397px;
   width: 420px;
-}
-
-.jordannapoleonlivecom {
-  left: 57px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 320px;
-}
-
-.email {
-  left: 32px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 289px;
-}
-
-.beale-afb {
-  left: 56px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 393px;
-}
-
-.duty-station {
-  left: 32px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 359px;
-}
-
-.united-states-air-force {
-  left: 57px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 462px;
-}
-
-.military-branch {
-  left: 32px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 427px;
-}
-
-.about-me-text {
-  color: var(--white);
-  font-family: var(--font-family-darker_grotesque);
-  font-size: var(--font-size-xl);
-  font-weight: 400;
-  left: 57px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 536px;
-  width: 325px;
-}
-
-.about-me {
-  left: 32px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 496px;
-}
-
-.mcsp-16 {
-  left: 150px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 244px;
-}
-
-.name {
-  left: 103px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 212px;
 }
 
 .profile-picture-section {
@@ -428,7 +315,10 @@
     background-color: rgba(217, 217, 217, .3);
     flex: 1;
     padding: 1em;
+    max-height: 50em;
+    overflow: hidden;
 }
+
 .profileSectionInner{
     width: 100%;
     height: 100%;
@@ -439,14 +329,27 @@
 .profileSectionInner > div {
     width: 100%;
     flex: 1;
-    padding: 0 5%;
     font-size: 1.1em;
 }
-
+.studentSettings{
+  position: relative;
+}
+.studentSettings > svg {
+  position: absolute;
+  right: 0;
+  fill: #03014d;
+  background-color: rgba(212, 80, 6, .3);
+}
+.studentSettings:hover > svg{
+  stroke: orange;
+}
 .profilePictureContainer{
   width: 100%;
+  padding: 1em 1em;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   
 }
 .profilePicture{
@@ -456,7 +359,28 @@
   overflow: hidden;
   border: 1px solid rgba(217, 217, 217, .3);
 }
+.studentDetails {
+  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+}
+.aboutText{
+  flex: 2;
+}
 
+.aboutText > p {
+  margin: none;
+}
+
+.studentDetails > :nth-child(odd){
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.studentDetails > :nth-child(even){
+  padding: 0 1.5em;
+  font-size: 1.3em
+}
 
 .profileSectionInner > :nth-child(2), .profileSectionInner > :nth-child(12) {
     flex: 5;
@@ -487,6 +411,16 @@
 /* ========== Resources Section ========== */
 .resourceContainer{
     width: 100%;
+    margin-bottom: 1em;
+    padding-left: 6.5em;
+    padding-right: 6.5em
 }
-.resourceTitle{}
-.resourceSection{}
+.resourceTitle{
+  color: White;
+  font-size: 3.5em;
+}
+.resourceSection{
+  width: 100% ;
+  height: 35em;
+  background-color: rgba(217, 217, 217, .3);
+}

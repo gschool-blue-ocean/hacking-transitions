@@ -89,7 +89,10 @@ let Login = () => {
           <div>|</div>
           <div className="source2">Military Transition</div>
           <div>|</div>
-          <div className="source3">Hire For Heroes</div>
+          <a href="https://www.hireheroesusa.org/">
+            <div className="source3">Hire For Heroes</div>
+          </a>
+            
         </div>
         <div className={style.overlapGroup2}>
           <div className={style.signUp}>Sign Up</div>
