@@ -63,7 +63,7 @@ const Header = ({ currentUser }) => {
                   <li className={style.page}>Home</li>
                 </a>
               </Link>
-              <Link href={"/admin/archive"} as={"/admin/edit"} passHref>
+              <Link href={"/admin/archive"} as={"/admin/archive"} passHref>
                 <a
                   className={`${style.link} ${
                     pathname === "/admin/archive" && style.active
