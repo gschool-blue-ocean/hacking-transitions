@@ -28,9 +28,11 @@ const AdminContainer = ({ allCohorts }) => {
       }
     })();
   }, []);
+
   const toggleMoveChat = () => {
     setMenuClicked(!menuClicked);
   };
+
   const moveMenuAnimate = {
     enter: {
       y: 0,
@@ -48,6 +50,7 @@ const AdminContainer = ({ allCohorts }) => {
       transitionEnd: {},
     },
   };
+
   return (
     <div className={s.background}>
       <div className={s.container}>

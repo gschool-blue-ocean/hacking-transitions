@@ -9,6 +9,7 @@ const Student = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+
   useEffect(() => {
     (async () => {
       const user = await checkLogin();

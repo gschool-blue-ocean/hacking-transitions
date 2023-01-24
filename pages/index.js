@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Login from "../components/Login/index";
 import Layout from "../components/Login/LoginLayout";
+import LoadingScreen from "./loading";
 
 import { setActiveStudent } from "../redux/features/app-slice";
 
@@ -40,7 +41,8 @@ function Home() {
   return (
     <>
       <Layout>
-        <Login />
+        {/* <Login /> */}
+        <LoadingScreen />
       </Layout>
     </>
   );
