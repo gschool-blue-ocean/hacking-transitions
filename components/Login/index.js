@@ -5,24 +5,13 @@ import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { initializeApp, getApps, getApp } from "firebase/app";
+import { Container, Button, Card, Form, Alert } from "react-bootstrap";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
 import LoadingScreen from "../../pages/loading";
 
 let Login = () => {
-  // const firebaseConfig = {
-  //   apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
-  //   authDomain: "hackingtransitions-development.firebaseapp.com",
-  //   projectId: "hackingtransitions-development",
-  //   storageBucket: "hackingtransitions-development.appspot.com",
-  //   messagingSenderId: "473992713297",
-  //   appId: "1:473992713297:web:68e712395d1ccf79c49470",
-  // };
-
-  // const app = initializeApp(firebaseConfig);
-
-  // const auth = getAuth(app);
   const {
     currentFirebaseUser,
     setCurrentFirebaseUser,
@@ -35,11 +24,59 @@ let Login = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   let stayLogged = false;
 
   const handleLogin = async (e) => {
-    setIsLoading(true);
+    if (loginData.password.length < 6) {
+      return setError("Password must be 6+ characters");
+    }
+    // try {
+    //   e.preventDefault();
+    //   setError("");
+    //   setIsLoading(true);
+    //   console.log("attempting sign in");
+
+    //   await fetch(`/api/users/${loginData.email}`)
+    //     .then((res) => {
+    //       if (res.status === 404) throw new Error("Not Found");
+    //       return res.json();
+    //     })
+    //     .then((user) => {
+    //       signInWithEmailAndPassword(
+    //         auth,
+    //         loginData.email,
+    //         loginData.password
+    //       ).then(async (userCredential) => {
+    //         console.log("user done configure");
+    //         await setCurrentFirebaseUser(userCredential.user);
+    //         console.log("currentFirebaseUser: ", currentFirebaseUser);
+    //         console.log("user: ", user);
+    //         // const currentUser = userCredential.user;
+    //         // console.log(currentUser);
+
+    //         stayLogged &&
+    //           localStorage.setItem("currentUser", JSON.stringify(user));
+    //         sessionStorage.setItem("currentUser", JSON.stringify(user));
+    //         user.admin
+    //           ? (router.push("/admin"), setLoginData(""))
+    //           : (router.push("/student"),
+    //             dispatch(setActiveStudent(user)),
+    //             setLoginData(""));
+    //       });
+    //       // .catch((error) => {
+    //       //   const errorCode = error.code;
+    //       //   const errorMessage = error.message;
+    //       //   console.log(errorCode, errorMessage);
+    //       // });
+    //     });
+    // } catch (error) {
+    //   setError("Failed to login");
+    //   console.log(error.code, error.message);
+    // }
+
+    // setIsLoading(true);
 
     e.preventDefault();
     let inputData = {
@@ -47,14 +84,15 @@ let Login = () => {
       password: loginData.password,
     };
 
-    await fetch(`/api/users/${inputData.email}`)
+    await fetch(`/api/users/${loginData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
       })
       .then((user) => {
-        signInWithEmailAndPassword(auth, inputData.email, inputData.password)
+        signInWithEmailAndPassword(auth, loginData.email, loginData.password)
           .then(async (userCredential) => {
+            setIsLoading(true);
             console.log("user done configure");
             await setCurrentFirebaseUser(userCredential.user);
             console.log("currentFirebaseUser: ", currentFirebaseUser);
@@ -72,9 +110,11 @@ let Login = () => {
                 setLoginData(""));
           })
           .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            // setIsLoading(false);
+            setError("Failed to login with email & password");
+            // const errorCode = error.code;
+            // const errorMessage = error.message;
+            console.log(error.code, error.message);
           });
       });
   };
@@ -90,19 +130,18 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
-    // {isLoading && <LoadingScreen/>}
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
       {/* <div className={style.picCont}> */}
       {/* </div> */}
       <div className={style.loginContainer}>
         <h1 className={style.loginTitle}>Hacking Transition</h1>
-        {error && (
+        {/* {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
             Email/Password is Incorrect
           </span>
-        )}
-
+        )} */}
+        {error && <Alert variant="danger">{error}</Alert>}
         <form className={style.loginForm} onSubmit={handleLogin}>
           <span>
             <label htmlFor="username" className={style.label}>
