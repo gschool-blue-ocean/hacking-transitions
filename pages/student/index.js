@@ -24,7 +24,9 @@ const Student = () => {
 
   return (
     loggedIn && (
+      <div>
         <StudentPage />
+      </div>
     )
   );
 };

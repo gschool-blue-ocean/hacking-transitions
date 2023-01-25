@@ -116,7 +116,6 @@
 
 .studentInfoCheckbox {
    margin-top: 6px;
-   
 }
 
 .editStudentBtnSpan {
@@ -188,11 +187,20 @@ margin-left: auto;
 /* ============= Student Checklist ========== */
 
 .SDashChecklist {
+   grid-area: StuCheck;
    display: flex;
    flex-direction: column;
    border-radius: 1px;
    flex-wrap: nowrap;
    align-items: center;
+   margin-left: 12px;
+   background-color: #fff;
+   margin-top: 5px;
+   max-height: 39.5rem;
+   min-height: 39.5rem;
+   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
+   border-top: 1px solid #F79020;
+   padding-top: 3%;
    overflow-y: scroll;
 }
 
@@ -205,14 +213,10 @@ margin-left: auto;
    display: flex;
    flex-direction: column;
    align-items: center;
-   margin-top: 1em;
 }
-
-
 .editStudentChecklist {
    display: flex;
    flex-direction: column;
-   font-size: 1.5vw;
 }
 .checkboxLabel {
    padding-top: 7px;
@@ -222,18 +226,15 @@ display: flex;
 flex-direction: column;
 align-items: flex-end;
 width: 100%;
-margin-top: 2em;
+margin-top: 20px
 }
 .checklistButtons{
    margin: 2px;
    border: 0px;
    font-family:Arial, Helvetica, sans-serif;
    border-radius: 5px;
-   color: rgb(0, 0, 0);
+   color: #F79020;
    background-color: inherit;
-}
-.checklistButtons:hover{
-   color: rgba(255, 122, 0, 1)
 }
 
 /* ============= Student Tasks ============== */

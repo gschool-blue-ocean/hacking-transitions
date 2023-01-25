@@ -1,28 +1,21 @@
 .container {
-  width: 100%;
+  margin-top: 0.5rem;
+  width: auto;
   grid-area: ChatModal;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  height: 100%;
+  max-height: 100%;
 }
 .display {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   flex-wrap: nowrap;
-  background-color: rgba(217, 217, 217, .3);
+  background-color: white;
   width: 100%;
-  overflow: scroll;
+  max-height: 15rem;
+  height: 15rem;
+  overflow-y: scroll;
   padding: 0.5rem;
-  height: 100%;
-  max-height: 100%;
-  gap: 1.2em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.messageSection{
-
-}
-
 .display::-webkit-scrollbar {
   display: none;
 }
@@ -35,17 +28,15 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem 0.75rem 1rem 0rem;
   padding: 0.25rem;
-  background-color: rgb(163, 161, 161);
+  margin-bottom: 0.75rem;
+  background-color: lightgray;
   max-width: 25rem;
   hyphens: auto;
   overflow-wrap: break-word;
-  color: white;
 }
 .message.right .body {
-  background-color: rgb(49, 49, 240);
+  background-color: #bee6f3;
   border-radius: 0.75rem 1rem 0rem 1rem;
-  color: white;
-  margin-bottom: 0;
 }
 .message.right {
   align-self: flex-end;
@@ -59,11 +50,6 @@
 .body .time {
   margin: 0;
 }
-
-.content{
-  font-size: 1.2em;
-}
-
 .body .time {
   font-size: 0.75rem;
   margin-top: 0.2rem;
@@ -71,13 +57,13 @@
 .name {
   font-size: 0.9rem;
   width: 100%;
-  font-size: 1.3em;
-  color: white;
 }
 
 .newMsgWrapper {
+  height: 15rem;
   width: 100%;
-  background-color: rgba(217, 217, 217, .3);
+  padding: 0.1rem;
+  background-color: white;
   position: relative;
 }
 
@@ -124,8 +110,4 @@
 .editBtn:active,
 .editBtn:hover {
   color: blue;
-}
-
-.ql-container.ql-snow{
-  height: auto;
 }

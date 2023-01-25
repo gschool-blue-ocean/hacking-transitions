@@ -1,9 +1,7 @@
 import React from "react";
 
-import Header from "../Login/LoginLayout/Header";
-import Footer from "../Login/LoginLayout/Footer";
-import style from "../../styles/LogInNew/LoginUI.module.css";
-
+import Header from "./Header";
+import Footer from "./Footer";
 import { useState, useEffect } from "react";
 const Layout = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
@@ -13,20 +11,11 @@ const Layout = ({ children }) => {
     setCurrentUser(JSON.parse(session));
   }, []);
   return (
-    // <>
-    //   {currentUser && <Header currentUser={currentUser} />}
-    //   {children}
-    //   {currentUser && <Footer />}
-    // </>
-    <div className={style.containerCenterHorizontal}>
-      <div className={style.desktop1}>
-            <div className={style.upperBlur}></div>
-              <Header />
-              {children}
-              <Footer />
-            <div className={style.bottomBlur}></div>
-      </div>
-    </div>
+    <>
+      {currentUser && <Header currentUser={currentUser} />}
+      {children}
+      {currentUser && <Footer />}
+    </>
   );
 };
 
