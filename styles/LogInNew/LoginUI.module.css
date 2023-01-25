@@ -1,8 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Darker+Grotesque:400");
-
-
-
 .screen a {
   display: contents;
   text-decoration: none;
@@ -18,10 +15,6 @@
   pointer-events: auto;
   font-family: "Darker Grotesque";
 }
-
-/* * {
-  box-sizing: border-box;
-} */
 
 .desktop1 {
     position: relative;
@@ -99,68 +92,6 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-  }
-  
-  .overlapGroup1 {
-    align-items: flex-start;
-    background-color: var(--alto);
-    display: flex;
-    flex-direction: column;
-    gap: 31px;
-    left: 943px;
-    min-height: 720px;
-    padding: 29px 23px;
-    position: absolute;
-    top: 306px;
-    width: 420px;
-  }
-  
-  /* .overlapGroup1 {
-    align-items: flex-start;
-    align-self: center;
-    background-color: var(--alto);
-    display: flex;
-    height: 89px;
-    margin-top: 7px;
-    min-width: 372px;
-    padding: 1px 122px;
-  } */
-  
-  .signIn {
-    color: white;
-    font-size: var(--font-size-xl);
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-    min-height: 68px;
-    min-width: 128px;
-    text-align: center;
-  }
-  
-  .signInForm {
-    background-color: var(--alto);
-    height: 535px;
-    width: 372px;
-  }
-  
-  .overlapGroup2 {
-    align-items: flex-start;
-    background-color: var(--grenadier);
-    display: flex;
-    height: 48px;
-    left: 1714px;
-    min-width: 159px;
-    padding: 0 37px;
-    position: absolute;
-    top: 235px;
-  }
-  
-  .signUp {
-    letter-spacing: 0;
-    line-height: normal;
-    min-height: 41px;
-    min-width: 85px;
-    text-align: center;
   }
   
   .headerN {
