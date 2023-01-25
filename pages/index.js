@@ -13,24 +13,26 @@ function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    /*
-          Check local storage for a signed in user, if exist sign them in
-      */
-    if (window) {
-      const localUser = localStorage.getItem("currentUser");
-      const sessionUser = window.sessionStorage.getItem("currentUser");
-      localUser && confirmStorageUser(localUser, true);
-      sessionUser && confirmStorageUser(sessionUser);
-    }
-  }, []);
+  // useEffect(() => {
+  //   /*
+  //         Check local storage for a signed in user, if exist sign them in
+  //     */
+  //   if (window) {
+  //     const localUser = localStorage.getItem("currentUser");
+  //     const sessionUser = window.sessionStorage.getItem("currentUser");
+  //     localUser && confirmStorageUser(localUser, true);
+  //     sessionUser && confirmStorageUser(sessionUser);
+  //   }
+  // }, []);
 
   const confirmStorageUser = async (currentUser, local = false) => {
     const currentUserObj = JSON.parse(currentUser);
+    console.log("1")
     const user = await (
       await fetch(`/api/users/${currentUserObj.username}`)
     ).json();
     if (user.password === currentUserObj.password) {
+      console.log("2")
       local && localStorage.setItem("currentUser", JSON.stringify(user));
       window.sessionStorage.setItem("currentUser", JSON.stringify(user));
       user.admin ? router.push("/admin") : router.push("/student"),

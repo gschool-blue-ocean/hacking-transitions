@@ -95,7 +95,7 @@ const SPChecklist = () => {
         keys.push(key);
       }
     }
-    console.log(keys.length)
+    // console.log(keys.length)
   }
 
   checklistItems(checklistData);
@@ -117,49 +117,51 @@ const SPChecklist = () => {
     let total = checkArr.length
     let trues = checkArr.filter(value => !!value).length
     let percent = Math.floor((trues/total)*100);
-    console.log('percent', percent)
+    let remaining = total - trues
+    console.log([percent, remaining])
     return percent;
   }
 getCheckedPercent(checklistData);
 const containerStyles = {
-  height: 20,
-  width: '90%',
+  display: 'flex',
+  flexWrap: 'wrap',
+  height: 3,
+  width: '82%',
   backgroundColor: "#e0e0de",
-  borderRadius: 50,
-  margin: 20
+  marginBottom: 20,
 }
 
 const fillerStyles = {
   height: '100%',
   width: `${getCheckedPercent(checklistData)}%`,
-  backgroundColor: 'green',
+  backgroundColor: '#F79020',
   transition: 'width 1s ease-in-out',
   borderRadius: 'inherit',
-  textAlign: 'right'
 }
 
 const labelStyles = {
-  padding: 5,
-  color: 'white',
-  fontWeight: 'bold'
+  fontSize: 10,
+  marginTop: 5,
+  color: 'grey',
+  alignSelf: 'flex-end'
 }
 
 const formStyles = {
-  marginBottom: 50,
-  marginTop: 30
+  marginBottom: 0,
 }
 
   return (
     <div className={styles.SDashChecklist}>
-      <div className="progress-tracker" style={containerStyles}>
-        <div style={fillerStyles}>
-          <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
-        </div>      
-      </div>
+      
       <div className="undefined">
         <h4 className="editStudentFormTitle" style={formStyles}>Transition Checklist</h4>
       </div>
-      <div className={styles.checklistForm} onSubmit={[handleSubmit, checklistItems]}>
+      <div className="progress-tracker" style={containerStyles}>
+        <div style={fillerStyles}>
+        </div>      
+        <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
+      </div>
+      <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
           <label className="checkboxLabel">
             <input
