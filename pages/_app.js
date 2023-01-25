@@ -5,22 +5,35 @@ import { Provider } from "react-redux";
 import Meta from "../components/Meta";
 import Layout from "../components/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
 
 //^^allows use of bootstrap css across website
 function MyApp({ Component, pageProps }) {
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  const contextData = {
+    showUpdateModal,
+    setShowUpdateModal,
+  };
+
   return Component.displayName === "Login" ? (
-    <Provider store={store}>
-      <Meta />
-      <Component {...pageProps} />{" "}
-    </Provider>
-  ) : (
-    <Provider store={store}>
-      <Meta />
-      <Layout>
+    <appContext.Provider value={{ ...contextData }}>
+      <Provider store={store}>
+        <Meta />
         <Component {...pageProps} />{" "}
-      </Layout>
-    </Provider>
+      </Provider>
+    </appContext.Provider>
+  ) : (
+    <appContext.Provider value={{ ...contextData }}>
+      <Provider store={store}>
+        <Meta />
+        <Layout>
+          <Component {...pageProps} />{" "}
+        </Layout>
+      </Provider>
+    </appContext.Provider>
   );
 }
 
+export const appContext = React.createContext();
 export default MyApp;

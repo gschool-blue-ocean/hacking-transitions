@@ -1,14 +1,16 @@
 import styles from "../../styles/Edit.Admin.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
+import { appContext } from "../_app";
 
 const AdminUpdate = () => {
-  const [open,setOpen]=useState(true);
-  const admin =JSON.parse(sessionStorage.getItem('currentUser'));
-  const onClose =()=>setOpen(!open);
-  console.log(admin)
+  const { showUpdateModal, setShowUpdateModal } = useContext(appContext);
+  // const [open, setOpen] = useState(true);
+  const admin = JSON.parse(sessionStorage.getItem("currentUser"));
+  // const onClose = () => setOpen(!open);
+  console.log(admin);
 
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
@@ -16,25 +18,27 @@ const AdminUpdate = () => {
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const router = useRouter();
-  const resetStateWhenCanceled = () =>{
+
+  const resetStateWhenCanceled = () => {
     setNewFirstName("");
     setNewLastName("");
     setNewUsername("");
     // setNewPassword("");
     // setNewEmail("");
-  }
+  };
+
   const adminPatch = (event) => {
     event.preventDefault();
     const inputPassword = newPassword;
     //check if the input is empty, if yes, set it equal to old value
-    if(newFirstName===''){
-      newFirstName=admin.first;
+    if (newFirstName === "") {
+      newFirstName = admin.first;
     }
-    if(newLastName===''){
-      newLastName=admin.last;
+    if (newLastName === "") {
+      newLastName = admin.last;
     }
-    if(newUsername===''){
-      newUsername=admin.username;
+    if (newUsername === "") {
+      newUsername = admin.username;
     }
     // if(newEmail===''){
     //   newEmail=admin.email;
@@ -51,7 +55,7 @@ const AdminUpdate = () => {
   };
 
   return (
-    open && (
+    showUpdateModal && (
       <>
         <div className={styles.adminUpdateOverlay}></div>
         <div className={styles.adminUpdateModal}>
@@ -63,10 +67,11 @@ const AdminUpdate = () => {
               <div className={styles.adminUpdateHeaderBtn}>
                 <button
                   className={styles.adminUpdateHeaderBtnClose}
-                  onClick={()=>{
+                  onClick={() => {
                     resetStateWhenCanceled();
-                    onClose();
-                    router.push("/admin");
+                    setShowUpdateModal(false);
+                    // onClose();
+                    // router.push("/admin");
                   }}
                 >
                   Close
@@ -81,7 +86,7 @@ const AdminUpdate = () => {
                   id={`first ${admin.user_id}`}
                   type="text"
                   defaultValue={admin.first}
-                  onChange={(event) =>setNewFirstName(event.target.value)}
+                  onChange={(event) => setNewFirstName(event.target.value)}
                   aria-label={`first ${admin.user_id}`}
                   placeholder={`Current First Name: ${admin.first}`}
                 />

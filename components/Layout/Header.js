@@ -2,16 +2,21 @@ import style from "../../styles/Header.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
+import { useState, useContext } from "react";
+import AdminUpdate from "../../pages/admin/profile";
+import { appContext } from "../../pages/_app";
 
 const Header = ({ currentUser }) => {
   const router = useRouter();
   const { pathname } = router;
+  const { showUpdateModal, setShowUpdateModal } = useContext(appContext);
+
   return (
     <nav className={style.header}>
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            <Link
+            {/* <Link
               href={"/admin/profile"}
               as={
                 currentUser.admin ? "/admin/update-user" : "student/update-user"
@@ -20,7 +25,16 @@ const Header = ({ currentUser }) => {
               <a className={`${style.link} `}>
                 {`${currentUser.first} ${currentUser.last}`}
               </a>
-            </Link>
+            </Link> */}
+            {showUpdateModal && <AdminUpdate />}
+            <a
+              className={`${style.link} `}
+              onClick={() => {
+                setShowUpdateModal(true);
+              }}
+            >
+              {`${currentUser.first} ${currentUser.last}`}
+            </a>
           </div>
           <Link href={"/"} passHref>
             <a

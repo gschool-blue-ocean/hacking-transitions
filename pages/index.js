@@ -41,8 +41,8 @@ function Home() {
   return (
     <>
       <Layout>
-        {/* <Login /> */}
-        <LoadingScreen />
+        <Login />
+        {/* <LoadingScreen /> */}
       </Layout>
     </>
   );
