@@ -4,16 +4,25 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+  height: 100%;
 }
 .display {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   flex-wrap: nowrap;
   background-color: rgba(217, 217, 217, .3);
   width: 100%;
   overflow: scroll;
   padding: 0.5rem;
+  height: 100%;
+  max-height: 100%;
+  gap: 1.2em;
 }
+.messageSection{
+
+}
+
 .display::-webkit-scrollbar {
   display: none;
 }
@@ -26,7 +35,6 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem 0.75rem 1rem 0rem;
   padding: 0.25rem;
-  margin-bottom: 0.75rem;
   background-color: rgb(163, 161, 161);
   max-width: 25rem;
   hyphens: auto;
@@ -37,6 +45,7 @@
   background-color: rgb(49, 49, 240);
   border-radius: 0.75rem 1rem 0rem 1rem;
   color: white;
+  margin-bottom: 0;
 }
 .message.right {
   align-self: flex-end;
@@ -54,6 +63,7 @@
 .content{
   font-size: 1.2em;
 }
+
 .body .time {
   font-size: 0.75rem;
   margin-top: 0.2rem;

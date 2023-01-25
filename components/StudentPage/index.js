@@ -95,16 +95,9 @@ export default function StudentPage({ viewClickedCohort }) {
             </div>
           </div>
             <div className={style.transitionSection}>
-                <div className={style.progressSection}>
-                  <h4>Separation Date: {activeStudent.ets_date}</h4>
-                </div>
                 <div className={style.transitionSectionLower}>
-                  <div className={style.transitionAdd}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-                      <path d="M21.65 38.85v-12.5H9.15v-4.7h12.5V9.15h4.7v12.5h12.5v4.7h-12.5v12.5Z"/>
-                    </svg>
-                  </div>
                   <SPChecklist />
+                  <h4 className={style.transitionDate}>Separation Date: {activeStudent.ets_date}</h4>
                 </div>
             </div>
             <div className={style.chatSection}>

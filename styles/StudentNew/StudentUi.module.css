@@ -9,192 +9,8 @@
 .mainStage {
   display: flex;
   flex: 1;
-
   flex-direction: column;
   font-family: "Darker Grotesque";
-}
-
-.resource-section {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  left: 535px;
-  min-height: 670px;
-  position: absolute;
-  top: 1117px;
-  width: 1249px;
-}
-
-.resources {
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: 24px;
-  min-height: 87px;
-}
-
-.overlap-group1 {
-  align-items: center;
-  background-size: 100% 100%;
-  display: flex;
-  height: 583px;
-  justify-content: flex-end;
-  min-width: 1247px;
-  padding: 0 23px;
-}
-
-.entries {
-  height: 531px;
-  width: 1199px;
-}
-
-.chat-section {
-  align-items: flex-start;
-  background-color: var(--alto);
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-  left: 1383px;
-  min-height: 718px;
-  padding: 20px;
-  position: absolute;
-  top: 399px;
-  width: 420px;
-}
-
-.overlap-group-container {
-  align-items: flex-end;
-  background-color: var(--alto);
-  display: flex;
-  flex-direction: column;
-  min-height: 607px;
-  padding: 10px 11px;
-  width: 376px;
-}
-
-.overlap-group9 {
-  align-items: flex-start;
-  background-color: var(--blue-ribbon);
-  border-radius: 10px;
-  display: flex;
-  gap: 70px;
-  height: 57px;
-  justify-content: flex-end;
-  margin-right: 1px;
-  min-width: 199px;
-  padding: 0 6px;
-}
-
-.message {
-  letter-spacing: 0;
-  line-height: normal;
-  min-height: 20px;
-  min-width: 49px;
-  text-align: center;
-}
-
-.overlap-group {
-  align-self: flex-end;
-  height: 32px;
-  margin-bottom: 5px;
-  position: relative;
-  width: 67px;
-}
-
-.place {
-  left: 35px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 0;
-}
-
-.text {
-  left: 0;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 18px;
-}
-
-.overlap-group-1 {
-  align-items: flex-start;
-  align-self: flex-start;
-  background-color: var(--gravel);
-  border-radius: 10px;
-  display: flex;
-  gap: 70px;
-  height: 57px;
-  justify-content: flex-end;
-  margin-top: 9px;
-  min-width: 199px;
-  padding: 0 6px;
-}
-
-.overlap-group-2 {
-  align-items: flex-start;
-  background-color: var(--blue-ribbon);
-  border-radius: 10px;
-  display: flex;
-  gap: 70px;
-  height: 57px;
-  justify-content: flex-end;
-  margin-right: 1px;
-  margin-top: 9px;
-  min-width: 199px;
-  padding: 0 6px;
-}
-
-.overlap-group-4 {
-  align-items: flex-start;
-  background-color: var(--blue-ribbon);
-  border-radius: 10px;
-  display: flex;
-  gap: 70px;
-  height: 57px;
-  justify-content: flex-end;
-  margin-right: 1px;
-  margin-top: 5px;
-  min-width: 199px;
-  padding: 0 6px;
-}
-
-.send-container {
-  background-color: var(--alto);
-  height: 53px;
-  width: 376px;
-}
-
-.overlap-group11 {
-  height: 732px;
-  left: 943px;
-  position: absolute;
-  top: 397px;
-  width: 420px;
-}
-
-.overlap-group12 {
-  background-size: 100% 100%;
-  height: 718px;
-  left: 503px;
-  position: absolute;
-  top: 397px;
-  width: 420px;
-}
-
-.profile-picture {
-  height: 145px;
-  object-fit: cover;
-  width: 95px;
-}
-
-.icon-settings {
-  height: 28px;
-  left: 359px;
-  position: absolute;
-  top: 29px;
-  width: 28px;
 }
 
 .welcomeCont {
@@ -208,7 +24,7 @@
   font-size: 3.5em;
   color: white;
 }
-
+ /* ========== Logout Tab ========== */
 .logOutTabLink {
   text-decoration: none;
   align-self: flex-end;
@@ -250,12 +66,6 @@
   white-space: nowrap;
 }
 
-.overlap-group14 {
-  height: 130px;
-  position: relative;
-  width: 727px;
-}
-
 
 /* ========== LOWER STAGE ========== */
 .lowerStage {
@@ -264,11 +74,14 @@
     display: flex;
     flex-direction: column;
 }
+
+/* ========== Student Panel ========== */
 .studentContainer{
     display: flex;
     flex-direction: row;
     margin-bottom: 1em;
     gap: 2em;
+    color: black;
 }
 .studentContainer > div {
     background-color: rgba(217, 217, 217, .3);
@@ -277,7 +90,7 @@
     max-height: 50em;
     overflow: hidden;
 }
-
+.profileSection{}
 .profileSectionInner{
     width: 100%;
     height: 100%;
@@ -348,7 +161,7 @@
     flex: 5;
 }
 
-
+/* ========== Transition Panel ========== */
 .transitionSection{
     display: flex;
     flex-direction: column;
@@ -365,40 +178,17 @@
 }
 .transitionSectionLower{
     width: 100%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 1em;
+    justify-content: space-between;
 }
-.transitionAdd{
-  width: 100%;
+.transitionDate {
+  margin: 0;
+  align-self: center;
 }
-.transitionAdd > svg {
-    float: right;
-    transform: scale(.8);
-    fill: #03014d;
-}
-.transitionAdd > svg:hover {
-  stroke: orange;
-}
-
-
-.profileSection{}
-.transitionSection{}
-.chatSection{}
-
-/* ========== Resources Section ========== */
-.resourceContainer{
-    width: 100%;
-    margin-bottom: 1em;
-    padding-left: 6.5em;
-    padding-right: 6.5em
-}
-.resourceTitle{
-  color: White;
-  font-size: 3.5em;
-}
-.resourceSection{
-  width: 100% ;
-  height: 35em;
-  background-color: rgba(217, 217, 217, .3);
+/* ========== Chat Panel ========== */
+.chatSection{
+  
 }
