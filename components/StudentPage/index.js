@@ -96,7 +96,7 @@ export default function StudentPage({ viewClickedCohort }) {
           </div>
             <div className={style.transitionSection}>
                 <div className={style.progressSection}>
-                  <div></div>
+                  <h4>Separation Date: {activeStudent.ets_date}</h4>
                 </div>
                 <div className={style.transitionSectionLower}>
                   <div className={style.transitionAdd}>

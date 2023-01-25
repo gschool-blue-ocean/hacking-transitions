@@ -299,7 +299,7 @@
   transform: scale(.6);
   fill: #03014d;
 }
-.studentSettings:hover > svg{
+.studentSettings > svg:hover{
   stroke: orange;
 }
 .profilePictureContainer{
@@ -360,6 +360,8 @@
 .progressSection{
     width: 100%;
     height: 10%;
+    display: flex;
+    justify-content: center;
 }
 .transitionSectionLower{
     width: 100%;
@@ -375,7 +377,7 @@
     transform: scale(.8);
     fill: #03014d;
 }
-.transitionAdd:hover > svg {
+.transitionAdd > svg:hover {
   stroke: orange;
 }
 
