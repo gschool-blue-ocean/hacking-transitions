@@ -140,15 +140,14 @@ const fillerStyles = {
 }
 
 const labelStyles = {
-  fontSize: '1em',
+  fontSize: 10,
   marginTop: 5,
-  color: 'black',
+  color: 'grey',
   alignSelf: 'flex-end'
 }
 
 const formStyles = {
-  marginTop: "1em",
-  marginBottom: ".2em"
+  marginBottom: 0,
 }
 
   return (
@@ -255,7 +254,6 @@ const formStyles = {
             Have dependents?
           </label>
         </div>
-      </div>
         <div className={styles.checklistButtonDiv}>
           <input
             id="6"
@@ -272,6 +270,7 @@ const formStyles = {
             value="Cancel"
           />
         </div>
+      </div>
     </div>
   );
 };
