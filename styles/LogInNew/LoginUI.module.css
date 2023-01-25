@@ -1,0 +1,209 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Darker+Grotesque:400");
+
+
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.containerCenterHorizontal {
+  pointer-events: none;
+  width: 100%;
+}
+
+.containerCenterHorizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+  font-family: "Darker Grotesque";
+}
+
+/* * {
+  box-sizing: border-box;
+} */
+
+.desktop1 {
+    position: relative;
+    overflow: hidden;
+    background-color: #03014d;
+    border: 1px none;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .overlapGroup4 {
+    height: 1367px;
+    margin-left: -433px;
+    margin-top: -28px;
+    position: relative;
+    width: 2257px;
+  }
+  
+  
+  .upperBlur {
+    background-color: rgba(255, 122, 0, .46);
+    border-radius: 433.5px/350.5px;
+    filter: blur(400px);;
+    height: 701px;
+    width: 867px;
+    position: absolute;
+    top: 30%;
+    left: -40%;
+  }
+  
+  .bottomBlur {
+    background-color: rgba(255, 122, 0, .46);
+    border-radius: 433.5px/350.5px;
+    filter: blur(400px);;
+    height: 701px;
+    width: 867px;
+    position: absolute;
+    bottom: -50%;
+    right: -30%;
+  }
+  
+  .overlapGroup {
+    background-color: rgb(212, 80, 6);
+    display: flex;
+    height: 90px;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1em;
+  }
+  
+  .copyRight {
+    color: white;
+    font-size: 1.3em;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6em;
+    white-space: nowrap;
+  }
+  
+  .privacy {
+    color: white;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: .5em;
+    margin-right: 6em;
+  }
+
+  .privacy > * {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .overlapGroup1 {
+    align-items: flex-start;
+    background-color: var(--alto);
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    left: 943px;
+    min-height: 720px;
+    padding: 29px 23px;
+    position: absolute;
+    top: 306px;
+    width: 420px;
+  }
+  
+  /* .overlapGroup1 {
+    align-items: flex-start;
+    align-self: center;
+    background-color: var(--alto);
+    display: flex;
+    height: 89px;
+    margin-top: 7px;
+    min-width: 372px;
+    padding: 1px 122px;
+  } */
+  
+  .signIn {
+    color: white;
+    font-size: var(--font-size-xl);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    min-height: 68px;
+    min-width: 128px;
+    text-align: center;
+  }
+  
+  .signInForm {
+    background-color: var(--alto);
+    height: 535px;
+    width: 372px;
+  }
+  
+  .overlapGroup2 {
+    align-items: flex-start;
+    background-color: var(--grenadier);
+    display: flex;
+    height: 48px;
+    left: 1714px;
+    min-width: 159px;
+    padding: 0 37px;
+    position: absolute;
+    top: 235px;
+  }
+  
+  .signUp {
+    letter-spacing: 0;
+    line-height: normal;
+    min-height: 41px;
+    min-width: 85px;
+    text-align: center;
+  }
+  
+  .headerN {
+    align-items: flex-end;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    height: 10em;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 6em;
+    margin-top: 2em;
+  }
+  
+  .overlapGroup3 {
+    margin-right: 0;
+  }
+
+  .galvanizeLogo {
+    height: 8em;
+    object-fit: cover;
+  }
+  
+  
+  .orangeAccent {
+    background-color: rgb(212, 80, 6);
+    height: 90px;
+    width: 43em;
+    top: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+  }
+  
+  .title {
+    color: white;
+    font-size: 5em;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    top: 0;
+    margin-bottom: .2em;
+  }
+  

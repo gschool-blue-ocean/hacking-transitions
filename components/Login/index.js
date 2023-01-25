@@ -81,12 +81,28 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
-    <div className={style.modalContainer}>
-      {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
-      {/* <div className={style.picCont}> */}
-      {/* </div> */}
+    <div className={style.mainStage}>
+    <div className={style.subBar}>
+        <div className={style.resources}>
+          Resources:
+          <div className="source1">LEARN</div>
+          <div>|</div>
+          <div className="source2">Military Transition</div>
+          <div>|</div>
+          <a href="https://www.hireheroesusa.org/">
+            <div className="source3">Hire For Heroes</div>
+          </a>
+            
+        </div>
+        <div className={style.overlapGroup2}>
+          <div className={style.signUp}>Sign Up</div>
+        </div>
+
+      </div>
       <div className={style.loginContainer}>
-        <h1 className={style.loginTitle}>Hacking Transition</h1>
+      <div className={style.loginFormContainer}>
+
+        <h1 className={style.loginTitle}>Sign In</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
             Email/Password is Incorrect
@@ -145,6 +161,7 @@ let Login = () => {
             LOG IN <CgEnter />{" "}
           </button>
         </form>
+        </div>
       </div>
     </div>
   );
