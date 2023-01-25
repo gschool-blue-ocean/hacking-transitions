@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../../styles/LoginStyles.module.css";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { appContext } from "../../pages/_app";
+import LoadingScreen from "../../pages/loading";
 
 let Login = () => {
   // const firebaseConfig = {
@@ -21,7 +23,12 @@ let Login = () => {
   // const app = initializeApp(firebaseConfig);
 
   // const auth = getAuth(app);
-
+  const {
+    currentFirebaseUser,
+    setCurrentFirebaseUser,
+    isLoading,
+    setIsLoading,
+  } = useContext(appContext);
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
@@ -31,24 +38,29 @@ let Login = () => {
   const [error, setError] = useState(false);
   let stayLogged = false;
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
+    setIsLoading(true);
+
     e.preventDefault();
     let inputData = {
       email: loginData.email,
       password: loginData.password,
     };
 
-    fetch(`/api/users/${inputData.email}`)
+    await fetch(`/api/users/${inputData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
       })
       .then((user) => {
         signInWithEmailAndPassword(auth, inputData.email, inputData.password)
-          .then((userCredential) => {
+          .then(async (userCredential) => {
             console.log("user done configure");
-            const currentUser = userCredential.user;
-            console.log(currentUser);
+            await setCurrentFirebaseUser(userCredential.user);
+            console.log("currentFirebaseUser: ", currentFirebaseUser);
+            console.log("user: ", user);
+            // const currentUser = userCredential.user;
+            // console.log(currentUser);
 
             stayLogged &&
               localStorage.setItem("currentUser", JSON.stringify(user));
@@ -78,6 +90,7 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
+    // {isLoading && <LoadingScreen/>}
     <div className={style.modalContainer}>
       {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
       {/* <div className={style.picCont}> */}
@@ -100,6 +113,7 @@ let Login = () => {
               id="formInput"
               className={`${style.input} ${style.username}`}
               type="text"
+              autoComplete="email"
               placeholder="Email"
               name="email"
               value={loginData.email}
@@ -112,9 +126,10 @@ let Login = () => {
             </label>
             <input
               required
-              id="formInput"
+              id="formInput2"
               className={style.input}
               type="password"
+              autoComplete="current-password"
               placeholder="Password"
               name="password"
               value={loginData.password}

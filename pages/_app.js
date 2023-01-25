@@ -10,10 +10,16 @@ import React, { useState } from "react";
 //^^allows use of bootstrap css across website
 function MyApp({ Component, pageProps }) {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [currentFirebaseUser, setCurrentFirebaseUser] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const contextData = {
     showUpdateModal,
     setShowUpdateModal,
+    currentFirebaseUser,
+    setCurrentFirebaseUser,
+    isLoading,
+    setIsLoading,
   };
 
   return Component.displayName === "Login" ? (

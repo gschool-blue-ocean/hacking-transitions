@@ -87,10 +87,79 @@ const SPChecklist = () => {
     }
   };
 
+  const checklistItems = (checklistData) => {
+    let keys = [];
+    for(let key in checklistData) {      
+      // console.log(checklistData[key] === true);
+      if (checklistData[key] === true || checklistData[key] === false){
+        keys.push(key);
+      }
+    }
+    // console.log(keys.length)
+  }
+
+  checklistItems(checklistData);
+
+  // ============ Progress Bar ============= //
+
+  const getCheckedPercent = (checklistData) => {
+    let checkArr = [ 
+      checklistData.final_physical, 
+      checklistData.gear_turn_in,
+      checklistData.hhg_move,
+      checklistData.barracks_checkout,
+      checklistData.file_va_claim,
+      checklistData.seeking_further_education,
+      checklistData.planning_to_relocate,
+      checklistData.taps_complete,
+      checklistData.has_dependents
+    ]
+    let total = checkArr.length
+    let trues = checkArr.filter(value => !!value).length
+    let percent = Math.floor((trues/total)*100);
+    let remaining = total - trues
+    console.log([percent, remaining])
+    return percent;
+  }
+getCheckedPercent(checklistData);
+const containerStyles = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  height: 3,
+  width: '82%',
+  backgroundColor: "#e0e0de",
+  marginBottom: 20,
+}
+
+const fillerStyles = {
+  height: '100%',
+  width: `${getCheckedPercent(checklistData)}%`,
+  backgroundColor: '#F79020',
+  transition: 'width 1s ease-in-out',
+  borderRadius: 'inherit',
+}
+
+const labelStyles = {
+  fontSize: 10,
+  marginTop: 5,
+  color: 'grey',
+  alignSelf: 'flex-end'
+}
+
+const formStyles = {
+  marginBottom: 0,
+}
+
   return (
     <div className={styles.SDashChecklist}>
+      
       <div className="undefined">
-        <h4 className="editStudentFormTitle">Transition Checklist</h4>
+        <h4 className="editStudentFormTitle" style={formStyles}>Transition Checklist</h4>
+      </div>
+      <div className="progress-tracker" style={containerStyles}>
+        <div style={fillerStyles}>
+        </div>      
+        <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
       </div>
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>

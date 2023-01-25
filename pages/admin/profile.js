@@ -2,56 +2,83 @@ import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
+import { getAuth, updatePassword, signOut } from "firebase/auth";
 import { appContext } from "../_app";
+import { auth } from "../../firebase/firebase";
 
 const AdminUpdate = () => {
-  const { showUpdateModal, setShowUpdateModal } = useContext(appContext);
-  // const [open, setOpen] = useState(true);
+  const router = useRouter();
   const admin = JSON.parse(sessionStorage.getItem("currentUser"));
-  // const onClose = () => setOpen(!open);
-  console.log(admin);
-
+  const { showUpdateModal, setShowUpdateModal, currentFirebaseUser } =
+    useContext(appContext);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const router = useRouter();
+  // const [newEmail, setNewEmail] = useState("");
+
+  console.log("user: ", admin);
+  console.log("newFirstName: ", newFirstName);
+  console.log("newLastName: ", newLastName);
+  console.log("newUsername: ", newUsername);
+  console.log("newPassword: ", newPassword);
+  console.log("newPass is undef? ", newPassword === "");
+  console.log("currentFirebaseUser: ", currentFirebaseUser);
+
+  console.log(`admin.first: ${JSON.stringify(admin.first)}`);
+
+  if (newPassword !== "") {
+    console.log("there is a new pass");
+  } else {
+    console.log("no new pass");
+  }
 
   const resetStateWhenCanceled = () => {
     setNewFirstName("");
     setNewLastName("");
     setNewUsername("");
-    // setNewPassword("");
+    setNewPassword("");
     // setNewEmail("");
   };
 
-  const adminPatch = (event) => {
+  const adminPatch = async (event) => {
     event.preventDefault();
-    const inputPassword = newPassword;
+    // const inputPassword = newPassword;
+
     //check if the input is empty, if yes, set it equal to old value
     if (newFirstName === "") {
       newFirstName = admin.first;
+      console.log(`first name did not change: ${newFirstName}`);
     }
     if (newLastName === "") {
       newLastName = admin.last;
+      console.log(`last name did not change: ${newLastName}`);
     }
     if (newUsername === "") {
       newUsername = admin.username;
+      console.log(`username did not change: ${newUsername}`);
     }
     // if(newEmail===''){
     //   newEmail=admin.email;
     // }
-    // axios.patch(`/api/admin/${admin.user_id}`, {
-    //   first: newFirstName,
-    //   last: newLastName,
-    //   email: admin.email,
-    //   username: newUsername,
-    //   password: newPassword,
-    // });
-    window.location.reload();
-    router.push("/admin");
+
+    axios.patch(`/api/admin/${admin.user_id}`, {
+      first: newFirstName,
+      last: newLastName,
+      username: newUsername,
+      //   email: admin.email,
+    });
+
+    if (newPassword !== "") {
+      console.log(`there is a new pass: ${newPassword}`);
+      updatePassword(currentFirebaseUser, newPassword);
+      setShowUpdateModal(false);
+      router.push("/");
+      signOut(auth);
+    }
+
+    // window.location.reload();
+    // router.push("/admin");
   };
 
   return (
@@ -127,7 +154,7 @@ const AdminUpdate = () => {
                   placeholder={`Change Password:`}
                 />
               </div>
-              <div className={styles.adminUpdateFormLabel}>
+              {/* <div className={styles.adminUpdateFormLabel}>
                 Email
                 <input
                   className={styles.adminUpdateFormInput}
@@ -138,7 +165,7 @@ const AdminUpdate = () => {
                   aria-label={`email ${admin.user_id}`}
                   placeholder={`Current email: ${admin.email}`}
                 />
-              </div>
+              </div> */}
               <div className={styles.adminUpdateFormSubmit}>
                 <button
                   className={styles.adminUpdateFormSubmitBtn}

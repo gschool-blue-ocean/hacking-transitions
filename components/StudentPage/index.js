@@ -48,12 +48,21 @@ export default function StudentPage({ viewClickedCohort }) {
                   onClick={handleEditBtnClicked}
                   className={styles.editStudentBtnSpan}
                 >
+                  {/* <<<<<<< HEAD
                   <Link
                     href={"student/editStudentModal"}
                     as={"student/edit-student-information"}
                   >
                     <FiEdit className={styles.editStudentInfoBtn} />
                   </Link>
+======= */}
+                  <a href={"student/editStudentModal"}>
+                    <FiEdit
+                      className={styles.editStudentInfoBtn}
+                      style={{ color: "black" }}
+                    />
+                  </a>
+                  {/* >>>>>>> dev-mcsp16-team1 */}
                   <div className={styles.editStudentToolTip}>Edit</div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useState, useContext } from "react";
 import AdminUpdate from "../../pages/admin/profile";
 import { appContext } from "../../pages/_app";
+import { auth } from "../../firebase/firebase";
 
 const Header = ({ currentUser }) => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const Header = ({ currentUser }) => {
             <a
               className={`${style.link} `}
               onClick={() => {
-                const auth = getAuth();
+                // const auth = getAuth();
                 localStorage.removeItem("currentUser");
                 window.sessionStorage.removeItem("currentUser");
                 signOut(auth)
