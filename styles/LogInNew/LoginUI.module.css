@@ -25,16 +25,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-  }
-  
-  .overlapGroup4 {
-    height: 1367px;
-    margin-left: -433px;
-    margin-top: -28px;
-    position: relative;
-    width: 2257px;
-  }
-  
+}
   
   .upperBlur {
     background-color: rgba(255, 122, 0, .46);
@@ -107,34 +98,27 @@
     margin-top: 2em;
   }
   
-  .overlapGroup3 {
-    margin-right: 0;
-  }
-
+  
   .galvanizeLogo {
     height: 8em;
     object-fit: cover;
   }
   
-  
-  .orangeAccent {
+  .overlapGroup3 {
     background-color: rgb(212, 80, 6);
-    height: 90px;
-    width: 43em;
     top: 33px;
+  }
+  .titleCont{
     display: flex;
     align-items: center;
     justify-content: center;
-    align-self: flex-end;
+    margin: .5vw 4vw
   }
-  
   .title {
     color: white;
-    font-size: 5em;
+    font-size: 3em;
     font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-    top: 0;
     margin-bottom: .2em;
+    white-space: nowrap;
   }
   

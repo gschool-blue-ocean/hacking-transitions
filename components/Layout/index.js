@@ -13,17 +13,12 @@ const Layout = ({ children }) => {
     setCurrentUser(JSON.parse(session));
   }, []);
   return (
-    // <>
-    //   {currentUser && <Header currentUser={currentUser} />}
-    //   {children}
-    //   {currentUser && <Footer />}
-    // </>
     <div className={style.containerCenterHorizontal}>
       <div className={style.desktop1}>
             <div className={style.upperBlur}></div>
-              <Header />
-              {children}
-              <Footer />
+            {currentUser && <Header currentUser={currentUser} />}
+            {children}
+            {currentUser && <Footer />}
             <div className={style.bottomBlur}></div>
       </div>
     </div>
