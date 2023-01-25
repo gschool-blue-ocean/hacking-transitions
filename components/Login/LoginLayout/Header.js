@@ -1,5 +1,5 @@
 import {useState} from "react";
-import style from "../../../styles/LogInNew/LoginUI.module.css";
+import style from "../../../styles/LogInNew/Loginui.module.css";
 import RegisterModal from "../Register";
 
 const Header = () => {

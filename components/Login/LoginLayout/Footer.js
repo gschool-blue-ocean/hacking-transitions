@@ -1,4 +1,4 @@
-import style from "../../../styles/LogInNew/LoginUI.module.css";
+import style from "../../../styles/LogInNew/Loginui.module.css";
 
 const Footer = () => {
   return (

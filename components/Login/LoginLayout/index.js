@@ -2,7 +2,7 @@ import React from "react";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import style from "../../../styles/LogInNew/LoginUI.module.css";
+import style from "../../../styles/LogInNew/Loginui.module.css";
 
 const Layout = ({ children }) => {
   return (

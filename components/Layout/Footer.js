@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/LoginNew/LoginUI.module.css";
+import style from "../../styles/LoginNew/Loginui.module.css";
 
 const Footer = () => {
     return (
