@@ -72,8 +72,8 @@ export default function StudentPage({ viewClickedCohort }) {
               </div>
               <div className={style.profilePictureContainer}>
                 <div className={style.profilePicture}></div>
-                <h1>{activeStudent.first} {activeStudent.last}</h1>
-                <h2>MCSP-16</h2>
+                <h3>{activeStudent.first} {activeStudent.last}</h3>
+                <h4>MCSP-16</h4>
               </div>
               <div className={style.studentDetails}>
                   <div>Email:</div>
@@ -84,33 +84,30 @@ export default function StudentPage({ viewClickedCohort }) {
                   <div>{activeStudent.branch}</div>
                   <div>About Me</div>
                   <div className={style.aboutText}>
-                    {/* <p>
+                    <p>
                       Im baby hexagon mumblecore intelligentsia, live-edge prism sus meh sriracha 3 wolf moon raw denim pok pok waistcoat forage. 
                       Paleo echo park art party gastropub locavore. Keffiyeh try-hard semiotics adaptogen flexitarian pour-over marfa lo-fi meh williamsburg bruh. 
                       Butcher chillwave crucifix narwhal. Enamel pin aesthetic DIY readymade ramps thundercats chambray, ethical hoodie glossier next level. Quinoa ascot 
                       tumblr tbh irony. Disrupt VHS fanny pack, hell of flexitarian cronut migas kinfolk.
-                    </p> */}
-                    <p>
-                      Currently not set
                     </p>
                   </div>
               </div>
             </div>
           </div>
             <div className={style.transitionSection}>
-                <div className={style.progressSection}></div>
-                <div className={style.transitionSectionLower}></div>
+                <div className={style.progressSection}>
+                  <div></div>
+                </div>
+                <div className={style.transitionSectionLower}>
+                  <div className={style.transitionAdd}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                      <path d="M21.65 38.85v-12.5H9.15v-4.7h12.5V9.15h4.7v12.5h12.5v4.7h-12.5v12.5Z"/>
+                    </svg>
+                  </div>
+                </div>
             </div>
             <div className={style.chatSection}>
               <Chat />
-            </div>
-          </div>
-          <div className={style.resourceContainer}>
-            <div className={style.resourceTitle}>
-              Resources:
-            </div>
-            <div className={style.resourceSection}>
-
             </div>
           </div>
       </div>
