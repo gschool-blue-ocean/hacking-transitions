@@ -219,8 +219,8 @@ margin-left: auto;
 }
 .checklistButtonDiv{
 display: flex;
-flex-direction: column;
-align-items: flex-end;
+flex-direction: row;
+justify-content: space-between;
 width: 100%;
 margin-top: 2em;
 }
@@ -231,6 +231,7 @@ margin-top: 2em;
    border-radius: 5px;
    color: rgb(0, 0, 0);
    background-color: inherit;
+   padding: 2rem;
 }
 .checklistButtons:hover{
    color: rgba(255, 122, 0, 1)
