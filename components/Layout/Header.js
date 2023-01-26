@@ -1,4 +1,4 @@
-import style from "../../styles/LoginNew/Loginui.module.css";
+import style from "../../styles/LogInNew/Loginui.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getAuth, signOut } from "firebase/auth";
