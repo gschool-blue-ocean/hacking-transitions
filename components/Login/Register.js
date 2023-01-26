@@ -2,26 +2,9 @@ import { useState, useContext } from "react";
 import styles from "../../styles/LoginStyles.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
-
-//pull in the firebase config file with the assigned api keys for our app
-// const config = require('./config');
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
-//   authDomain: "hackingtransitions-development.firebaseapp.com",
-//   projectId: "hackingtransitions-development",
-//   storageBucket: "hackingtransitions-development.appspot.com",
-//   messagingSenderId: "473992713297",
-//   appId: "1:473992713297:web:68e712395d1ccf79c49470",
-// };
 
 const RegisterModal = ({ open, onClose }) => {
   const {
@@ -38,11 +21,6 @@ const RegisterModal = ({ open, onClose }) => {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [apiUserData, setApiUserData] = useState();
-  let stayLogged = false;
-
-  // const app = initializeApp(firebaseConfig);
-  //auth links any user info sent to firebass api correlated with this app
-  // const auth = getAuth(app);
 
   if (!open) return null;
 
@@ -57,7 +35,6 @@ const RegisterModal = ({ open, onClose }) => {
       .then(async (data) => {
         console.log("this is my data", data);
         await data.map((passcode) => {
-          // console.log(res)
           console.log("2.) mapping cohort passcodes");
           let cohortCode = passcode.register_code;
           let cohort = passcode.cohort_name;
@@ -79,6 +56,8 @@ const RegisterModal = ({ open, onClose }) => {
                   // console.log(errorCode)
                 })
                 .then(async (userCredential) => {
+                  // await setCurrentFirebaseUser(userCredential.user);
+                  // console.log("currentFirebaseUser: ", currentFirebaseUser);
                   console.log("3.) creating user with email/pass on fb");
                   console.log(userCredential);
                   if (userCredential) {
@@ -110,72 +89,15 @@ const RegisterModal = ({ open, onClose }) => {
                     JSON.stringify(apiUserData)
                   );
                 })
-                .then(() => {
+                .then(async () => {
                   console.log("localStorage: ", localStorage);
                   console.log("sessionStorage: ", sessionStorage);
+                  await router.push("/student");
                 });
-
-              // signInWithEmailAndPassword(auth, email, Password)
-              //   .then(async (userCredential) => {
-              //     console.log("4.) signing in with email/pass");
-              //     setIsLoading(true);
-              //     console.log("user done configure");
-              //     await setCurrentFirebaseUser(userCredential.user);
-              //     console.log("currentFirebaseUser: ", currentFirebaseUser);
-              //     console.log("user: ", apiUserData);
-              //     // const currentUser = userCredential.user;
-              //     // console.log(currentUser);
-
-              //     stayLogged &&
-              //       localStorage.setItem(
-              //         "currentUser",
-              //         JSON.stringify(apiUserData)
-              //       );
-              //     sessionStorage.setItem(
-              //       "currentUser",
-              //       JSON.stringify(apiUserData)
-              //     );
-              //     user.admin
-              //       ? (router.push("/admin"), setLoginData(""))
-              //       : (router.push("/student"),
-              //         dispatch(setActiveStudent(user)),
-              //         setLoginData(""));
-              //   })
-              //   .catch((error) => {
-              //     console.log(error.code);
-              //     // setIsLoading(false);
-              //     // if (error.code === "auth/wrong-password") {
-              //     //   setLoginAttempts((prevCount) => prevCount - 1);
-              //     //   setError(
-              //     //     `Incorrect password... ${loginAttempts} attempts remaining`
-              //     //   );
-              //     // } else if (error.code === "auth/too-many-requests") {
-              //     //   setError("Account temporarily locked... try again later");
-              //     // }
-              //     // setError("Failed to login with email & password");
-              //     // const errorCode = error.code;
-              //     // const errorMessage = error.message;
-              //     // console.log(error.code);
-              //     // console.log(error.code, error.message);
-              //   });
-
-              // signOut(auth).then(() => {
-              //   // Sign-out successful.
-              //   //alert('New Admin account created for email ', newEmail);
-              //   window.alert("User Created");
-              //   //window.location.reload();
-              //   router.push("/admin/edit");
-              // });
-              // );
-              //window.location.reload();
             } catch {
               router.push("/registrationerror");
             }
           }
-          router.push("/student");
-          // else {
-          //   router.push("/registrationerror");
-          // }
         });
       });
   };
