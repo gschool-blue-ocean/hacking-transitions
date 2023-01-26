@@ -4,7 +4,6 @@ import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import SPChecklist from "./SP-Checklist";
 import style from "../../styles/StudentNew/StudentUi.module.css";
-// import styles from "../../styles/StudentPage.module.css"
 import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import { useSelector } from "react-redux";
