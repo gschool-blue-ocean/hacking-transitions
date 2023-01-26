@@ -3,7 +3,7 @@ import style from "../../../styles/LogInNew/Loginui.module.css";
 import RegisterModal from "../Register";
 
 const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <header className={style.headerN}>
       <img className={style.galvanizeLogo} src="https://www.galvanize.com/wp-content/uploads/2022/11/galvanize_logo_small-scale_full-color_dark-background.png" alt="Galvanize Logo" />
