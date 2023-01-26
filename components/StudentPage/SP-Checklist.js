@@ -123,11 +123,11 @@ const SPChecklist = () => {
   }
 getCheckedPercent(checklistData);
 const containerStyles = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  height: 3,
   width: '82%',
   backgroundColor: "#e0e0de",
+  textAlign: 'center',
+  fontSize: '1em',
+  color: 'rgb(0, 0, 255)',
   marginBottom: 20,
 }
 
@@ -135,15 +135,7 @@ const fillerStyles = {
   height: '100%',
   width: `${getCheckedPercent(checklistData)}%`,
   backgroundColor: '#F79020',
-  transition: 'width 1s ease-in-out',
-  borderRadius: 'inherit',
-}
-
-const labelStyles = {
-  fontSize: '1em',
-  marginTop: 5,
-  color: 'black',
-  alignSelf: 'flex-end'
+  transition: 'width 1s ease-in-out'
 }
 
 const formStyles = {
@@ -152,15 +144,14 @@ const formStyles = {
 }
 
   return (
-    <div className={styles.SDashChecklist}>
-      
+    <div className={styles.SDashChecklist}>    
       <div className="undefined">
         <h4 className="editStudentFormTitle" style={formStyles}>Transition Checklist</h4>
       </div>
       <div className="progress-tracker" style={containerStyles}>
         <div style={fillerStyles}>
-        </div>      
-        <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
+          <strong>{`${getCheckedPercent(checklistData)}%`}</strong>
+        </div>
       </div>
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
