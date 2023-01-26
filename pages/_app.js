@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [currentFirebaseUser, setCurrentFirebaseUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(5);
 
   const contextData = {
     showUpdateModal,
@@ -20,6 +21,8 @@ function MyApp({ Component, pageProps }) {
     setCurrentFirebaseUser,
     isLoading,
     setIsLoading,
+    loginAttempts,
+    setLoginAttempts,
   };
 
   return Component.displayName === "Login" ? (

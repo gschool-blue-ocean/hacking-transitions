@@ -6,7 +6,11 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { Container, Button, Card, Form, Alert } from "react-bootstrap";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
 import LoadingScreen from "../../pages/loading";
@@ -17,6 +21,8 @@ let Login = () => {
     setCurrentFirebaseUser,
     isLoading,
     setIsLoading,
+    loginAttempts,
+    setLoginAttempts,
   } = useContext(appContext);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -28,8 +34,17 @@ let Login = () => {
   const [error, setError] = useState("");
   let stayLogged = false;
 
+  onAuthStateChanged(auth, (user) => {
+    if (user !== null) {
+      console.log("logged in!");
+    } else {
+      console.log("No User");
+    }
+  });
+
   const handleLogin = async (e) => {
     if (loginData.password.length < 6) {
+      e.preventDefault();
       return setError("Password must be 6+ characters");
     }
     // try {
@@ -79,14 +94,16 @@ let Login = () => {
     // setIsLoading(true);
 
     e.preventDefault();
-    let inputData = {
-      email: loginData.email,
-      password: loginData.password,
-    };
+    // let inputData = {
+    //   email: loginData.email,
+    //   password: loginData.password,
+    // };
 
     await fetch(`/api/users/${loginData.email}`)
       .then((res) => {
-        if (res.status === 404) throw new Error("Not Found");
+        if (res.status === 404) {
+          return setError("Email does not exists... try again");
+        }
         return res.json();
       })
       .then((user) => {
@@ -110,11 +127,21 @@ let Login = () => {
                 setLoginData(""));
           })
           .catch((error) => {
+            console.log(error.code);
             // setIsLoading(false);
-            setError("Failed to login with email & password");
+            if (error.code === "auth/wrong-password") {
+              setLoginAttempts((prevCount) => prevCount - 1);
+              setError(
+                `Incorrect password... ${loginAttempts} attempts remaining`
+              );
+            } else if (error.code === "auth/too-many-requests") {
+              setError("Account temporarily locked... try again later");
+            }
+            // setError("Failed to login with email & password");
             // const errorCode = error.code;
             // const errorMessage = error.message;
-            console.log(error.code, error.message);
+            // console.log(error.code);
+            // console.log(error.code, error.message);
           });
       });
   };
@@ -141,7 +168,16 @@ let Login = () => {
             Email/Password is Incorrect
           </span>
         )} */}
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && (
+          <Alert
+            variant="danger"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </Alert>
+        )}
         <form className={style.loginForm} onSubmit={handleLogin}>
           <span>
             <label htmlFor="username" className={style.label}>
