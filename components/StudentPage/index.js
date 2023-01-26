@@ -3,8 +3,8 @@ import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import SPChecklist from "./SP-Checklist";
-import styles from "../../styles/StudentPage.module.css";
 import Chat from "../Chat";
+import style from "../../styles/StudentNew/StudentUi.module.css";
 import { FiEdit } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -29,111 +29,97 @@ export default function StudentPage({ viewClickedCohort }) {
   };
 
   return (
-    <div className={styles.testgrid}>
-      <div className={styles.container}>
-        <div className={styles.StudentDashWrapper}>
-          <div className={styles.SDashHeader}>
-            <div className={styles.SDashheaderCol}>
-              <h1 id={styles.StuHeaderName}>
-                {activeStudent.first} {activeStudent.last}
-              </h1>
-              <p id={styles.StuHeaderBranch}>{activeStudent.branch}</p>
+    <div className={style.mainStage}>
+      <div className={style.subBar}>
+        <div className={style.welcomeCont}>
+          <h1 className={style.welcome}>Student Portal</h1>
+          <h1 className={style.welcome}>
+            Welcome, {activeStudent.first} {activeStudent.last}
+          </h1>
+        </div>
+        <Link href={"/"} passHref>
+          <a
+            className={style.logOutTabLink}
+            onClick={() => {
+              const auth = getAuth();
+              localStorage.removeItem("currentUser");
+              window.sessionStorage.removeItem("currentUser");
+              signOut(auth)
+                .then(() => {
+                  // Sign-out successful.
+                  alert("You have succesfully logged out");
+                })
+                .catch((error) => {
+                  // An error happened.
+                  console.log(error);
+                });
+            }}
+          >
+            <div className={style.logOutTab}>
+              <svg className={style.vector} height="48" width="48">
+                <path d="M9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h14.55v3H9v30h14.55v3Zm24.3-9.25-2.15-2.15 5.1-5.1h-17.5v-3h17.4l-5.1-5.1 2.15-2.15 8.8 8.8Z" />
+              </svg>
+              <div className={style.logOut}>Log Out</div>
             </div>
-            <SPETStag userETS={activeStudent.ets_date} />
-          </div>
-          <div className={styles.SDashInfocard}>
-            <div className={styles.infoCardcontainer}>
-              <div>
-                <div
-                  onClick={handleEditBtnClicked}
-                  className={styles.editStudentBtnSpan}
+          </a>
+        </Link>
+      </div>
+      <div className={style.lowerStage}>
+        <div className={style.studentContainer}>
+          <div className={style.profileSection}>
+            <div className={style.profileSectionInner}>
+              <div className={style.studentSettings}>
+                <svg
+                  id={style.studentIcon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="48"
+                  width="48"
                 >
-                  {/* <<<<<<< HEAD
-                  <Link
-                    href={"student/editStudentModal"}
-                    as={"student/edit-student-information"}
-                  >
-                    <FiEdit className={styles.editStudentInfoBtn} />
-                  </Link>
-======= */}
-                  <a href={"student/editStudentModal"}>
-                    <FiEdit
-                      className={styles.editStudentInfoBtn}
-                      style={{ color: "black" }}
-                    />
-                  </a>
-                  {/* >>>>>>> dev-mcsp16-team1 */}
-                  <div className={styles.editStudentToolTip}>Edit</div>
+                  <path d="m19.4 44-1-6.3q-.95-.35-2-.95t-1.85-1.25l-5.9 2.7L4 30l5.4-3.95q-.1-.45-.125-1.025Q9.25 24.45 9.25 24q0-.45.025-1.025T9.4 21.95L4 18l4.65-8.2 5.9 2.7q.8-.65 1.85-1.25t2-.9l1-6.35h9.2l1 6.3q.95.35 2.025.925Q32.7 11.8 33.45 12.5l5.9-2.7L44 18l-5.4 3.85q.1.5.125 1.075.025.575.025 1.075t-.025 1.05q-.025.55-.125 1.05L44 30l-4.65 8.2-5.9-2.7q-.8.65-1.825 1.275-1.025.625-2.025.925l-1 6.3ZM24 30.5q2.7 0 4.6-1.9 1.9-1.9 1.9-4.6 0-2.7-1.9-4.6-1.9-1.9-4.6-1.9-2.7 0-4.6 1.9-1.9 1.9-1.9 4.6 0 2.7 1.9 4.6 1.9 1.9 4.6 1.9Z" />
+                </svg>
+              </div>
+              <div className={style.profilePictureContainer}>
+                <div className={style.profilePicture}></div>
+                <h3>
+                  {activeStudent.first} {activeStudent.last}
+                </h3>
+                <h4>MCSP-16</h4>
+              </div>
+              <div className={style.studentDetails}>
+                <div>Email:</div>
+                <div>{activeStudent.email}</div>
+                <div>Duty Station:</div>
+                <div>{activeStudent.duty_station}</div>
+                <div>Military Branch:</div>
+                <div>{activeStudent.branch}</div>
+                <div>About Me</div>
+                <div className={style.aboutText}>
+                  <p>
+                    Im baby hexagon mumblecore intelligentsia, live-edge prism
+                    sus meh sriracha 3 wolf moon raw denim pok pok waistcoat
+                    forage. Paleo echo park art party gastropub locavore.
+                    Keffiyeh try-hard semiotics adaptogen flexitarian pour-over
+                    marfa lo-fi meh williamsburg bruh. Butcher chillwave
+                    crucifix narwhal. Enamel pin aesthetic DIY readymade ramps
+                    thundercats chambray, ethical hoodie glossier next level.
+                    Quinoa ascot tumblr tbh irony. Disrupt VHS fanny pack, hell
+                    of flexitarian cronut migas kinfolk.
+                  </p>
                 </div>
               </div>
-              <div className="styles.stuInfoETS">
-                <h4 className={styles.personalInfoSpacing}>ETS Date</h4>
-                <span>{activeStudent.ets_date}</span>
-              </div>
-              <h4 className={styles.personalInfoSpacing}>Personal Info</h4>
-              <div>
-                <span className={styles.title}> Email: </span>
-                <span className={styles.answer}>{activeStudent.email}</span>
-              </div>
-              <div>
-                <span className="title under-line"> MOS: </span>
-                <span className={styles.answer}>{activeStudent.mos}</span>
-              </div>
-              <div>
-                <span className={styles.title}> Rank: </span>
-                <span className={styles.answer}>{activeStudent.rank}</span>
-              </div>
-              <div>
-                <span className={styles.title}> Duty Station: </span>
-                <span className={styles.answer}>
-                  {activeStudent.duty_station}
-                </span>
-              </div>
-              <div>
-                <span className={styles.title}> Terminal Leave: </span>
-                <span className={styles.answer}>
-                  {activeStudent.leave_start_date}
-                </span>
-              </div>
-              <div>
-                <span className={styles.title}> TAP Status: </span>
-                <span className={styles.answer}>
-                  {activeStudent.taps_complete ? "Complete" : "Incomplete"}
-                </span>
-              </div>
-              <h4 className={styles.personalInfoSpacing}>Dependents</h4>
-              <div className={styles.title}>
-                <span>
-                  {activeStudent.has_dependents ? (
-                    <SPDependents student={activeStudent} />
-                  ) : (
-                    "None"
-                  )}
-                </span>
-              </div>
-              <div>
-                <h4 className={styles.personalInfoSpacing}> Education </h4>
-                <span className={styles.title}> Degree: </span>
-                <span className={styles.answer}>
-                  {activeStudent.highest_education}
-                </span>
-              </div>
-              <div>
-                <h4 className={styles.personalInfoSpacing}> Relocation </h4>
-                <span className={styles.title}> Planning to Relocate?: </span>
-                <span className={styles.answer}>
-                  {activeStudent.planning_to_relocate ? "Yes" : "No"}
-                </span>
-              </div>
-              <h4 className={styles.personalInfoSpacing}>Interests</h4>
-              <div className={styles.title}>
-                <span>{activeStudent.interests}</span>
-              </div>
             </div>
           </div>
-          <SPChecklist />
-          <SPTasks activeStudent={activeStudent} />
-          <Chat />
+          <div className={style.transitionSection}>
+            <div className={style.transitionSectionLower}>
+              <SPChecklist />
+              <h4 className={style.transitionDate}>
+                Separation Date: {activeStudent.ets_date}
+              </h4>
+            </div>
+          </div>
+          <div className={style.chatSection}>
+            <Chat />
+          </div>
         </div>
       </div>
     </div>

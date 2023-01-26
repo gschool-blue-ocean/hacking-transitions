@@ -1,34 +1,30 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { CgEnter } from "react-icons/cg";
 import style from "../../styles/LoginStyles.module.css";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+//import firebase
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { appContext } from "../../pages/_app";
-import LoadingScreen from "../../pages/loading";
+//import config firebasee key
+// const config = require('./config');
 
 let Login = () => {
-  // const firebaseConfig = {
-  //   apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
-  //   authDomain: "hackingtransitions-development.firebaseapp.com",
-  //   projectId: "hackingtransitions-development",
-  //   storageBucket: "hackingtransitions-development.appspot.com",
-  //   messagingSenderId: "473992713297",
-  //   appId: "1:473992713297:web:68e712395d1ccf79c49470",
-  // };
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
+    authDomain: "hackingtransitions-development.firebaseapp.com",
+    projectId: "hackingtransitions-development",
+    storageBucket: "hackingtransitions-development.appspot.com",
+    messagingSenderId: "473992713297",
+    appId: "1:473992713297:web:68e712395d1ccf79c49470",
+  };
+  //Initialize Firebase
+  // const app=getApps().length===0?initializeApp(firebaseConfig):getApp();
+  const app = initializeApp(firebaseConfig);
+  // Initialize Firebase Authentication and get a reference to the service
+  const auth = getAuth(app);
 
-  // const app = initializeApp(firebaseConfig);
-
-  // const auth = getAuth(app);
-  const {
-    currentFirebaseUser,
-    setCurrentFirebaseUser,
-    isLoading,
-    setIsLoading,
-  } = useContext(appContext);
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
@@ -38,29 +34,24 @@ let Login = () => {
   const [error, setError] = useState(false);
   let stayLogged = false;
 
-  const handleLogin = async (e) => {
-    setIsLoading(true);
-
+  const handleLogin = (e) => {
     e.preventDefault();
     let inputData = {
       email: loginData.email,
       password: loginData.password,
     };
 
-    await fetch(`/api/users/${inputData.email}`)
+    fetch(`/api/users/${inputData.email}`)
       .then((res) => {
         if (res.status === 404) throw new Error("Not Found");
         return res.json();
       })
       .then((user) => {
         signInWithEmailAndPassword(auth, inputData.email, inputData.password)
-          .then(async (userCredential) => {
+          .then((userCredential) => {
             console.log("user done configure");
-            await setCurrentFirebaseUser(userCredential.user);
-            console.log("currentFirebaseUser: ", currentFirebaseUser);
-            console.log("user: ", user);
-            // const currentUser = userCredential.user;
-            // console.log(currentUser);
+            const currentUser = userCredential.user;
+            console.log(currentUser);
 
             stayLogged &&
               localStorage.setItem("currentUser", JSON.stringify(user));
@@ -90,13 +81,28 @@ let Login = () => {
 
   // handleHash was here but was commented out;
   return (
-    // {isLoading && <LoadingScreen/>}
-    <div className={style.modalContainer}>
-      {/* <button onClick={handleHash}>CLICK TO HASH</button> */}
-      {/* <div className={style.picCont}> */}
-      {/* </div> */}
+    <div className={style.mainStage}>
+    <div className={style.subBar}>
+        <div className={style.resources}>
+          Resources:
+          <div className="source1">LEARN</div>
+          <div>|</div>
+          <div className="source2">Military Transition</div>
+          <div>|</div>
+          <a href="https://www.hireheroesusa.org/">
+            <div className="source3">Hire For Heroes</div>
+          </a>
+            
+        </div>
+        <div className={style.overlapGroup2}>
+          <div className={style.signUp}>Sign Up</div>
+        </div>
+
+      </div>
       <div className={style.loginContainer}>
-        <h1 className={style.loginTitle}>Hacking Transition</h1>
+      <div className={style.loginFormContainer}>
+
+        <h1 className={style.loginTitle}>Sign In</h1>
         {error && (
           <span id="blankLoginErrMsg" className={style.errorMsg}>
             Email/Password is Incorrect
@@ -155,6 +161,7 @@ let Login = () => {
             LOG IN <CgEnter />{" "}
           </button>
         </form>
+        </div>
       </div>
     </div>
   );
