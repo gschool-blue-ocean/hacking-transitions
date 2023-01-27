@@ -125,25 +125,28 @@ getCheckedPercent(checklistData);
 const containerStyles = {
   display: 'flex',
   flexWrap: 'wrap',
-  height: 3,
+  textAlign: 'right',
   width: '82%',
   backgroundColor: "#e0e0de",
+  borderRadius: '10px',
   marginBottom: 20,
+  overflow: 'hidden',
 }
 
 const fillerStyles = {
-  height: '100%',
-  width: `${getCheckedPercent(checklistData)}%`,
-  backgroundColor: '#F79020',
-  transition: 'width 1s ease-in-out',
-  borderRadius: 'inherit',
-}
+    height: '100%',
+    width: `${getCheckedPercent(checklistData)}%`,
+    backgroundColor: 'rgb(0, 140, 128)',
+    transition: 'width 1s ease-in-out',
+    borderTopLeftRadius: 'inherit',
+    borderBottomLeftRadius: 'inherit',
+    overflow: 'hidden',
+  }
 
 const labelStyles = {
-  fontSize: 10,
-  marginTop: 5,
-  color: 'grey',
-  alignSelf: 'flex-end'
+  marginLeft: '.3rem',
+  marginRight: '.3rem',
+  color: 'white',
 }
 
 const formStyles = {
@@ -158,8 +161,9 @@ const formStyles = {
       </div>
       <div className="progress-tracker" style={containerStyles}>
         <div style={fillerStyles}>
-        </div>      
         <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
+        </div>      
+      
       </div>
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
