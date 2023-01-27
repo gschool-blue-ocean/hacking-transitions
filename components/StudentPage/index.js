@@ -13,6 +13,7 @@ export default function StudentPage({ viewClickedCohort }) {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
+  console.log(activeStudent)
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -35,7 +36,7 @@ export default function StudentPage({ viewClickedCohort }) {
           <div className={styles.SDashHeader}>
             <div className={styles.SDashheaderCol}>
               <h1 id={styles.StuHeaderName}>
-                {activeStudent.first} {activeStudent.last}
+                {activeStudent.first} {activeStudent.last} 
               </h1>
               <p id={styles.StuHeaderBranch}>{activeStudent.branch}</p>
             </div>
@@ -65,6 +66,10 @@ export default function StudentPage({ viewClickedCohort }) {
                   {/* >>>>>>> dev-mcsp16-team1 */}
                   <div className={styles.editStudentToolTip}>Edit</div>
                 </div>
+              </div>
+              <div className="styles.stuInfoETS">
+                <h4 className={styles.personalInfoSpacing}>Cohort</h4>
+                <span>{activeStudent.cohort_name}</span>
               </div>
               <div className="styles.stuInfoETS">
                 <h4 className={styles.personalInfoSpacing}>ETS Date</h4>
