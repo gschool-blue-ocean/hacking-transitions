@@ -8,7 +8,7 @@ const Footer = () => {
       <div className={style.footer}>
         <div className={style.cont}>
           <div className={style.col}>
-            <small>© 2022 Galvanize, All rights resrved.</small>
+            <small>© 2013 - 2023 Galvanize, Inc.</small>
           </div>
           <div className={style.links}>
             <ul className={style.list}>

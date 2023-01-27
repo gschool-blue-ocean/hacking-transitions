@@ -47,7 +47,7 @@ const Header = ({ currentUser }) => {
                 signOut(auth)
                   .then(() => {
                     // Sign-out successful.
-                    alert("You have succesfully logged out");
+                    // alert("You have succesfully logged out");
                   })
                   .catch((error) => {
                     // An error happened.
