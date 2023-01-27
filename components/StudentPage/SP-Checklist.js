@@ -266,13 +266,13 @@ const formStyles = {
             type="submit"
             value="Update Checklist"
           />
-          <input
+          {/* <input
             id="7"
             className={styles.checklistButtons}
             onClick={handleCancel}
             type="button"
             value="Cancel"
-          />
+          /> */}
         </div>
       </div>
     </div>
