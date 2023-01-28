@@ -10,6 +10,8 @@
     width: 110rem;
     min-width: 400px;
     /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
+    border: 5px solid red;
+    /* min-width: 300px; */
 }
 .div {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
