@@ -2,6 +2,7 @@ import react, { useState } from "react";
 import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
+import { Alert } from "react-bootstrap";
 
 const SPChecklist = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const SPChecklist = () => {
     barracks_checkout: activeStudent.barracks_checkout,
     file_va_claim: activeStudent.file_va_claim,
   });
+  const [message, setMessage] = useState("")
 
   function convertDateToIso(date) {
     if (date == "") {
@@ -70,7 +72,11 @@ const SPChecklist = () => {
     })
       .then((res) => res.json())
       .then(() => {
-        dispatch(setActiveStudent(checklistData));
+        dispatch(setActiveStudent(checklistData))
+        setMessage("Success!")
+        setTimeout(() => {
+          setMessage("");
+        }, 1000)
       })
       .catch((err) => console.log(err));
   };
@@ -266,15 +272,27 @@ const formStyles = {
             type="submit"
             value="Update Checklist"
           />
-          <input
+          {/* <input
             id="7"
             className={styles.checklistButtons}
             onClick={handleCancel}
             type="button"
             value="Cancel"
-          />
+          /> */}
         </div>
       </div>
+      {message && (
+          <Alert
+            variant="primary"
+            style={{
+              background: 'none',
+              border: 'none',
+              textAlign: "center",
+            }}
+          >
+            {message}
+          </Alert>
+        )}
     </div>
   );
 };
