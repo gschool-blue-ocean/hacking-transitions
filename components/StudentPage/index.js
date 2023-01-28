@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SPTasks from "./SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
@@ -8,8 +8,11 @@ import Chat from "../Chat";
 import { FiEdit } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import ProfileEdit from "./Profile-Section/EditStudentv2";
 
 export default function StudentPage({ viewClickedCohort }) {
+  const [isEditOpen, setEditOpen] = useState(false);
+
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
@@ -27,7 +30,6 @@ export default function StudentPage({ viewClickedCohort }) {
   const handleEditBtnClicked = (e) => {
     console.log("show edit student modal");
   };
-
   return (
     <div className={styles.testgrid}>
       <div className={styles.container}>
@@ -42,30 +44,8 @@ export default function StudentPage({ viewClickedCohort }) {
             <SPETStag userETS={activeStudent.ets_date} />
           </div>
           <div className={styles.SDashInfocard}>
-            <div className={styles.infoCardcontainer}>
-              <div>
-                <div
-                  onClick={handleEditBtnClicked}
-                  className={styles.editStudentBtnSpan}
-                >
-                  {/* <<<<<<< HEAD
-                  <Link
-                    href={"student/editStudentModal"}
-                    as={"student/edit-student-information"}
-                  >
-                    <FiEdit className={styles.editStudentInfoBtn} />
-                  </Link>
-======= */}
-                  <a href={"student/editStudentModal"}>
-                    <FiEdit
-                      className={styles.editStudentInfoBtn}
-                      style={{ color: "black" }}
-                    />
-                  </a>
-                  {/* >>>>>>> dev-mcsp16-team1 */}
-                  <div className={styles.editStudentToolTip}>Edit</div>
-                </div>
-              </div>
+            <div className={styles.infoCardcontainer}>             
+              <ProfileEdit />
               <div className="styles.stuInfoETS">
                 <h4 className={styles.personalInfoSpacing}>ETS Date</h4>
                 <span>{activeStudent.ets_date}</span>
