@@ -46,6 +46,7 @@
 }
 
 .title{
+    display: flex;
     float:left;
     font-size: 4vmin;
     font-weight: 600;
@@ -55,4 +56,5 @@
     padding-left: 10px;
     justify-content: center;
     text-align: center;
+    font-size: 90%;
 }
