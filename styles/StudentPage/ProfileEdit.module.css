@@ -17,13 +17,27 @@
     height: 45vw;
     border: 1px solid red;
     display: flex;
+    flex-direction: column;
     align-items: center;
     color: orange;
+    background-color: rgb(10, 0, 78);
   }
   .editStudentFormInputs{
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .label{
-    
+    margin-right: auto;
   }
+  .answer{
+    margin-right: 0;
+  }
+  .myInterestsDiv{}
+  .interestLabel{}
+  .editInterestsTextarea{
+    resize: none;
+  }
+  .editStudentBtnDiv{}
+  .editStudentBtn{}

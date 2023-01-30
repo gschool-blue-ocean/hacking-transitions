@@ -82,185 +82,187 @@ const ProfileEdit = () => {
 
 
     return (
-      <div>
+    <div>
         <div className="Edit" onClick={handleButtonPress}><FiEdit/></div>
       {isModalOpen && (
-        <div className={css.ProfileEditBG}>
-           <form className={css.addStudentForm} onSubmit={handleSubmit}>
-        <div className={css.editStudentFormInputs}>
-          <label className={css.label}>
-            First
-            <input
-              id="editStudentFirstName"
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student First name"
-              onChange={handleChange}
-              name="first"
-              value={formData.first}
-            />
-          </label>
-          <label className={css.label}>
-            Last
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student Last name"
-              onChange={handleChange}
-              name="last"
-              value={formData.last}
-            />
-          </label>
-          <label className={css.label}>
-            Email
-            <input
-              required
-              className={css.answer}
-              type="email"
-              placeholder="Student Email Address"
-              onChange={handleChange}
-              name="email"
-              value={formData.email}
-            />
-          </label>
-          <label className={css.label}>
-            Rank
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student Rank"
-              onChange={handleChange}
-              name="rank"
-              value={formData.rank}
-            />
-          </label>
-          <label className={css.label}>
-            Branch
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student Branch of Service"
-              onChange={handleChange}
-              name="branch"
-              value={formData.branch}
-            />
-          </label>
-          <label className={css.label}>
-            Duty Station
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student Duty Station"
-              onChange={handleChange}
-              name="duty_station"
-              value={formData.duty_station}
-            />
-          </label>
-          <label className={css.label}>
-            Leave start date
-            <input
-              required
-              className={css.answer}
-              type="date"
-              onChange={handleChange}
-              name="leave_start_date"
-              value={formData.leave_start_date}
-            />
-          </label>
-          <label className={css.label}>
-            ETS date
-            <input
-              required
-              className={css.answer}
-              type="date"
-              onChange={handleChange}
-              name="ets_date"
-              value={formData.ets_date}
-            />
-          </label>
-          <label className={css.label}>
-            City
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student City"
-              onChange={handleChange}
-              name="city"
-              value={formData.city}
-            />
-          </label>
-          <label className={css.label}>
-            State
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student State"
-              onChange={handleChange}
-              name="state"
-              value={formData.state}
-            />
-          </label>
-          <label className={css.label}>
-            Highest education
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student highest education"
-              onChange={handleChange}
-              name="highest_education"
-              value={formData.highest_education}
-            />
-          </label>
-          <label className={css.label}>
-            Military Occupation
-            <input
-              required
-              className={css.answer}
-              type="text"
-              placeholder="Student Military occupation"
-              onChange={handleChange}
-              name="mos"
-              value={formData.mos}
-            />
-          </label>
-        </div>
-        {activeStudent.admin ? null : (
-          <div className={css.myInterestsDiv}>
-            <label className={css.interestLabel}>My interests:</label>
-            <textarea
-              className={css.editInterestsTextarea}
-              type="text"
-              onChange={handleChange}
-              name="interests"
-              value={formData.interests}
-            />
+      <div className={css.ProfileEditBG}>
+        <form className={css.addStudentForm} onSubmit={handleSubmit}>
+            <div className={css.editStudentFormInputs}>
+              <label className={css.label}>
+                First
+                <input
+                  id="editStudentFirstName"
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student First name"
+                  onChange={handleChange}
+                  name="first"
+                  value={formData.first}
+                />
+              </label>
+              <label className={css.label}>
+                Last
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student Last name"
+                  onChange={handleChange}
+                  name="last"
+                  value={formData.last}
+                />
+              </label>
+              <label className={css.label}>
+                Email
+                <input
+                  required
+                  className={css.answer}
+                  type="email"
+                  placeholder="Student Email Address"
+                  onChange={handleChange}
+                  name="email"
+                  value={formData.email}
+                />
+              </label>
+              <label className={css.label}>
+                Rank
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student Rank"
+                  onChange={handleChange}
+                  name="rank"
+                  value={formData.rank}
+                />
+              </label>
+              <label className={css.label}>
+                Branch
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student Branch of Service"
+                  onChange={handleChange}
+                  name="branch"
+                  value={formData.branch}
+                />
+              </label>
+              <label className={css.label}>
+                Duty Station
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student Duty Station"
+                  onChange={handleChange}
+                  name="duty_station"
+                  value={formData.duty_station}
+                />
+              </label>
+              <label className={css.label}>
+                Leave start date
+                <input
+                  required
+                  className={css.answer}
+                  type="date"
+                  onChange={handleChange}
+                  name="leave_start_date"
+                  value={formData.leave_start_date}
+                />
+              </label>
+              <label className={css.label}>
+                ETS date
+                <input
+                  required
+                  className={css.answer}
+                  type="date"
+                  onChange={handleChange}
+                  name="ets_date"
+                  value={formData.ets_date}
+                />
+              </label>
+              <label className={css.label}>
+                City
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student City"
+                  onChange={handleChange}
+                  name="city"
+                  value={formData.city}
+                />
+              </label>
+              <label className={css.label}>
+                State
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student State"
+                  onChange={handleChange}
+                  name="state"
+                  value={formData.state}
+                />
+              </label>
+              <label className={css.label}>
+                Highest education
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student highest education"
+                  onChange={handleChange}
+                  name="highest_education"
+                  value={formData.highest_education}
+                />
+              </label>
+              <label className={css.label}>
+                Military Occupation
+                <input
+                  required
+                  className={css.answer}
+                  type="text"
+                  placeholder="Student Military occupation"
+                  onChange={handleChange}
+                  name="mos"
+                  value={formData.mos}
+                />
+              </label>
+            {activeStudent.admin ? null : (
+              <div className={css.myInterestsDiv}>
+                <label className={css.interestLabel}>My interests:</label>
+                <textarea
+                  className={css.editInterestsTextarea}
+                  type="text"
+                  onChange={handleChange}
+                  name="interests"
+                  value={formData.interests}
+                  rows="4"
+                  cols="50"
+                />
+              </div>
+            )}
+            </div>
+            <div className={css.editStudentBtnDiv}>
+              <input
+                className={css.editStudentBtn}
+                type="submit"
+                value="Update Student"
+              />
+              <input
+                className={css.editStudentBtn}
+                onClick={handleCancelPress}
+                type="button"
+                value="Cancel"
+              />
           </div>
-        )}
-        <div className={css.editStudentBtnDiv}>
-          <input
-            className={css.editStudentBtn}
-            type="submit"
-            value="Update Student"
-          />
-          <input
-            className={css.editStudentBtn}
-            onClick={handleCancelPress}
-            type="button"
-            value="Cancel"
-          />
-        </div>
-      </form>
-        </div>
+        </form>
+      </div>
       )}
     </div>
-    )
+  )
 }
 export default ProfileEdit;
