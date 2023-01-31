@@ -31,8 +31,7 @@ export default function StudentPage({ viewClickedCohort }) {
     console.log("show edit student modal");
   };
   return (
-    <div className={styles.testgrid}>
-      <div className={styles.container}>
+      <main className={styles.container}>
         <div className={styles.StudentDashWrapper}>
           <div className={styles.SDashHeader}>
             <div className={styles.SDashheaderCol}>
@@ -115,7 +114,6 @@ export default function StudentPage({ viewClickedCohort }) {
           <SPTasks activeStudent={activeStudent} />
           <Chat />
         </div>
-      </div>
-    </div>
+      </main>
   );
 }

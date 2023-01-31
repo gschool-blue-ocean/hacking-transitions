@@ -22,9 +22,9 @@ function EditStudent(props) {
   }, []);
   return (
     loggedIn && (
-      <div>
+      <>
         <EditStudentModal />
-      </div>
+      </>
     )
   );
 }
