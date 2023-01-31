@@ -21,20 +21,19 @@ const ProfileEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("submitted", formData);
-    // fetch(`/api/users/${activeStudent.user_id}`, {
-    //   method: "PATCH",
-    //   body: JSON.stringify(formData),
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((res) => res.json())
-    //   .then(() => {
-    //     dispatch(setActiveStudent(formData));
-    //     router.push("/student");
-    //   })
-    //   .catch((err) => console.log(err));
-    // console.log(JSON.stringify(formData))
-    console.log(formData)
+    console.log("submitted", formData);
+    fetch(`/api/users/${activeStudent.user_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        dispatch(setActiveStudent(formData));
+        router.push("/student");
+      })
+      .catch((err) => console.log(err));
+    console.log(JSON.stringify(formData))
   };
   const handleChange = (e) => {
     if (e.target.type === "checkbox") {
