@@ -155,7 +155,7 @@ const ProfileEdit = () => {
                 </section>
                 <section>
                   <label >Branch:</label>
-                  <select 
+                  <select
                     className={css.answer}
                     type="text"
                     placeholder="Student Branch of Service"
@@ -286,7 +286,7 @@ const ProfileEdit = () => {
               </div>
             </form>
           </div>
-          <div className={css.EditBackground} onClick={()=>{setIsModalOpen(false)}}></div>
+          <div className={css.EditBackground} onClick={() => { setIsModalOpen(false) }}></div>
         </>
       )}
     </>
