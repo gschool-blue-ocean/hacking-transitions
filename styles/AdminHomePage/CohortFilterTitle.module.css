@@ -9,6 +9,7 @@
     border-top: 1px rgb(232, 232, 232) solid;
 }
 .td{
+    font-size: 1vw;
     padding-right: 2vw;
     cursor: pointer;
 }
@@ -29,7 +30,7 @@
     background: #e0eaf8;
     
     
-}
+} 
 .sortButton{
    float: left;
     margin-top: 10px;
@@ -39,7 +40,7 @@
    
     
 }
-.blankButton {
+ .blankButton {
     font-size: 2.5vw;
     margin-top: 10px;
     gap: 2px;
@@ -47,8 +48,6 @@
 
 .title{
     display: flex;
-    float:left;
-    font-size: 4vmin;
     font-weight: 600;
     margin-top: 10px;
     margin-left: 2px;
@@ -56,5 +55,5 @@
     padding-left: 10px;
     justify-content: center;
     text-align: center;
-    font-size: 90%;
+    font-size: 2vw;
 }
