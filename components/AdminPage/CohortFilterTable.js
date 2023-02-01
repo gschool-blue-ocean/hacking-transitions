@@ -31,19 +31,19 @@ const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClicke
                                 dispatch(setStudentsForCohortChat([]));
                               }}
                             >
-                              <LinkToViewStudent id={cohort.cohort_id}>
+                              <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
                                 <td>
                                   <btn className={s.td}>{student.first}</btn>
                                 </td>
                               </LinkToViewStudent>
 
-                              <LinkToViewStudent id={cohort.cohort_id}>
+                              <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
                                 <td>
                                   <btn className={s.td}>{student.last}</btn>
                                 </td>
                               </LinkToViewStudent>
 
-                              <LinkToViewStudent id={cohort.cohort_id}>
+                              <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
                                 <ColorEts daysToEts={daysToEts}>
                                   <td>
                                     <btn className={s.td}>{student.ets_date}</btn>
@@ -51,13 +51,13 @@ const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClicke
                                 </ColorEts>
                               </LinkToViewStudent>
 
-                              <LinkToViewStudent id={cohort.cohort_id}>
+                              <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
                                 <td>
                                   <btn className={s.td}>{student.leave_start_date}</btn>
                                 </td>
                               </LinkToViewStudent>
 
-                              <LinkToViewStudent id={cohort.cohort_id}>
+                              <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
                                 <td>
                                   <btn className={s.td}>{student.branch}</btn>
                                 </td>
