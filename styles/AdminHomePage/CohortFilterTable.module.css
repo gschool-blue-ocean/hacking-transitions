@@ -38,11 +38,14 @@
 }
 .tr{
     border-top: 1px rgb(232, 232, 232) solid;
+    
 }
 .td{
-  font-size: 3vmin;
+    
+   font-size: 1vw;
    padding-right: 2rem;
    cursor: pointer;
+   
 }
 .default {
     margin-left: 30rem

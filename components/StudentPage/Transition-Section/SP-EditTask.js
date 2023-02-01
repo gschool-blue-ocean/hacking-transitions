@@ -46,6 +46,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
    };
 
    return (
+
       <div className={styles.ModalEditTask}>
          <button
             className={styles.ModalTaskBtns}
@@ -84,18 +85,7 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                   <option value="false">In Progress</option>
                </select>
             </div>
-
-            <div className={styles.ModalTaskInputs}>
-               <label>Description</label>
-               <input
-                  defaultValue={task.description}
-                  type="text"
-                  placeholder="description"
-                  {...register("description", { required: true })}
-               />
-            </div>
-            <input className={styles.ModalTaskBtns} type="submit" value="Submit Edit" />
          </form>
       </div>
-   );
+   )
 }

@@ -16,6 +16,7 @@ export default function StudentPage({ viewClickedCohort }) {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
+  console.log(activeStudent)
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
