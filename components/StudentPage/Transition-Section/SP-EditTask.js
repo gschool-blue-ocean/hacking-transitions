@@ -1,28 +1,53 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import styles from "../../../styles/StudentPage.module.css";
+import styles from "../../styles/StudentPage.module.css";
+import axios from "axios";
 
 export default function SPEditTask({ task, cancelEdit, closeModal }) {
    const { register, handleSubmit } = useForm();
 
-   const editTask = (edit, task) => {
-      const taskID = task.task_id;
-      const editData = {
-         title: edit.title,
-         date: convertDateToIso(edit.date),
-         description: edit.description,
-         completed: JSON.parse(edit.completed),
-         remarks: null, // Remarks have been deleted
-      };
+//////////// PATCH request for edit tasks modal refactored to use axios ///////////
 
-      fetch(`/api/tasks/${taskID}`, {
-         method: "PATCH",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify(editData),
-      });
-      cancelEdit(false);
-      closeModal(false);
+const editTask = async (edit, task) => {
+   const taskID = task.task_id;
+   const editData = {
+       title: edit.title,
+       date: convertDateToIso(edit.date),
+       description: edit.description,
+       completed: JSON.parse(edit.completed),
+       remarks: null, // Remarks have been deleted
    };
+   try {
+       await axios.patch(`/api/tasks/${taskID}`, editData, {
+           headers: { "Content-Type": "application/json" },
+       });
+   } catch (err) {
+       console.log(err);
+   }
+   cancelEdit(false);
+   closeModal(false);
+};
+
+
+//////////////// Old PATCH request using fetch /////////////////////////
+
+   // const editTask = (edit, task) => {
+   //    const taskID = task.task_id;
+   //    const editData = {
+   //       title: edit.title,
+   //       date: convertDateToIso(edit.date),
+   //       description: edit.description,
+   //       completed: JSON.parse(edit.completed),
+   //       remarks: null, // Remarks have been deleted
+   //    };
+   //    fetch(`/api/tasks/${taskID}`, {
+   //       method: "PATCH",
+   //       headers: { "Content-Type": "application/json" },
+   //       body: JSON.stringify(editData),
+   //    });
+   //    cancelEdit(false);
+   //    closeModal(false);
+   // };
 
    function convertDateToIso(date) {
       if (date.split("-")[0].length === 4) {
@@ -46,7 +71,6 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
    };
 
    return (
-
       <div className={styles.ModalEditTask}>
          <button
             className={styles.ModalTaskBtns}
@@ -85,7 +109,18 @@ export default function SPEditTask({ task, cancelEdit, closeModal }) {
                   <option value="false">In Progress</option>
                </select>
             </div>
+
+            <div className={styles.ModalTaskInputs}>
+               <label>Description</label>
+               <input
+                  defaultValue={task.description}
+                  type="text"
+                  placeholder="description"
+                  {...register("description", { required: true })}
+               />
+            </div>
+            <input className={styles.ModalTaskBtns} type="submit" value="Submit Edit" />
          </form>
       </div>
-   )
+   );
 }
