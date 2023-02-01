@@ -36,24 +36,28 @@ return (
         <table className={s.table}>
             <tr className={s.headtr}>
                 <th className={s.tableheaders}>
-                    <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
-                    <h1 className={s.title}> First </h1>
+                    {/* <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
+                    <p>&nbsp;</p> */}
+                    <h1 className={s.title} id="firstTitle"> First </h1>
                 </th>
                 <th className={s.tableheaders}>
-                    <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
+                    {/* <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
+                    <p>&nbsp;</p> */}
                    <h1 className={s.title}>Last</h1>  
                 </th>
                 <th className={s.tableheaders}>
-                    <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
+                    {/* <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
+                    <p>&nbsp;</p> */}
                     <h1 className={s.title}>ETS</h1>
                 </th>
                 <th className={s.tableheaders}>
-                <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                  
-
+                {/* <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                  
+                    <p>&nbsp;</p> */}
                     <h1 className={s.title}>Leave </h1>
                 </th>
                 <th className={s.tableheaders}>
-                <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
+                {/* <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
+                <p>&nbsp;&nbsp;</p> */}
                  <h1 className={s.title}>Branch</h1>
                 </th>
                 <th className={s.tableheaders}>
