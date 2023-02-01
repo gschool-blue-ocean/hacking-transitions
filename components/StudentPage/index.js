@@ -40,20 +40,20 @@ export default function StudentPage({ viewClickedCohort }) {
             <h1 id={styles.StuHeaderName}>Welcome, {activeStudent.first} {activeStudent.last}</h1>
           </div>
           <Link href={"/"} passHref>
-            <a
+            <a className={styles.LogOutLink}
               onClick={() => {
-                // const auth = getAuth();
                 localStorage.removeItem("currentUser");
                 window.sessionStorage.removeItem("currentUser");
-                signOut(auth)
-                  .then(() => {
-                    // Sign-out successful.
-                    // alert("You have succesfully logged out");
-                  })
-                  .catch((error) => {
-                    // An error happened.
-                    console.log(error);
-                  });
+                // const auth = getAuth();
+                // signOut(auth)
+                //   .then(() => {
+                //     // Sign-out successful.
+                //     // alert("You have succesfully logged out");
+                //   })
+                //   .catch((error) => {
+                //     // An error happened.
+                //     console.log(error);
+                //   });
               }}
             >
               <div className={styles.LogOutTab}>

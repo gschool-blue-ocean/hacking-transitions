@@ -471,6 +471,9 @@ margin-top: 20px;
    color: white;
    padding: .5vw;
 }
+.LogOutLink{
+   text-decoration: none;
+}
 .LogOutTab:hover{
    color: rgb(10, 0, 78);
    cursor: pointer;

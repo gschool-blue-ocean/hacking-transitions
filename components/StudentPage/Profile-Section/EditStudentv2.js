@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../../redux/features/app-slice";
+import axios from "axios";
+
 import { FiEdit } from "react-icons/fi";
 import { FaCogs } from "react-icons/fa";
 import { TbArrowBack } from "react-icons/tb"
@@ -22,21 +24,18 @@ const ProfileEdit = () => {
     setIsModalOpen(true);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", formData);
-    fetch(`/api/users/${activeStudent.user_id}`, {
-      method: "PATCH",
-      body: JSON.stringify(formData),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then(() => {
-        dispatch(setActiveStudent(formData));
-        router.push("/student");
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await axios.patch(`/api/users/${activeStudent.user_id}`, formData);
+      dispatch(setActiveStudent(formData));
+      router.push("/student");
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   const handleChange = (e) => {
     setFormData((prevData) => {
       return {
