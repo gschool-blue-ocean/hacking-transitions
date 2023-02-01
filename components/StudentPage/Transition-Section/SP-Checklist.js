@@ -2,6 +2,8 @@ import react, { useState } from "react";
 import styles from "../../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../../redux/features/app-slice";
+import { Alert } from "react-bootstrap";
+import axios from "axios";
 
 const SPChecklist = () => {
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ const SPChecklist = () => {
     barracks_checkout: activeStudent.barracks_checkout,
     file_va_claim: activeStudent.file_va_claim,
   });
+  const [message, setMessage] = useState("")
 
   function convertDateToIso(date) {
     if (date == "") {
@@ -60,20 +63,43 @@ const SPChecklist = () => {
     console.log("canceled", checklistData);
   };
 
-  const handleSubmit = (e) => {
+  ////////////////// PATCH request for update checklist refactored to use axios //////////////
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`/api/users/${checklistData.user_id}`, {
-      method: "PATCH",
-      body: JSON.stringify(checklistData),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then(() => {
+    try {
+        const res = await axios.patch(`/api/users/${checklistData.user_id}`, checklistData);
         dispatch(setActiveStudent(checklistData));
-      })
-      .catch((err) => console.log(err));
-  };
+        setMessage("Success!");
+        setTimeout(() => {
+            setMessage("");
+        }, 1000);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+////////////////// Old PATCH request using fetch /////////////////////
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("submitted", checklistData);
+  //   fetch(`/api/users/${checklistData.user_id}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify(checklistData),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       dispatch(setActiveStudent(checklistData))
+  //       setMessage("Success!")
+  //       setTimeout(() => {
+  //         setMessage("");
+  //       }, 1000)
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const handleChange = (e) => {
     console.log("changed");
@@ -125,29 +151,36 @@ getCheckedPercent(checklistData);
 const containerStyles = {
   display: 'flex',
   flexWrap: 'wrap',
-  height: 3,
+  textAlign: 'right',
   width: '82%',
   backgroundColor: "#e0e0de",
+  borderRadius: '10px',
   marginBottom: 20,
+  overflow: 'hidden',
 }
 
 const fillerStyles = {
-  height: '100%',
-  width: `${getCheckedPercent(checklistData)}%`,
-  backgroundColor: '#F79020',
-  transition: 'width 1s ease-in-out',
-  borderRadius: 'inherit',
-}
+    height: '100%',
+    width: `${getCheckedPercent(checklistData)}%`,
+    backgroundColor: 'rgb(0, 140, 128)',
+    transition: 'width 1s ease-in-out',
+    borderTopLeftRadius: 'inherit',
+    borderBottomLeftRadius: 'inherit',
+    overflow: 'hidden',
+  }
 
 const labelStyles = {
-  fontSize: 10,
-  marginTop: 5,
-  color: 'grey',
-  alignSelf: 'flex-end'
+  marginLeft: '.3rem',
+  marginRight: '.3rem',
+  color: 'white',
 }
 
 const formStyles = {
   marginBottom: 0,
+}
+
+const checkStyle = {
+  accentColor: 'rgb(0, 140, 128)'
 }
 
   return (
@@ -158,66 +191,79 @@ const formStyles = {
       </div>
       <div className="progress-tracker" style={containerStyles}>
         <div style={fillerStyles}>
-        </div>      
         <span style={labelStyles}>{`${getCheckedPercent(checklistData)}%`}</span>
+        </div>      
+      
       </div>
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
           <label className="checkboxLabel">
             <input
+              className="checkbox"
               id="1"
               checked={checklistData.final_physical}
               type="checkbox"
               name="final_physical"
+              style={checkStyle}
               onChange={handleChange}
             />{" "}
             Seperation Physical Complete?
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="2"
               checked={checklistData.gear_turn_in}
               type="checkbox"
               name="gear_turn_in"
+              style={checkStyle}
               onChange={handleChange}
             />{" "}
             Final Gear Turn-In?
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="3"
               checked={checklistData.hhg_move}
               type="checkbox"
               name="hhg_move"
+              style={checkStyle}
               onChange={handleChange}
             />{" "}
             HHG move?
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="4"
               checked={checklistData.barracks_checkout}
               type="checkbox"
               name="barracks_checkout"
+              style={checkStyle}
               onChange={handleChange}
             />{" "}
             Barracks Checkout?
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="5"
               checked={checklistData.file_va_claim}
               type="checkbox"
               name="file_va_claim"
+              style={checkStyle}
               onChange={handleChange}
             />{" "}
             VA Claim Filed?
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="6"
               type="checkbox"
               name="seeking_further_education"
+              style={checkStyle}
               onChange={handleChange}
               checked={checklistData.seeking_further_education}
             />{" "}
@@ -225,9 +271,11 @@ const formStyles = {
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="7"
               type="checkbox"
               name="planning_to_relocate"
+              style={checkStyle}
               onChange={handleChange}
               checked={checklistData.planning_to_relocate}
             />{" "}
@@ -235,9 +283,11 @@ const formStyles = {
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="8"
               type="checkbox"
               name="taps_complete"
+              style={checkStyle}
               onChange={handleChange}
               checked={checklistData.taps_complete}
             />{" "}
@@ -245,9 +295,11 @@ const formStyles = {
           </label>
           <label className={styles.checkboxLabel}>
             <input
+              className="checkbox"
               id="9"
               type="checkbox"
               name="has_dependents"
+              style={checkStyle}
               onChange={handleChange}
               checked={checklistData.has_dependents}
             />{" "}
@@ -262,15 +314,27 @@ const formStyles = {
             type="submit"
             value="Update Checklist"
           />
-          <input
+          {/* <input
             id="7"
             className={styles.checklistButtons}
             onClick={handleCancel}
             type="button"
             value="Cancel"
-          />
+          /> */}
         </div>
       </div>
+      {message && (
+          <Alert
+            variant="primary"
+            style={{
+              background: 'none',
+              border: 'none',
+              textAlign: "center",
+            }}
+          >
+            {message}
+          </Alert>
+        )}
     </div>
   );
 };
