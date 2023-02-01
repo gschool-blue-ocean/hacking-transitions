@@ -39,10 +39,29 @@ export default function StudentPage({ viewClickedCohort }) {
             <h1>Student Portal</h1>
             <h1 id={styles.StuHeaderName}>Welcome, {activeStudent.first} {activeStudent.last}</h1>
           </div>
-          <div className={styles.LogOutTab}>
-              <SlLogout />
-              <div>Logout</div>
-          </div>
+          <Link href={"/"} passHref>
+            <a
+              onClick={() => {
+                // const auth = getAuth();
+                localStorage.removeItem("currentUser");
+                window.sessionStorage.removeItem("currentUser");
+                signOut(auth)
+                  .then(() => {
+                    // Sign-out successful.
+                    // alert("You have succesfully logged out");
+                  })
+                  .catch((error) => {
+                    // An error happened.
+                    console.log(error);
+                  });
+              }}
+            >
+              <div className={styles.LogOutTab}>
+                  <SlLogout />
+                  <div>Logout</div>
+              </div>
+            </a>
+          </Link>
           {/* <SPETStag userETS={activeStudent.ets_date} /> */}
         </div>
         <div className={styles.SDashInfocard}>
