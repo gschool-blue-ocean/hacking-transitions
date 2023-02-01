@@ -166,14 +166,10 @@ margin-left: auto;
    border-radius: 1px;
    flex-wrap: nowrap;
    align-items: center;
-   margin-left: 12px;
    background-color: #fff;
-   margin-top: 5px;
    max-height: 39.5rem;
    min-height: 39.5rem;
-   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
    border-top: 1px solid #F79020;
-   padding-top: 3%;
    overflow-y: scroll;
 }
 
@@ -219,15 +215,11 @@ margin-top: 20px
    border-radius: 1px;
    flex-wrap: nowrap;
    align-items: center;
-   margin-left: 12px;
    background-color: #fff;
-   margin-top: 5px;
    overflow-y: scroll;
    max-height: 39.5rem;
    min-height: 39.5rem;
-   box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
    border-top: 1px solid #F79020;
-   padding-top: 3%;
 }
 
 .SDashTasks::-webkit-scrollbar {

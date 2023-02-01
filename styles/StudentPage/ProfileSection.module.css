@@ -21,15 +21,38 @@
   color: rgb(212, 80, 6);
   background-color: rgb(10, 0, 78);
   display: flex;
+  flex-direction: column;
+  padding: .5vw 1vw 1vw 1vw;
 }
-
+.EditPassword {
+  display: flex;
+  gap: .5vw;
+  margin-left: auto;
+  margin-right: 0;
+}
+.EditPassword:hover{
+  color: white;
+  cursor: pointer;
+}
+.EditPasswordTitle {
+  display: flex;
+}
+.EditPasswordTitle h6 {
+  margin: 0;
+  align-self: center;
+}
+.EditPasswordTitle > svg {
+  width: 2vw;
+  height: 2vw;
+  margin-left: .5em;
+}
 .EditProfileForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 1vw;
   flex: 1;
+  padding-top: 1vw;
 }
 
 .EditProfileUpper {
@@ -65,4 +88,26 @@
   width: fit-content;
   margin-right: 0;
   margin-left: auto;
+}
+
+/* ==================== PASSWORD MANAGEMENT MODAL ==================== */
+.EditPasswordForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
+  margin-top: 1em;
+ 
+}
+.EditPasswordForm section:not(.EditPasswordForm section:last-child) {
+  width: 100%;
+  display: flex;
+}
+.EditPasswordForm section label{
+  margin-right: auto;
+}
+.EditPasswordForm section input{
+  margin-left: auto;
+  margin-right: 0;
 }
