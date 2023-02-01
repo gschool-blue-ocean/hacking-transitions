@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../../redux/features/app-slice";
 import axios from "axios";
-
 import { FiEdit } from "react-icons/fi";
 import { FaCogs } from "react-icons/fa";
 import { TbArrowBack } from "react-icons/tb"
