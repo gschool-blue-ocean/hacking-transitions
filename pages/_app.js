@@ -1,13 +1,12 @@
-import "../styles/globals.css";
-import "../styles/LoginStyles.module.css";
-import store from "../redux/store";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
+import store from "../redux/store";
 import Meta from "../components/Meta";
 import Layout from "../components/Layout";
+import "../styles/globals.css";
+import "../styles/LoginStyles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
 
-//^^allows use of bootstrap css across website
 function MyApp({ Component, pageProps }) {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [currentFirebaseUser, setCurrentFirebaseUser] = useState();
@@ -29,7 +28,7 @@ function MyApp({ Component, pageProps }) {
     <appContext.Provider value={{ ...contextData }}>
       <Provider store={store}>
         <Meta />
-        <Component {...pageProps} />{" "}
+        <Component {...pageProps} />
       </Provider>
     </appContext.Provider>
   ) : (
@@ -37,7 +36,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <Meta />
         <Layout>
-          <Component {...pageProps} />{" "}
+          <Component {...pageProps} />
         </Layout>
       </Provider>
     </appContext.Provider>

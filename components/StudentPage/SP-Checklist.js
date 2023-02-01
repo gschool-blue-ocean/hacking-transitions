@@ -3,6 +3,7 @@ import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import { Alert } from "react-bootstrap";
+import axios from "axios";
 
 const SPChecklist = () => {
   const dispatch = useDispatch();
@@ -62,24 +63,43 @@ const SPChecklist = () => {
     console.log("canceled", checklistData);
   };
 
-  const handleSubmit = (e) => {
+  ////////////////// PATCH request for update checklist refactored to use axios //////////////
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
-    fetch(`/api/users/${checklistData.user_id}`, {
-      method: "PATCH",
-      body: JSON.stringify(checklistData),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then(() => {
-        dispatch(setActiveStudent(checklistData))
-        setMessage("Success!")
+    try {
+        const res = await axios.patch(`/api/users/${checklistData.user_id}`, checklistData);
+        dispatch(setActiveStudent(checklistData));
+        setMessage("Success!");
         setTimeout(() => {
-          setMessage("");
-        }, 1000)
-      })
-      .catch((err) => console.log(err));
-  };
+            setMessage("");
+        }, 1000);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+////////////////// Old PATCH request using fetch /////////////////////
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("submitted", checklistData);
+  //   fetch(`/api/users/${checklistData.user_id}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify(checklistData),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       dispatch(setActiveStudent(checklistData))
+  //       setMessage("Success!")
+  //       setTimeout(() => {
+  //         setMessage("");
+  //       }, 1000)
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const handleChange = (e) => {
     console.log("changed");

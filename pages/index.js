@@ -1,61 +1,35 @@
+import style from "../styles/LoginStyles.module.css";
 import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import Login from "../components/Login/index";
-import Layout from "../components/Login/LoginLayout";
+import UserLogin from "../components/LoginPage/index";
+import LoginLayout from "../components/LoginPage/LoginLayout";
 import LoadingScreen from "./loading";
 import { appContext } from "./_app";
-
-import { setActiveStudent } from "../redux/features/app-slice";
 
 //=========================  LOGIN PAGE ==================
 
 function Home() {
   const { isLoading, setIsLoading } = useContext(appContext);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    /*
-          Check local storage for a signed in user, if exist sign them in
-    */
+    // this useEffect checks if a currentUser exists in session storage:
+    // if user exists, redirect to appropriate page (student or admin)
     if (window) {
-      const localUser = localStorage.getItem("currentUser");
       const sessionUser = window.sessionStorage.getItem("currentUser");
-      localUser && confirmStorageUser(localUser, true);
-      sessionUser && confirmStorageUser(sessionUser);
+      console.log("sessionStorage: ", sessionStorage);
+      console.log("sessionUser: ", JSON.parse(sessionUser));
+      if (sessionUser !== null) {
+        setIsLoading(true);
+        sessionUser.admin ? router.push("/admin") : router.push("/student");
+      }
     }
   }, []);
-  // useEffect(() => {
-  //   /*
-  //         Check local storage for a signed in user, if exist sign them in
-  //     */
-  //   if (window) {
-  //     const localUser = localStorage.getItem("currentUser");
-  //     const sessionUser = window.sessionStorage.getItem("currentUser");
-  //     localUser && confirmStorageUser(localUser, true);
-  //     sessionUser && confirmStorageUser(sessionUser);
-  //   }
-  // }, []);
-
-  const confirmStorageUser = async (currentUser, local = false) => {
-    const currentUserObj = JSON.parse(currentUser);
-    console.log("1");
-    const user = await (
-      await fetch(`/api/users/${currentUserObj.username}`)
-    ).json();
-    if (user.password === currentUserObj.password) {
-      console.log("2");
-      local && localStorage.setItem("currentUser", JSON.stringify(user));
-      window.sessionStorage.setItem("currentUser", JSON.stringify(user));
-      user.admin ? router.push("/admin") : router.push("/student"),
-        dispatch(setActiveStudent(user));
-    }
-  };
 
   return (
     <>
-      <Layout>{isLoading ? <LoadingScreen /> : <Login />}</Layout>
+      <LoginLayout>{isLoading ? <LoadingScreen /> : <UserLogin />}</LoginLayout>
     </>
   );
 }
