@@ -1,5 +1,5 @@
 // const isIsomorphic = require('../Algorithms/Isomorphic-Strings');
-// describe('Determines if two strings are isomorphic', () => { 
+// describe('Determines if two strings are isomorphic', () => {
 //     test('should determine if two strings are isomorphic', () => {
 //         expect(isIsomorphic('egg', 'add')).toBe(true)
 //       })
@@ -8,4 +8,6 @@
 //       })
 //     })
 //add test here
-console.log('add tests here')
+console.log("add tests here");
+
+// Test options - ViTest / Jest
