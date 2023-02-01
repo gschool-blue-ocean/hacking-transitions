@@ -8,6 +8,7 @@ import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudentTasks } from "../../redux/features/app-slice";
+import axios from "axios";
 
 //task modal styling
 const customStyles = {
@@ -73,15 +74,30 @@ export default function SPTasks({ activeStudent }) {
     }
   }
 
-  const getTasks = () => {
+////////// GET request for student tasks refactored to use axios /////////////
+
+  const getTasks = async () => {
     if (activeStudent.user_id) {
-      fetch(`api/tasks/student/${activeStudent.user_id}`)
-        .then((res) => res.json())
-        .then((tasks) => {
-          dispatch(setStudentTasks(tasks));
-        });
+      try {
+        const res = await axios.get(`api/tasks/student/${activeStudent.user_id}`)
+        dispatch(setStudentTasks(res.data))
+      } catch (err) {
+        console.log(err);
+      }
     }
-  };
+  }
+
+//////////// Old GET request using fetch ///////////////
+
+  // const getTasks = () => {
+  //   if (activeStudent.user_id) {
+  //     fetch(`api/tasks/student/${activeStudent.user_id}`)
+  //       .then((res) => res.json())
+  //       .then((tasks) => {
+  //         dispatch(setStudentTasks(tasks));
+  //       });
+  //   }
+  // };
 
   return (
     <div className={styles.SDashTasks}>
