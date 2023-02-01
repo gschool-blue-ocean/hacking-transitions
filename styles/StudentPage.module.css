@@ -26,12 +26,13 @@
    grid-area: StuHeader;
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
    padding: 1rem;
+   align-items: center;
 }
 .SDashheaderCol {
    display: flex;
    flex-direction: column;
+   margin-right: auto;
 }
 
 #StuHeaderName {
@@ -447,3 +448,21 @@ margin-top: 20px
  }
 
  
+/* =============== UPDATED STYLES =============== */
+.LogOutTab{
+   display: flex;
+   flex-direction: row;
+   font-size: 1.5vw;
+   gap: .5vw;
+   margin-right: 0;
+   background-color: rgb(212, 80, 6);
+   color: white;
+   padding: .5vw;
+}
+.LogOutTab:hover{
+   color: rgb(10, 0, 78);
+}
+
+.LogOutTab > svg {
+   align-self: center;
+}

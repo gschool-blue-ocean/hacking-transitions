@@ -1,7 +1,7 @@
 import react, { useState } from "react";
-import styles from "../../styles/StudentPage.module.css";
+import styles from "../../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveStudent } from "../../redux/features/app-slice";
+import { setActiveStudent } from "../../../redux/features/app-slice";
 
 const SPChecklist = () => {
   const dispatch = useDispatch();

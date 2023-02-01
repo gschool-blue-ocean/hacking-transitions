@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../../styles/StudentPage.module.css";
+import styles from "../../../styles/StudentPage.module.css";
 import { useDispatch } from "react-redux";
-import { deleteStudentTask } from '../../redux/features/app-slice';
+import { deleteStudentTask } from '../../../redux/features/app-slice';
 
 
 // Pull  Selected Task Info from DB

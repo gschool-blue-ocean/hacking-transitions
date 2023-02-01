@@ -12,7 +12,7 @@ const Student = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // setIsLoading(false); ======== CAUSING ERROR WHEN LOADING STUDENT PAGE
+  //setIsLoading(false); // CAUSING ERROR WHEN LOADING STUDENT PAGE
 
   useEffect(() => {
     (async () => {

@@ -5,9 +5,9 @@ import SPEditTask from "./SP-EditTask";
 import SPCreateTask from "./SP-CreateTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
-import styles from "../../styles/StudentPage.module.css";
+import styles from "../../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setStudentTasks } from "../../redux/features/app-slice";
+import { setStudentTasks } from "../../../redux/features/app-slice";
 
 //task modal styling
 const customStyles = {

@@ -18,7 +18,6 @@ const ProfileEdit = () => {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
-
   function handleButtonPress() {
     setIsModalOpen(true);
   }
@@ -37,18 +36,8 @@ const ProfileEdit = () => {
         router.push("/student");
       })
       .catch((err) => console.log(err));
-    console.log(JSON.stringify(formData))
   };
   const handleChange = (e) => {
-    if (e.target.type === "checkbox") {
-      return setFormData((prevData) => {
-        return {
-          ...prevData,
-          [e.target.name]: e.target.checked,
-        };
-      });
-    }
-
     setFormData((prevData) => {
       return {
         ...prevData,
@@ -58,23 +47,23 @@ const ProfileEdit = () => {
   };
   const [formData, setFormData] = useState({
     user_id: activeStudent.user_id,
-    first: activeStudent.first,
-    last: activeStudent.last,
+    firstname: activeStudent.first,
+    lastname: activeStudent.last,
     email: activeStudent.email,
     rank: activeStudent.rank,
     branch: activeStudent.branch,
-    duty_station: activeStudent.duty_station,
+    dutystation: activeStudent.duty_station,
     taps_complete: activeStudent.taps_complete,
-    leave_start_date: convertDateToIso(activeStudent.leave_start_date),
-    ets_date: convertDateToIso(activeStudent.ets_date),
+    leavestartdate: convertDateToIso(activeStudent.leave_start_date),
+    etsdate: convertDateToIso(activeStudent.ets_date),
     planning_to_relocate: activeStudent.planning_to_relocate,
     city: activeStudent.city,
     state: activeStudent.state,
     has_dependents: activeStudent.has_dependents,
-    highest_education: activeStudent.highest_education,
+    highesteducation: activeStudent.highest_education,
     seeking_further_education: activeStudent.seeking_further_education,
     mos: activeStudent.mos,
-    interests: activeStudent.interests,
+    aboutme: activeStudent.interests,
     file_va_claim: activeStudent.file_va_claim,
     hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
@@ -116,7 +105,7 @@ const ProfileEdit = () => {
                       type="text"
                       placeholder="Enter First Name"
                       onChange={handleChange}
-                      value={formData.first}
+                      value={formData.firstname}
                     />
                   </section>
                   <section>
@@ -128,7 +117,7 @@ const ProfileEdit = () => {
                       type="text"
                       placeholder="Enter Last Name"
                       onChange={handleChange}
-                      value={formData.last}
+                      value={formData.lastname}
                     />
                   </section>
                   <section>
@@ -200,7 +189,7 @@ const ProfileEdit = () => {
                       type="text"
                       placeholder="Enter Duty Station"
                       onChange={handleChange}
-                      value={formData.duty_station}
+                      value={formData.dutystation}
                     />
                   </section>
                   <section>
@@ -211,7 +200,7 @@ const ProfileEdit = () => {
                       name="leavestartdate"
                       type="date"
                       onChange={handleChange}
-                      value={formData.leave_start_date}
+                      value={formData.leavestartdate}
                     />
                   </section>
                   <section>
@@ -222,7 +211,7 @@ const ProfileEdit = () => {
                       name="etsdate"
                       type="date"
                       onChange={handleChange}
-                      value={formData.ets_date}
+                      value={formData.etsdate}
                     />
                   </section>
                   <section>
@@ -258,7 +247,7 @@ const ProfileEdit = () => {
                       type="text"
                       placeholder="Enter Highest Ed."
                       onChange={handleChange}
-                      value={formData.highest_education}
+                      value={formData.highesteducation}
                     />
                   </section>
                   <section>
@@ -283,7 +272,7 @@ const ProfileEdit = () => {
                         type="text"
                         placeholder="Tell us about yourself."
                         onChange={handleChange}
-                        value={formData.interests}
+                        value={formData.aboutme}
                         rows="4"
                         cols="50"
                       />
