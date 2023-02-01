@@ -1,3 +1,4 @@
+import { Modal, Alert } from "react-bootstrap";
 import { useState, useContext } from "react";
 import styles from "../../styles/LoginStyles.module.css";
 import { useRouter } from "next/router";
@@ -6,34 +7,41 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
 
-const RegisterModal = ({ open, onClose }) => {
-  const {
-    isLoading,
-    setIsLoading,
-    currentFirebaseUser,
-    setCurrentFirebaseUser,
-    showRegisterModal,
-    setShowRegisterModal,
-  } = useContext(appContext);
+const RegisterModal = () => {
+  const { setIsLoading, showRegisterModal, setShowRegisterModal } =
+    useContext(appContext);
   const router = useRouter();
   const [regCode, setRegCode] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [apiUserData, setApiUserData] = useState();
-
-  // if (!open) return null;
+  const [error, setError] = useState("");
 
   const register = (event) => {
+    if (password.length < 6) {
+      event.preventDefault();
+      return setError("Password must be 6+ characters");
+    }
+
+    if (password !== confirmPassword) {
+      event.preventDefault();
+      return setError("Passwords do not match");
+    }
+
     event.preventDefault();
 
     fetch("/api/registration")
       .then((data) => {
         console.log("1.) fetching all cohort data");
+        setIsLoading(true);
+        setShowRegisterModal(false);
         return data.json();
       })
+
       .then(async (data) => {
         console.log("this is my data", data);
         await data.map((passcode) => {
@@ -46,7 +54,7 @@ const RegisterModal = ({ open, onClose }) => {
             try {
               console.log(cohort);
               console.log(cohortID);
-              createUserWithEmailAndPassword(auth, email, Password)
+              createUserWithEmailAndPassword(auth, email, password)
                 .catch((error) => {
                   const errorCode = error.code;
                   const errorMessage = error.message;
@@ -55,11 +63,8 @@ const RegisterModal = ({ open, onClose }) => {
                   } else {
                     alert(errorMessage);
                   }
-                  // console.log(errorCode)
                 })
                 .then(async (userCredential) => {
-                  // await setCurrentFirebaseUser(userCredential.user);
-                  // console.log("currentFirebaseUser: ", currentFirebaseUser);
                   console.log("3.) creating user with email/pass on fb");
                   console.log(userCredential);
                   if (userCredential) {
@@ -77,7 +82,6 @@ const RegisterModal = ({ open, onClose }) => {
                 .then(async () => {
                   let res = await axios.get(`api/users/${email}`);
                   apiUserData = res.data;
-                  // setApiUserData(await res.data);
                   console.log(apiUserData);
                 })
                 .then(async () => {
@@ -94,9 +98,11 @@ const RegisterModal = ({ open, onClose }) => {
                 .then(async () => {
                   console.log("localStorage: ", localStorage);
                   console.log("sessionStorage: ", sessionStorage);
+                  setError("");
                   await router.push("/student");
                 });
             } catch {
+              setIsLoading(false);
               router.push("/registrationerror");
             }
           }
@@ -104,110 +110,119 @@ const RegisterModal = ({ open, onClose }) => {
       });
   };
 
+  const handleHide = () => {
+    setShowRegisterModal(false);
+    setError("");
+    setRegCode("");
+    setUsername("");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+  };
+
   return (
-    <>
-      {open && (
-        <>
-          {/* ----------- Blurred out background overlay ------------- */}
-          <div className={styles.registerModalCreateOverlay} onClick={onClose}>
-            {/* -------------------------------------------------------- */}
-            <div className={styles.registerModalCreateModal}>
-              <div className={styles.registerModalCreateParent}>
-                <div className={styles.registerModalCreateHeader}>
-                  <h1 className={styles.modalHeader}>Sign Up</h1>
-                </div>
-                <div className={styles.registerModalCreateForm}>
-                  <form>
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <input
-                        className={styles.registerModalCreateFormInput}
-                        id="reg code"
-                        type="text"
-                        placeholder="Registration Code"
-                        onChange={(event) => setRegCode(event.target.value)}
-                        value={regCode}
-                        required
-                      />
-                    </div>
+    <Modal
+      contentClassName={styles.reg_modal_container}
+      show={showRegisterModal}
+      onHide={handleHide}
+      size="md"
+      centered
+    >
+      <form className={styles.reg_modal_form}>
+        <h1 className={styles.reg_modal_h1}>Sign Up</h1>
 
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <label> First Name</label>
-                      <input
-                        type="text"
-                        placeholder='ex. "John"'
-                        onChange={(event) => setFirstName(event.target.value)}
-                        value={firstName}
-                        required
-                      />
-                    </div>
+        <input
+          className={styles.reg_code_input}
+          id="reg code"
+          type="text"
+          placeholder="Registration Code"
+          onChange={(event) => setRegCode(event.target.value)}
+          value={regCode}
+          required
+        />
 
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <label> Last Name</label>
-                      <input
-                        type="text"
-                        placeholder='ex. "Smith"'
-                        onChange={(event) => setLastName(event.target.value)}
-                        value={lastName}
-                        required
-                      />
-                    </div>
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="Username"
+          onChange={(event) => setUsername(event.target.value)}
+          value={Username}
+          required
+        />
 
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <label> Email</label>
-                      <input
-                        type="text"
-                        placeholder='ex. "JohnSmith@gmail.com"'
-                        onChange={(event) => setEmail(event.target.value)}
-                        value={email}
-                        required
-                      />
-                    </div>
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="First Name"
+          onChange={(event) => setFirstName(event.target.value)}
+          value={firstName}
+          required
+        />
 
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <label> Create Username</label>
-                      <input
-                        type="text"
-                        placeholder='ex. "Username"'
-                        onChange={(event) => setUsername(event.target.value)}
-                        value={Username}
-                        required
-                      />
-                    </div>
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="Last Name"
+          onChange={(event) => setLastName(event.target.value)}
+          value={lastName}
+          required
+        />
 
-                    <div className={styles.registerModalCreateFormInputLabel}>
-                      <label> Create Password</label>
-                      <input
-                        type="text"
-                        placeholder='ex. "P@ssw0rd"'
-                        onChange={(event) => setPassword(event.target.value)}
-                        value={Password}
-                        required
-                      />
-                    </div>
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="Email"
+          onChange={(event) => setEmail(event.target.value)}
+          value={email}
+          required
+        />
 
-                    <div className={styles.registerModalCreateFormSubmit}>
-                      <button
-                        className={styles.registerModalCreateFormSubmitBtn}
-                        type="submit"
-                        onClick={(event) => register(event)}
-                      >
-                        Submit
-                      </button>
-                      <button
-                        onClick={onClose}
-                        className={styles.registerModalCloseBtn}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </>
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="Password"
+          onChange={(event) => setPassword(event.target.value)}
+          value={password}
+          required
+        />
+
+        <input
+          className={styles.reg_inputs}
+          type="text"
+          placeholder="Confirm Password"
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          value={confirmPassword}
+          required
+        />
+        {/* ------------ if error, show alert with error---------------- */}
+        {error && (
+          <Alert
+            className={styles.reg_error_alert}
+            variant="danger"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </Alert>
+        )}
+        {/* ----------------------------------------------------------- */}
+        <section className={styles.reg_modal_btns_container}>
+          <button
+            className={styles.reg_modal_submit_btn}
+            type="submit"
+            onClick={(event) => register(event)}
+          >
+            Submit
+          </button>
+          <button onClick={handleHide} className={styles.reg_modal_close_btn}>
+            Cancel
+          </button>
+        </section>
+      </form>
+    </Modal>
   );
 };
 
