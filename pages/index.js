@@ -1,6 +1,4 @@
-import style from "../styles/LoginStyles.module.css";
 import { useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import UserLogin from "../components/LoginPage/index";
 import LoginLayout from "../components/LoginPage/LoginLayout";
@@ -17,11 +15,12 @@ function Home() {
     // this useEffect checks if a currentUser exists in session storage:
     // if user exists, redirect to appropriate page (student or admin)
     if (window) {
-      const sessionUser = window.sessionStorage.getItem("currentUser");
+      let sessionUser = window.sessionStorage.getItem("currentUser");
       console.log("sessionStorage: ", sessionStorage);
       console.log("sessionUser: ", JSON.parse(sessionUser));
       if (sessionUser !== null) {
         setIsLoading(true);
+        sessionUser = JSON.parse(sessionUser);
         sessionUser.admin ? router.push("/admin") : router.push("/student");
       }
     }
