@@ -18,7 +18,7 @@
   left: 28px;
   border-radius: 50%;
   border: 16px solid #000;
-  border-color: #0d0f4a transparent #0d0f4a transparent;
+  border-color: #ef6e47 transparent #ef6e47 transparent;
   animation: ldio_xqw00oyri 1s linear infinite;
 }
 
@@ -31,7 +31,7 @@
   animation: ldio_xqw00oyri 1s linear infinite reverse;
 }
 .ldio_xqw00oyri > div:nth-child(2) {
-  border-color: transparent #ef6e47 transparent #ef6e47;
+  border-color: transparent #0d0f4a transparent #0d0f4a;
 }
 .ldio_xqw00oyri > div:nth-child(3) {
   border-color: transparent;
@@ -51,14 +51,14 @@
   height: 16px;
   top: -16px;
   left: 48px;
-  background: #0d0f4a;
+  background: #ef6e47;
   border-radius: 50%;
-  box-shadow: 0 128px 0 0 #0d0f4a;
+  box-shadow: 0 128px 0 0 #ef6e47;
 }
 .ldio_xqw00oyri > div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
-  box-shadow: 128px 0 0 0 #0d0f4a;
+  box-shadow: 128px 0 0 0 #ef6e47;
 }
 
 .ldio_xqw00oyri > div:nth-child(4) {
@@ -79,14 +79,14 @@
   height: 16px;
   top: -16px;
   left: 30px;
-  background: #ef6e47;
+  background: #0d0f4a;
   border-radius: 50%;
-  box-shadow: 0 92px 0 0 #ef6e47;
+  box-shadow: 0 92px 0 0 #0d0f4a;
 }
 .ldio_xqw00oyri > div:nth-child(4) div:after {
   left: -16px;
   top: 30px;
-  box-shadow: 92px 0 0 0 #ef6e47;
+  box-shadow: 92px 0 0 0 #0d0f4a;
 }
 .loadingio_spinner_double_ring_skvnrc1dpw {
   width: 200px;

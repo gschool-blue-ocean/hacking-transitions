@@ -17,16 +17,6 @@ const Header = ({ currentUser }) => {
       <div className={style.topNav}>
         <ul className={style.topList}>
           <div className={style.listItem}>
-            {/* <Link
-              href={"/admin/profile"}
-              as={
-                currentUser.admin ? "/admin/update-user" : "student/update-user"
-              }
-            >
-              <a className={`${style.link} `}>
-                {`${currentUser.first} ${currentUser.last}`}
-              </a>
-            </Link> */}
             {showUpdateModal && <AdminUpdate />}
             <a
               className={`${style.link} `}
