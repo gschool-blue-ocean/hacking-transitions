@@ -1,9 +1,12 @@
 import style from "../../../styles/LoginStyles.module.css";
-import RegisterModal from "../RegisterModal";
-import { useState } from "react";
+// import RegisterModal from "../RegisterModal";
+import RegisterModal from "../RegisterModal1";
+import { useState, useContext } from "react";
+import { appContext } from "../../../pages/_app";
 
 const LoginHeader = () => {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const { showRegisterModal, setShowRegisterModal } = useContext(appContext);
+
   return (
     <>
       <header className={style.header}>
@@ -51,10 +54,7 @@ const LoginHeader = () => {
         </nav>
       </header>
       {/* --------------------------------- REGISTER MODAL ----------------------------- */}
-      <RegisterModal
-        open={showRegisterModal}
-        onClose={() => setShowRegisterModal(false)}
-      />
+      <RegisterModal />
     </>
   );
 };

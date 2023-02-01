@@ -8,12 +8,15 @@ import "../styles/LoginStyles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [currentFirebaseUser, setCurrentFirebaseUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [loginAttempts, setLoginAttempts] = useState(5);
 
   const contextData = {
+    showRegisterModal,
+    setShowRegisterModal,
     showUpdateModal,
     setShowUpdateModal,
     currentFirebaseUser,
