@@ -16,12 +16,13 @@
 
 
 .div {
+
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     overflow-y:visible; 
     overflow-x: hidden; 
     margin-bottom: 2rem;
     font-size: 2rem;
-    height: 30rem;
+    height: 50rem;
     width: 100%;
 }
 .div::-webkit-scrollbar {
