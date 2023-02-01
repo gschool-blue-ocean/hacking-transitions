@@ -76,7 +76,7 @@ const createCohort = () => {
             </label>
             <input
               className={styles.createCohortEndDateInput}
-              type="text" placeholder="Start Date"
+              type="text" placeholder="End Date"
               onChange={(event) => setEndDate(event.target.value)}
             />
           </div>
