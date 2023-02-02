@@ -2,18 +2,35 @@ import React from "react";
 import styles from "../../../styles/StudentPage.module.css";
 import { useDispatch } from "react-redux";
 import { deleteStudentTask } from '../../../redux/features/app-slice';
+import axios from "axios";
 
 
 // Pull  Selected Task Info from DB
 export default function SPTaskModal({ task, closeModal }) {
    const dispatch = useDispatch();
-   const deleteTask = (task) => {
-      dispatch(deleteStudentTask(task));
-      fetch(`/api/tasks/${task.task_id}`, {
-         method: "DELETE",
-         headers: { "Content-Type": "application/json" },
-      });
-   };
+
+//////// DELETE request for student tasks modal refactored to use axios /////////
+
+const deleteTask = async (task) => {
+   dispatch(deleteStudentTask(task));
+   try {
+       await axios.delete(`/api/tasks/${task.task_id}`, {
+           headers: { "Content-Type": "application/json" },
+       });
+   } catch (err) {
+       console.log(err);
+   }
+};
+
+//////////// Old DELETE request using fetch //////////////
+
+   // const deleteTask = (task) => {
+   //    dispatch(deleteStudentTask(task));
+   //    fetch(`/api/tasks/${task.task_id}`, {
+   //       method: "DELETE",
+   //       headers: { "Content-Type": "application/json" },
+   //    });
+   // };
 
    if (task) {
       return (
