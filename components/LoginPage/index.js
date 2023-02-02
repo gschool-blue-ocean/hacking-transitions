@@ -1,10 +1,9 @@
 import style from "../../styles/LoginStyles.module.css";
 import { useState, useContext } from "react";
-import { CgEnter } from "react-icons/cg";
 import { setActiveStudent } from "../../redux/features/app-slice.js";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { Container, Button, Card, Form, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
@@ -96,78 +95,84 @@ let UserLogin = () => {
   return (
     <main className={style.main}>
       <div className={style.login_container}>
-        <h1 className={style.loginTitle}>Hacking Transition</h1>
-        {/* <picture className={style.login_logo}>
-          <img
-            src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
-            alt="Galvanize Login Logo"
-            height="50px"
-          />
-        </picture> */}
-        {/* ------------ if error, show alert with error---------------- */}
-        {error && (
-          <Alert
-            variant="danger"
-            style={{
-              textAlign: "center",
-            }}
-          >
-            {error}
-          </Alert>
-        )}
-        {/* ----------------------------------------------------------- */}
-        <form className={style.loginForm} onSubmit={handleLogin}>
-          <span>
-            <label htmlFor="username" className={style.label}>
-              Email
-            </label>
-            <input
-              required
-              id="formInput"
-              className={`${style.input} ${style.username}`}
-              type="text"
-              autoComplete="email"
-              placeholder="Email"
-              name="email"
-              value={loginData.email}
-              onChange={handleChange}
+        <div className={style.login_inner_wrapper}>
+          <picture className={style.login_logo}>
+            <img
+              src="https://dotcom-files.s3.us-west-2.amazonaws.com/galvanize_logo_full-color_light-background.png"
+              alt="Galvanize Login Logo"
+              height="50px"
             />
-          </span>
-          <span>
-            <label htmlFor="password" className={style.label}>
-              Password
-            </label>
-            <input
-              required
-              id="formInput2"
-              className={style.input}
-              type="password"
-              autoComplete="current-password"
-              placeholder="Password"
-              name="password"
-              value={loginData.password}
-              onChange={handleChange}
-            />
-          </span>
-          <span>
-            <input
-              type="checkbox"
-              name="stay_logged"
-              id="stay_logged"
-              value={true}
-              className={style.rememberMe}
-              onClick={() => {
-                stayLogged = !stayLogged;
+          </picture>
+          <h1 className={style.signin_h1}>Sign In</h1>
+          {/* ------------ if error, show alert with error---------------- */}
+          {error && (
+            <Alert
+              variant="danger"
+              style={{
+                textAlign: "center",
               }}
-            />{" "}
-            <label htmlFor="stay_logged" className={style.label}>
-              Remember Me
-            </label>
-          </span>
-          <button id="submit" type="submit" className={style.loginBtn}>
-            LOG IN <CgEnter />{" "}
-          </button>
-        </form>
+            >
+              {error}
+            </Alert>
+          )}
+          {/* ----------------------------------------------------------- */}
+          <form className={style.loginForm} onSubmit={handleLogin}>
+            <span>
+              <input
+                required
+                id="formInput"
+                className={style.login_inputs}
+                type="text"
+                autoComplete="email"
+                placeholder="Email address"
+                name="email"
+                value={loginData.email}
+                onChange={handleChange}
+              />
+            </span>
+            <span>
+              <input
+                required
+                id="formInput2"
+                className={style.login_inputs}
+                type="password"
+                autoComplete="current-password"
+                placeholder="Password"
+                name="password"
+                value={loginData.password}
+                onChange={handleChange}
+              />
+            </span>
+            <section className={style.remember_me_container}>
+              <span>
+                <input
+                  type="checkbox"
+                  name="stay_logged"
+                  id="stay_logged"
+                  value={true}
+                  className={style.remember_me_box}
+                  onClick={() => {
+                    stayLogged = !stayLogged;
+                  }}
+                />
+                <label
+                  htmlFor="stay_logged"
+                  className={style.remember_me_label}
+                >
+                  {"Remember Me"}
+                </label>
+              </span>
+            </section>
+            <button id="submit" type="submit" className={style.loginBtn}>
+              {"SIGN IN"}
+            </button>
+            <div className={style.forgot_pass_wrapper}>
+              <label className={style.forgot_pass}>
+                {"Forget your password?"}
+              </label>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
   );

@@ -23,11 +23,13 @@
     background-color: rgb(230, 229, 229);
 }
 .tableheaders{
-  padding: auto;
+    /* display:table-row; */
+    padding: auto;
     font-size: 2.5vw;
-    text-align: center;
+    text-align: left;
     margin-top: 4px;
     background: #e0eaf8;
+
     
     
 } 
@@ -51,9 +53,9 @@
     font-weight: 600;
     margin-top: 10px;
     margin-left: 2px;
-    padding: 10px;
-    padding-left: 10px;
-    justify-content: center;
-    text-align: center;
+    /* padding: 10px; */
+    /* padding-left: 10px; */
+    /* justify-content: center; */
+    text-align: left;
     font-size: 2vw;
 }
