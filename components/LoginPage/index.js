@@ -7,6 +7,8 @@ import { Alert } from "react-bootstrap";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { appContext } from "../../pages/_app";
+import LoginFooter from "./LoginLayout/LoginFooter";
+import axios from 'axios'
 
 let UserLogin = () => {
   const {
@@ -35,50 +37,50 @@ let UserLogin = () => {
   };
 
   const handleLogin = async (e) => {
-    if (loginData.password.length < 6) {
+    if (loginData.password.length < 5) {
       e.preventDefault();
       return setError("Password must be 6+ characters");
     }
-
+  
     e.preventDefault();
-
-    await fetch(`/api/users/${loginData.email}`)
-      .then((res) => {
-        if (res.status === 404) {
+  
+    try {
+      const res = await (axios.get(`/api/users/${loginData.email}`));
+      // console.log('res', res)
+  
+  
+      const user = res.data;
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        loginData.email,
+        loginData.password
+      );
+      setIsLoading(true);
+      console.log("user done configure");
+      await setCurrentFirebaseUser(userCredential.user);
+      console.log("currentFirebaseUser: ", currentFirebaseUser);
+      console.log("user: ", user);
+  
+      stayLogged && localStorage.setItem("currentUser", JSON.stringify(user));
+      sessionStorage.setItem("currentUser", JSON.stringify(user));
+      user.admin
+        ? (router.push("/admin"), setLoginData(""))
+        : (router.push("/student"),
+          dispatch(setActiveStudent(user)),
+          setLoginData(""));
+    } catch (error) {
+      console.log(error.code);
+      if (error.code === 'auth/wrong-password') {
+        setLoginAttempts((prevCount) => prevCount - 1);
+        setError(
+          `Incorrect password... ${loginAttempts} attempts remaining`
+        );
+      } else if (error.code === 'auth/too-many-requests') {
+        setError("Account temporarily locked... try again later");
+      } else if (error.code === 'ERR_BAD_REQUEST'){
           return setError("Email does not exists... try again");
-        }
-        return res.json();
-      })
-      .then((user) => {
-        signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-          .then(async (userCredential) => {
-            setIsLoading(true);
-            console.log("user done configure");
-            await setCurrentFirebaseUser(userCredential.user);
-            console.log("currentFirebaseUser: ", currentFirebaseUser);
-            console.log("user: ", user);
-
-            stayLogged &&
-              localStorage.setItem("currentUser", JSON.stringify(user));
-            sessionStorage.setItem("currentUser", JSON.stringify(user));
-            user.admin
-              ? (router.push("/admin"), setLoginData(""))
-              : (router.push("/student"),
-                dispatch(setActiveStudent(user)),
-                setLoginData(""));
-          })
-          .catch((error) => {
-            console.log(error.code);
-            if (error.code === "auth/wrong-password") {
-              setLoginAttempts((prevCount) => prevCount - 1);
-              setError(
-                `Incorrect password... ${loginAttempts} attempts remaining`
-              );
-            } else if (error.code === "auth/too-many-requests") {
-              setError("Account temporarily locked... try again later");
-            }
-          });
-      });
+      }
+    }
   };
 
   onAuthStateChanged(auth, (user) => {

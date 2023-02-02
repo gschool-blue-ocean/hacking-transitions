@@ -93,7 +93,7 @@
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  background: #ffffff;
+  background: transparent;
 }
 .ldio_xqw00oyri {
   width: 100%;
@@ -101,7 +101,7 @@
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0;
 }
 .ldio_xqw00oyri div {
   box-sizing: content-box;
@@ -112,4 +112,9 @@
   height: 100%;
   min-height: fit-content;
   overflow: auto;
+  background: linear-gradient(
+    281deg,
+    rgba(255, 255, 255, 1) 56%,
+    rgba(205, 205, 205, 1) 100%
+  );
 }

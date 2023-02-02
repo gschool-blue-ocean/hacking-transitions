@@ -4,6 +4,7 @@ import CohortView from "./CohortView";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import RevealChat from "./RevealChat";
+import axios from "axios";
 
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
@@ -15,9 +16,9 @@ const AdminContainer = ({ allCohorts }) => {
     (async () => {
       if (cohorts.length > 0) {
         const topcohort = cohorts[cohorts.length - 1];
-        const students = await (
-          await fetch(`/api/users/cohort/${topcohort.cohort_id}`)
-        ).json();
+        const students = (
+          await axios.get(`/api/users/cohort/${topcohort.cohort_id}`)
+        ).data;
         setCurrCohort([
           {
             cohort_id: topcohort.cohort_id,

@@ -28,27 +28,6 @@ const editTask = async (edit, task) => {
    closeModal(false);
 };
 
-
-//////////////// Old PATCH request using fetch /////////////////////////
-
-   // const editTask = (edit, task) => {
-   //    const taskID = task.task_id;
-   //    const editData = {
-   //       title: edit.title,
-   //       date: convertDateToIso(edit.date),
-   //       description: edit.description,
-   //       completed: JSON.parse(edit.completed),
-   //       remarks: null, // Remarks have been deleted
-   //    };
-   //    fetch(`/api/tasks/${taskID}`, {
-   //       method: "PATCH",
-   //       headers: { "Content-Type": "application/json" },
-   //       body: JSON.stringify(editData),
-   //    });
-   //    cancelEdit(false);
-   //    closeModal(false);
-   // };
-
    function convertDateToIso(date) {
       if (date.split("-")[0].length === 4) {
          return date;

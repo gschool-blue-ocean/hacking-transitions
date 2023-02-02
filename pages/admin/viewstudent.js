@@ -7,6 +7,8 @@ import StudentPage from "../../components/StudentPage";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import { checkLogin } from "../../utility";
 import sql from "../../database/connection";
+import axios from "axios";
+import { Alert } from 'react-bootstrap'
 
 //******FOR VIEWING STUDENT INFORMATION WHILE LOGGED IN AS AN ADMIN ***********/
 
@@ -17,6 +19,7 @@ const ViewStudent = ({ cohortStudents }) => {
   const [admin, setAdmin] = useState(false);
   const [search, setSearch] = useState("");
   const [currentStudentIndex, setCurrentStudentIndex] = useState(null);
+  const [message, setMessage] = useState("")
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
@@ -50,7 +53,7 @@ const ViewStudent = ({ cohortStudents }) => {
         break;
       }
     }
-  }, []);
+  }, [cohortStudents, dispatch, router]);
 
   const handleNav = (e) => {
     const i = currentStudentIndex;
@@ -73,7 +76,7 @@ const ViewStudent = ({ cohortStudents }) => {
     console.log(search);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let inputData = {
       first: search.first,
@@ -81,24 +84,29 @@ const ViewStudent = ({ cohortStudents }) => {
     };
     setSearch("");
     e.target.reset();
-
-    fetch(`/api/users/students/${inputData.last}`)
-      .then((res) => {
-        if (res.status === 404) throw new Error("User Not Found!");
-        return res.json();
-      })
-      .then((user) => {
-        if (user.first === inputData.first) {
-          if (user.admin) throw new Error("User is Admin");
-          dispatch(setActiveStudent(user));
-          // sessionStorage.setItem("activeStudent", JSON.stringify(user));
-        } else {
-          throw new Error("User Not Found!");
+    try {
+      let { data } = await axios.get(`/api/users/students/${inputData.last}`);
+      let user = data;
+      if (user.first === inputData.first) {
+        if (user.admin) {
+          setMessage("User is Admin");
+          setTimeout(() => {
+            setMessage("");
+          }, 3000)
         }
-      })
-      .catch(({ message }) => {
-        setError(true);
-      });
+        dispatch(setActiveStudent(user));
+        // sessionStorage.setItem("activeStudent", JSON.stringify(user));
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        setMessage("User Not Found!")
+        setTimeout(() => {
+          setMessage("");
+      }, 3000);
+    } else {
+      console.error(error)
+    }
+    }
   };
 
   return (
@@ -113,6 +121,16 @@ const ViewStudent = ({ cohortStudents }) => {
             <div className={style.btnSpace}></div>
           )}
           <div className={style.spacer}></div>
+          {message && (
+          <Alert
+            variant="danger"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {message}
+          </Alert>
+        )}
           <div className={style.cohort}>{activeStudent.cohort_name}</div>
           <div className={style.searchdiv}>
             Search Students

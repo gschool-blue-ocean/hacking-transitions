@@ -38,28 +38,6 @@ export default function SPCreateTask({ student, closeModal, cancelCreate }) {
     }
 };
 
-
-  //////////////////// old POST request using fetch ////////////////
-
-  // const addTask = (data) => {
-  //   const newTask = {
-  //     student_id: student.user_id,
-  //     title: data.title,
-  //     date: convertDateToIso(data.date),
-  //     description: data.description,
-  //     remarks: null,
-  //     completed: JSON.parse(data.completed),
-  //   };
-  //   let allTasks = [...studentTasks, newTask];
-  //   dispatch(setStudentTasks(allTasks));
-
-  //   fetch(`/api/tasks`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(newTask),
-  //   });
-  // };
-
   function convertDateToIso(date) {
     if (date.split("-")[0].length === 4) {
       return date;
