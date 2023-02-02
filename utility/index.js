@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import axios from 'axios';
 
 /**********  API Utility Functions **********/
@@ -63,9 +63,9 @@ export const sortTableData = (array, { key, direction }) => {
 }
 
 export const useSortableData = (items = [], config) => {
-  const [sortConfig, setSortConfig] = React.useState(config)
+  const [sortConfig, setSortConfig] = useState(config)
 console.log("useSortableData input array", items)
-  const sortedItems = React.useMemo(() => {
+  const sortedItems = useMemo(() => {
     // If no config was defined then return the unsorted array
     if (!sortConfig) return items
 
