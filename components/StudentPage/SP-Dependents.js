@@ -20,17 +20,6 @@ export default function SPDependents({ student }) {
     }
 };
 
-
-  //////////////// Old GET request using fetch //////////////////
-
-  // const getDependents = () => {
-  //   fetch(`/api/dependents/sponsor/${student.user_id}`)
-  //     .then((res) => res.json())
-  //     .then((deps) => {
-  //       setDependents(deps);
-  //     });
-  // };
-
   if (student.has_dependents) {
     return dependents.map((dep) => {
       return (

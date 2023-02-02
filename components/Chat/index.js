@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { MdSend, MdOutlineModeEdit, MdOutlineDelete } from "react-icons/md";
 import io from "socket.io-client";
 import dynamic from "next/dynamic";
+import axios from "axios";
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -40,11 +41,12 @@ const Chat = () => {
       /****** Getting connected to the socket server ******/
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
-      const resUrl = (await fetch(`/api/socket`)).url;
+      const resUrl = (await axios.get(`/api/socket`)).request.responseURL;
       const baseUrl = resUrl.substring(0, resUrl.indexOf("/api"));
 
       const newSocket = io(baseUrl);
       setSocket(newSocket);
+
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
       !newSocket.connected &&
@@ -312,8 +314,27 @@ console.log(editInfo);
 
 export default Chat;
 
+// const getCohortComments = async (id) => {
+//   try {
+//     const { data } = await axios.get(`/api/comments/cohort/${id}`);
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// const getStudentComments = async (id) => {
+//   try {
+//     const { data } = await axios.get(`/api/comments/student/${id}`);
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+
 const getCohortComments = async (id) =>
-  await (await fetch(`/api/comments/cohort/${id}`)).json();
+  (await axios.get(`/api/comments/cohort/${id}`)).data;
 
 const getStudentComments = async (id) =>
-  await (await fetch(`/api/comments/student/${id}`)).json();
+  (await axios.get(`/api/comments/student/${id}`)).data;
