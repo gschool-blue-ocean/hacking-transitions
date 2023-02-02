@@ -80,27 +80,6 @@ const SPChecklist = () => {
     }
 };
 
-////////////////// Old PATCH request using fetch /////////////////////
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("submitted", checklistData);
-  //   fetch(`/api/users/${checklistData.user_id}`, {
-  //     method: "PATCH",
-  //     body: JSON.stringify(checklistData),
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((res) => res.json())
-  //     .then(() => {
-  //       dispatch(setActiveStudent(checklistData))
-  //       setMessage("Success!")
-  //       setTimeout(() => {
-  //         setMessage("");
-  //       }, 1000)
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   const handleChange = (e) => {
     console.log("changed");
     if (e.target.type === "checkbox") {

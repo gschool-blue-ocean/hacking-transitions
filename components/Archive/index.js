@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import StudentPage from "../StudentPage";
+import axios from "axios";
 
 export default function ArchivePage({ cohorts, students }) {
   const [displayCohorts, setDisplay] = useState(cohorts);
@@ -25,24 +26,22 @@ export default function ArchivePage({ cohorts, students }) {
   const [cohort, setCohort] = useState([]);
   const [listStudents, setListStudents] = useState([]);
 
-  const getList = () => {
-    fetch(`/api/archive/listStudents/${cohort}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((list) => {
-        if (list.length !== 0) {
-          setListStudents(list);
-        } else {
-          setListStudents([
-            { first: "No Student Rosters Available" },
-            // { first: "no list, sorry", last: "no list, sorry" },
-          ]);
-        }
-      });
+  const getList = async () => {
+    try {
+      const { data } = await axios.get(`/api/archive/listStudents/${cohort}`);
+      if (data.length !== 0) {
+        setListStudents(data);
+      } else {
+        setListStudents([
+          { first: "No Student Rosters Available" },
+          // { first: "no list, sorry", last: "no list, sorry" },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  //
+  
 
   //for Search
   const studentRef = useRef("");

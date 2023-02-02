@@ -22,16 +22,6 @@ const deleteTask = async (task) => {
    }
 };
 
-//////////// Old DELETE request using fetch //////////////
-
-   // const deleteTask = (task) => {
-   //    dispatch(deleteStudentTask(task));
-   //    fetch(`/api/tasks/${task.task_id}`, {
-   //       method: "DELETE",
-   //       headers: { "Content-Type": "application/json" },
-   //    });
-   // };
-
    if (task) {
       return (
          <div className={styles.SPTaskModal}>

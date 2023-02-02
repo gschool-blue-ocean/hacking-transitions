@@ -87,18 +87,6 @@ export default function SPTasks({ activeStudent }) {
     }
   }
 
-//////////// Old GET request using fetch ///////////////
-
-  // const getTasks = () => {
-  //   if (activeStudent.user_id) {
-  //     fetch(`api/tasks/student/${activeStudent.user_id}`)
-  //       .then((res) => res.json())
-  //       .then((tasks) => {
-  //         dispatch(setStudentTasks(tasks));
-  //       });
-  //   }
-  // };
-
   return (
     <div className={styles.SDashTasks}>
       <h4 id="StuTasksHeader">Tasks</h4>
