@@ -12,7 +12,7 @@ const Student = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  setIsLoading(false);
+  setIsLoading(false); // CAUSING ERROR WHEN LOADING STUDENT PAGE
 
   useEffect(() => {
     (async () => {
@@ -28,10 +28,8 @@ const Student = () => {
   }, []);
 
   return (
-    loggedIn && (
-      <div>
+    loggedIn && (   
         <StudentPage />
-      </div>
     )
   );
 };

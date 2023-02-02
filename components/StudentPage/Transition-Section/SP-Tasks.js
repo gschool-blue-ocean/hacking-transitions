@@ -5,10 +5,9 @@ import SPEditTask from "./SP-EditTask";
 import SPCreateTask from "./SP-CreateTask";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiMessageAltAdd } from "react-icons/bi";
-import styles from "../../styles/StudentPage.module.css";
+import styles from "../../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setStudentTasks } from "../../redux/features/app-slice";
-import axios from "axios";
+import { setStudentTasks } from "../../../redux/features/app-slice";
 
 //task modal styling
 const customStyles = {
@@ -74,18 +73,15 @@ export default function SPTasks({ activeStudent }) {
     }
   }
 
-////////// GET request for student tasks refactored to use axios /////////////
-
-  const getTasks = async () => {
+  const getTasks = () => {
     if (activeStudent.user_id) {
-      try {
-        const res = await axios.get(`api/tasks/student/${activeStudent.user_id}`)
-        dispatch(setStudentTasks(res.data))
-      } catch (err) {
-        console.log(err);
-      }
+      fetch(`api/tasks/student/${activeStudent.user_id}`)
+        .then((res) => res.json())
+        .then((tasks) => {
+          dispatch(setStudentTasks(tasks));
+        });
     }
-  }
+  };
 
   return (
     <div className={styles.SDashTasks}>

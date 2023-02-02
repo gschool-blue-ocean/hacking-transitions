@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import styles from "../../styles/StudentPage.module.css";
+import styles from "../../../styles/StudentPage.module.css";
 import axios from "axios";
 
 export default function SPEditTask({ task, cancelEdit, closeModal }) {
