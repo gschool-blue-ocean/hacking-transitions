@@ -21,7 +21,7 @@ const RegisterModal = () => {
   const [apiUserData, setApiUserData] = useState();
   const [error, setError] = useState("");
 
-  const register = (event) => {
+  const register = async (event) => {
     if (password.length < 6) {
       event.preventDefault();
       return setError("Password must be 6+ characters");
@@ -33,82 +33,138 @@ const RegisterModal = () => {
     }
 
     event.preventDefault();
-
-    fetch("/api/registration")
-      .then((data) => {
-        console.log("1.) fetching all cohort data");
-        setIsLoading(true);
-        setShowRegisterModal(false);
-        return data.json();
-      })
-
-      .then(async (data) => {
-        console.log("this is my data", data);
-        await data.map((passcode) => {
-          console.log("2.) mapping cohort passcodes");
-          let cohortCode = passcode.register_code;
-          let cohort = passcode.cohort_name;
-          let cohortID = passcode.cohort_id;
-
-          if (regCode == cohortCode) {
-            try {
-              console.log(cohort);
-              console.log(cohortID);
-              createUserWithEmailAndPassword(auth, email, password)
-                .catch((error) => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  if (errorCode == "auth/email-already-in-use") {
-                    alert("This user for this email already exists");
-                  } else {
-                    alert(errorMessage);
-                  }
-                })
-                .then(async (userCredential) => {
-                  console.log("3.) creating user with email/pass on fb");
-                  console.log(userCredential);
-                  if (userCredential) {
-                    await axios.post("/api/admin", {
-                      admin: false,
-                      first: firstName,
-                      last: lastName,
-                      username: Username,
-                      email: email,
-                      cohort_name: cohort,
-                      cohort_id: cohortID,
-                    });
-                  }
-                })
-                .then(async () => {
-                  let res = await axios.get(`api/users/${email}`);
-                  apiUserData = res.data;
-                  console.log(apiUserData);
-                })
-                .then(async () => {
-                  localStorage.setItem(
-                    "currentUser",
-                    JSON.stringify(apiUserData)
-                  );
-
-                  sessionStorage.setItem(
-                    "currentUser",
-                    JSON.stringify(apiUserData)
-                  );
-                })
-                .then(async () => {
-                  console.log("localStorage: ", localStorage);
-                  console.log("sessionStorage: ", sessionStorage);
-                  setError("");
-                  await router.push("/student");
-                });
-            } catch {
-              setIsLoading(false);
-              router.push("/registrationerror");
-            }
-          }
+    setIsLoading(true);
+    setShowRegisterModal(false);
+    try {
+      const { data: cohorts } = await axios.get("/api/registration");
+      console.log('cohorts', cohorts)
+      const cohort = cohorts.find(passcode => regCode == passcode.register_code);
+      console.log('co', cohort)
+      if (!cohort) {
+        return setError('Invalid registration code');
+      }
+      // const { email, password, firstName, lastName, Username, regCode } = this.state;
+      // const auth = firebase.auth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      if (userCredential) {
+        await axios.post("/api/admin", {
+          admin: false,
+          first: firstName,
+          last: lastName,
+          username: Username,
+          email: email,
+          cohort_name: cohort.cohort_name,
+          cohort_id: cohort.cohort_id,
         });
-      });
+        const { data: apiUserData } = await axios.get(`api/users/${email}`);
+        localStorage.setItem("currentUser", JSON.stringify(apiUserData));
+        sessionStorage.setItem("currentUser", JSON.stringify(apiUserData));
+        setError("");
+        router.push("/student");
+      }
+    } catch (error) {
+      console.log(error)
+      let errorMessage;
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "A user for this email already exists";
+      } else {
+        errorMessage = error.message;
+      }
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+
+  // const register = (event) => {
+  //   if (password.length < 6) {
+  //     event.preventDefault();
+  //     return setError("Password must be 6+ characters");
+  //   }
+
+  //   if (password !== confirmPassword) {
+  //     event.preventDefault();
+  //     return setError("Passwords do not match");
+  //   }
+
+  //   event.preventDefault();
+
+  //   fetch("/api/registration")
+  //     .then((data) => {
+  //       console.log("1.) fetching all cohort data");
+  //       setIsLoading(true);
+  //       setShowRegisterModal(false);
+  //       return data.json();
+  //     })
+
+  //     .then(async (data) => {
+  //       console.log("this is my data", data);
+  //       await data.map((passcode) => {
+  //         console.log("2.) mapping cohort passcodes");
+  //         let cohortCode = passcode.register_code;
+  //         let cohort = passcode.cohort_name;
+  //         let cohortID = passcode.cohort_id;
+
+  //         if (regCode == cohortCode) {
+  //           try {
+  //             console.log(cohort);
+  //             console.log(cohortID);
+  //             createUserWithEmailAndPassword(auth, email, password)
+  //               .catch((error) => {
+  //                 const errorCode = error.code;
+  //                 const errorMessage = error.message;
+  //                 if (errorCode == "auth/email-already-in-use") {
+  //                   alert("This user for this email already exists");
+  //                 } else {
+  //                   alert(errorMessage);
+  //                 }
+  //               })
+  //               .then(async (userCredential) => {
+  //                 console.log("3.) creating user with email/pass on fb");
+  //                 console.log(userCredential);
+  //                 if (userCredential) {
+  //                   await axios.post("/api/admin", {
+  //                     admin: false,
+  //                     first: firstName,
+  //                     last: lastName,
+  //                     username: Username,
+  //                     email: email,
+  //                     cohort_name: cohort,
+  //                     cohort_id: cohortID,
+  //                   });
+  //                 }
+  //               })
+  //               .then(async () => {
+  //                 let res = await axios.get(`api/users/${email}`);
+  //                 apiUserData = res.data;
+  //                 console.log(apiUserData);
+  //               })
+  //               .then(async () => {
+  //                 localStorage.setItem(
+  //                   "currentUser",
+  //                   JSON.stringify(apiUserData)
+  //                 );
+
+  //                 sessionStorage.setItem(
+  //                   "currentUser",
+  //                   JSON.stringify(apiUserData)
+  //                 );
+  //               })
+  //               .then(async () => {
+  //                 console.log("localStorage: ", localStorage);
+  //                 console.log("sessionStorage: ", sessionStorage);
+  //                 setError("");
+  //                 await router.push("/student");
+  //               });
+  //           } catch {
+  //             setIsLoading(false);
+  //             router.push("/registrationerror");
+  //           }
+  //         }
+  //       });
+  //     });
+  // };
 
   const handleHide = () => {
     setShowRegisterModal(false);

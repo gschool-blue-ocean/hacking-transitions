@@ -47,48 +47,47 @@ export default function ArchivePage({ cohorts, students }) {
   const studentRef = useRef("");
   const cohortRef = useRef("");
 
-  const searchStudent = (e) => {
+  const searchStudent = async (e) => {
     e.preventDefault();
     let search = studentRef.current.value;
     let sStu = search.split(" ");
     let data = `${sStu[0]}-${sStu[1]}`;
     console.log("student search", data);
-
-    fetch(`/api/archive/students/${data}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((results) => {
-        if (results.length !== 0) {
-          setResultStudent(results);
-        } else {
-          setResultStudent([
-            {
-              first: "No Results",
-            },
-          ]);
-        }
-      });
+  
+    try {
+      const { data: results } = await axios.get(`/api/archive/students/${data}`);
+      if (results.length !== 0) {
+        setResultStudent(results);
+      } else {
+        setResultStudent([
+          {
+            first: "No Results",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const searchCohort = (e) => {
+  const searchCohort = async (e) => {
     e.preventDefault();
     let search = cohortRef.current.value;
-    fetch(`/api/archive/cohorts/${search}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((results) => {
-        if (results.length !== 0) {
-          setDisplay(results);
-        } else {
-          setDisplay([
-            {
-              cohort_name: "No Results",
-            },
-          ]);
-        }
-      });
+    try {
+      let res = await axios.get(`/api/archive/cohorts/${search}`);
+      let results = res.data;
+      if (results.length !== 0) {
+        setDisplay(results);
+      } else {
+        setDisplay([
+          {
+            cohort_name: "No Results",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 /**********  API Utility Functions **********/
 export const checkApiMethod = ({ method }, string) => method === string;
@@ -28,7 +29,7 @@ export const checkLogin = async () => {
   }
   const checkUser = JSON.parse(session);
 
-  const user = await (await fetch(`/api/users/${checkUser.user_id}`)).json();
+  const user = (await axios.get(`/api/users/${checkUser.user_id}`)).data;
 
   local && localStorage.setItem("currentUser", JSON.stringify(user));
   sessionStorage.setItem("currentUser", JSON.stringify(user));
