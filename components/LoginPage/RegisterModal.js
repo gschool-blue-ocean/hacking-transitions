@@ -179,15 +179,15 @@ const RegisterModal = () => {
         )}
         {/* ----------------------------------------------------------- */}
         <section className={styles.reg_modal_btns_container}>
+          <button onClick={handleHide} className={styles.reg_modal_close_btn}>
+            Cancel
+          </button>
           <button
             className={styles.reg_modal_submit_btn}
             type="submit"
             onClick={(event) => register(event)}
           >
             Submit
-          </button>
-          <button onClick={handleHide} className={styles.reg_modal_close_btn}>
-            Cancel
           </button>
         </section>
       </form>
