@@ -5,7 +5,7 @@
   flex-direction: column;
   min-height: fit-content;
   height: 100vh;
-  max-height: 1000px;
+  max-height: 100%;
 }
 .header {
   min-height: fit-content;
