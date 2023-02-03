@@ -6,6 +6,7 @@ import { Alert } from "react-bootstrap";
 import axios from "axios";
 import ListItems from "./ListItems";
 
+
 const SPChecklist = () => {
   const dispatch = useDispatch();
   const activeStudent = useSelector(
@@ -14,27 +15,35 @@ const SPChecklist = () => {
   const [checklistData, setChecklistData] = useState(activeStudent);
   const [listItems, setListItems] = useState([])
   const [message, setMessage] = useState("")
-
-  function convertDateToIso(date) {
-    if (date == "") {
-      return "";
-    }
-    if (date == null) {
-      return "";
-    } else if (date.split("-")[0].length === 4) {
-      return date;
-    } else if (date.split("/")[0].length === 4) {
-      return date;
-    } else {
-      let newDate = new Date(date);
-      let dateArray = newDate.toLocaleDateString().split("/");
-      let year = dateArray[2];
-      let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
-      let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
-
-      return `${year}-${month}-${day}`;
-    }
+  const props = {
+    checklistData,
+    setChecklistData,
+    activeStudent,
+    setActiveStudent,
+    message,
+    setMessage
   }
+
+  // function convertDateToIso(date) {
+  //   if (date == "") {
+  //     return "";
+  //   }
+  //   if (date == null) {
+  //     return "";
+  //   } else if (date.split("-")[0].length === 4) {
+  //     return date;
+  //   } else if (date.split("/")[0].length === 4) {
+  //     return date;
+  //   } else {
+  //     let newDate = new Date(date);
+  //     let dateArray = newDate.toLocaleDateString().split("/");
+  //     let year = dateArray[2];
+  //     let day = dateArray[1].length === 2 ? dateArray[1] : `0${dateArray[1]}`;
+  //     let month = dateArray[0].length === 2 ? dateArray[0] : `0${dateArray[0]}`;
+
+  //     return `${year}-${month}-${day}`;
+  //   }
+  // }
 
   // ========== PATCH request for update checklist =============
 
@@ -52,18 +61,6 @@ const SPChecklist = () => {
         setMessage(err);
     }
 };
-
-  const handleChange = (e) => {
-    console.log("changed");
-    if (e.target.type === "checkbox") {
-      return setChecklistData((prevData) => {
-        return {
-          ...prevData,
-          [e.target.name]: e.target.checked,
-        };
-      });
-    }
-  };
 
   const checklistItems = (checklistData) => {
     const transitionChecklistItems = [];
@@ -153,10 +150,6 @@ const formStyles = {
   marginBottom: 0,
 }
 
-const checkStyle = {
-  accentColor: 'rgb(0, 140, 128)'
-}
-
   return (
     <div className={styles.SDashChecklist}>
       
@@ -172,7 +165,7 @@ const checkStyle = {
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
         {listItems.map(item => 
-          <ListItems key={item.id} {...item}/>
+          <ListItems key={item.id} {...item} props={props}/>
         )}
         </div>
         <div className={styles.checklistButtonDiv}>

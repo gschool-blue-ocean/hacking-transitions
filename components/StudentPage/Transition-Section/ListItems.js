@@ -1,10 +1,14 @@
-import React from 'react'
+
 
 export default function ListItems({...item}) {
   console.log('item', item)
+  console.log(item.props)
+  const setChecklistData = item.props.setChecklistData
   const checkStyle = {
-    accentColor: 'rgb(0, 140, 128)'
+    accentColor: 'rgb(0, 140, 128)',
   }
+
+
   const handleChange = (e) => {
     console.log("changed");
     if (e.target.type === "checkbox") {
@@ -16,15 +20,16 @@ export default function ListItems({...item}) {
       });
     }
   };
+  
 
   return (
       <label className="checkboxLabel">
         <input
           className="checkbox"
-          id="1"
+          id={item.id}
           checked={item[1]}
           type="checkbox"
-          name="final_physical"
+          name={item[0]}
           style={checkStyle}
           onChange={handleChange}
         />{" "}
