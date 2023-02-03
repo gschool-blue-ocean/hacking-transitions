@@ -28,7 +28,9 @@ export default function ListItems({...item}) {
           style={checkStyle}
           onChange={handleChange}
         />{" "}
-        {item[0].replace(/_/g, ' ')}
+        {item[0].replace(/([^a-z]|^)([a-z])(?=[a-z]{2})/g, function(_, g1, g2) {
+          return g1+g2.toUpperCase();
+        }).replace(/_/g, ' ').replace(/./, item[0][0].toUpperCase()).replace(/[^a-zA-Z]va[^a-zA-Z]/g, ' VA ').replace(/$/, '?')}
       </label>
   )
 }

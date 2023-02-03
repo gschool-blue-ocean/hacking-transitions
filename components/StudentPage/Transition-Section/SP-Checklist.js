@@ -73,7 +73,6 @@ const SPChecklist = () => {
           let index = [];
           index.push(key);
           index.push(checklistData[key])
-          // index[key] = checklistData[key]
           transitionChecklistItems.push(index)
         }      
       }
@@ -175,114 +174,6 @@ const checkStyle = {
         {listItems.map(item => 
           <ListItems key={item.id} {...item}/>
         )}
-          {/* <label className="checkboxLabel">
-            <input
-              className="checkbox"
-              id="1"
-              checked={checklistData.final_physical}
-              type="checkbox"
-              name="final_physical"
-              style={checkStyle}
-              onChange={handleChange}
-            />{" "}
-            Seperation Physical Complete?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="2"
-              checked={checklistData.gear_turn_in}
-              type="checkbox"
-              name="gear_turn_in"
-              style={checkStyle}
-              onChange={handleChange}
-            />{" "}
-            Final Gear Turn-In?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="3"
-              checked={checklistData.hhg_move}
-              type="checkbox"
-              name="hhg_move"
-              style={checkStyle}
-              onChange={handleChange}
-            />{" "}
-            HHG move?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="4"
-              checked={checklistData.barracks_checkout}
-              type="checkbox"
-              name="barracks_checkout"
-              style={checkStyle}
-              onChange={handleChange}
-            />{" "}
-            Barracks Checkout?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="5"
-              checked={checklistData.file_va_claim}
-              type="checkbox"
-              name="file_va_claim"
-              style={checkStyle}
-              onChange={handleChange}
-            />{" "}
-            VA Claim Filed?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="6"
-              type="checkbox"
-              name="seeking_further_education"
-              style={checkStyle}
-              onChange={handleChange}
-              checked={checklistData.seeking_further_education}
-            />{" "}
-            Seeking further education?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="7"
-              type="checkbox"
-              name="planning_to_relocate"
-              style={checkStyle}
-              onChange={handleChange}
-              checked={checklistData.planning_to_relocate}
-            />{" "}
-            Planning to relocate?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="8"
-              type="checkbox"
-              name="taps_complete"
-              style={checkStyle}
-              onChange={handleChange}
-              checked={checklistData.taps_complete}
-            />{" "}
-            Taps complete?
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className="checkbox"
-              id="9"
-              type="checkbox"
-              name="has_dependents"
-              style={checkStyle}
-              onChange={handleChange}
-              checked={checklistData.has_dependents}
-            />{" "}
-            Have dependents?
-          </label> */}
         </div>
         <div className={styles.checklistButtonDiv}>
           <input
