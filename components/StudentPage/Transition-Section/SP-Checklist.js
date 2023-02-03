@@ -1,41 +1,18 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import styles from "../../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../../redux/features/app-slice";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
+import ListItems from "./ListItems";
 
 const SPChecklist = () => {
   const dispatch = useDispatch();
   const activeStudent = useSelector(
     ({ app: { activeStudent } }) => activeStudent
   );
-
-  const [checklistData, setChecklistData] = useState({
-    user_id: activeStudent.user_id,
-    first: activeStudent.first,
-    last: activeStudent.last,
-    email: activeStudent.email,
-    rank: activeStudent.rank,
-    branch: activeStudent.branch,
-    duty_station: activeStudent.duty_station,
-    taps_complete: activeStudent.taps_complete,
-    leave_start_date: convertDateToIso(activeStudent.leave_start_date),
-    ets_date: convertDateToIso(activeStudent.ets_date),
-    planning_to_relocate: activeStudent.planning_to_relocate,
-    city: activeStudent.city,
-    state: activeStudent.state,
-    has_dependents: activeStudent.has_dependents,
-    highest_education: activeStudent.highest_education,
-    seeking_further_education: activeStudent.seeking_further_education,
-    mos: activeStudent.mos,
-    interests: activeStudent.interests,
-    final_physical: activeStudent.final_physical,
-    gear_turn_in: activeStudent.gear_turn_in,
-    hhg_move: activeStudent.hhg_move,
-    barracks_checkout: activeStudent.barracks_checkout,
-    file_va_claim: activeStudent.file_va_claim,
-  });
+  const [checklistData, setChecklistData] = useState(activeStudent);
+  const [listItems, setListItems] = useState([])
   const [message, setMessage] = useState("")
 
   function convertDateToIso(date) {
@@ -59,24 +36,20 @@ const SPChecklist = () => {
     }
   }
 
-  const handleCancel = () => {
-    console.log("canceled", checklistData);
-  };
-
-  ////////////////// PATCH request for update checklist refactored to use axios //////////////
+  // ========== PATCH request for update checklist =============
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", checklistData);
     try {
-        const res = await axios.patch(`/api/users/${checklistData.user_id}`, checklistData);
+        await axios.patch(`/api/users/${checklistData.user_id}`, checklistData);
         dispatch(setActiveStudent(checklistData));
         setMessage("Success!");
         setTimeout(() => {
             setMessage("");
         }, 1000);
     } catch (err) {
-        console.log(err);
+        setMessage(err);
     }
 };
 
@@ -93,17 +66,40 @@ const SPChecklist = () => {
   };
 
   const checklistItems = (checklistData) => {
-    let keys = [];
-    for(let key in checklistData) {      
-      // console.log(checklistData[key] === true);
-      if (checklistData[key] === true || checklistData[key] === false){
-        keys.push(key);
+    const transitionChecklistItems = [];
+    for (let key in checklistData) {
+      if (typeof checklistData[key] === 'boolean') {
+        if (key !== 'relocate_to_country' && key !== 'admin' && key !== 'new_user' && key !== 'archived'){
+          let index = [];
+          index.push(key);
+          index.push(checklistData[key])
+          // index[key] = checklistData[key]
+          transitionChecklistItems.push(index)
+        }      
       }
     }
-    // console.log(keys.length)
-  }
+    return transitionChecklistItems;
+  };
+  
+  
+    useEffect(() => {
+        const list = checklistItems(checklistData);
+        setListItems(list);
+    }, [checklistData])
+console.log('here', listItems)
 
-  checklistItems(checklistData);
+  // const checklistItems = (checklistData) => {
+  //   let keys = [];
+  //   for(let key in checklistData) {      
+  //     // console.log(checklistData[key] === true);
+  //     if (checklistData[key] === true || checklistData[key] === false){
+  //       keys.push(key);
+  //     }
+  //   }
+  //   // console.log(keys.length)
+  // }
+
+  // checklistItems(checklistData);
 
   // ============ Progress Bar ============= //
 
@@ -176,7 +172,10 @@ const checkStyle = {
       </div>
       <div className={styles.checklistForm} onSubmit={handleSubmit}>
         <div className={styles.editStudentChecklist}>
-          <label className="checkboxLabel">
+        {listItems.map(item => 
+          <ListItems key={item.id} {...item}/>
+        )}
+          {/* <label className="checkboxLabel">
             <input
               className="checkbox"
               id="1"
@@ -283,7 +282,7 @@ const checkStyle = {
               checked={checklistData.has_dependents}
             />{" "}
             Have dependents?
-          </label>
+          </label> */}
         </div>
         <div className={styles.checklistButtonDiv}>
           <input
