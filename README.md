@@ -40,7 +40,7 @@
 - To access admin portal: admin@admin.com / "password" 
 
   
-# 1.) Objective & Requirements
+# Objective & Requirements
 
 ## What is the _Hacking Transitions_ Application?
 
@@ -54,7 +54,7 @@ Application is requested to include:
 - **student portal:** allows the student to view/edit/update their transition information & allows the student to directly message admissions staff; allows the student to update their account password
 - **admin portal:** allows the admissions staff to access/track/manage student-inputed information from the student portal and assign/re-assign students to specified cohorts; allows admissions staff to directly message students or entire cohorts; allows admissions staff to maintain a database of archived cohorts/students information; allows admins to create new cohorts with a designated unique registration code; allows admissions staff to create/delete admin accounts; allows admins to update their account password
 
-# 2.) What the app does and why...
+# What the app does and why...
 
 The application is designed to `assist the transition team` at Galvanize in monitoring each student's required tasks, personal goals, and mandatory timelines set forth by their Military Branch of Service regarding their military-to-civilian transition.
 
@@ -66,7 +66,7 @@ The application is designed to `assist the transition team` at Galvanize in moni
 
 - Galvanize staff transition specialists are able to login as an `admin` and are able to add/update/delete/archive cohorts, view and manage student data, and chat with cohorts as a group or students individually.
 
-# 3.) Tech Implementation: _How the application works..._
+# Tech Implementation: _How the application works..._
 
 This application uses **[Next.js](https://nextjs.org/)** as its dedicated `Front-end framework` on top of **[React](https://reactjs.org/)**, while **[Redux](https://redux.js.org/)** is used for dynamic state management. The app uses the **[Next.js API](https://nextjs.org/docs/api-routes/introduction)** _that is built into the Front-end framework_ (see 'pages/api') to query a **[PostgreSQL Database](https://www.postgresql.org/)** that stores all relevant application data. **[Docker](https://www.docker.com/)** is used to containerize the entire application to streamline development and deployment.
 
@@ -78,7 +78,7 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
 
 (**Note:** application directory format is in standard with the Next.js framework convention.)
 
-# 4.) Installation & Setup
+# Installation & Setup
 
 - Fork / clone down the main branch of this repo
 - open your forked/cloned repo within your IDE and install dependencies:
