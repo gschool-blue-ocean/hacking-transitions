@@ -1,6 +1,6 @@
 ### ------------------------------ Galvanize MCSP-16 Team 1 ------------------------------ 
 
-# ------------ _[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_ -----------
+# ------------ **_[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_** -----------
 
 <div align='center'>
   <h2> Tech Stack </h2>
@@ -34,9 +34,9 @@
   
   <h3> Deployed Application Access in Production & Login </h3>
 
-<p>Access the [Hacking Transitions Application](https://hacking-transitions-webservice.onrender.com/) hosted on [Render](https://render.com/).</p>
-<p>To access student portal: student@student.com / "password"</p>
-<p>To access admin portal: admin@admin.com / "password"</p>
+<span> Access the [Hacking Transitions Application](https://hacking-transitions-webservice.onrender.com/) hosted on [Render](https://render.com/). </span>
+<span> To access student portal: student@student.com / "password" </span>
+<span> To access admin portal: admin@admin.com / "password" </span>
 </div>
   
 # 1.) Objective & Requirements
