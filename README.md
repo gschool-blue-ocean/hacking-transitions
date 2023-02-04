@@ -1,4 +1,4 @@
-# ------------ **_[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_** -----------
+# ------------ **[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean** -----------
 
 
  ### Tech Stack
