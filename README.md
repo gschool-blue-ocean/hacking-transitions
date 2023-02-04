@@ -35,10 +35,9 @@
   
   <h3> Deployed Application Access in Production & Login </h3>
 
-- Access the [Hacking Transitions Application](https://hacking-transitions-webservice.onrender.com/) hosted on [Render](https://render.com/).
-- To access student portal: student@student.com / "password"
-- To access admin portal: admin@admin.com / "password"
-- _Optional:_ Register your own student account with this demo Registration Code: **batMan**
+Access the [Hacking Transitions Application](https://hacking-transitions-webservice.onrender.com/) hosted on [Render](https://render.com/).
+To access student portal: student@student.com / "password"
+To access admin portal: admin@admin.com / "password"
 </div>
   
 # 1.) Objective & Requirements
