@@ -1,8 +1,7 @@
-<h1 align='center'>----------------- Galvanize MCSP-16 Team 1 ---------------- </h1>
+# ----------------- Galvanize MCSP-16 Team 1 ---------------- 
 
-<h1 align='center'> Hacking Transitions : Blue Ocean </h1>
-<!-- # ------ _[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_ -----
-# -->
+# ------ _[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_ -----
+
 <div align='center'>
   <h2> Tech Stack </h2>
 
