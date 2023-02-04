@@ -4,7 +4,7 @@
 <!-- # ------ _[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean_ -----
 # -->
 <div align='center'>
-# Tech Stack
+  <h2> Tech Stack </h2>
 
 ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642)
@@ -31,15 +31,16 @@
 ![Discord](https://camo.githubusercontent.com/f868f43f3c084669121e55e633ca5c3e11d382872ab7db663789f5c736c71a43/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446973636f72642d3538363546323f7374796c653d666f722d7468652d6261646765266c6f676f3d646973636f7264266c6f676f436f6c6f723d7768697465)
 ![Slack](https://camo.githubusercontent.com/870d2945e15dde83583f64ea1f3f4471702e45bf30fa884412da74cb7731ae42/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
 ![Zoom](https://camo.githubusercontent.com/c6c90c4d74d5fad08da3e2c31c556ea8a8b45a6bd5756b6e49111d9825cde56f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5a6f6f6d2d3244384346463f7374796c653d666f722d7468652d6261646765266c6f676f3d7a6f6f6d266c6f676f436f6c6f723d7768697465)
-</div>
+
   
-### Deployed Application Access in Production & Login
+  <h3> Deployed Application Access in Production & Login </h3>
 
 - Access the [Hacking Transitions Application](https://hacking-transitions-webservice.onrender.com/) hosted on [Render](https://render.com/).
 - To access student portal: student@student.com / "password"
 - To access admin portal: admin@admin.com / "password"
 - _Optional:_ Register your own student account with this demo Registration Code: **batMan**
-
+</div>
+  
 # 1.) Objective & Requirements
 
 ## What is the _Hacking Transitions_ Application?
