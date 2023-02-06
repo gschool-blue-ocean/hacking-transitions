@@ -1,5 +1,4 @@
 
-
 export default function ListItems({...item}) {
   console.log('item', item)
   console.log(item.props)
