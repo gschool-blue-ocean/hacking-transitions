@@ -6,10 +6,9 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-// import { set } from "immer/dist/internal";
 
 const Admin = ({ allCohorts }) => {
-  const { isLoading, setIsLoading } = useContext(appContext);
+  const { setIsLoading } = useContext(appContext);
   const [admin, setAdmin] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
