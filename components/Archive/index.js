@@ -41,7 +41,6 @@ export default function ArchivePage({ cohorts, students }) {
       console.error(error);
     }
   };
-  
 
   //for Search
   const studentRef = useRef("");
@@ -53,9 +52,11 @@ export default function ArchivePage({ cohorts, students }) {
     let sStu = search.split(" ");
     let data = `${sStu[0]}-${sStu[1]}`;
     console.log("student search", data);
-  
+
     try {
-      const { data: results } = await axios.get(`/api/archive/students/${data}`);
+      const { data: results } = await axios.get(
+        `/api/archive/students/${data}`
+      );
       if (results.length !== 0) {
         setResultStudent(results);
       } else {
@@ -136,7 +137,8 @@ export default function ArchivePage({ cohorts, students }) {
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li className={style.listName}
+                  <li
+                    className={style.listName}
                     key={student.user_id}
                     onClick={() => {
                       dispatch(setActiveStudent(student));
