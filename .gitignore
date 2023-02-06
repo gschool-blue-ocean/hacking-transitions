@@ -7,7 +7,7 @@ components/Login/config.js
 /node_modules
 /.pnp
 .pnp.js
-.env
+# .env
 
 # testing
 /coverage
