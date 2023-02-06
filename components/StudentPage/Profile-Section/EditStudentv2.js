@@ -5,7 +5,8 @@ import { setActiveStudent } from "../../../redux/features/app-slice";
 import axios from "axios";
 import { FiEdit } from "react-icons/fi";
 import { FaCogs } from "react-icons/fa";
-import { TbArrowBack } from "react-icons/tb"
+import { TbArrowBack } from "react-icons/tb";
+import AdminUpdate from "../../AdminPage/AdminEdit/AdminUpdate";
 
 
 import css from "../../../styles/StudentPage/ProfileSection.module.css";
@@ -75,7 +76,7 @@ const ProfileEdit = () => {
       {isModalOpen && (
         <>
           <div className={css.EditFormContainer}>
-            <div className={css.EditPassword}>
+            {/* <div className={css.EditPassword}>
               <div className={css.EditPasswordTitle} onClick={() => { setIsPasswordOpen(!isPasswordOpen) }}>
                 {!isPasswordOpen ?
                   <>
@@ -89,7 +90,7 @@ const ProfileEdit = () => {
                   </>
                 }
               </div>
-            </div>
+            </div> */}
             {!isPasswordOpen && (
               <form className={css.EditProfileForm} onSubmit={handleSubmit}>
                 <div className={css.EditProfileUpper}>
@@ -300,37 +301,7 @@ const ProfileEdit = () => {
             )}
             {isPasswordOpen && (
               <>
-                <form className={css.EditPasswordForm}>
-                  <section>
-                    <label>Current Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <label>New Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <label>Confirm Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <input
-                      type="submit"
-                      value="Change Password"
-                    />
-                    <input
-                      onClick={() => { setIsPasswordOpen(false) }}
-                      type="button"
-                      value="Cancel"
-                    />
-                  </section>
-                </form>
+                <AdminUpdate />
               </>
             )}
           </div>
