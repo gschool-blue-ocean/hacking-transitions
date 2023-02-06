@@ -7,7 +7,7 @@ import axios from "axios";
 
 const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
-  const [isClicked, toggleClicked] = useState(false);
+  const [isClicked, toggleClicked] = useState(true);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active);
   const handleClick = async (e) => {

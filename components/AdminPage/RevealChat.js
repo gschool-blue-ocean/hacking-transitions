@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Chat from "../Chat";
 import { useState } from "react";
 const RevealChat = ({ chatCohort }) => {
-  const [isClicked, toggleClicked] = useState(false);
+  const [isClicked, toggleClicked] = useState(true);
   const toggleClickedMenu = () => {
     toggleClicked(!isClicked);
   };

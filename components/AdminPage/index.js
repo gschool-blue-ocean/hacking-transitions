@@ -9,7 +9,7 @@ import axios from "axios";
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
   const [currCohort, setCurrCohort] = useState([]);
-  const [menuClicked, setMenuClicked] = useState(false);
+  const [menuClicked, setMenuClicked] = useState(true);
   const [chatCohort, setChatCohort] = useState("");
 
   useEffect(() => {
