@@ -28,7 +28,7 @@ const AdminCohort = () => {
     <>
       <div className={styles.adminCohortParent}>
         <div className={styles.adminCohortHeader}>
-          <h1>Cohort Passcode</h1>
+          <p>Cohort Passcode</p>
         </div>
 
         <div className={styles.adminCohortSelector}>
@@ -58,9 +58,8 @@ const AdminCohort = () => {
           <div className={styles.adminCohortPassword}>
             <label
               className={styles.adminCohortPasswordLabel}
-              for="cohortPassword"
-            >
-              One Time Password:
+              for="cohortPassword">
+              One Time Registration Password:
             </label>
             <input
               className={styles.adminCohortPasswordInput}

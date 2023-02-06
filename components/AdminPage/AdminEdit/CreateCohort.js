@@ -49,7 +49,7 @@ const createCohort = () => {
     <>
       <div className={styles.createCohortParent}>
         <div className={styles.createCohortHeader}>
-          <h1>Create Cohort</h1>
+          <p>Create Cohort</p>
         </div>
 
         <div className={styles.createCohortSelector}>
@@ -68,7 +68,7 @@ const createCohort = () => {
             </label>
             <input
               className={styles.createCohortStartDateInput}
-              type="text" placeholder="Start Date"
+              type="text" placeholder="DD / MM / YYYY"
               onChange={(event) => setStartDate(event.target.value)}
             />
             <label for="End Date" className={styles.createCohortEndDateLabel}>
@@ -76,7 +76,7 @@ const createCohort = () => {
             </label>
             <input
               className={styles.createCohortEndDateInput}
-              type="text" placeholder="End Date"
+              type="text" placeholder="DD / MM / YYYY"
               onChange={(event) => setEndDate(event.target.value)}
             />
           </div>

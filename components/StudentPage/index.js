@@ -56,10 +56,10 @@ export default function StudentPage({ viewClickedCohort }) {
                 //   });
               }}
             >
-              <div className={styles.LogOutTab}>
+              {/* <div className={styles.LogOutTab}>
                   <SlLogout />
                   <div>Logout</div>
-              </div>
+              </div> */}
             </a>
           </Link>
           {/* <SPETStag userETS={activeStudent.ets_date} /> */}

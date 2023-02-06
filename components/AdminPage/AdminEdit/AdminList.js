@@ -22,7 +22,7 @@ const AdminList = () => {
   return (
     <div className={styles.adminListParent}>
       <div className={styles.adminListHeader}>
-        <h1>Current Admins</h1>
+        <p>Current Admins</p>
       </div>
       <div className={styles.adminListList}>
         <ul>
