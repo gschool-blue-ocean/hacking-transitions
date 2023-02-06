@@ -262,15 +262,15 @@ const ProfileEdit = () => {
                   </section>
                   {activeStudent.admin ? null : (
                     <section>
-                      <label for="aboutme">About Me:</label>
+                      <label for="interests">About Me:</label>
                       <textarea
                         className={css.editInterestsTextarea}
-                        id="aboutme"
-                        name="aboutme"
+                        id="interests"
+                        name="interests"
                         type="text"
                         placeholder="Tell us about yourself."
                         onChange={handleChange}
-                        value={formData.aboutme}
+                        value={formData.interests}
                         rows="4"
                         cols="50"
                       />
