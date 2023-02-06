@@ -49,7 +49,7 @@ const createCohort = () => {
     <>
       <div className={styles.createCohortParent}>
         <div className={styles.createCohortHeader}>
-          <h1>Create Cohort</h1>
+          <p>Create Cohort</p>
         </div>
 
         <div className={styles.createCohortSelector}>
