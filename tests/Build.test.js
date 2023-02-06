@@ -1,8 +1,9 @@
-// Run an "npm install" from root project directory first!
-// To run this test, ensure that your docker containers are up and running ("docker-compose up")
-// and your .env file has the DEV Local docker container DB URL uncommented
-// and the PRODUCTION Render DB URL is commented out.
-// Then CD into the "tests" directory, then run "npm test"
+// TO RUN THIS TEST:
+// - Run an "npm install" from root project directory
+// - Navigate to .env file and uncomment the DEV Local docker container DB URL, then comment out the PRODUCTION Render DB URL
+// - Run "docker-compose up --build"
+// - CD into the "tests" directory
+// - Run "npm test" to test if the app will execute a Next Build without failing
 
 const { execSync } = require("child_process");
 
