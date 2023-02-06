@@ -8,7 +8,7 @@ import { BiMessageAltAdd } from "react-icons/bi";
 import styles from "../../../styles/StudentPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudentTasks } from "../../../redux/features/app-slice";
-
+import axios from 'axios'
 //task modal styling
 const customStyles = {
   content: {
@@ -48,8 +48,19 @@ export default function SPTasks({ activeStudent }) {
   }
 
   useEffect(() => {
-    setTimeout(() => {getTasks()}, '0140');
-  }, [activeStudent, selectedTask, createTask, editTask, modalIsOpen]);
+    const getTasks = async () => {
+      if (activeStudent.user_id) {
+        try {
+          const res = await axios.get(`api/tasks/student/${activeStudent.user_id}`);
+          dispatch(setStudentTasks(res.data));
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    setTimeout(() => {getTasks()}, 140);
+  }, [activeStudent.user_id, dispatch]);
+  
 
   function modalRendering() {
     if (editTask) {
@@ -72,16 +83,6 @@ export default function SPTasks({ activeStudent }) {
       return <SPTaskModal task={selectedTask} closeModal={setIsOpen} />;
     }
   }
-
-  const getTasks = () => {
-    if (activeStudent.user_id) {
-      fetch(`api/tasks/student/${activeStudent.user_id}`)
-        .then((res) => res.json())
-        .then((tasks) => {
-          dispatch(setStudentTasks(tasks));
-        });
-    }
-  };
 
   return (
     <div className={styles.SDashTasks}>
