@@ -2,29 +2,35 @@ import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { json } from "react-router-dom";
 import { getAuth, updatePassword, signOut } from "firebase/auth";
 import { appContext } from "../_app";
 import { auth } from "../../firebase/firebase";
 
 const AdminUpdate = () => {
   const router = useRouter();
-  const { showUpdateModal, setShowUpdateModal, currentFirebaseUser } =
+  const { showUpdateModal, setShowUpdateModal, currentFirebaseUser, _window } =
     useContext(appContext);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const admin = JSON.parse(sessionStorage.getItem("currentUser"));
+  const [admin, setAdmin] = useState({});
+  //fixes build issue with by having sessionStorage called after page is rendered
+  useEffect(
+    () => setAdmin(JSON.parse(sessionStorage.getItem("currentUser"))),
+    []
+  );
 
-  console.log("user: ", admin);
-  console.log("newFirstName: ", newFirstName);
-  console.log("newLastName: ", newLastName);
-  console.log("newUsername: ", newUsername);
-  console.log("newPassword: ", newPassword);
-  console.log("newPass is undef? ", newPassword === "");
-  console.log("currentFirebaseUser: ", currentFirebaseUser);
-
-  console.log(`admin.first: ${JSON.stringify(admin.first)}`);
+  // console.log("user: ", admin);
+  // console.log("newFirstName: ", newFirstName);
+  // console.log("newLastName: ", newLastName);
+  // console.log("newUsername: ", newUsername);
+  // console.log("newPassword: ", newPassword);
+  // console.log("newPass is undef? ", newPassword === "");
+  // console.log("currentFirebaseUser: ", currentFirebaseUser);
+  // console.log("sessionStorage: ", sessionStorage);
+  // console.log(`admin.first: ${JSON.stringify(admin.first)}`);
 
   if (newPassword !== "") {
     console.log("there is a new pass");

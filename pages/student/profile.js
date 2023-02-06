@@ -2,20 +2,25 @@ import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { json } from "react-router-dom";
 import { getAuth, updatePassword, signOut } from "firebase/auth";
 import { appContext } from "../_app";
 import { auth } from "../../firebase/firebase";
 
 const StudentUpdate = () => {
   const router = useRouter();
-  const admin = JSON.parse(sessionStorage.getItem("currentUser"));
   const { showUpdateModal, setShowUpdateModal, currentFirebaseUser } =
     useContext(appContext);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  // const [newEmail, setNewEmail] = useState("");
+  const [admin, setAdmin] = useState({});
+  //fixes build issue with by having sessionStorage called after page is rendered
+  useEffect(
+    () => setAdmin(JSON.parse(sessionStorage.getItem("currentUser"))),
+    []
+  );
 
   console.log("user: ", admin);
   console.log("newFirstName: ", newFirstName);
