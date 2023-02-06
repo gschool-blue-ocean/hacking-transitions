@@ -95,11 +95,11 @@ const ProfileEdit = () => {
               <form className={css.EditProfileForm} onSubmit={handleSubmit}>
                 <div className={css.EditProfileUpper}>
                   <section>
-                    <label for="firstname">First Name:</label>
+                    <label for="first">First Name:</label>
                     <input
                       className={css.answer}
-                      id="firstname"
-                      name="firstname"
+                      id="first"
+                      name="first"
                       type="text"
                       placeholder="Enter First Name"
                       onChange={handleChange}
@@ -107,11 +107,11 @@ const ProfileEdit = () => {
                     />
                   </section>
                   <section>
-                    <label for="lastname">Last Name:</label>
+                    <label for="last">Last Name:</label>
                     <input
                       className={css.answer}
-                      id="lastname"
-                      name="lastname"
+                      id="last"
+                      name="last"
                       type="text"
                       placeholder="Enter Last Name"
                       onChange={handleChange}
