@@ -1,6 +1,6 @@
 ### ------------------------------- Galvanize MCSP-16 Team 1 --------------------------------
 
-# ------------ **[Hacking Transitions](https://hacking-transitions-webservice.onrender.com/) : Blue Ocean** -----------
+# ------------ **[Hacking Transitions](https://hacking-transitions-nextjs-frontend.onrender.com/) : Blue Ocean** -----------
 
 ### Tech Stack
 
