@@ -296,7 +296,6 @@
   font-size: 1.35vw;
   justify-content: center;
   font-weight: bolder;
-  font-size: 12px;
   border-bottom: 3px solid #f79020;
 }
 
@@ -564,7 +563,7 @@
 .createCohortHeader {
   display: flex;
   grid-area: createCohortHeader;
-  font-size: 1.35vw;
+  font-size: 2vw;
   justify-content: center;
   font-weight: bolder;
   border-bottom: 3px solid #f79020;
