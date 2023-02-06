@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "../components/Login/LoginLayout";
+import LoginLayout from "../components/LoginPage/LoginLayout";
 import style from "../styles/LoginStyles.module.css";
 import Link from "next/link";
 
 const NotFound = () => {
   return (
-    <Layout>
+    <LoginLayout>
       <div className={style.notfound}>
         <h1> Ooops...That page cannot be found! </h1>
         <h2>Please contact your administrator</h2>
@@ -16,7 +16,7 @@ const NotFound = () => {
           </Link>
         </h3>
       </div>
-    </Layout>
+    </LoginLayout>
   );
 };
 

@@ -8,14 +8,13 @@ import { auth } from "../../firebase/firebase";
 
 const AdminUpdate = () => {
   const router = useRouter();
-  const admin = JSON.parse(sessionStorage.getItem("currentUser"));
   const { showUpdateModal, setShowUpdateModal, currentFirebaseUser } =
     useContext(appContext);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  // const [newEmail, setNewEmail] = useState("");
+  const admin = JSON.parse(sessionStorage.getItem("currentUser"));
 
   console.log("user: ", admin);
   console.log("newFirstName: ", newFirstName);
