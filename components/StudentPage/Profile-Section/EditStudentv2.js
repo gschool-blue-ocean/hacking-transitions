@@ -5,7 +5,8 @@ import { setActiveStudent } from "../../../redux/features/app-slice";
 import axios from "axios";
 import { FiEdit } from "react-icons/fi";
 import { FaCogs } from "react-icons/fa";
-import { TbArrowBack } from "react-icons/tb"
+import { TbArrowBack } from "react-icons/tb";
+import AdminUpdate from "../../AdminPage/AdminEdit/AdminUpdate";
 
 
 import css from "../../../styles/StudentPage/ProfileSection.module.css";
@@ -22,14 +23,13 @@ const ProfileEdit = () => {
   function handleButtonPress() {
     setIsModalOpen(true);
   }
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", formData);
     try {
       const res = await axios.patch(`/api/users/${activeStudent.user_id}`, formData);
       dispatch(setActiveStudent(formData));
-      router.push("/student");
     } catch (err) {
       console.log(err);
     }
@@ -45,23 +45,23 @@ const ProfileEdit = () => {
   };
   const [formData, setFormData] = useState({
     user_id: activeStudent.user_id,
-    firstname: activeStudent.first,
-    lastname: activeStudent.last,
+    first: activeStudent.first,
+    last: activeStudent.last,
     email: activeStudent.email,
     rank: activeStudent.rank,
     branch: activeStudent.branch,
-    dutystation: activeStudent.duty_station,
+    duty_station: activeStudent.duty_station,
     taps_complete: activeStudent.taps_complete,
-    leavestartdate: convertDateToIso(activeStudent.leave_start_date),
-    etsdate: convertDateToIso(activeStudent.ets_date),
+    'leave_start_date': convertDateToIso(activeStudent.leave_start_date),
+    ets_date: convertDateToIso(activeStudent.ets_date),
     planning_to_relocate: activeStudent.planning_to_relocate,
     city: activeStudent.city,
     state: activeStudent.state,
     has_dependents: activeStudent.has_dependents,
-    highesteducation: activeStudent.highest_education,
+    highest_education: activeStudent.highest_education,
     seeking_further_education: activeStudent.seeking_further_education,
     mos: activeStudent.mos,
-    aboutme: activeStudent.interests,
+    interests: activeStudent.interests,
     file_va_claim: activeStudent.file_va_claim,
     hhg_move: activeStudent.hhg_move,
     barracks_checkout: activeStudent.barracks_checkout,
@@ -76,7 +76,7 @@ const ProfileEdit = () => {
       {isModalOpen && (
         <>
           <div className={css.EditFormContainer}>
-            <div className={css.EditPassword}>
+            {/* <div className={css.EditPassword}>
               <div className={css.EditPasswordTitle} onClick={() => { setIsPasswordOpen(!isPasswordOpen) }}>
                 {!isPasswordOpen ?
                   <>
@@ -90,32 +90,32 @@ const ProfileEdit = () => {
                   </>
                 }
               </div>
-            </div>
+            </div> */}
             {!isPasswordOpen && (
               <form className={css.EditProfileForm} onSubmit={handleSubmit}>
                 <div className={css.EditProfileUpper}>
                   <section>
-                    <label for="firstname">First Name:</label>
+                    <label for="first">First Name:</label>
                     <input
                       className={css.answer}
-                      id="firstname"
-                      name="firstname"
+                      id="first"
+                      name="first"
                       type="text"
                       placeholder="Enter First Name"
                       onChange={handleChange}
-                      value={formData.firstname}
+                      value={formData.first}
                     />
                   </section>
                   <section>
-                    <label for="lastname">Last Name:</label>
+                    <label for="last">Last Name:</label>
                     <input
                       className={css.answer}
-                      id="lastname"
-                      name="lastname"
+                      id="last"
+                      name="last"
                       type="text"
                       placeholder="Enter Last Name"
                       onChange={handleChange}
-                      value={formData.lastname}
+                      value={formData.last}
                     />
                   </section>
                   <section>
@@ -182,34 +182,34 @@ const ProfileEdit = () => {
                     <label for="dutystation">Duty Station:</label>
                     <input
                       className={css.answer}
-                      id="dutystation"
-                      name="dutystation"
+                      id="duty_station"
+                      name="duty_station"
                       type="text"
                       placeholder="Enter Duty Station"
                       onChange={handleChange}
-                      value={formData.dutystation}
+                      value={formData['duty_station']}
                     />
                   </section>
                   <section>
                     <label for="leavestartdate">Leave Start Date:</label>
                     <input
                       className={css.answer}
-                      id="leavestartdate"
-                      name="leavestartdate"
+                      id="leave_start_date"
+                      name="leave_start_date"
                       type="date"
                       onChange={handleChange}
-                      value={formData.leavestartdate}
+                      value={formData['leave_start_date']}
                     />
                   </section>
                   <section>
-                    <label for="etsdate">ETS Date:</label>
+                    <label for="ets_date">ETS Date:</label>
                     <input
                       className={css.answer}
-                      id="etsdate"
-                      name="etsdate"
+                      id="ets_date"
+                      name="ets_date"
                       type="date"
                       onChange={handleChange}
-                      value={formData.etsdate}
+                      value={formData['ets_date']}
                     />
                   </section>
                   <section>
@@ -237,16 +237,21 @@ const ProfileEdit = () => {
                     />
                   </section>
                   <section>
-                    <label for="highesteducation">Highest Education:</label>
-                    <input
+                    <label for="highest_education">Highest Education:</label>
+                    <select
                       className={css.answer}
-                      id="highesteducation"
-                      name="highesteducation"
+                      id="highest_education"
+                      name="highest_education"
                       type="text"
-                      placeholder="Enter Highest Ed."
                       onChange={handleChange}
-                      value={formData.highesteducation}
-                    />
+                      value={formData['highest_education']}
+                    >
+                      <option value="High School/GED">High School/GED</option>
+                      <option value="Associates Degree">Associates Degree</option>
+                      <option value="Bachelor's Degree">Bachelor's Degree</option>
+                      <option value="Doctoral Degree">Doctoral Degree</option>
+                      <option value="None/No degree">None/No degree</option>
+                    </select>
                   </section>
                   <section>
                     <label for="mos">Military Occupation:</label>
@@ -262,15 +267,15 @@ const ProfileEdit = () => {
                   </section>
                   {activeStudent.admin ? null : (
                     <section>
-                      <label for="aboutme">About Me:</label>
+                      <label for="interests">About Me:</label>
                       <textarea
                         className={css.editInterestsTextarea}
-                        id="aboutme"
-                        name="aboutme"
+                        id="interests"
+                        name="interests"
                         type="text"
                         placeholder="Tell us about yourself."
                         onChange={handleChange}
-                        value={formData.aboutme}
+                        value={formData.interests}
                         rows="4"
                         cols="50"
                       />
@@ -296,37 +301,7 @@ const ProfileEdit = () => {
             )}
             {isPasswordOpen && (
               <>
-                <form className={css.EditPasswordForm}>
-                  <section>
-                    <label>Current Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <label>New Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <label>Confirm Password:</label>
-                    <input
-                      type="password"
-                    ></input>
-                  </section>
-                  <section>
-                    <input
-                      type="submit"
-                      value="Change Password"
-                    />
-                    <input
-                      onClick={() => { setIsPasswordOpen(false) }}
-                      type="button"
-                      value="Cancel"
-                    />
-                  </section>
-                </form>
+                <AdminUpdate />
               </>
             )}
           </div>
