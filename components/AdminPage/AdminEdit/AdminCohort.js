@@ -28,7 +28,7 @@ const AdminCohort = () => {
     <>
       <div className={styles.adminCohortParent}>
         <div className={styles.adminCohortHeader}>
-          <h1>Cohort Passcode</h1>
+          <p>Cohort Passcode</p>
         </div>
 
         <div className={styles.adminCohortSelector}>
