@@ -228,6 +228,11 @@ margin-top: 20px;
    background-color: rgb(0, 99, 91);
 }
 
+.checkStyle {
+  accent-color: rgb(0, 140, 128);
+  margin: .5em;
+} 
+
 /* ============= Student Tasks ============== */
 
 .SDashTasks {
