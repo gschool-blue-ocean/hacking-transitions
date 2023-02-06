@@ -36,6 +36,12 @@
 - To access student portal: student@student.com / "password"
 - To access admin portal: admin@admin.com / "password"
 
+#### Project Links
+
+- [Hacking Transitions Project Board on GitHub](https://github.com/orgs/gschool-blue-ocean/projects/7)
+- [Hacking Transitions App Wiki on GitHub](https://github.com/gschool-blue-ocean/hacking-transitions/wiki)
+- [Hacking Transitions ERD](https://i.imgur.com/LNIOfac.png)
+
 # Objective & Requirements
 
 ## What is the _Hacking Transitions_ Application?
