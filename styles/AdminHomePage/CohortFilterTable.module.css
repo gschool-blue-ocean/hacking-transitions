@@ -35,13 +35,19 @@
 .tableheaders{
     font-size: 2.3rem;
     text-align: left;
+    background-color: #F79020;
+
 }
 .tr{
     border-top: 1px rgb(232, 232, 232) solid;
+    
 }
 .td{
+    
+   font-size: 1vw;
    padding-right: 2rem;
    cursor: pointer;
+   
 }
 .default {
     margin-left: 30rem
@@ -54,4 +60,8 @@
 .chatBtn{
     background-color: transparent;
     border: none;
+}
+
+.studentElement {
+    justify-content: center;
 }

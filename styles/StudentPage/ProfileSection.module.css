@@ -1,0 +1,113 @@
+.EditBackground {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .8);
+}
+
+.EditFormContainer {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 50vw;
+  height: auto;
+  border: .2vw solid rgb(212, 80, 6);
+  color: rgb(212, 80, 6);
+  background-color: rgb(10, 0, 78);
+  display: flex;
+  flex-direction: column;
+  padding: .5vw 1vw 1vw 1vw;
+  border-radius: 1vw;
+}
+.EditPassword {
+  display: flex;
+  gap: .5vw;
+  margin-left: auto;
+  margin-right: 0;
+}
+.EditPassword:hover{
+  color: white;
+  cursor: pointer;
+}
+.EditPasswordTitle {
+  display: flex;
+}
+.EditPasswordTitle h6 {
+  margin: 0;
+  align-self: center;
+}
+.EditPasswordTitle > svg {
+  width: 2vw;
+  height: 2vw;
+}
+.EditProfileForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  padding-top: 1vw;
+}
+
+.EditProfileUpper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1vw;
+}
+
+.EditProfileUpper section {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.EditProfileUpper section:last-child {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.answer {
+  margin: 0 10%;
+}
+
+.EditProfileLower {
+  display: Flex;
+  justify-content: center;
+}
+
+.Edit {
+  width: fit-content;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ==================== PASSWORD MANAGEMENT MODAL ==================== */
+.EditPasswordForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
+  margin-top: 1em;
+ 
+}
+.EditPasswordForm section:not(.EditPasswordForm section:last-child) {
+  width: 100%;
+  display: flex;
+}
+.EditPasswordForm section label{
+  margin-right: auto;
+}
+.EditPasswordForm section input{
+  margin-left: auto;
+  margin-right: 0;
+}

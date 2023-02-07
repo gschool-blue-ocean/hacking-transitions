@@ -3,19 +3,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setStudentsForCohortChat, setActiveStudent } from "../../redux/features/app-slice";
+import axios from "axios";
 
 const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) => {
   const dispatch = useDispatch();
-  const [isClicked, toggleClicked] = useState(false);
+  const [isClicked, toggleClicked] = useState(true);
   //filter out none active cohorts
   cohorts = cohorts.filter((cohort) => cohort.active);
   const handleClick = async (e) => {
     const data = e.target.dataset;
     const id = parseInt(data.cohort_id);
     //filter students based on cohort id retrieved by event.target
-    const students = await (
-      await fetch(`/api/users/cohort/${id}`)
-    ).json();
+    const students = (
+      await axios.get(`/api/users/cohort/${id}`)
+    ).data;
     if (cohorts.length == 0) {
       setCurrCohort([
         {
@@ -113,11 +114,11 @@ const CohortMenu = ({ setChatCohort, setCurrCohort, cohorts, toggleMoveChat }) =
                 </motion.btn>{" "}
                 <button className={s.messageBtn}
                   onClick={async () => {
-                    const cohortStudents = await (
-                      await fetch(
+                    const cohortStudents = (
+                      await axios.get(
                         `/api/users/cohort/${cohort.cohort_id}`
                       )
-                    ).json();
+                    ).data;
                     dispatch(setStudentsForCohortChat(cohortStudents));
                     dispatch(setActiveStudent({}));
                     setChatCohort(cohort.cohort_name)

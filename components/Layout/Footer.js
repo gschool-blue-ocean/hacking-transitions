@@ -3,12 +3,11 @@ import style from "../../styles/Footer.module.css";
 
 const Footer = () => {
   return (
-    <div className={style.container}>
-      <div className={style.spacer}></div>
+    <>
       <div className={style.footer}>
         <div className={style.cont}>
           <div className={style.col}>
-            <small>© 2022 Galvanize, All rights resrved.</small>
+            <small>© 2022 Galvanize, All rights reserved.</small>
           </div>
           <div className={style.links}>
             <ul className={style.list}>
@@ -55,8 +54,8 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-      </div>
     </div>
+  </>
   );
 };
 

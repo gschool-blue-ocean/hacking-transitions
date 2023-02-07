@@ -3,6 +3,7 @@ import styles from "../../styles/StudentPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const EditStudentModal = () => {
   const router = useRouter();
@@ -57,22 +58,20 @@ const EditStudentModal = () => {
       return `${year}-${month}-${day}`;
     }
   }
+  ///////////////// PATCH for update student info refactored for axios /////////////////
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted", formData);
-    fetch(`/api/users/${activeStudent.user_id}`, {
-      method: "PATCH",
-      body: JSON.stringify(formData),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then(() => {
+    try {
+        const res = await axios.patch(`/api/users/${activeStudent.user_id}`, formData);
         dispatch(setActiveStudent(formData));
         router.push("/student");
-      })
-      .catch((err) => console.log(err));
-  };
+    } catch (err) {
+        console.log(err);
+    }
+};
+
   console.log("activeStudent", activeStudent);
 
   const handleChange = (e) => {

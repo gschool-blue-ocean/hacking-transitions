@@ -104,30 +104,7 @@ const AdminUpdate = ({ admin, open, onClose }) => {
                   placeholder={`Current Username: ${admin.username}`}
                 />
               </div>
-              {/* Assume Admin cannot change other Admin email and password */}
-              {/* <div className={styles.adminUpdateFormLabel}>
-                Password
-                <input
-                  className={styles.adminUpdateFormInput}
-                  id={`password ${admin.user_id}`}
-                  type="password"
-                  onChange={(event) => setNewPassword(event.target.value)}
-                  aria-label={`password ${admin.user_id}`}
-                  placeholder={`Change Password:`}
-                />
-              </div>
-              <div className={styles.adminUpdateFormLabel}>
-                Email
-                <input
-                  className={styles.adminUpdateFormInput}
-                  id={`email ${admin.user_id}`}
-                  type="email"
-                  defaultValue={admin.email}
-                  onChange={(event) => setNewEmail(event.target.value)}
-                  aria-label={`email ${admin.user_id}`}
-                  placeholder={`Current email: ${admin.email}`}
-                />
-              </div> */}
+             
               <div className={styles.adminUpdateFormSubmit}>
                 <button
                   className={styles.adminUpdateFormSubmitBtn}

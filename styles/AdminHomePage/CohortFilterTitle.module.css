@@ -1,7 +1,7 @@
 .table {
     table-layout: fixed;
     border-collapse: collapse;
-    height: 30rem;
+    height: 30vw;
     width: 100%;
     
 }
@@ -9,7 +9,8 @@
     border-top: 1px rgb(232, 232, 232) solid;
 }
 .td{
-    padding-right: 2rem;
+    font-size: 1vw;
+    padding-right: 2vw;
     cursor: pointer;
 }
 .default {
@@ -22,38 +23,39 @@
     background-color: rgb(230, 229, 229);
 }
 .tableheaders{
-    font-size: 2.5rem;
-    text-align: center;
+    /* display:table-row; */
+    padding: auto;
+    font-size: 2.5vw;
+    text-align: left;
     margin-top: 4px;
     background: #e0eaf8;
+
     
     
-}
+} 
 .sortButton{
-    float: left;
+   float: left;
     margin-top: 10px;
     margin: 2px;
-    width: 15%;
-    padding-right: 15px;
+    width: 1.5px;
+    padding-right: 20px;
+   
     
 }
-.blankButton {
-    font-size: 2.5rem;
+ .blankButton {
+    font-size: 2.5vw;
     margin-top: 10px;
     gap: 2px;
 }
-.sortDirection {
 
-  
-}
 .title{
-    float:left;
-    font-size: 2.5rem;
+    display: flex;
     font-weight: 600;
     margin-top: 10px;
     margin-left: 2px;
-    padding: 10px;
-    padding-left: 10px;
-    justify-content: center;
-    text-align: center;
+    /* padding: 10px; */
+    /* padding-left: 10px; */
+    /* justify-content: center; */
+    text-align: left;
+    font-size: 2vw;
 }

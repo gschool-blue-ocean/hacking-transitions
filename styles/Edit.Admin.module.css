@@ -38,10 +38,9 @@
 .adminCohortHeader {
   display: flex;
   grid-area: adminCohortHeader;
-  font-size: 50%;
+  font-size: 2vw;
   justify-content: center;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: bolder;
   border-bottom: 3px solid #f79020;
 }
 
@@ -294,10 +293,9 @@
 .adminListHeader {
   display: flex;
   grid-area: adminListHeader;
-  font-size: 50%;
+  font-size: 2vw;
   justify-content: center;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: bolder;
   border-bottom: 3px solid #f79020;
 }
 
@@ -565,10 +563,9 @@
 .createCohortHeader {
   display: flex;
   grid-area: createCohortHeader;
-  font-size: 50%;
+  font-size: 2vw;
   justify-content: center;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: bolder;
   border-bottom: 3px solid #f79020;
 }
 

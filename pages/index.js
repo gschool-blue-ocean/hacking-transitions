@@ -1,49 +1,37 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import Login from "../components/Login/index";
-import Layout from "../components/Login/LoginLayout";
-
-
-import { setActiveStudent } from "../redux/features/app-slice";
+import UserLogin from "../components/LoginPage/index";
+import LoginLayout from "../components/LoginPage/LoginLayout";
+import LoadingScreen from "./loading";
+import { appContext } from "./_app";
 
 //=========================  LOGIN PAGE ==================
 
 function Home() {
+  const { isLoading, setIsLoading } = useContext(appContext);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    /*
-          Check local storage for a signed in user, if exist sign them in
-      */
+    // this useEffect checks if a currentUser exists in session storage:
+    // if user exists, redirect to appropriate page (student or admin)
     if (window) {
-      const localUser = localStorage.getItem("currentUser");
-      const sessionUser = window.sessionStorage.getItem("currentUser");
-      localUser && confirmStorageUser(localUser, true);
-      sessionUser && confirmStorageUser(sessionUser);
+      let sessionUser = window.sessionStorage.getItem("currentUser");
+      console.log("sessionStorage: ", sessionStorage);
+      console.log("sessionUser: ", JSON.parse(sessionUser));
+      if (sessionUser !== null) {
+        setIsLoading(true);
+        sessionUser = JSON.parse(sessionUser);
+        sessionUser.admin ? router.push("/admin") : router.push("/student");
+      }
     }
   }, []);
 
-  const confirmStorageUser = async (currentUser, local = false) => {
-    const currentUserObj = JSON.parse(currentUser);
-    const user = await (
-      await fetch(`/api/users/${currentUserObj.username}`)
-    ).json();
-    if (user.password === currentUserObj.password) {
-      local && localStorage.setItem("currentUser", JSON.stringify(user));
-      window.sessionStorage.setItem("currentUser", JSON.stringify(user));
-      user.admin ? router.push("/admin") : router.push("/student"),
-        dispatch(setActiveStudent(user));
-    }
-  };
   return (
     <>
-    < Layout >
-      <Login />
-    </ Layout >
+      <LoginLayout>{isLoading ? <LoadingScreen /> : <UserLogin />}</LoginLayout>
     </>
   );
 }
+
 Home.displayName = "Login";
 export default Home;

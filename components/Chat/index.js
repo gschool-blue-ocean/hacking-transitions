@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { MdSend, MdOutlineModeEdit, MdOutlineDelete } from "react-icons/md";
 import io from "socket.io-client";
 import dynamic from "next/dynamic";
+import axios from "axios";
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -28,7 +29,7 @@ const Chat = () => {
   const [chatMessages, setChatMessages] = useState([]); //Chat messages to display
   const [socket, setSocket] = useState({}); // socket connection
   const [newMessage, setNewMessage] = useState("");
-  const [ctrlDown, setCtrlDown] = useState(false);
+  const [shftDown, setShftDown] = useState(false);
   const [receivedMessage, setReceivedMessage] = useState(false);
   const [display, setDisplay] = useState({
     editBtns: false,
@@ -40,11 +41,12 @@ const Chat = () => {
       /****** Getting connected to the socket server ******/
       const userData = JSON.parse(sessionStorage.getItem("currentUser"));
       setUserData(userData);
-      const resUrl = (await fetch(`/api/socket`)).url;
+      const resUrl = (await axios.get(`/api/socket`)).request.responseURL;
       const baseUrl = resUrl.substring(0, resUrl.indexOf("/api"));
 
       const newSocket = io(baseUrl);
       setSocket(newSocket);
+
       // if any socket.on methods are put in a function will break and resend the message incrementenly
 
       !newSocket.connected &&
@@ -110,7 +112,7 @@ const Chat = () => {
         content: newMessage,
         date_time: editInfo
           ? editInfo.date_time
-          : new Date(Date.now()).toUTCString(),
+          : new Date(Date.now()).toLocaleString(),
       };
       //// Add properties to the newMessageObj depending on the usecase
       if (cohortChat[0]) newMessageObj.cohort_id = cohortChat[0].cohort_id;
@@ -149,6 +151,10 @@ console.log(editInfo);
       console.error(error);
     }
   };
+
+// const handleShftDown = (e) => {
+//   if (e.keyCode = 16) setShftDown(true)
+// }
 
   return (
     <div className={styles.container}>
@@ -270,12 +276,12 @@ console.log(editInfo);
           onChange={setNewMessage}
           value={newMessage}
           onKeyDown={({ key }) => {
-            key === "Control" && setCtrlDown(true);
+            key === "Shift" && setShftDown(true);
           }}
           onKeyUp={({ key }) => {
-            key === "Control" && setCtrlDown(false);
+            key === "Shift" && setShftDown(false);
             key === "Enter" &&
-              ctrlDown &&
+               !shftDown &&
               (submitMsg(),
               !editInfo &&
                 setTimeout(
@@ -295,7 +301,7 @@ console.log(editInfo);
                 500
               );
           }}
-          title="Ctrl + Enter, Send a message"
+          title="Enter, Send a message"
         >
           <MdSend />
         </button>
@@ -308,8 +314,27 @@ console.log(editInfo);
 
 export default Chat;
 
+// const getCohortComments = async (id) => {
+//   try {
+//     const { data } = await axios.get(`/api/comments/cohort/${id}`);
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// const getStudentComments = async (id) => {
+//   try {
+//     const { data } = await axios.get(`/api/comments/student/${id}`);
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+
 const getCohortComments = async (id) =>
-  await (await fetch(`/api/comments/cohort/${id}`)).json();
+  (await axios.get(`/api/comments/cohort/${id}`)).data;
 
 const getStudentComments = async (id) =>
-  await (await fetch(`/api/comments/student/${id}`)).json();
+  (await axios.get(`/api/comments/student/${id}`)).data;

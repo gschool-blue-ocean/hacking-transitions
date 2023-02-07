@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { setActiveStudent } from "../../redux/features/app-slice";
 import StudentPage from "../StudentPage";
+import axios from "axios";
 
 export default function ArchivePage({ cohorts, students }) {
   const [displayCohorts, setDisplay] = useState(cohorts);
@@ -25,71 +26,69 @@ export default function ArchivePage({ cohorts, students }) {
   const [cohort, setCohort] = useState([]);
   const [listStudents, setListStudents] = useState([]);
 
-  const getList = () => {
-    fetch(`/api/archive/listStudents/${cohort}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((list) => {
-        if (list.length !== 0) {
-          setListStudents(list);
-        } else {
-          setListStudents([
-            { first: "No Student Rosters Available" },
-            // { first: "no list, sorry", last: "no list, sorry" },
-          ]);
-        }
-      });
+  const getList = async () => {
+    try {
+      const { data } = await axios.get(`/api/archive/listStudents/${cohort}`);
+      if (data.length !== 0) {
+        setListStudents(data);
+      } else {
+        setListStudents([
+          { first: "No Student Rosters Available" },
+          // { first: "no list, sorry", last: "no list, sorry" },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  //
 
   //for Search
   const studentRef = useRef("");
   const cohortRef = useRef("");
 
-  const searchStudent = (e) => {
+  const searchStudent = async (e) => {
     e.preventDefault();
     let search = studentRef.current.value;
     let sStu = search.split(" ");
     let data = `${sStu[0]}-${sStu[1]}`;
     console.log("student search", data);
 
-    fetch(`/api/archive/students/${data}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((results) => {
-        if (results.length !== 0) {
-          setResultStudent(results);
-        } else {
-          setResultStudent([
-            {
-              first: "No Results",
-            },
-          ]);
-        }
-      });
+    try {
+      const { data: results } = await axios.get(
+        `/api/archive/students/${data}`
+      );
+      if (results.length !== 0) {
+        setResultStudent(results);
+      } else {
+        setResultStudent([
+          {
+            first: "No Results",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const searchCohort = (e) => {
+  const searchCohort = async (e) => {
     e.preventDefault();
     let search = cohortRef.current.value;
-    fetch(`/api/archive/cohorts/${search}`)
-      .then((data) => {
-        return data.json();
-      })
-      .then((results) => {
-        if (results.length !== 0) {
-          setDisplay(results);
-        } else {
-          setDisplay([
-            {
-              cohort_name: "No Results",
-            },
-          ]);
-        }
-      });
+    try {
+      let res = await axios.get(`/api/archive/cohorts/${search}`);
+      let results = res.data;
+      if (results.length !== 0) {
+        setDisplay(results);
+      } else {
+        setDisplay([
+          {
+            cohort_name: "No Results",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //
@@ -138,7 +137,8 @@ export default function ArchivePage({ cohorts, students }) {
             ) : (
               listStudents.map((student) => {
                 return (
-                  <li className={style.listName}
+                  <li
+                    className={style.listName}
                     key={student.user_id}
                     onClick={() => {
                       dispatch(setActiveStudent(student));

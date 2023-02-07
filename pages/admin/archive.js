@@ -5,12 +5,13 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-import sql from "../../database/connection"
+import sql from "../../database/connection";
 
-export default function Archive({cohorts,students}) {
+export default function Archive({ cohorts, students }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
+
   useEffect(() => {
     (async () => {
       const user = await checkLogin();
@@ -28,6 +29,7 @@ export default function Archive({cohorts,students}) {
       }
     })();
   }, []);
+
   return (
     admin && (
       <div>
@@ -37,20 +39,16 @@ export default function Archive({cohorts,students}) {
   );
 }
 export const getStaticProps = async () => {
+  const cohorts =
+    await sql`SELECT * FROM cohorts WHERE archived = true ORDER BY cohort_id DESC LIMIT 5;`;
 
+  const students =
+    await sql`SELECT * FROM users WHERE admin = false AND archived = true LIMIT 5;`;
 
-      const cohorts =
-        await sql`SELECT * FROM cohorts WHERE archived = true ORDER BY cohort_id DESC LIMIT 5;`;
-     
-      const students =
-      await sql`SELECT * FROM users WHERE admin = false AND archived = true LIMIT 5;`;
-   
-  
- 
   return {
     props: {
       cohorts,
-      students
+      students,
     },
   };
 };

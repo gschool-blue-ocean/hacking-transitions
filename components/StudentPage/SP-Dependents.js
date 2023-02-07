@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/StudentPage.module.css";
+import axios from "axios";
 
 
 export default function SPDependents({ student }) {
@@ -8,13 +9,16 @@ export default function SPDependents({ student }) {
     getDependents();
   }, [student]);
 
-  const getDependents = () => {
-    fetch(`/api/dependents/sponsor/${student.user_id}`)
-      .then((res) => res.json())
-      .then((deps) => {
-        setDependents(deps);
-      });
-  };
+  ///////////////// GET request for dependents refactored to use axios ////////////////
+
+  const getDependents = async () => {
+    try {
+        const res = await axios.get(`/api/dependents/sponsor/${student.user_id}`);
+        setDependents(res.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
 
   if (student.has_dependents) {
     return dependents.map((dep) => {

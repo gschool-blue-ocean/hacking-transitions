@@ -22,13 +22,14 @@ const AdminList = () => {
   return (
     <div className={styles.adminListParent}>
       <div className={styles.adminListHeader}>
-        <h1>Current Admins</h1>
+        <p>Current Admins</p>
       </div>
       <div className={styles.adminListList}>
         <ul>
           {adminList.map((admin, { i }) => {
             const deleteAdmin = (event) => {
               event.preventDefault();
+              
               axios.delete(`/api/users/${admin.user_id}`, {
                 id: admin.user_id,
               });

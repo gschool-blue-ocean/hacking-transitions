@@ -7,14 +7,14 @@ components/Login/config.js
 /node_modules
 /.pnp
 .pnp.js
-.env
+# .env
 
 # testing
 /coverage
 
 # next.js
 /.next/
-/out/
+# /out/
 
 # production
 /build
