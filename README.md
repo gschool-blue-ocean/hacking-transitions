@@ -125,18 +125,24 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
 - You may also register for your own student account using the demo Registration Code: **batMan** _<--- code is case sensitive_
   ![Imgur](https://i.imgur.com/XVJacfZ.gif)
 
-## Testing (Jest)
-- Run an "npm install" from root project directory
-- Run "docker-compose up --build"
-- CD into the "tests" directory
-- Run "npm test" to test if the app will execute a Next Build without failing
-```bash
-*** from 'HACKING-TRANSITIONS' directory [root directory] ***
-  npm install
-  docker compose up --build
-  cd tests/
-  npm test
+# Testing (Jest)
+- Jest.js test will test if the Hacking Transitions Application builds correct with Next Build command ("npm run build")
 
+- 1.) Run an "npm install" from root project directory
+```bash
+  npm install
+```
+- 2.) Run "docker-compose up --build"
+```bash
+  docker compose up --build
+```
+- 3.) CD into the "tests" directory
+```bash
+  cd tests/
+```
+- 4.) Run "npm test" to test if the app will execute a Next Build without failing
+```bash
+  npm test
 ```
 
 # Contributors
