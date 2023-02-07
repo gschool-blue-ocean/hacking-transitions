@@ -125,6 +125,20 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
 - You may also register for your own student account using the demo Registration Code: **batMan** _<--- code is case sensitive_
   ![Imgur](https://i.imgur.com/XVJacfZ.gif)
 
+## Testing (Jest)
+- Run an "npm install" from root project directory
+- Run "docker-compose up --build"
+- CD into the "tests" directory
+- Run "npm test" to test if the app will execute a Next Build without failing
+```bash
+*** from 'HACKING-TRANSITIONS' directory [root directory] ***
+  npm install
+  docker compose up --build
+  cd tests/
+  npm test
+
+```
+
 # Contributors
 
 - [Jullian Rives](https://github.com/jullianrives7) / [Kadynce Krank](https://github.com/kadync3) - Login/Authentication/Registration Portal Team
