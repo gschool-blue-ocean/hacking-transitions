@@ -126,7 +126,7 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
   ![Imgur](https://i.imgur.com/XVJacfZ.gif)
 
 # Testing (Jest)
-- Jest.js test will test if the Hacking Transitions Application builds correct with Next Build command ("npm run build")
+"Build.test.js" is a Jest.js test that will test if the Hacking Transitions Application will build correctly using the Next Build command ("npm run build")
 
 - 1.) Run an "npm install" from root project directory
 ```bash
