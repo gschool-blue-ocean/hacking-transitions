@@ -1,9 +1,7 @@
-version: '3.8'
-
+version: "3.8"
 services:
-
   pgadmin:
-    container_name: hackingTransitions-pgadmin
+    container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -11,60 +9,49 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
       PGADMIN_LISTEN_PORT: 80
     ports:
-      - "8080:80"
+      - 8080:80
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    # depends_on:
-    #   - 'hackingTransitions-db'
 
-  hackingTransitions-db: 
-    container_name: hackingTransitions-DB
+  hacking-transitions-db:
+    container_name: database
     image: postgres:15-alpine
     restart: always
     environment:
-      #DATABASE_HOST: 127.0.0.1
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_HOST_AUTH_METHOD: trust
-      #POSTGRES_PORT: 5432
       POSTGRES_DB: blueocean
       PGDATA: /var/lib/postgresql/data
     depends_on:
-      - 'pgadmin'
+      - pgadmin
     ports:
-      - '5432:5432'
+      - 5432:5432
     healthcheck:
-        test: ["CMD-SHELL", "pg_isready -U postgres"]
-        interval: 5s
-        timeout: 5s
-        retries: 5
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
-      - pgdatasource:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
       - ./database/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
   
-
-  hackingTransitions-FE:
-    container_name: hackingTransitions-FE
-    image: docker-nextjs-dev
+  hacking-transitions-app:
+    container_name: app
+    image: app
+    build: .
     restart: always
     environment:
-      DATABASE_URL: postgresql://postgres:docker@hackingTransitions-db/blueocean
-    build: .
+      DATABASE_URL: postgresql://postgres:docker@hacking-transitions-db/blueocean
     depends_on:
-      - 'hackingTransitions-db'
+      - hacking-transitions-db
     ports:
     - 3000:3000
     volumes: 
     - .:/app
     command: npm run dev
 
-
-
-
 volumes: 
-  pgdatasource:
+  pg-data:
   pgadmin-data:
-
-networks:
-  default:
