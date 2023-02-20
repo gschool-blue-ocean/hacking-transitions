@@ -39,7 +39,7 @@ services:
   
   hacking-transitions-app:
     container_name: app
-    image: app
+    image: hacking-transitions-app
     build: .
     restart: always
     environment:
@@ -47,9 +47,9 @@ services:
     depends_on:
       - hacking-transitions-db
     ports:
-    - 3000:3000
+      - 3000:3000
     volumes: 
-    - .:/app
+      - .:/app
     command: npm run dev
 
 volumes: 
