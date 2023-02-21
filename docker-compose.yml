@@ -1,7 +1,6 @@
 version: "3.8"
 services:
   pgadmin:
-    container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -14,12 +13,12 @@ services:
       - pgadmin-data:/var/lib/pgadmin
 
   database:
-    container_name: database
     image: postgres:15-alpine
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: blueocean
+      POSTGRES_PASSWORD: docker
     ports:
       - 5432:5432
     volumes:
@@ -27,8 +26,7 @@ services:
       - ./database/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
   
-  hacking-transitions-app:
-    container_name: app
+  app:
     image: hacking-transitions-app
     build: .
     restart: always
@@ -38,7 +36,7 @@ services:
       - database
     ports:
       - 3000:3000
-    volumes: 
+    volumes:
       - .:/app
     command: npm run dev
 
