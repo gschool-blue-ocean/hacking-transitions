@@ -3,7 +3,6 @@ import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import RevealChat from "./RevealChat";
 import axios from "axios";
 
 const AdminContainer = ({ allCohorts }) => {
@@ -69,9 +68,7 @@ const AdminContainer = ({ allCohorts }) => {
             initial="enter"
             animate={menuClicked ? "exit" : "enter"}
             variants={moveMenuAnimate}
-          >
-            <RevealChat chatCohort={chatCohort} />
-          </motion.div>
+          ></motion.div>
         </div>
         <CohortView
           setCurrCohort={setCurrCohort}
