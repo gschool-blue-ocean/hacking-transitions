@@ -2,7 +2,6 @@ import styles from "../../styles/Edit.Admin.module.css";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { json } from "react-router-dom";
 import { getAuth, updatePassword, signOut } from "firebase/auth";
 import { appContext } from "../_app";
 import { auth } from "../../firebase/firebase";
