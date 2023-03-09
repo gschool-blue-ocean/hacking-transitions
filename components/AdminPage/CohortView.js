@@ -5,22 +5,17 @@ import s from "../../styles/AdminHomePage/CohortView.module.css";
 import etsStyle from "../../styles/StudentPage.module.css";
 import App from "./EditStudentModal";
 import { useDispatch } from "react-redux";
-import {
-  setActiveStudent,
-  setStudentsForCohortChat,
-} from "../../redux/features/app-slice";
+import { setActiveStudent } from "../../redux/features/app-slice";
 import { motion } from "framer-motion";
-import { BsChatText } from "react-icons/bs";
 import CohortFilterTitle from "./CohortFilterTitle";
-import EditCohortModal from '../AdminPage/EditCohortModal'
+import EditCohortModal from "../AdminPage/EditCohortModal";
 
 // CohortView component is the parent component to CohortFilterTitle
 // Creates the container that will hold all of the Cohort Tables that populate from an on-Click event in the CohortMenu
 // maps through CurrCohort and sets table titles and passes props down to CohortFilterTitle component
 
-const CohortView = ({ currCohort, setCurrCohort, setChatCohort }) => {
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
+const CohortView = ({ currCohort, setCurrCohort }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [clickedCohort, setClickedCohort] = useState([]);
   //handle click for cohort
@@ -29,7 +24,7 @@ const CohortView = ({ currCohort, setCurrCohort, setChatCohort }) => {
     setClickedCohort(cohort_id);
   };
 
-  console.log("sortableData:", currCohort)
+  console.log("sortableData:", currCohort);
 
   if (currCohort == 0) {
     return (
@@ -41,25 +36,32 @@ const CohortView = ({ currCohort, setCurrCohort, setChatCohort }) => {
     return (
       <div className={s.container}>
         {currCohort.map((cohort, cohortIndex) => (
-          <div key={cohort.cohort_id} >
-            <h1>{cohort.cohort_name}
+          <div key={cohort.cohort_id}>
+            <h1>
+              {cohort.cohort_name}
               <btn className={s.td}>
                 <EditCohortModal
-                  cohort={cohort} setCurrCohort={setCurrCohort}
+                  cohort={cohort}
+                  setCurrCohort={setCurrCohort}
                   open={isModalOpen}
                   onClose={() => setIsModalOpen(false)}
                 />
               </btn>
             </h1>
             <div className={s.div}>
-              <CohortFilterTitle index={cohortIndex} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
+              <CohortFilterTitle
+                index={cohortIndex}
+                cohort={cohort}
+                setClickedCohort={setClickedCohort}
+                setCurrCohort={setCurrCohort}
+                currCohort={currCohort}
+              />
             </div>
           </div>
         ))}
       </div>
     );
   }
-}
+};
 
 export default CohortView;
-
