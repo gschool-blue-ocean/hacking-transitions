@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { SlLogout } from "react-icons/sl"
+import { SlLogout } from "react-icons/sl";
 import SPTasks from "./Transition-Section/SP-Tasks";
 import SPETStag from "./SP-ETStag";
 import SPDependents from "./SP-Dependents";
 import SPChecklist from "./Transition-Section/SP-Checklist";
 import styles from "../../styles/StudentPage.module.css";
-import Chat from "../Chat";
 import { useSelector } from "react-redux";
 import ProfileEdit from "./Profile-Section/EditStudentv2";
 
@@ -16,7 +15,7 @@ export default function StudentPage({ viewClickedCohort }) {
   const { activeStudent } = useSelector(({ app: { activeStudent } }) => ({
     activeStudent,
   }));
-  console.log(activeStudent)
+  console.log(activeStudent);
 
   useEffect(() => {
     document.querySelectorAll(".listOfCohorts").forEach((elem) => {
@@ -37,10 +36,13 @@ export default function StudentPage({ viewClickedCohort }) {
         <div className={styles.SDashHeader}>
           <div className={styles.SDashheaderCol}>
             <h1>Student Portal</h1>
-            <h1 id={styles.StuHeaderName}>Welcome, {activeStudent.first} {activeStudent.last}</h1>
+            <h1 id={styles.StuHeaderName}>
+              Welcome, {activeStudent.first} {activeStudent.last}
+            </h1>
           </div>
           <Link href={"/"} passHref>
-            <a className={styles.LogOutLink}
+            <a
+              className={styles.LogOutLink}
               onClick={() => {
                 localStorage.removeItem("currentUser");
                 window.sessionStorage.removeItem("currentUser");
@@ -57,8 +59,8 @@ export default function StudentPage({ viewClickedCohort }) {
               }}
             >
               <div className={styles.LogOutTab}>
-                  <SlLogout />
-                  <div>Logout</div>
+                <SlLogout />
+                <div>Logout</div>
               </div>
             </a>
           </Link>
@@ -134,7 +136,6 @@ export default function StudentPage({ viewClickedCohort }) {
         </div>
         <SPChecklist />
         <SPTasks activeStudent={activeStudent} />
-        <Chat />
       </div>
     </main>
   );

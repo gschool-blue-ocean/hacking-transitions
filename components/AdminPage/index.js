@@ -3,14 +3,12 @@ import CohortMenu from "./CohortMenu";
 import CohortView from "./CohortView";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import RevealChat from "./RevealChat";
 import axios from "axios";
 
 const AdminContainer = ({ allCohorts }) => {
   const [cohorts] = useState(allCohorts);
   const [currCohort, setCurrCohort] = useState([]);
   const [menuClicked, setMenuClicked] = useState(true);
-  const [chatCohort, setChatCohort] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -29,10 +27,6 @@ const AdminContainer = ({ allCohorts }) => {
       }
     })();
   }, []);
-
-  const toggleMoveChat = () => {
-    setMenuClicked(!menuClicked);
-  };
 
   const moveMenuAnimate = {
     enter: {
@@ -58,8 +52,6 @@ const AdminContainer = ({ allCohorts }) => {
         <div className={s.tools_container}>
           <div>
             <CohortMenu
-              setChatCohort={setChatCohort}
-              toggleMoveChat={toggleMoveChat}
               cohorts={cohorts}
               currCohort={currCohort}
               setCurrCohort={setCurrCohort}
@@ -69,15 +61,9 @@ const AdminContainer = ({ allCohorts }) => {
             initial="enter"
             animate={menuClicked ? "exit" : "enter"}
             variants={moveMenuAnimate}
-          >
-            <RevealChat chatCohort={chatCohort} />
-          </motion.div>
+          ></motion.div>
         </div>
-        <CohortView
-          setCurrCohort={setCurrCohort}
-          currCohort={currCohort}
-          setChatCohort={setChatCohort}
-        />
+        <CohortView setCurrCohort={setCurrCohort} currCohort={currCohort} />
       </div>
     </div>
   );
