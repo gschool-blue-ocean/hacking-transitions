@@ -65,9 +65,9 @@ The application is designed to `assist the transition team` at Galvanize in moni
 
 - This `application` is designed to keep track of each student attending the Galvanize Software Engineering Program and their transition obligations.
 
-- The `student` is able to login and view and update their information, create/delete personal tasks, and chat with a transition specialist. Additional helpful resources are avaliable for students at the login page.
+- The `student` is able to login and view and update their information, create/delete personal tasks. Additional helpful resources are avaliable for students at the login page.
 
-- Galvanize staff transition specialists are able to login as an `admin` and are able to add/update/delete/archive cohorts, view and manage student data, and chat with cohorts as a group or students individually.
+- Galvanize staff transition specialists are able to login as an `admin` and are able to add/update/delete/archive cohorts, view and manage student data.
 
 # Tech Implementation: _How the application works..._
 
