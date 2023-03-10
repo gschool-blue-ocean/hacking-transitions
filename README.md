@@ -12,7 +12,7 @@
 ![Bootstrap](https://camo.githubusercontent.com/b13ed67c809178963ce9d538175b02649800772be1ce0cb02da5879e5614e236/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f426f6f7473747261702d3536334437433f7374796c653d666f722d7468652d6261646765266c6f676f3d626f6f747374726170266c6f676f436f6c6f723d7768697465)
 
 ![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
-![Socket.io](https://img.shields.io/badge/Socket.io-010101?&style=for-the-badge&logo=Socket.io&logoColor=white)
+![](https://img.shields.io/badge/-010101?&style=for-the-badge&logo=&logoColor=white)
 ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -65,17 +65,15 @@ The application is designed to `assist the transition team` at Galvanize in moni
 
 - This `application` is designed to keep track of each student attending the Galvanize Software Engineering Program and their transition obligations.
 
-- The `student` is able to login and view and update their information, create/delete personal tasks, and chat with a transition specialist. Additional helpful resources are avaliable for students at the login page.
+- The `student` is able to login and view and update their information, create/delete personal tasks. Additional helpful resources are avaliable for students at the login page.
 
-- Galvanize staff transition specialists are able to login as an `admin` and are able to add/update/delete/archive cohorts, view and manage student data, and chat with cohorts as a group or students individually.
+- Galvanize staff transition specialists are able to login as an `admin` and are able to add/update/delete/archive cohorts, view and manage student data.
 
 # Tech Implementation: _How the application works..._
 
 This application uses **[Next.js](https://nextjs.org/)** as its dedicated `Front-end framework` on top of **[React](https://reactjs.org/)**, while **[Redux](https://redux.js.org/)** is used for dynamic state management. The app uses the **[Next.js API](https://nextjs.org/docs/api-routes/introduction)** _that is built into the Front-end framework_ (see 'pages/api') to query a **[PostgreSQL Database](https://www.postgresql.org/)** that stores all relevant application data. **[Docker](https://www.docker.com/)** is used to containerize the entire application to streamline development and deployment.
 
 **[Google Firebase](https://firebase.google.com/)** is used for login authentication and account creation during registration.
-
-**[Socket.io](https://socket.io/)** is used to conduct chat operations between students and admins, ensuring near instantaneous sending & receiving of chat data via Websockets.
 
 The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-bootstrap.github.io/)** styling & component library is used for some modals, alerts, etc., and in tandem with traditional **[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)** styling.
 
@@ -127,21 +125,29 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
   ![Imgur](https://i.imgur.com/XVJacfZ.gif)
 
 # Testing (Jest)
+
 "Build.test.js" is a Jest.js test that will test if the Hacking Transitions Application will build correctly using the Next Build command ("npm run build")
 
 - 1.) Run an "npm install" from root project directory
+
 ```bash
   npm install
 ```
+
 - 2.) Run "docker-compose up --build"
+
 ```bash
   docker compose up --build
 ```
+
 - 3.) CD into the "tests" directory
+
 ```bash
   cd tests/
 ```
+
 - 4.) Run "npm test" to test if the app will execute a Next Build without failing
+
 ```bash
   npm test
 ```
