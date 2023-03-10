@@ -1,35 +1,19 @@
 import styles from "../../../styles/Edit.Admin.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import { auth } from "../../../firebase/firebase";
 //pull in the firebase config file with the assigned api keys for our app
 // const config = require("../../Login/config");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBNDQyZHitCAjyupnVxNzU1YKfI4zBOMss",
-  authDomain: "hackingtransitions-development.firebaseapp.com",
-  projectId: "hackingtransitions-development",
-  storageBucket: "hackingtransitions-development.appspot.com",
-  messagingSenderId: "473992713297",
-  appId: "1:473992713297:web:68e712395d1ccf79c49470",
-};
-
 const AdminCreate = ({ open, onClose }) => {
-  const app = initializeApp(firebaseConfig);
+
   //auth links any user info sent to firebass api correlated with this app
-  const auth = getAuth(app);
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const router = useRouter();
 
   const resetStateOnClose = () => {
     setNewEmail("");
