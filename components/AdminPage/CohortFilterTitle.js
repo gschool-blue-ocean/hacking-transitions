@@ -24,25 +24,33 @@ const CohortFilterTitle = ({
     // const arrows = { ascending: '↓', descending: '↑' }
     // const arrow = sortBy === id ? arrows[direction] : '↕︎'
 
-    const arrows = {
-      ascending: <AiFillCaretDown />,
-      descending: <AiFillCaretDown />,
-    };
-    const arrow = sortBy === id ? arrows[direction] : <AiFillCaretDown />;
-    return (
-      <div className={s.sortButton}>
-        <div className={s.blankButton} id={id} onClick={onClick}>
-          {arrow}
-        </div>
-        {/* <div className={s.sortDirection}> Sort {direction}</div> */}
-      </div>
-    );
-  };
 
-  //import useSortableDate (a custom hook defined in the Utiliy file) on the list of students to be used in the Table
-  const { items, requestSort, sortConfig } = useSortableData(
-    currCohort[index]?.students
-  );
+    console.log("students", cohort.students)
+
+    function sortedDates() {cohort.students.sort((a, b) => b.ets_date - a.ets_date)};
+    console.log("sorted", sortedDates);
+
+
+    //Create SortButton to be used for Column headers 
+    const SortButton = ({ direction, id, onClick, sortBy }) => {
+        // const arrows = { ascending: '↓', descending: '↑' }
+        // const arrow = sortBy === id ? arrows[direction] : '↕︎'
+        
+        const arrows = { ascending: <AiFillCaretDown />, descending: <AiFillCaretDown/> }
+        const arrow = sortBy === id ? arrows[direction] : <AiFillCaretDown/>
+        return (
+      <div className={s.sortButton}>     
+        <div className={s.blankButton} id={id} onClick={onClick}>{arrow}</div> 
+        <div className={s.sortDirection}> Sort </div>
+      </div> 
+      )
+    }
+
+    
+
+
+  //import useSortableDate (a custom hook defined in the Utiliy file) on the list of students to be used in the Table 
+  const {items, requestSort, sortConfig } = useSortableData(currCohort[index]?.students);
 
   return (
     <>

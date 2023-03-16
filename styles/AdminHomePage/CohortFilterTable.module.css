@@ -4,10 +4,12 @@
     display: flex;
     flex-direction: column;
     font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
-    color: #003B4C;
-    background-color: #FFF;
+    color: #f5fafb;
+    background-color: #0d0f4a;
     margin-left: 2rem;
     width: 110rem;
+    border: none;
+    padding: 10px;
     /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
 }
 .div {
@@ -18,6 +20,7 @@
     font-size: 2rem;
     height: 30rem;
     width: 100%;
+    padding: 10px;
 }
 .table {
     table-layout: fixed;
@@ -27,7 +30,7 @@
     
 }
 .headtr{
-    border-bottom: 1px #F79020  solid;
+    /* border-bottom: 1px #F79020  solid; */
     position: sticky;
     top: 0;
     background-color: rgb(230, 229, 229);

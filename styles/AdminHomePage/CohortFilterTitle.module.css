@@ -12,32 +12,33 @@
     font-size: 1vw;
     padding-right: 2vw;
     cursor: pointer;
+    font-weight: 300;
 }
 .default {
     margin-left: 30rem
 }
 .headtr{
-    border-bottom: 2px #F79020  solid;
+    /* border-bottom: 2px #F79020  solid; */
     position: sticky;
     top: 0;
-    background-color: rgb(230, 229, 229);
+    background-color: #0d0f4a;
 }
 .tableheaders{
     /* display:table-row; */
-    padding: auto;
+    /* padding: auto; */
     font-size: 2.5vw;
     text-align: left;
     margin-top: 4px;
-    background: #e0eaf8;
+    background-color: rgb(230, 229, 229);
 
     
     
 } 
 .sortButton{
    float: left;
-    margin-top: 10px;
+    margin-top: 2px;
     margin: 2px;
-    width: 1.5px;
+    width: 5px;
     padding-right: 20px;
    
     
@@ -48,14 +49,20 @@
     gap: 2px;
 }
 
+.sortDirection {
+    font-size: 1vw;;
+}
+
 .title{
     display: flex;
     font-weight: 600;
-    margin-top: 10px;
+    /* margin-top: 10px;
     margin-left: 2px;
-    /* padding: 10px; */
-    /* padding-left: 10px; */
-    /* justify-content: center; */
+    padding: 10px;
+    padding-left: 10px; */
+    justify-content: left;
     text-align: left;
     font-size: 2vw;
 }
+
+
