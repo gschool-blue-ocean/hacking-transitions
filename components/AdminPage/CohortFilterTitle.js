@@ -2,28 +2,16 @@ import s from "../../styles/AdminHomePage/CohortFilterTitle.module.css";
 import { useSortableData } from "../../utility";
 import Link from "next/link";
 import etsStyle from "../../styles/StudentPage.module.css";
-import { useState } from "react";
+import {useState} from "react";
 import CohortFilterTable from "./CohortFilterTable";
 import { AiFillCaretDown } from "react-icons/ai";
 
 //CohortFilterTitle renders the headers of each individual Cohort Table based off of the index of the selected Cohort from the CohortMenu
 // On-click event for First, Last, and Branch are set to requestSort() which allows to sort the table contents by column ASC/DESC
 
-const CohortFilterTitle = ({
-  index,
-  currCohort,
-  clickedCohort,
-  setClickedCohort,
-  cohort,
-  setCurrCohort,
-}) => {
-  console.log("cohort", cohort);
+const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, cohort, setChatCohort, setCurrCohort}) => { 
 
-  //Create SortButton to be used for Column headers
-  const SortButton = ({ direction, id, onClick, sortBy }) => {
-    // const arrows = { ascending: '↓', descending: '↑' }
-    // const arrow = sortBy === id ? arrows[direction] : '↕︎'
-
+    console.log("cohort", cohort);
 
     console.log("students", cohort.students)
 
@@ -52,52 +40,59 @@ const CohortFilterTitle = ({
   //import useSortableDate (a custom hook defined in the Utiliy file) on the list of students to be used in the Table 
   const {items, requestSort, sortConfig } = useSortableData(currCohort[index]?.students);
 
-  return (
+return (
     <>
-      <table className={s.table}>
-        <tr className={s.headtr}>
-          <th className={s.tableheaders}>
-            {/* <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
-            <h1 className={s.title} id="firstTitle">
-              {" "}
-              First{" "}
-            </h1>
-          </th>
-          <th className={s.tableheaders}>
-            {/* <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
-            <h1 className={s.title}>Last</h1>
-          </th>
-          <th className={s.tableheaders}>
-            {/* <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
-            <h1 className={s.title}>ETS</h1>
-          </th>
-          <th className={s.tableheaders}>
-            {/* <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                  
-                    <p>&nbsp;</p> */}
-            <h1 className={s.title}>Leave </h1>
-          </th>
-          <th className={s.tableheaders}>
-            {/* <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
-                <p>&nbsp;&nbsp;</p> */}
-            <h1 className={s.title}>Branch</h1>
-          </th>
-          <th className={s.tableheaders}>
-            <h1 className={s.title}>Edit</h1>
-          </th>
-        </tr>
-        <CohortFilterTable
-          index={index}
-          cohort={cohort}
-          setClickedCohort={setClickedCohort}
-          setCurrCohort={setCurrCohort}
-          currCohort={currCohort}
-        />
-      </table>
-    </>
-  );
-};
+        <table className={s.table}>
+            <tr className={s.headtr}>
+                <th className={s.tableheaders}>
+                    <h1 className={s.title} id="firstTitle"> First </h1>
+                    {/* <p>&nbsp;</p> */}
+                    <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
+                    
+                    
+                </th>
+                <th className={s.tableheaders}>
+                    <h1 className={s.title}>Last</h1>
+                    <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
+                    {/* <p>&nbsp;</p> */}
+                     
+                </th>
+                
+                <th className={s.tableheaders}>
+                <h1 className={s.title}>Branch</h1>
+                <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
+                {/* <p>&nbsp;&nbsp;</p> */}
+                </th>
 
-export default CohortFilterTitle;
+                <th className={s.tableheaders}>
+                    <h1 className={s.title}>ETS</h1>
+                    {/* <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/> */}
+                    {/* <p>&nbsp;</p> */}
+                    
+                </th>
+                
+                <th className={s.tableheaders}>
+                    <h1 className={s.title}>Days To ETS</h1>
+                        {/* <SortButton direction={sortConfig?.direction} id="daysToEts" onClick={sortedDates}/> */}
+                    {/* <p>&nbsp;</p> */}
+                    
+                </th>
+
+                <th className={s.tableheaders}>
+                <h1 className={s.title}>Leave </h1>
+                {/* <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                   */}
+                    {/* <p>&nbsp;</p> */}
+                    
+                </th>
+                
+                <th className={s.tableheaders}>
+                    <h1 className={s.title}>Edit</h1>
+                </th>
+            </tr>
+            <CohortFilterTable  index = {index} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />
+        </table>
+    </>
+    )
+}
+
+export default CohortFilterTitle; 
