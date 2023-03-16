@@ -2,15 +2,10 @@ import s from "../../styles/AdminHomePage/CohortFilterTable.module.css";
 import { getDaysToEts, useSortableData } from "../../utility";
 import Link from "next/link";
 import etsStyle from "../../styles/StudentPage.module.css";
-import {useDispatch} from "react-redux";
-import {useEffect, useState} from "react";
+import { useDispatch } from "react-redux";
 import App from "./EditStudentModal";
-import {
-  setActiveStudent,
-  setStudentsForCohortChat,
-} from "../../redux/features/app-slice";
 import { motion } from "framer-motion";
-import { BsChatText } from "react-icons/bs";
+import { setActiveStudent } from "../../redux/features/app-slice";
 
 //CohortFitlerTable renders the content of the table the mapping over the students information of each selected Cohort
 
