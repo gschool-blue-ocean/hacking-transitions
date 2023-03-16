@@ -3,9 +3,9 @@
 .cohorts{
     display:flex;
     flex-flow:column;
-    height: 40vh;
+    height: 70vh;
     padding: 1em;
-    margin:auto;
+    margin:2em;
     background: #e0eaf8;
     color: #0d0f4a;
 }
@@ -55,7 +55,8 @@
     flex-flow:column;
     height:35vh;
     padding: 1em;
-    margin:auto;
+    height: 70vh;
+    margin:4em;
     background: #e0eaf8;
     
 }
@@ -102,18 +103,19 @@
 
 .cardDeck{
     display: flex;
-    margin: 2em;
+    margin: 4em;
     cursor: pointer;
 }
 
 .card{
-    margin: 2em;
-    display: flex;
-    justify-content: center;
+    margin: 1em;
+    /* display: flex; */
+    display: inline-block;
+    justify-content: left;
     flex-direction: column;
     padding-left: 1em;
-    width: 15%;
-    height: 8em;
+    width: 20em;
+    height: 10em;
     border-top:1px solid #F79020;
     /* border-width: 1px; */
     box-shadow: 1px 1px 3px 0px rgba(0,0,0,.35);
@@ -129,6 +131,7 @@
 .card h4 {
     margin-top: 2px;
     margin-bottom: 0%;
+    font-weight: bold;
 }
 
 .card h5 {

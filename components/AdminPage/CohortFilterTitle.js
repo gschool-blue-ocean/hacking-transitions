@@ -13,6 +13,12 @@ const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, 
 
     console.log("cohort", cohort);
 
+    console.log("students", cohort.students)
+
+    function sortedDates() {cohort.students.sort((a, b) => b.ets_date - a.ets_date)};
+    console.log("sorted", sortedDates);
+
+
     //Create SortButton to be used for Column headers 
     const SortButton = ({ direction, id, onClick, sortBy }) => {
         // const arrows = { ascending: '↓', descending: '↑' }
@@ -23,10 +29,13 @@ const CohortFilterTitle = ({index, currCohort, clickedCohort, setClickedCohort, 
         return (
       <div className={s.sortButton}>     
         <div className={s.blankButton} id={id} onClick={onClick}>{arrow}</div> 
-        {/* <div className={s.sortDirection}> Sort {direction}</div> */}
+        <div className={s.sortDirection}> Sort </div>
       </div> 
       )
     }
+
+    
+
 
   //import useSortableDate (a custom hook defined in the Utiliy file) on the list of students to be used in the Table 
   const {items, requestSort, sortConfig } = useSortableData(currCohort[index]?.students);
@@ -36,35 +45,51 @@ return (
         <table className={s.table}>
             <tr className={s.headtr}>
                 <th className={s.tableheaders}>
-                    {/* <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
                     <h1 className={s.title} id="firstTitle"> First </h1>
+                    {/* <p>&nbsp;</p> */}
+                    <SortButton direction={sortConfig?.direction} id="first"  onClick={()=> requestSort('first')} sortBy = {sortConfig?.key}/>
+                    
+                    
                 </th>
                 <th className={s.tableheaders}>
-                    {/* <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
-                   <h1 className={s.title}>Last</h1>  
+                    <h1 className={s.title}>Last</h1>
+                    <SortButton direction={sortConfig?.direction} id="last"  onClick={()=> requestSort('last')} sortBy = {sortConfig?.key}/>
+                    {/* <p>&nbsp;</p> */}
+                     
                 </th>
+                
                 <th className={s.tableheaders}>
-                    {/* <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/>
-                    <p>&nbsp;</p> */}
+                <h1 className={s.title}>Branch</h1>
+                <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
+                {/* <p>&nbsp;&nbsp;</p> */}
+                </th>
+
+                <th className={s.tableheaders}>
                     <h1 className={s.title}>ETS</h1>
+                    {/* <SortButton direction={sortConfig?.direction} id="ets_date"  onClick={()=> requestSort('ets_date')} sortBy = {sortConfig?.key}/> */}
+                    {/* <p>&nbsp;</p> */}
+                    
                 </th>
+              
+
+                  
+                
                 <th className={s.tableheaders}>
-                {/* <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                  
-                    <p>&nbsp;</p> */}
-                    <h1 className={s.title}>Leave </h1>
+                    <h1 className={s.title}>Days To ETS</h1>
+                        {/* <SortButton direction={sortConfig?.direction} id="daysToEts" onClick={sortedDates}/> */}
+                    {/* <p>&nbsp;</p> */}
+                    
                 </th>
+
                 <th className={s.tableheaders}>
-                {/* <SortButton direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('branch')} sortBy = {sortConfig?.key}/>                  
-                <p>&nbsp;&nbsp;</p> */}
-                 <h1 className={s.title}>Branch</h1>
+                <h1 className={s.title}>Leave </h1>
+                {/* <SortButton  direction={sortConfig?.direction} id="branch"  onClick={()=> requestSort('leave_start_date')} sortBy = {sortConfig?.key}/>                   */}
+                    {/* <p>&nbsp;</p> */}
+                    
                 </th>
+                
                 <th className={s.tableheaders}>
                     <h1 className={s.title}>Edit</h1>
-                </th>
-                <th className={s.tableheaders}>
-                    <h1 className={s.title}>Chat </h1>
                 </th>
             </tr>
             <CohortFilterTable  index = {index} cohort={cohort} setClickedCohort={setClickedCohort} setCurrCohort={setCurrCohort} currCohort={currCohort} setChatCohort={setChatCohort} />

@@ -116,7 +116,10 @@ export default function ArchivePage({ cohorts, students }) {
               >
                 <h3>{cohort.cohort_name}</h3>
                 <p>
-                  {cohort.start_date}-{cohort.end_date}
+                  Start: {cohort.start_date}
+                </p>
+                <p>
+                  End: {cohort.end_date}
                 </p>
               </div>
             );
@@ -202,8 +205,8 @@ export default function ArchivePage({ cohorts, students }) {
                 <h3>
                   {student.first} {student.last}
                 </h3>
-                <p>Class: {student.cohort_name}</p>
-                <p>ETS Date: {student.ets_date}</p>
+                <p>{student.cohort_name}</p>
+                <p>ETS: {student.ets_date}</p>
               </div>
             );
           })}
