@@ -32,7 +32,7 @@ const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClicke
                               key={student.user_id}
                               onClick={() => {
                                 dispatch(setActiveStudent(student));
-                                dispatch(setStudentsForCohortChat([]));
+                                //dispatch(setStudentsForCohortChat([]));
                               }}
                             >
                               <LinkToViewStudent className={s.studentElement} id={cohort.cohort_id}>
@@ -104,7 +104,7 @@ const CohortFilterTable = ({ setCurrCohort, currCohort, clickedCohort, setClicke
                     </> 
        )
 }
-export default CohortFilterTable; 
+export default CohortFilterTable 
 
 // Defines reusable function that wraps each student row elements to navigate to their student page when clicked
 const LinkToViewStudent = ({ children, id }) => {
