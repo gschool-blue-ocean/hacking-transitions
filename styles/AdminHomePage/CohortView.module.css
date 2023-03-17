@@ -1,16 +1,19 @@
 .container {
-    margin-top: 2.3rem;
+    margin-top: 1rem;
     height: auto;
     display: flex;
     flex-direction: column;
-    font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif;
-    color: #003B4C;
-    background-color: #FFF;
+    /* font-family: museo-sans,Helvetica,Roboto,Arial,sans-serif; */
+    font-family: "Inter",sans-serif;
+    color: #0d0f4a;
+    background-color: #e0eaf8;
     margin-left: 2rem;
     width: 110rem;
     min-width: 400px;
+    border-radius: 15px;
+
     /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
-    border: 2.5px solid #F79020;
+    /* border: 2.5px solid #F79020; */
     /* min-width: 300px; */
 }
 
@@ -24,6 +27,7 @@
     font-size: 2rem;
     height: 50rem;
     width: 100%;
+    font-weight: 300;
 }
 .div::-webkit-scrollbar {
     display: none;
