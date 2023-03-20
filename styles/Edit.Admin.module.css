@@ -9,19 +9,17 @@
 .adminEditParent {
   background-color: #fff;
   display: grid;
-  height: 30rem;
-  width: 70%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "adminList  adminCohort  createCohort createCohortStartDate";
   margin: 0 auto;
-  margin-top: 10%;
-  margin-bottom: 10%;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
 
 /* admin cohort */
 .adminCohortParent {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   grid-area: adminCohort;
   grid-template-rows: 10% 80% 10%;
   grid-template-areas:
@@ -31,8 +29,6 @@
   margin-left: 2.5%;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .adminCohortHeader {
@@ -45,7 +41,8 @@
 }
 
 .adminCohortSelector {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-area: adminCohortSelector;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
@@ -60,7 +57,8 @@
 
 .adminCohortDropdown {
   grid-area: adminCohortDropdown;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "adminCohortDropdownLabel"
@@ -170,15 +168,14 @@
 }
 
 .adminCreateParent {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-area: adminCreate;
   grid-template-rows: 10% 90%;
   grid-template-areas:
     "adminCreateHeader"
     "adminCreateForm";
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-height: 35rem;
-  min-height: 25rem;
   background-color: #fff;
 }
 
