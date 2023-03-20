@@ -13,6 +13,7 @@
   grid-template-areas: "adminList  adminCohort  createCohort createCohortStartDate";
   margin: 0 auto;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+  min-height: 100vh;
 }
 
 /* admin cohort */
@@ -283,8 +284,6 @@
   margin-right: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .adminListHeader {
@@ -353,6 +352,7 @@
   justify-content: center;
   margin-top: 10%;
   line-height: 1.25rem;
+  margin: 10px;
 }
 
 .adminListListInputFirstName {
@@ -448,8 +448,6 @@
     "adminUpdateHeader"
     "adminUpdateForm";
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-height: 35rem;
-  min-height: 25rem;
   background-color: #fff;
 }
 
@@ -553,8 +551,6 @@
   margin-left: 2.5%;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .createCohortHeader {
