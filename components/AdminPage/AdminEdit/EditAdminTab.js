@@ -8,7 +8,7 @@ import Tabs from 'react-bootstrap/Tabs';
 
 const EditAdminTab = (user) => {
   return (
-    // <div className={styles.adminEditParent}>
+    <div className={styles.TabTopLevel}>
       <Tabs
         defaultActiveKey="AdminList"
       >
@@ -22,7 +22,7 @@ const EditAdminTab = (user) => {
           <CreateCohort />
         </Tab>
       </Tabs>
-    // </div>
+    </div>
   );
 };
 
