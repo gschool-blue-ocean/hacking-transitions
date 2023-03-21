@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { checkLogin } from "../../utility";
 import { setActiveStudent } from "../../redux/features/app-slice";
-
+import styles from "../../styles/aboveAdminTop.module.css"
 
 const EditAdmins = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const EditAdmins = () => {
   }, []);
   return (
     admin && (
-      <div>
+      <div className={styles.aboveAdminTop}>
         <EditAdminTab />
       </div>
     )

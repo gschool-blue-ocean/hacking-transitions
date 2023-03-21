@@ -7,6 +7,7 @@ import "../styles/globals.css";
 import "../styles/LoginStyles.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 function MyApp({ Component, pageProps }) {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);

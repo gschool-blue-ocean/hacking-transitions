@@ -7,8 +7,10 @@
 }
 
 .adminEditParent {
+  flex-grow: 1;
   background-color: #fff;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   height: 30rem;
   width: 70%;
   grid-template-columns: 1fr 1fr 1fr;
@@ -21,7 +23,8 @@
 
 /* admin cohort */
 .adminCohortParent {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-area: adminCohort;
   grid-template-rows: 10% 80% 10%;
   grid-template-areas:
@@ -31,8 +34,6 @@
   margin-left: 2.5%;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .adminCohortHeader {
@@ -123,6 +124,7 @@
 
 .adminCohortGenerate {
   grid-area: adminCohortGenerate;
+  padding: 40px;
 }
 
 .adminCohortGenerateBtn {
@@ -177,8 +179,6 @@
     "adminCreateHeader"
     "adminCreateForm";
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-height: 35rem;
-  min-height: 25rem;
   background-color: #fff;
 }
 
@@ -286,8 +286,6 @@
   margin-right: 2.5%;
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .adminListHeader {
@@ -451,8 +449,6 @@
     "adminUpdateHeader"
     "adminUpdateForm";
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  max-height: 35rem;
-  min-height: 25rem;
   background-color: #fff;
 }
 
@@ -556,8 +552,6 @@
   margin-left: 2.5%;
   /* box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35); */
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 10px;
-  min-height: 30rem;
-  max-height: 40rem;
 }
 
 .createCohortHeader {
@@ -589,8 +583,16 @@
   z-index: 1000;
 } */
 
+.TabTopLevel {
+  flex-grow: 1;
+  padding: 1rem;
+  max-width: 70rem;
+}
+
 .createCohortSelector {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
   grid-area: createCohortSelector;
   grid-template-areas:
     "createCohortInputLabel"

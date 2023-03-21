@@ -1,13 +1,10 @@
 
 .footer {
-    z-index: 9998;
-    /* position: relative; */
-    border-top: 10px solid #f79020;
-    height: 80px;
+    border-top: 1px solid #e6e6e6;
     background: #f4f4f4;
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cont {
