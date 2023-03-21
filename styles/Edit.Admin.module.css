@@ -7,6 +7,7 @@
 }
 
 .adminEditParent {
+  flex-grow: 1;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -123,6 +124,7 @@
 
 .adminCohortGenerate {
   grid-area: adminCohortGenerate;
+  padding: 40px;
 }
 
 .adminCohortGenerateBtn {
@@ -582,7 +584,9 @@
 } */
 
 .TabTopLevel {
+  flex-grow: 1;
   padding: 1rem;
+  max-width: 70rem;
 }
 
 .createCohortSelector {
