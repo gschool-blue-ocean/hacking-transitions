@@ -152,8 +152,3 @@ The **[Bootstrap](https://getbootstrap.com/) / [React-Bootstrap](https://react-b
   npm test
 ```
 
-# Contributors
-
-- [Jullian Rives](https://github.com/jullianrives7) / [Kadynce Krank](https://github.com/kadync3) - Login/Authentication/Registration Portal Team
-- [Dustin Swartzbaugh](https://github.com/Swartz-D) / [Jordan Napoleon](https://github.com/jordannapoleon) - Student Portal Team
-- [Scott Patterson](https://github.com/Enzinoman) / [Bain Obermark](https://github.com/SCP-714) - Admin Portal Team
